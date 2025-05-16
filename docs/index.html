@@ -29,13 +29,39 @@
     fetch('data/fountains_processed.geojson')
       .then(r => r.json())
       .then(gj => {
-        L.geoJSON(gj, {
+        const markerById = {};
+        const geoLayer = L.geoJSON(gj, {
           onEachFeature: (f, layer) => {
             const p = f.properties;
-            layer.bindPopup(`<strong>${p.name||'Unnamed'}</strong><br>${p.address}<br>${p.geo_local_area}`);
+            // Build popup HTML with all relevant info
+            let popup = `<strong>${p.name||'Unnamed'}</strong><br>`;
+            popup += `<table class='table table-sm table-borderless mb-0'>`;
+            popup += `<tr><th>Neighbourhood</th><td>${p.geo_local_area||'—'}</td></tr>`;
+            popup += `<tr><th>Address</th><td>${p.address||'—'}</td></tr>`;
+            popup += `<tr><th>Rating</th><td>${p.rating ? p.rating : '—'}</td></tr>`;
+            if (p.photo_url) popup += `<tr><th>IG Photo</th><td><img src='${p.photo_url}' width='60'></td></tr>`;
+            if (p.ig_post_url) popup += `<tr><th>IG Post</th><td><a href='${p.ig_post_url}' target='_blank'>View Post</a></td></tr>`;
+            popup += `<tr><th>Pet OK</th><td>${p.pet_friendly||'—'}</td></tr>`;
+            popup += `<tr><th>Wheelchair</th><td>${p.wheelchair_accessible||'—'}</td></tr>`;
+            popup += `<tr><th>Bottle</th><td>${p.bottle_filler||'—'}</td></tr>`;
+            popup += `<tr><th>Serviced</th><td>${p.last_service_date||'—'}</td></tr>`;
+            popup += `<tr><th>Visited</th><td>${p.visited||'—'}</td></tr>`;
+            popup += `<tr><th>Visit Date</th><td>${p.visit_date||'—'}</td></tr>`;
+            popup += `<tr><th>Caption</th><td>${p.caption||'—'}</td></tr>`;
+            popup += `</table>`;
+            layer.bindPopup(popup);
+            if (p.id) markerById[p.id] = layer;
           },
           pointToLayer: (_, latlng) => L.circleMarker(latlng, {radius:6, color:'#008cba'})
         }).addTo(map);
+
+        // Focus on marker if hash is present
+        const hash = window.location.hash.replace('#','');
+        if (hash && markerById[hash]) {
+          const marker = markerById[hash];
+          map.setView(marker.getLatLng(), 16, {animate:true});
+          marker.openPopup();
+        }
       });
   </script>
 </body>

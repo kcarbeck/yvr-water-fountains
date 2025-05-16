@@ -1,1413 +1,2543 @@
+
     <!doctype html><html><head><meta charset='utf-8'>
-    <title>Fountain Table</title>
-    <link rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-    <link rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/datatables@1.13.8/media/css/jquery.dataTables.min.css">
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/datatables@1.13.8/media/js/jquery.dataTables.min.js"></script>
-    </head><body class='p-3'>
-    <a href='index.html'>&larr; Map view</a><h2>All Vancouver Fountains</h2>
-    <table class="dataframe table table-striped">
+    <title>Vancouver Water Fountains – Table</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/datatables@1.13.8/media/css/jquery.dataTables.min.css">
+    <style>
+      body{padding:1rem;}
+      table.dataTable {width:100% !important;}
+    </style>
+    </head><body>
+    <a href='index.html' class='btn btn-link'>&larr; Map</a>
+    <h2 class='mb-3'>All Vancouver Fountains</h2>
+    <div class="table-responsive"><table class="dataframe table table-striped table-hover nowrap">
   <thead>
     <tr style="text-align: right;">
-      <th>name</th>
-      <th>address</th>
-      <th>geo_local_area</th>
+      <th>Name</th>
+      <th>Neighbourhood</th>
+      <th>Address</th>
+      <th>Pet OK</th>
+      <th>Wheelchair</th>
+      <th>Bottle</th>
+      <th>Serviced</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>Fountain location:\nTrafalgar Park</td>
-      <td>E-side of wading pool</td>
-      <td>Arbutus-Ridge</td>
+      <td>Fountain location:\nAlmond Park</td>
+      <td>Kitsilano</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
     </tr>
     <tr>
       <td>Fountain location:\nArbutus Village Park</td>
-      <td>S-side of playground</td>
       <td>Arbutus-Ridge</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nCarnarvon Park</td>
-      <td>S-side of wading pool</td>
-      <td>Arbutus-Ridge</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nQuilchena Park</td>
-      <td>W-side of fieldhouse</td>
-      <td>Arbutus-Ridge</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nCoopers' Park</td>
       <td>None</td>
-      <td>Downtown</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nHarbour Green Park - Viewpoint</td>
-      <td>west, by seawall</td>
-      <td>Downtown</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nCreekside Park</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
       <td>None</td>
-      <td>Downtown</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nHarbour Green Park - In front of washrooms</td>
-      <td>near spray pool</td>
-      <td>Downtown</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nEmery Barnes Park - South west of playground</td>
-      <td>None</td>
-      <td>Downtown</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nDavid Lam Park - South west of basketball courts</td>
-      <td>near playground and tennis court</td>
-      <td>Downtown</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nCRAB Park at Portside</td>
-      <td>None</td>
-      <td>Downtown</td>
-    </tr>
-    <tr>
-      <td>Temporary Handwashing Station location: The Gathering Place</td>
-      <td>609 Helmcken St</td>
-      <td>Downtown</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nAndy Livingstone Park - South of soccer fields</td>
-      <td>north side of fieldhouse</td>
-      <td>Downtown</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nGeorge Wainborn Park</td>
-      <td>NE corner near seawall</td>
-      <td>Downtown</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nGranville &amp; Robson</td>
-      <td>Northwest corner of Granville &amp; Robson</td>
-      <td>Downtown</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nHarbour Green Park - foot of Jervis Mews</td>
-      <td>foot of Jervis Mews</td>
-      <td>Downtown</td>
-    </tr>
-    <tr>
-      <td>Temporary Misting Station location: Columbia &amp; Powell</td>
-      <td>NE corner of Columbia St &amp; Powell St</td>
-      <td>Downtown</td>
-    </tr>
-    <tr>
-      <td>Temporary Misting Station location: Andy Livingston Park</td>
-      <td>NW corner of Andy Livingston Park</td>
-      <td>Downtown</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nVictory Square</td>
-      <td>south corner of park</td>
-      <td>Downtown</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nPioneer Place (Pigeon Park)</td>
-      <td>None</td>
-      <td>Downtown</td>
-    </tr>
-    <tr>
-      <td>Temporary Handwashing Station location: E Hastings &amp; Columbia</td>
-      <td>101 E Hastings St</td>
-      <td>Downtown</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nCoopers' Park - underneath bridge, near basket</td>
-      <td>underneath bridge, near basket</td>
-      <td>Downtown</td>
-    </tr>
-    <tr>
-      <td>Temporary Handwashing Station location: 15 E Hastings</td>
-      <td>15 E Hastings St</td>
-      <td>Downtown</td>
-    </tr>
-    <tr>
-      <td>Temporary Fountain location: Main &amp; E Hastings</td>
-      <td>NW corner of E Hastings St and Main St</td>
-      <td>Downtown</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nEmery Barnes Park - Dog off-leash area</td>
-      <td>None</td>
-      <td>Downtown</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nCoal Harbour Park</td>
-      <td>near playground</td>
-      <td>Downtown</td>
-    </tr>
-    <tr>
-      <td>Bottle Filling Station location: \nGranville St Pumping Station</td>
-      <td>North side of sewage pumping station under Granville Bridge on bike route</td>
-      <td>Downtown</td>
-    </tr>
-    <tr>
-      <td>Temporary Fountain location: London Drugs</td>
-      <td>733 Granville St</td>
-      <td>Downtown</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nArt Phillips Park (Discovery Square)</td>
-      <td>NW plaza</td>
-      <td>Downtown</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nDavid Lam Park - South west of playgrounds</td>
-      <td>E area, near playground</td>
-      <td>Downtown</td>
-    </tr>
-    <tr>
-      <td>Fountain location:Nelson &amp; Howe</td>
-      <td>Southeast corner of Nelson &amp; Howe</td>
-      <td>Downtown</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nAndy Livingstone Park - North of basketball court</td>
-      <td>by amphitheatre steps near bas</td>
-      <td>Downtown</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nChaldecott Park</td>
-      <td>W-side of spray park</td>
-      <td>Dunbar-Southlands</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nBalaclava Park</td>
-      <td>W of wading pool</td>
-      <td>Dunbar-Southlands</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nMemorial West Park</td>
-      <td>S of tennis courts</td>
-      <td>Dunbar-Southlands</td>
-    </tr>
-    <tr>
-      <td>Fountain location: 733 W 14th Avenue</td>
-      <td>North side of 14th Avenue</td>
-      <td>Fairview</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nSutcliffe Park</td>
-      <td>S-side of false creek communit</td>
-      <td>Fairview</td>
-    </tr>
-    <tr>
-      <td>Temporary Misting Station location: Granville &amp; W 10th</td>
-      <td>NE corner of Granville St &amp; W 10th Ave</td>
-      <td>Fairview</td>
-    </tr>
-    <tr>
-      <td>Fountain location: 10th &amp; Willow</td>
-      <td>Northwest corner of 10th &amp; Willow</td>
-      <td>Fairview</td>
-    </tr>
-    <tr>
-      <td>Bottle Filling Station location: \nGranville Island Pumping Station</td>
-      <td>North side of sewage pumping station on seawall east of the granville island entrance</td>
-      <td>Fairview</td>
-    </tr>
-    <tr>
-      <td>Bottle Filling Station location: \nCharleson Park Pumping Station</td>
-      <td>North side of sewage pumping station 900 Charleson</td>
-      <td>Fairview</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nGranville Loop Park</td>
-      <td>None</td>
-      <td>Fairview</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\n1650 W 7th</td>
-      <td>Midblock, outside of 1650 W 7th</td>
-      <td>Fairview</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nCharleson Park</td>
-      <td>N of school off of seawall</td>
-      <td>Fairview</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nVictoria Park</td>
-      <td>adjacent to children's play area</td>
-      <td>Grandview-Woodland</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nGrandview Park - West of Stage</td>
-      <td>Close to the Stage</td>
-      <td>Grandview-Woodland</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nGrandview Park - South of playground</td>
-      <td>By the Playground</td>
-      <td>Grandview-Woodland</td>
-    </tr>
-    <tr>
-      <td>Temporary Fountain location: Commercial &amp; E Broadway</td>
-      <td>NE corner of Commercial Drive &amp; East Broadway</td>
-      <td>Grandview-Woodland</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nCommercial &amp; 3rd</td>
-      <td>Northeast corner of Commercial &amp; 3rd</td>
-      <td>Grandview-Woodland</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nMosaic Creek Park</td>
-      <td>near children's play area</td>
-      <td>Grandview-Woodland</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nPandora Park</td>
-      <td>N-side of wading pool</td>
-      <td>Grandview-Woodland</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nWoodland Park</td>
-      <td>in front of wading pool</td>
-      <td>Grandview-Woodland</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nW.C. Shelly Park</td>
-      <td>None</td>
-      <td>Grandview-Woodland</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nGarden Park</td>
-      <td>N-side of field house</td>
-      <td>Grandview-Woodland</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nHastings Park - Italian gardens</td>
-      <td>near skate park</td>
-      <td>Hastings-Sunrise</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nHastings Community Park - SE of tennis courts</td>
-      <td>besides path leading to spray</td>
-      <td>Hastings-Sunrise</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nBurrard View Park</td>
-      <td>N-side of wading pool</td>
-      <td>Hastings-Sunrise</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nHastings Park -Plateau Sport Parks / Empire Fields</td>
-      <td>empire field - soccer fields</td>
-      <td>Hastings-Sunrise</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nClinton Park - North side of ball diamond</td>
-      <td>N-side of B-ball diamond</td>
-      <td>Hastings-Sunrise</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nAdanac Park</td>
-      <td>SW side of Field house</td>
-      <td>Hastings-Sunrise</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nHastings Park -Plateau Sport Parks / Empire Fields</td>
-      <td>East of playgrounds</td>
-      <td>Hastings-Sunrise</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nRupert Park - East of fieldhouse</td>
-      <td>E-side of Field house</td>
-      <td>Hastings-Sunrise</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nClinton Park - East side of wading pool</td>
-      <td>E-side of wading pool</td>
-      <td>Hastings-Sunrise</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nNew Brighton Park - South of pool</td>
-      <td>S-side of pool</td>
-      <td>Hastings-Sunrise</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nHastings &amp; Kamloops</td>
-      <td>Northeast corner of Hastings &amp; Kamloops</td>
-      <td>Hastings-Sunrise</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nSunrise Park</td>
-      <td>N-side of wading pool</td>
-      <td>Hastings-Sunrise</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nRupert Park</td>
-      <td>E-side of playground</td>
-      <td>Hastings-Sunrise</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nNew Brighton Park - West of tennis courts</td>
-      <td>W-side of tennis courts</td>
-      <td>Hastings-Sunrise</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nNew Brighton Park - South west of playground</td>
-      <td>SW of playground</td>
-      <td>Hastings-Sunrise</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nHastings Park -Plateau Sport Parks / Empire Fields</td>
-      <td>field house at empire field</td>
-      <td>Hastings-Sunrise</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nHastings Park -Plateau Sport Parks / Empire Fields</td>
-      <td>East of basketball courts</td>
-      <td>Hastings-Sunrise</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nHastings Park -Plateau Sport Parks / Empire Fields</td>
-      <td>north of empire field</td>
-      <td>Hastings-Sunrise</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nHastings Community Park - South of wading pool</td>
-      <td>besides wading pool</td>
-      <td>Hastings-Sunrise</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nRupert Park - South of golf entrance booth</td>
-      <td>S-side of golf entrance booth</td>
-      <td>Hastings-Sunrise</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nKaslo Park</td>
-      <td>SE corner of tennis courts</td>
-      <td>Hastings-Sunrise</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nKensington Park</td>
-      <td>between baseball diamond and parking lots</td>
-      <td>Kensington-Cedar Cottage</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\n39th &amp; Nanaimo</td>
-      <td>Southwest corner of 39th &amp; Nanaimo</td>
-      <td>Kensington-Cedar Cottage</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nClark Park</td>
-      <td>None</td>
-      <td>Kensington-Cedar Cottage</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nCedar Cottage Park</td>
-      <td>Near Sport courts</td>
-      <td>Kensington-Cedar Cottage</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nJohn Hendry (Trout Lake) Park</td>
-      <td>nearby beach</td>
-      <td>Kensington-Cedar Cottage</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nBroadway &amp; Victoria</td>
-      <td>Southeast corner of Broadway &amp; Victoria</td>
-      <td>Kensington-Cedar Cottage</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nKingcrest Park</td>
-      <td>E-side of washroom</td>
-      <td>Kensington-Cedar Cottage</td>
-    </tr>
-    <tr>
-      <td>Temporary Misting Station location: Commercial &amp; E 10th</td>
-      <td>NE corner of Commercial St &amp; E 10th Ave</td>
-      <td>Kensington-Cedar Cottage</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nBrewers Park</td>
-      <td>S-side of wading pool</td>
-      <td>Kensington-Cedar Cottage</td>
-    </tr>
-    <tr>
-      <td>Temporary Handwashing Station location: ICBC 999 Kingsway</td>
-      <td>999 Kingsway</td>
-      <td>Kensington-Cedar Cottage</td>
-    </tr>
-    <tr>
-      <td>Fountain location : E 30th Ave &amp; Gladstone St</td>
-      <td>East Side corner Gladstone at E 30th Ave</td>
-      <td>Kensington-Cedar Cottage</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nGrays Park</td>
-      <td>front of wading pool</td>
-      <td>Kensington-Cedar Cottage</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nElgin &amp; 37th</td>
-      <td>Northwest corner of Elgin &amp; 37th</td>
-      <td>Kensington-Cedar Cottage</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nElm Park</td>
-      <td>N-side of field house</td>
-      <td>Kerrisdale</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nFraser River Park - park entrance by Angus Dr</td>
-      <td>near park entrance by Angus Dr</td>
-      <td>Kerrisdale</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nMcCleery Golf Course - driving range</td>
-      <td>driving range</td>
-      <td>Kerrisdale</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nMcCleery Golf Course - clubhouse building</td>
-      <td>clubhouse building</td>
-      <td>Kerrisdale</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nMcCleery Golf Course - 5th tee</td>
-      <td>5th tee</td>
-      <td>Kerrisdale</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nKerrisdale Centennial Park</td>
-      <td>2nd N-side entrance</td>
-      <td>Kerrisdale</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nShannon Mews Park</td>
-      <td>None</td>
-      <td>Kerrisdale</td>
-    </tr>
-    <tr>
-      <td>Temporary Misting Station location: West Blvd &amp; W 45th</td>
-      <td>SE corner of West Boulevard &amp; W 45th Ave</td>
-      <td>Kerrisdale</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nFraser River Park - South west</td>
-      <td>None</td>
-      <td>Kerrisdale</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nMaple Grove Park - South of baseball diamond</td>
-      <td>S-side of baseball diamond</td>
-      <td>Kerrisdale</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nMaple Grove Park - East of pool</td>
-      <td>E-side of pool</td>
-      <td>Kerrisdale</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nMcCleery Golf Course - servive yard</td>
-      <td>servive yard</td>
-      <td>Kerrisdale</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nRiverfront Park - East of washrooms</td>
-      <td>E-side of washrooms</td>
-      <td>Killarney</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nFraserview Golf Course - West of kerr st.</td>
-      <td>West of kerr st.</td>
-      <td>Killarney</td>
-    </tr>
-    <tr>
-      <td>Fountain location: 8683 Kerr</td>
-      <td>Southwest side of Kerr</td>
-      <td>Killarney</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nFraserview Golf Course - driving range</td>
-      <td>driving range</td>
-      <td>Killarney</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nKillarney Park - E 45th Ave. @ Killarney St.</td>
-      <td>north plaza</td>
-      <td>Killarney</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nFraserview Golf Course - clubhouse building</td>
-      <td>clubhouse building</td>
-      <td>Killarney</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nFraserview Golf Course - 6th tee</td>
-      <td>6th tee</td>
-      <td>Killarney</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nRiverfront Park - West of tennis courts</td>
-      <td>w-side of tennis courts</td>
-      <td>Killarney</td>
-    </tr>
-    <tr>
-      <td>Fountain location: River District Crossing &amp; E Kent Ave North</td>
-      <td>Northeast corner of River District Crossing &amp; E Kent Ave North</td>
-      <td>Killarney</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nKillarney Park - East of wading pool</td>
-      <td>in front of wading pool</td>
-      <td>Killarney</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nKitsilano Beach Park - South of playground</td>
-      <td>besides playground</td>
-      <td>Kitsilano</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nSeaforth Peace Park</td>
-      <td>S end plaza</td>
-      <td>Kitsilano</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nVanier Park (Burrard Civic Marina)</td>
-      <td>None</td>
-      <td>Kitsilano</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nKitsilano Beach Park - washroom wall</td>
-      <td>opposite washrooms</td>
-      <td>Kitsilano</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nConnaught Park - North of playground</td>
-      <td>None</td>
-      <td>Kitsilano</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nKitsilano Beach Park - North of parking lot</td>
-      <td>besides parking lot</td>
-      <td>Kitsilano</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nArbutus Greenway Park</td>
-      <td>S-side of playground</td>
-      <td>Kitsilano</td>
-    </tr>
-    <tr>
-      <td>Bottle Filling Station location: \nKitsilano Pumping Station</td>
-      <td>North side of sewage pumping station on w/s/ 1300 Arbutus</td>
-      <td>Kitsilano</td>
-    </tr>
-    <tr>
-      <td>Fountain location: 2001 W 10th Avenue</td>
-      <td>North side of 10th Avenue</td>
-      <td>Kitsilano</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\n4th &amp; Arbutus</td>
-      <td>Northeast corner of 4th &amp; Arbutus</td>
-      <td>Kitsilano</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nBroadway &amp; Stephens</td>
-      <td>Northwest corner of Broadway &amp; Stephens</td>
-      <td>Kitsilano</td>
-    </tr>
-    <tr>
-      <td>Temporary Fountain location: 2067 W 15th Ave</td>
-      <td>NE corner of 2000 W 15th Ave at Arbutus Greenway</td>
-      <td>Kitsilano</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nAlmond Park</td>
-      <td>S-side of playground</td>
-      <td>Kitsilano</td>
-    </tr>
-    <tr>
-      <td>Fountain location: Point Grey Road &amp; Waterloo</td>
-      <td>1600 Waterloo St</td>
-      <td>Kitsilano</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nConnaught Park - East side of fieldhouse</td>
-      <td>near fieldhouse</td>
-      <td>Kitsilano</td>
-    </tr>
-    <tr>
-      <td>Fountain location:Pt.Grey &amp; MacDonald</td>
-      <td>Northwest corner of Pt. Grey &amp; MacDonald</td>
-      <td>Kitsilano</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nMcBride Park</td>
-      <td>S of playground</td>
-      <td>Kitsilano</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nWinona Park</td>
-      <td>near playground</td>
-      <td>Marpole</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nOak Park - North west of field hockey</td>
-      <td>Near parking lot</td>
-      <td>Marpole</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nLangara Golf Course - servive yard</td>
-      <td>servive yard</td>
-      <td>Marpole</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nOak Park - East of spray park</td>
-      <td>In spray park</td>
-      <td>Marpole</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nOak Park - East of fieldhouse</td>
-      <td>East side of fieldhouse</td>
-      <td>Marpole</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nEbisu Park</td>
-      <td>near playground</td>
-      <td>Marpole</td>
-    </tr>
-    <tr>
-      <td>Temporary Misting Station location: W 70th Ave &amp; Hudson St</td>
-      <td>W 70th Ave &amp; Hudson St</td>
-      <td>Marpole</td>
-    </tr>
-    <tr>
-      <td>Fountain location: W 63rd Avenue &amp; Yukon Street</td>
-      <td>Southeast corner of W 63rd Avenue &amp; Yukon Street</td>
-      <td>Marpole</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nGranville &amp; 59th</td>
-      <td>Northeast corner of Granville &amp; 59th</td>
-      <td>Marpole</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nMarpole Park</td>
-      <td>west entrance to playground</td>
-      <td>Marpole</td>
-    </tr>
-    <tr>
-      <td>Fountain location: 375 W 59th Avenue</td>
-      <td>Northeast corner of Alberta St and W 59th Ave</td>
-      <td>Marpole</td>
-    </tr>
-    <tr>
-      <td>Fountain location: 11th &amp; Prince Edward</td>
-      <td>Northeast corner of 11th &amp; Prince Edward</td>
-      <td>Mount Pleasant</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nGuelph Park</td>
-      <td>w-side of tennis courts</td>
-      <td>Mount Pleasant</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nChina Creek North Park</td>
-      <td>S central side along jogging c</td>
-      <td>Mount Pleasant</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nPark Site On South East False Creek - Hinge</td>
-      <td>None</td>
-      <td>Mount Pleasant</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nSeawall - Creekside</td>
-      <td>Seawall - in front of Creekside Community Recreation Centre</td>
-      <td>Mount Pleasant</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nJonathan Rogers Park</td>
-      <td>E-side of wading pool</td>
-      <td>Mount Pleasant</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nMount Pleasant Park</td>
-      <td>S-side of wading pool</td>
-      <td>Mount Pleasant</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nPark Site On South East False Creek</td>
-      <td>NE side of the park</td>
-      <td>Mount Pleasant</td>
-    </tr>
-    <tr>
-      <td>Fountain location: Cambie &amp; 10th</td>
-      <td>Northeast corner of Cambie &amp; 10th</td>
-      <td>Mount Pleasant</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nMain &amp; 11th</td>
-      <td>Southeast corner of Main &amp; 11th</td>
-      <td>Mount Pleasant</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nMajor Matthews Park</td>
-      <td>None</td>
-      <td>Mount Pleasant</td>
-    </tr>
-    <tr>
-      <td>Fountain location: 10th &amp; Kingsway</td>
-      <td>Northwest corner of 10th &amp; Kingsway</td>
-      <td>Mount Pleasant</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nRobson Park</td>
-      <td>N-side of wading pool</td>
-      <td>Mount Pleasant</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nBroadway &amp; Ontario</td>
-      <td>Southwest corner of Broadway &amp; Ontario</td>
-      <td>Mount Pleasant</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nChina Creek South Park</td>
-      <td>S-side of skate park</td>
-      <td>Mount Pleasant</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\n7th &amp; Yukon</td>
-      <td>Southwest corner of 7th &amp; Yukon</td>
-      <td>Mount Pleasant</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nTea Swamp Park</td>
-      <td>NE corner of park</td>
-      <td>Mount Pleasant</td>
-    </tr>
-    <tr>
-      <td>Temporary Misting Station location: Main St &amp; 14th Ave</td>
-      <td>Main st &amp; 14th Ave</td>
-      <td>Mount Pleasant</td>
-    </tr>
-    <tr>
-      <td>Fountian Location: Fraser &amp; Broadway</td>
-      <td>Northwest corner of Fraser &amp; Broadway</td>
-      <td>Mount Pleasant</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nTisdall Park</td>
-      <td>near North baseball diamond</td>
-      <td>Oakridge</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nColumbia Park</td>
-      <td>in front of wading pool</td>
-      <td>Oakridge</td>
-    </tr>
-    <tr>
-      <td>Fountain location: Oak &amp; 46th</td>
-      <td>Northeast corner of Oak &amp; 46th</td>
-      <td>Oakridge</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nLangara Golf Course - East of tennis courts</td>
-      <td>56th and Ontario</td>
-      <td>Oakridge</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\n56th &amp; Ontario</td>
-      <td>Northwest corner of 56th &amp; Ontario</td>
-      <td>Oakridge</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nLangara Golf Course - cambie pathway</td>
-      <td>cambie pathway</td>
-      <td>Oakridge</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nLangara Golf Course - clubhouse building</td>
-      <td>clubhouse building</td>
-      <td>Oakridge</td>
-    </tr>
-    <tr>
-      <td>Bottle Filling Station location: \nGrandview Hwy Pumping Station</td>
-      <td>None</td>
-      <td>Renfrew-Collingwood</td>
-    </tr>
-    <tr>
-      <td>Fountain location: Ormidale St &amp; Vanness Avenue</td>
-      <td>Southeast corner of Ormidale St &amp; Vanness Avenue</td>
-      <td>Renfrew-Collingwood</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nGaston Park</td>
-      <td>near basketball court</td>
-      <td>Renfrew-Collingwood</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nFalaise Park</td>
-      <td>in front of wading pool</td>
-      <td>Renfrew-Collingwood</td>
     </tr>
     <tr>
       <td>Fountain location:\nBeaconsfield Park</td>
-      <td>adjacent to field house</td>
       <td>Renfrew-Collingwood</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nMelbourne Park</td>
-      <td>front of tennis courts</td>
-      <td>Renfrew-Collingwood</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nNorquay Park</td>
-      <td>front of wading pool</td>
-      <td>Renfrew-Collingwood</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nVancouver Technical HS</td>
-      <td>NE of the sport field</td>
-      <td>Renfrew-Collingwood</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nSlocan Park</td>
-      <td>near playground</td>
-      <td>Renfrew-Collingwood</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nAberdeen Park</td>
-      <td>plaza</td>
-      <td>Renfrew-Collingwood</td>
-    </tr>
-    <tr>
-      <td>Temporary Fountain location: Wessex &amp; Kingsway</td>
-      <td>3357 Kingsway</td>
-      <td>Renfrew-Collingwood</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nCollingwood Park</td>
-      <td>in front of wading pool</td>
-      <td>Renfrew-Collingwood</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nSlocan Greenway</td>
-      <td>12th and slocan</td>
-      <td>Renfrew-Collingwood</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nRenfrew Community Park</td>
-      <td>adjacent to wading pool</td>
-      <td>Renfrew-Collingwood</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nRiley Park</td>
-      <td>West side of the park</td>
-      <td>Riley Park</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nHillcrest Park - East side</td>
       <td>None</td>
-      <td>Riley Park</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nQueen Elizabeth Park - 37th and Ontario</td>
-      <td>37th and Ontario</td>
-      <td>Riley Park</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nHillcrest Park - North of playground</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
       <td>None</td>
-      <td>Riley Park</td>
     </tr>
     <tr>
-      <td>Fountain location:\n28th &amp; Main</td>
-      <td>Northeast corner of 28th &amp; Main</td>
-      <td>Riley Park</td>
+      <td>Fountain location:\nCarnarvon Park</td>
+      <td>Arbutus-Ridge</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
     </tr>
     <tr>
-      <td>Fountain location:\nQueen Elizabeth Park - Pitch and Putt Course</td>
-      <td>Pitch and Putt Course</td>
-      <td>Riley Park</td>
+      <td>Fountain location:\nClinton Park - East side of wading pool</td>
+      <td>Hastings-Sunrise</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
     </tr>
     <tr>
-      <td>Fountain location:\nQueen Elizabeth Park - At Conservatory</td>
-      <td>At Conservatory</td>
-      <td>Riley Park</td>
+      <td>Fountain location:\nCoal Harbour Park</td>
+      <td>Downtown</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
     </tr>
     <tr>
-      <td>Fountain location:\n37th &amp; Prince Edward</td>
-      <td>Northwest corner of 37th &amp; Prince Edward</td>
-      <td>Riley Park</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\n37th &amp; Ontario</td>
-      <td>Northwest corner of 37th &amp; Ontario</td>
-      <td>Riley Park</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nVandusen Botanical Garden - upper gardens</td>
-      <td>upper gardens</td>
-      <td>Shaughnessy</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nVandusen Botanical Garden</td>
-      <td>near reflecting pond</td>
-      <td>Shaughnessy</td>
+      <td>Fountain location:\nDavid Lam Park - South west of playgrounds</td>
+      <td>Downtown</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
     </tr>
     <tr>
       <td>Fountain location:\nDouglas Park (community centre)</td>
-      <td>exterior of building</td>
       <td>South Cambie</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nDouglas Park - Right side of wading pool</td>
-      <td>in front of wading pool</td>
-      <td>South Cambie</td>
-    </tr>
-    <tr>
-      <td>Fountain location: Cambie &amp; 29th Avenue</td>
-      <td>Southwest corner of Cambie &amp; 29th Avenue</td>
-      <td>South Cambie</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\n37th &amp; Oak</td>
-      <td>Southeast corner of 37th &amp; Oak</td>
-      <td>South Cambie</td>
-    </tr>
-    <tr>
-      <td>Fountain location: 4963 Cambie St</td>
-      <td>Northwest corner of Cambie and W 35th</td>
-      <td>South Cambie</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nMaclean Park</td>
       <td>None</td>
-      <td>Strathcona</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nTrillium Park</td>
-      <td>on west side of building</td>
-      <td>Strathcona</td>
-    </tr>
-    <tr>
-      <td>Temporary Misting Station Location: Oppenheimer Park</td>
-      <td>NE Corner of Oppenheimer Park</td>
-      <td>Strathcona</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nStrathcona Park - besides baseball diamond</td>
-      <td>besides baseball diamond</td>
-      <td>Strathcona</td>
-    </tr>
-    <tr>
-      <td>Temporary Misting Station location: Thornton Park</td>
-      <td>East side of Thornton Park across from Pacific Central</td>
-      <td>Strathcona</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nUnion &amp; Hawks</td>
-      <td>In mini park at Union &amp; Hawks</td>
-      <td>Strathcona</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nStrathcona Park - North west of basketball court</td>
-      <td>besides basketball court</td>
-      <td>Strathcona</td>
-    </tr>
-    <tr>
-      <td>Temporary Handwashing Station location: 384 Main</td>
-      <td>384 Main St</td>
-      <td>Strathcona</td>
-    </tr>
-    <tr>
-      <td>Temporary Fountain location: Powell &amp; Gore</td>
-      <td>SW corner of Powell St and Gore Ave</td>
-      <td>Strathcona</td>
-    </tr>
-    <tr>
-      <td>Temporary Fountain location: Powell &amp; Jackson</td>
-      <td>477 Powell St</td>
-      <td>Strathcona</td>
-    </tr>
-    <tr>
-      <td>Temporary Handwashing Station location: 201 Central</td>
-      <td>201 Central St</td>
-      <td>Strathcona</td>
-    </tr>
-    <tr>
-      <td>Bottle Filling Station location: \nThornton Park Pumping Station</td>
-      <td>West side of sewage pumping station on w/s/ 1200 Station St</td>
-      <td>Strathcona</td>
-    </tr>
-    <tr>
-      <td>Temporary Fountain location: E Hastings &amp; Heatley</td>
-      <td>NE corner of E Hastings St and Heatley Ave</td>
-      <td>Strathcona</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nOppenheimer Park</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
       <td>None</td>
-      <td>Strathcona</td>
     </tr>
     <tr>
-      <td>Temporary Handwashing Station location: Union Gospel Mission</td>
-      <td>601 E Hastings St</td>
-      <td>Strathcona</td>
-    </tr>
-    <tr>
-      <td>Temporary Handwashing Station location: Dunlevy &amp; E Cordova</td>
-      <td>255 Dunlevy Av</td>
-      <td>Strathcona</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nHastings &amp; Gore</td>
-      <td>Northeast corner of Hastings &amp; Gore</td>
-      <td>Strathcona</td>
-    </tr>
-    <tr>
-      <td>Temporary Handwashing Station location: Evelyne Saller Centre</td>
-      <td>320 Alexander  St</td>
-      <td>Strathcona</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nMacDonald Park</td>
-      <td>near NW corner of tennis court</td>
-      <td>Sunset</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nMoberly Park - Arts &amp; Cultural Centre</td>
+      <td>Fountain location:\nElm Park</td>
+      <td>Kerrisdale</td>
       <td>None</td>
-      <td>Sunset</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
     </tr>
     <tr>
-      <td>Fountain location:\nMoberly Park - West of tennis courts</td>
-      <td>in front of tennis courts</td>
-      <td>Sunset</td>
+      <td>Fountain location:\nEmery Barnes Park - Dog off-leash area</td>
+      <td>Downtown</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
     </tr>
     <tr>
-      <td>Fountain location:\nSunset Park</td>
-      <td>front of wading pool</td>
-      <td>Sunset</td>
+      <td>Fountain location:\nFraser River Park - park entrance by Angus Dr</td>
+      <td>Kerrisdale</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
     </tr>
     <tr>
       <td>Fountain location:\nGeorge Park</td>
-      <td>southeast corner of park</td>
       <td>Sunset</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
     </tr>
     <tr>
-      <td>Fountain location:\nMemorial South Park - West of wading pool</td>
-      <td>W-side of wading pool</td>
-      <td>Sunset</td>
+      <td>Fountain location:\nGrandview Park - West of Stage</td>
+      <td>Grandview-Woodland</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
     </tr>
     <tr>
-      <td>Fountain location:\nRoss Park</td>
-      <td>near shelter</td>
-      <td>Sunset</td>
+      <td>Fountain location:\nGrays Park</td>
+      <td>Kensington-Cedar Cottage</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nHastings Community Park - South of wading pool</td>
+      <td>Hastings-Sunrise</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nHillcrest Park - East side</td>
+      <td>Riley Park</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nKaslo Park</td>
+      <td>Hastings-Sunrise</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nKerrisdale Centennial Park</td>
+      <td>Kerrisdale</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nKitsilano Beach Park - North of parking lot</td>
+      <td>Kitsilano</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nKitsilano Beach Park - washroom wall</td>
+      <td>Kitsilano</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nLangara Golf Course - cambie pathway</td>
+      <td>Oakridge</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nLangara Golf Course - servive yard</td>
+      <td>Marpole</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nMaclean Park</td>
+      <td>Strathcona</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nMajor Matthews Park</td>
+      <td>Mount Pleasant</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nMaple Grove Park - East of pool</td>
+      <td>Kerrisdale</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nMcCleery Golf Course - 5th tee</td>
+      <td>Kerrisdale</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nMelbourne Park</td>
+      <td>Renfrew-Collingwood</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
     </tr>
     <tr>
       <td>Fountain location:\nMemorial South Park - West of Softball Diamond</td>
-      <td>None</td>
       <td>Sunset</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nMemorial West Park</td>
+      <td>Dunbar-Southlands</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nMount Pleasant Park</td>
+      <td>Mount Pleasant</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nNew Brighton Park - South west of playground</td>
+      <td>Hastings-Sunrise</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nNew Brighton Park - West of tennis courts</td>
+      <td>Hastings-Sunrise</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nPark Site On South East False Creek</td>
+      <td>Mount Pleasant</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nQueen Elizabeth Park - Pitch and Putt Course</td>
+      <td>Riley Park</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nQuilchena Park</td>
+      <td>Arbutus-Ridge</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nRenfrew Community Park</td>
+      <td>Renfrew-Collingwood</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nRiverfront Park - East of washrooms</td>
+      <td>Killarney</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
     </tr>
     <tr>
       <td>Fountain location:\nRoss Park</td>
-      <td>in front of wading pool</td>
       <td>Sunset</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nTecumseh Park</td>
-      <td>middle of park</td>
-      <td>Victoria-Fraserview</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nAshburn &amp; Elliot</td>
-      <td>Northwest corner of Ashburn &amp; Elliot</td>
-      <td>Victoria-Fraserview</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nBobolink Park</td>
-      <td>in front of wading pool</td>
-      <td>Victoria-Fraserview</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nNanaimo Park</td>
-      <td>in front of wading pool</td>
-      <td>Victoria-Fraserview</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nGilford &amp; Comox</td>
-      <td>Northwest corner of Gilford &amp; Comox</td>
-      <td>West End</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nBurrard &amp; Davie</td>
-      <td>Northwest corner of Burrard &amp; Davie</td>
-      <td>West End</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nGilford &amp; Nelson</td>
-      <td>Northwest corner of Gilford &amp; Nelson</td>
-      <td>West End</td>
-    </tr>
-    <tr>
-      <td>Fountain location: Gilford St &amp; Haro St</td>
-      <td>Gilford mini park</td>
-      <td>West End</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nEnglish Bay Beach Park - West of bath-house</td>
-      <td>opposite entrance to bathhouse</td>
-      <td>West End</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nEnglish Bay Beach Park - concessions</td>
-      <td>concessions</td>
-      <td>West End</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nCardero &amp; Burnaby</td>
-      <td>In the mini park at Cardero &amp; Burnaby</td>
-      <td>West End</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nNicola &amp; Beach</td>
-      <td>Northeast corner of Nicola &amp; Beach</td>
-      <td>West End</td>
-    </tr>
-    <tr>
-      <td>Temporary Misting Station location: Robson &amp; Cardero</td>
-      <td>SW corner of Robson St &amp; Cardero St</td>
-      <td>West End</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nRobson &amp; Chilco</td>
-      <td>In mini park at Robson &amp; Chilco</td>
-      <td>West End</td>
-    </tr>
-    <tr>
-      <td>Temporary Misting Station location: Nelson Park</td>
-      <td>NW corner of Thurlow St &amp; Comox St</td>
-      <td>West End</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nNelson &amp; Broughton</td>
-      <td>In mini park at Nelson &amp; Broughton</td>
-      <td>West End</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nSunset Beach</td>
-      <td>on building wall</td>
-      <td>West End</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nAlexandra Park</td>
-      <td>west plaza gateway</td>
-      <td>West End</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nNelson Park</td>
-      <td>middle of park</td>
-      <td>West End</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nComox &amp; Denman</td>
-      <td>Northwest corner of Comox &amp; Denman</td>
-      <td>West End</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nWest End minipark</td>
-      <td>Bute &amp; Haro</td>
-      <td>West End</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nComox &amp; Cardero</td>
-      <td>Northeast corner of Comox &amp; Cardero</td>
-      <td>West End</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nComox &amp; Chilco</td>
-      <td>In mini park at Comox &amp; Chilco</td>
-      <td>West End</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nWest End minipark - JERVIS ST @ BURNABY ST</td>
-      <td>north end</td>
-      <td>West End</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nEnglish Bay Beach Park - Davie st entrance</td>
-      <td>Davie st entrance</td>
-      <td>West End</td>
-    </tr>
-    <tr>
-      <td>Fountain location: Davie &amp; Bute (Jim Deva Plaza)</td>
-      <td>1200 Davie Street</td>
-      <td>West End</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nMorton Park</td>
       <td>None</td>
-      <td>West End</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nDenman &amp; Nelson</td>
-      <td>Southwest corner of Denman &amp; Nelson</td>
-      <td>West End</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nWest Point Grey Park - North of wading pool</td>
-      <td>N-side of wading pool</td>
-      <td>West Point Grey</td>
-    </tr>
-    <tr>
-      <td>Fountain location:\nJericho Beach Park</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
       <td>None</td>
-      <td>West Point Grey</td>
     </tr>
     <tr>
-      <td>Fountain location:\nWest Point Grey Park - lawn bowling court</td>
-      <td>In lawn bowling court</td>
-      <td>West Point Grey</td>
+      <td>Fountain location:\nRupert Park</td>
+      <td>Hastings-Sunrise</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
     </tr>
     <tr>
-      <td>Fountain location:\nLocarno Beach Park</td>
-      <td>near concessions</td>
-      <td>West Point Grey</td>
+      <td>Fountain location:\nSeawall - Creekside</td>
+      <td>Mount Pleasant</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nShannon Mews Park</td>
+      <td>Kerrisdale</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nSlocan Greenway</td>
+      <td>Renfrew-Collingwood</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nSlocan Park</td>
+      <td>Renfrew-Collingwood</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
     </tr>
     <tr>
       <td>Fountain location:\nSpanish Banks Beach Park</td>
-      <td>on north wall of washrooms</td>
       <td>West Point Grey</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
     </tr>
     <tr>
       <td>Fountain location:\nStanley Park - Admin building</td>
-      <td>Park Board Office</td>
+      <td>None</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
       <td>None</td>
     </tr>
     <tr>
       <td>Fountain location:\nStanley Park - Lumbermen's Arch</td>
-      <td>Lumbermen's Arch</td>
+      <td>None</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
       <td>None</td>
     </tr>
     <tr>
       <td>Fountain location:\nStanley Park - North east of Rose and Perennial Ga</td>
       <td>None</td>
       <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
     </tr>
     <tr>
       <td>Fountain location:\nStanley Park - Putting Green</td>
-      <td>Pitch and Putt Course</td>
+      <td>None</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
       <td>None</td>
     </tr>
     <tr>
       <td>Fountain location:\nStanley Park - Second Beach</td>
-      <td>Second Beach</td>
+      <td>None</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
       <td>None</td>
     </tr>
     <tr>
       <td>Fountain location:\nStanley Park - Second Beach Pool</td>
-      <td>Second Beach pool deck</td>
+      <td>None</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
       <td>None</td>
     </tr>
     <tr>
       <td>Fountain location:\nStanley Park - South west of playground</td>
-      <td>Rose Garden playground</td>
+      <td>None</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
       <td>None</td>
     </tr>
     <tr>
       <td>Fountain location:\nStanley Park - West of Shore to Shore sculpture</td>
-      <td>Totem poles</td>
+      <td>None</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nSunrise Park</td>
+      <td>Hastings-Sunrise</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nSunset Beach</td>
+      <td>West End</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nVandusen Botanical Garden</td>
+      <td>Shaughnessy</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nWest End minipark - JERVIS ST @ BURNABY ST</td>
+      <td>West End</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nWest Point Grey Park - lawn bowling court</td>
+      <td>West Point Grey</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nWinona Park</td>
+      <td>Marpole</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Temporary Misting Station location: Andy Livingston Park</td>
+      <td>Downtown</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Temporary Misting Station location: Granville & W 10th</td>
+      <td>Fairview</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Temporary Misting Station location: Nelson Park</td>
+      <td>West End</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Temporary Misting Station location: Robson & Cardero</td>
+      <td>West End</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Temporary Misting Station location: West Blvd & W 45th</td>
+      <td>Kerrisdale</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Bottle Filling Station location: \nCharleson Park Pumping Station</td>
+      <td>Fairview</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Bottle Filling Station location: \nGrandview Hwy Pumping Station</td>
+      <td>Renfrew-Collingwood</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location : E 30th Ave & Gladstone St</td>
+      <td>Kensington-Cedar Cottage</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\n28th & Main</td>
+      <td>Riley Park</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\n37th & Oak</td>
+      <td>South Cambie</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\n37th & Ontario</td>
+      <td>Riley Park</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\n37th & Prince Edward</td>
+      <td>Riley Park</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nAshburn & Elliot</td>
+      <td>Victoria-Fraserview</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nCardero & Burnaby</td>
+      <td>West End</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nDenman & Nelson</td>
+      <td>West End</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nElgin & 37th</td>
+      <td>Kensington-Cedar Cottage</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nGranville & 59th</td>
+      <td>Marpole</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nHastings & Gore</td>
+      <td>Strathcona</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nRobson & Chilco</td>
+      <td>West End</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nUnion & Hawks</td>
+      <td>Strathcona</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location: 10th & Kingsway</td>
+      <td>Mount Pleasant</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location: 4963 Cambie St</td>
+      <td>South Cambie</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location: Davie & Bute (Jim Deva Plaza)</td>
+      <td>West End</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location: Oak & 46th</td>
+      <td>Oakridge</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location: Point Grey Road & Waterloo</td>
+      <td>Kitsilano</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location: River District Crossing & E Kent Ave North</td>
+      <td>Killarney</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:Pt.Grey & MacDonald</td>
+      <td>Kitsilano</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountian Location: Fraser & Broadway</td>
+      <td>Mount Pleasant</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Temporary Fountain location: 2067 W 15th Ave</td>
+      <td>Kitsilano</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Temporary Fountain location: London Drugs</td>
+      <td>Downtown</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Temporary Handwashing Station location: 15 E Hastings</td>
+      <td>Downtown</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Temporary Handwashing Station location: Dunlevy & E Cordova</td>
+      <td>Strathcona</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Temporary Handwashing Station location: E Hastings & Columbia</td>
+      <td>Downtown</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Temporary Handwashing Station location: The Gathering Place</td>
+      <td>Downtown</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nAdanac Park</td>
+      <td>Hastings-Sunrise</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nAndy Livingstone Park - North of basketball court</td>
+      <td>Downtown</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nArt Phillips Park (Discovery Square)</td>
+      <td>Downtown</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nBalaclava Park</td>
+      <td>Dunbar-Southlands</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nBurrard View Park</td>
+      <td>Hastings-Sunrise</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nCedar Cottage Park</td>
+      <td>Kensington-Cedar Cottage</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nChaldecott Park</td>
+      <td>Dunbar-Southlands</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nChina Creek South Park</td>
+      <td>Mount Pleasant</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nClark Park</td>
+      <td>Kensington-Cedar Cottage</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nClinton Park - North side of ball diamond</td>
+      <td>Hastings-Sunrise</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nCollingwood Park</td>
+      <td>Renfrew-Collingwood</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nConnaught Park - East side of fieldhouse</td>
+      <td>Kitsilano</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nCoopers' Park</td>
+      <td>Downtown</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nCoopers' Park - underneath bridge, near basket</td>
+      <td>Downtown</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nCreekside Park</td>
+      <td>Downtown</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nEbisu Park</td>
+      <td>Marpole</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nEnglish Bay Beach Park - Davie st entrance</td>
+      <td>West End</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nFalaise Park</td>
+      <td>Renfrew-Collingwood</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nFraserview Golf Course - 6th tee</td>
+      <td>Killarney</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nFraserview Golf Course - clubhouse building</td>
+      <td>Killarney</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nGarden Park</td>
+      <td>Grandview-Woodland</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nGaston Park</td>
+      <td>Renfrew-Collingwood</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nGeorge Wainborn Park</td>
+      <td>Downtown</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nHarbour Green Park - foot of Jervis Mews</td>
+      <td>Downtown</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nHastings Community Park - SE of tennis courts</td>
+      <td>Hastings-Sunrise</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nHastings Park - Italian gardens</td>
+      <td>Hastings-Sunrise</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nHastings Park -Plateau Sport Parks / Empire Fields</td>
+      <td>Hastings-Sunrise</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nHastings Park -Plateau Sport Parks / Empire Fields</td>
+      <td>Hastings-Sunrise</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nJohn Hendry (Trout Lake) Park</td>
+      <td>Kensington-Cedar Cottage</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nKensington Park</td>
+      <td>Kensington-Cedar Cottage</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nKingcrest Park</td>
+      <td>Kensington-Cedar Cottage</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nLangara Golf Course - East of tennis courts</td>
+      <td>Oakridge</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nMcBride Park</td>
+      <td>Kitsilano</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nMcCleery Golf Course - clubhouse building</td>
+      <td>Kerrisdale</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nMcCleery Golf Course - driving range</td>
+      <td>Kerrisdale</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nMemorial South Park - West of wading pool</td>
+      <td>Sunset</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nMoberly Park - West of tennis courts</td>
+      <td>Sunset</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nMosaic Creek Park</td>
+      <td>Grandview-Woodland</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nNew Brighton Park - South of pool</td>
+      <td>Hastings-Sunrise</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nOppenheimer Park</td>
+      <td>Strathcona</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nQueen Elizabeth Park - At Conservatory</td>
+      <td>Riley Park</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nRobson Park</td>
+      <td>Mount Pleasant</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nRupert Park - East of fieldhouse</td>
+      <td>Hastings-Sunrise</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
       <td>None</td>
     </tr>
     <tr>
       <td>Fountain location:\nStanley Park - Brockton Oval Fieldhouse</td>
-      <td>brockton oval</td>
+      <td>None</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
       <td>None</td>
     </tr>
     <tr>
       <td>Fountain location:\nStanley Park - Brockton Point Viewpoint</td>
-      <td>Brockton point - lighthouse</td>
+      <td>None</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
       <td>None</td>
     </tr>
     <tr>
       <td>Fountain location:\nStanley Park - Ceperley Washrooms</td>
-      <td>Ceperley washrooms</td>
+      <td>None</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
       <td>None</td>
     </tr>
     <tr>
       <td>Fountain location:\nStanley Park - Lawn Bowling Club</td>
-      <td>Lawn Bowling</td>
+      <td>None</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
       <td>None</td>
     </tr>
     <tr>
       <td>Fountain location:\nStanley Park - Legends Of The Moon Washroom</td>
-      <td>Legends Of The Moon - Washroom</td>
+      <td>None</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
       <td>None</td>
     </tr>
     <tr>
       <td>Fountain location:\nStanley Park - Prospect Point Washrooms</td>
-      <td>prospect point washrooms</td>
+      <td>None</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
       <td>None</td>
     </tr>
     <tr>
       <td>Fountain location:\nStanley Park - Stanley Park Pavilion</td>
-      <td>pavillion outside washrooms</td>
+      <td>None</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
       <td>None</td>
     </tr>
     <tr>
       <td>Fountain location:\nStanley Park - West of Restaurant</td>
-      <td>W - side of Fish House</td>
+      <td>None</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
       <td>None</td>
     </tr>
     <tr>
       <td>Fountain location:\nStanley Park - West side of Stanley Park Train</td>
       <td>None</td>
       <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nStrathcona Park - North west of basketball court</td>
+      <td>Strathcona</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nSunset Park</td>
+      <td>Sunset</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nTea Swamp Park</td>
+      <td>Mount Pleasant</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nTisdall Park</td>
+      <td>Oakridge</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nVancouver Technical HS</td>
+      <td>Renfrew-Collingwood</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nVandusen Botanical Garden - upper gardens</td>
+      <td>Shaughnessy</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nVictoria Park</td>
+      <td>Grandview-Woodland</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nVictory Square</td>
+      <td>Downtown</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nWest End minipark</td>
+      <td>West End</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nWoodland Park</td>
+      <td>Grandview-Woodland</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Temporary Misting Station location: Columbia & Powell</td>
+      <td>Downtown</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Temporary Misting Station location: Main St & 14th Ave</td>
+      <td>Mount Pleasant</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Temporary Misting Station location: Thornton Park</td>
+      <td>Strathcona</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Bottle Filling Station location: \nGranville Island Pumping Station</td>
+      <td>Fairview</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\n56th & Ontario</td>
+      <td>Oakridge</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nBroadway & Stephens</td>
+      <td>Kitsilano</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nBroadway & Victoria</td>
+      <td>Kensington-Cedar Cottage</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nCommercial & 3rd</td>
+      <td>Grandview-Woodland</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nComox & Cardero</td>
+      <td>West End</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nComox & Chilco</td>
+      <td>West End</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nComox & Denman</td>
+      <td>West End</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nGranville & Robson</td>
+      <td>Downtown</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nMain & 11th</td>
+      <td>Mount Pleasant</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nNelson & Broughton</td>
+      <td>West End</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location: 10th & Willow</td>
+      <td>Fairview</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location: 11th & Prince Edward</td>
+      <td>Mount Pleasant</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location: 2001 W 10th Avenue</td>
+      <td>Kitsilano</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location: 375 W 59th Avenue</td>
+      <td>Marpole</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location: 8683 Kerr</td>
+      <td>Killarney</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location: Cambie & 10th</td>
+      <td>Mount Pleasant</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Temporary Fountain location: E Hastings & Heatley</td>
+      <td>Strathcona</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Temporary Fountain location: Wessex & Kingsway</td>
+      <td>Renfrew-Collingwood</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Temporary Handwashing Station location: Evelyne Saller Centre</td>
+      <td>Strathcona</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Temporary Handwashing Station location: Union Gospel Mission</td>
+      <td>Strathcona</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nAberdeen Park</td>
+      <td>Renfrew-Collingwood</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nAlexandra Park</td>
+      <td>West End</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nAndy Livingstone Park - South of soccer fields</td>
+      <td>Downtown</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nArbutus Greenway Park</td>
+      <td>Kitsilano</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nBobolink Park</td>
+      <td>Victoria-Fraserview</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nBrewers Park</td>
+      <td>Kensington-Cedar Cottage</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nCRAB Park at Portside</td>
+      <td>Downtown</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nCharleson Park</td>
+      <td>Fairview</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nChina Creek North Park</td>
+      <td>Mount Pleasant</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nColumbia Park</td>
+      <td>Oakridge</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nConnaught Park - North of playground</td>
+      <td>Kitsilano</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nDavid Lam Park - South west of basketball courts</td>
+      <td>Downtown</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
     </tr>
     <tr>
       <td>Fountain location:\nDevonian Harbour Park</td>
-      <td>near Stanley Park entrance</td>
+      <td>None</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nDouglas Park - Right side of wading pool</td>
+      <td>South Cambie</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nEmery Barnes Park - South west of playground</td>
+      <td>Downtown</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nEnglish Bay Beach Park - West of bath-house</td>
+      <td>West End</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nEnglish Bay Beach Park - concessions</td>
+      <td>West End</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nFraser River Park - South west</td>
+      <td>Kerrisdale</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nFraserview Golf Course - West of kerr st.</td>
+      <td>Killarney</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nFraserview Golf Course - driving range</td>
+      <td>Killarney</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nGrandview Park - South of playground</td>
+      <td>Grandview-Woodland</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nGranville Loop Park</td>
+      <td>Fairview</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nGuelph Park</td>
+      <td>Mount Pleasant</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nHarbour Green Park - In front of washrooms</td>
+      <td>Downtown</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nHarbour Green Park - Viewpoint</td>
+      <td>Downtown</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nHastings Park -Plateau Sport Parks / Empire Fields</td>
+      <td>Hastings-Sunrise</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nHastings Park -Plateau Sport Parks / Empire Fields</td>
+      <td>Hastings-Sunrise</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nHastings Park -Plateau Sport Parks / Empire Fields</td>
+      <td>Hastings-Sunrise</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nHillcrest Park - North of playground</td>
+      <td>Riley Park</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nJericho Beach Park</td>
+      <td>West Point Grey</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nJonathan Rogers Park</td>
+      <td>Mount Pleasant</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nKillarney Park - E 45th Ave. @ Killarney St.</td>
+      <td>Killarney</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nKillarney Park - East of wading pool</td>
+      <td>Killarney</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nKitsilano Beach Park - South of playground</td>
+      <td>Kitsilano</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nLangara Golf Course - clubhouse building</td>
+      <td>Oakridge</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nLocarno Beach Park</td>
+      <td>West Point Grey</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nMacDonald Park</td>
+      <td>Sunset</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nMaple Grove Park - South of baseball diamond</td>
+      <td>Kerrisdale</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nMarpole Park</td>
+      <td>Marpole</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nMcCleery Golf Course - servive yard</td>
+      <td>Kerrisdale</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nMoberly Park - Arts & Cultural Centre</td>
+      <td>Sunset</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nMorton Park</td>
+      <td>West End</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nNanaimo Park</td>
+      <td>Victoria-Fraserview</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nNelson Park</td>
+      <td>West End</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nNorquay Park</td>
+      <td>Renfrew-Collingwood</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nOak Park - East of fieldhouse</td>
+      <td>Marpole</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nOak Park - East of spray park</td>
+      <td>Marpole</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nOak Park - North west of field hockey</td>
+      <td>Marpole</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nPandora Park</td>
+      <td>Grandview-Woodland</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nPark Site On South East False Creek - Hinge</td>
+      <td>Mount Pleasant</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nPioneer Place (Pigeon Park)</td>
+      <td>Downtown</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nQueen Elizabeth Park - 37th and Ontario</td>
+      <td>Riley Park</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nRiley Park</td>
+      <td>Riley Park</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nRiverfront Park - West of tennis courts</td>
+      <td>Killarney</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nRoss Park</td>
+      <td>Sunset</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nRupert Park - South of golf entrance booth</td>
+      <td>Hastings-Sunrise</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nSeaforth Peace Park</td>
+      <td>Kitsilano</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
       <td>None</td>
     </tr>
     <tr>
       <td>Fountain location:\nStanley Park - Brockton Cricket Pavilion</td>
-      <td>Brockton Clubhouse</td>
+      <td>None</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
       <td>None</td>
     </tr>
     <tr>
       <td>Fountain location:\nStanley Park - Dog Off-leash area</td>
-      <td>Beside Dog off-leash area</td>
+      <td>None</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
       <td>None</td>
     </tr>
     <tr>
       <td>Fountain location:\nStanley Park - Prospect Point Lookout</td>
-      <td>Prospect Point viewing</td>
+      <td>None</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
       <td>None</td>
     </tr>
     <tr>
       <td>Fountain location:\nStanley Park - Prospect Point Picnic Site</td>
-      <td>Prospect Point picnic area</td>
+      <td>None</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
       <td>None</td>
     </tr>
     <tr>
       <td>Fountain location:\nStanley Park - Tennis Courts</td>
-      <td>near Tennis Courts &amp; Fish House</td>
+      <td>None</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
       <td>None</td>
     </tr>
     <tr>
       <td>Fountain location:\nStanley Park - Third Beach Seawall</td>
-      <td>Third beach seawall</td>
+      <td>None</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nStrathcona Park - besides baseball diamond</td>
+      <td>Strathcona</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nSutcliffe Park</td>
+      <td>Fairview</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nTecumseh Park</td>
+      <td>Victoria-Fraserview</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nTrafalgar Park</td>
+      <td>Arbutus-Ridge</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nTrillium Park</td>
+      <td>Strathcona</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nVanier Park (Burrard Civic Marina)</td>
+      <td>Kitsilano</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nW.C. Shelly Park</td>
+      <td>Grandview-Woodland</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nWest Point Grey Park - North of wading pool</td>
+      <td>West Point Grey</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Temporary Misting Station Location: Oppenheimer Park</td>
+      <td>Strathcona</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Temporary Misting Station location: Commercial & E 10th</td>
+      <td>Kensington-Cedar Cottage</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Temporary Misting Station location: W 70th Ave & Hudson St</td>
+      <td>Marpole</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Bottle Filling Station location: \nGranville St Pumping Station</td>
+      <td>Downtown</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Bottle Filling Station location: \nKitsilano Pumping Station</td>
+      <td>Kitsilano</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Bottle Filling Station location: \nThornton Park Pumping Station</td>
+      <td>Strathcona</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\n1650 W 7th</td>
+      <td>Fairview</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\n39th & Nanaimo</td>
+      <td>Kensington-Cedar Cottage</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\n4th & Arbutus</td>
+      <td>Kitsilano</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\n7th & Yukon</td>
+      <td>Mount Pleasant</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nBroadway & Ontario</td>
+      <td>Mount Pleasant</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nBurrard & Davie</td>
+      <td>West End</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nGilford & Comox</td>
+      <td>West End</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nGilford & Nelson</td>
+      <td>West End</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nHastings & Kamloops</td>
+      <td>Hastings-Sunrise</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:\nNicola & Beach</td>
+      <td>West End</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location: 733 W 14th Avenue</td>
+      <td>Fairview</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location: Cambie & 29th Avenue</td>
+      <td>South Cambie</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location: Gilford St & Haro St</td>
+      <td>West End</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location: Ormidale St & Vanness Avenue</td>
+      <td>Renfrew-Collingwood</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location: W 63rd Avenue & Yukon Street</td>
+      <td>Marpole</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Fountain location:Nelson & Howe</td>
+      <td>Downtown</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Temporary Fountain location: Commercial & E Broadway</td>
+      <td>Grandview-Woodland</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Temporary Fountain location: Main & E Hastings</td>
+      <td>Downtown</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Temporary Fountain location: Powell & Gore</td>
+      <td>Strathcona</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Temporary Fountain location: Powell & Jackson</td>
+      <td>Strathcona</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Temporary Handwashing Station location: 201 Central</td>
+      <td>Strathcona</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Temporary Handwashing Station location: 384 Main</td>
+      <td>Strathcona</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Temporary Handwashing Station location: ICBC 999 Kingsway</td>
+      <td>Kensington-Cedar Cottage</td>
+      <td>None</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
       <td>None</td>
     </tr>
   </tbody>
-</table>
-    <script>$(function(){ $('table').DataTable(); });</script>
+</table></div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/datatables@1.13.8/media/js/jquery.dataTables.min.js"></script>
+    <script>
+      $(function(){
+        $('table').DataTable({
+          responsive: true,
+          pageLength: 25,
+          order: [[1,'asc']],     // sort by Neighbourhood
+        });
+      });
+    </script>
     </body></html>

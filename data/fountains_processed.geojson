@@ -14,7 +14,12 @@
         "id": "DFPB0004",
         "name": "Fountain location:\nAlmond Park",
         "address": "S-side of playground",
-        "geo_local_area": "Kitsilano"
+        "geo_local_area": "Kitsilano",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -30,7 +35,12 @@
         "id": "DFPB0008",
         "name": "Fountain location:\nArbutus Village Park",
         "address": "S-side of playground",
-        "geo_local_area": "Arbutus-Ridge"
+        "geo_local_area": "Arbutus-Ridge",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -46,7 +56,12 @@
         "id": "DFPB0011",
         "name": "Fountain location:\nBeaconsfield Park",
         "address": "adjacent to field house",
-        "geo_local_area": "Renfrew-Collingwood"
+        "geo_local_area": "Renfrew-Collingwood",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -62,7 +77,12 @@
         "id": "DFPB0014",
         "name": "Fountain location:\nCarnarvon Park",
         "address": "S-side of wading pool",
-        "geo_local_area": "Arbutus-Ridge"
+        "geo_local_area": "Arbutus-Ridge",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -78,7 +98,12 @@
         "id": "DFPB0021",
         "name": "Fountain location:\nClinton Park - East side of wading pool",
         "address": "E-side of wading pool",
-        "geo_local_area": "Hastings-Sunrise"
+        "geo_local_area": "Hastings-Sunrise",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -94,7 +119,12 @@
         "id": "DFPB0023",
         "name": "Fountain location:\nCoal Harbour Park",
         "address": "near playground",
-        "geo_local_area": "Downtown"
+        "geo_local_area": "Downtown",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -110,7 +140,12 @@
         "id": "DFPB0033",
         "name": "Fountain location:\nDavid Lam Park - South west of playgrounds",
         "address": "E area, near playground",
-        "geo_local_area": "Downtown"
+        "geo_local_area": "Downtown",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -126,7 +161,12 @@
         "id": "DFPB0036",
         "name": "Fountain location:\nDouglas Park (community centre)",
         "address": "exterior of building",
-        "geo_local_area": "South Cambie"
+        "geo_local_area": "South Cambie",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -142,7 +182,12 @@
         "id": "DFPB0038",
         "name": "Fountain location:\nElm Park",
         "address": "N-side of field house",
-        "geo_local_area": "Kerrisdale"
+        "geo_local_area": "Kerrisdale",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -158,7 +203,12 @@
         "id": "DFPB0039",
         "name": "Fountain location:\nEmery Barnes Park - Dog off-leash area",
         "address": null,
-        "geo_local_area": "Downtown"
+        "geo_local_area": "Downtown",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -174,7 +224,12 @@
         "id": "DFPB0046",
         "name": "Fountain location:\nFraser River Park - park entrance by Angus Dr",
         "address": "near park entrance by Angus Dr",
-        "geo_local_area": "Kerrisdale"
+        "geo_local_area": "Kerrisdale",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -190,7 +245,12 @@
         "id": "DFPB0053",
         "name": "Fountain location:\nGeorge Park",
         "address": "southeast corner of park",
-        "geo_local_area": "Sunset"
+        "geo_local_area": "Sunset",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -206,7 +266,12 @@
         "id": "DFPB0055",
         "name": "Fountain location:\nGrandview Park - West of Stage",
         "address": "Close to the Stage",
-        "geo_local_area": "Grandview-Woodland"
+        "geo_local_area": "Grandview-Woodland",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -222,7 +287,12 @@
         "id": "DFPB0058",
         "name": "Fountain location:\nGrays Park",
         "address": "front of wading pool",
-        "geo_local_area": "Kensington-Cedar Cottage"
+        "geo_local_area": "Kensington-Cedar Cottage",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -238,7 +308,12 @@
         "id": "DFPB0063",
         "name": "Fountain location:\nHastings Community Park - South of wading pool",
         "address": "besides wading pool",
-        "geo_local_area": "Hastings-Sunrise"
+        "geo_local_area": "Hastings-Sunrise",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -254,7 +329,12 @@
         "id": "DFPB0072",
         "name": "Fountain location:\nHillcrest Park - East side",
         "address": null,
-        "geo_local_area": "Riley Park"
+        "geo_local_area": "Riley Park",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -270,7 +350,12 @@
         "id": "DFPB0076",
         "name": "Fountain location:\nKaslo Park",
         "address": "SE corner of tennis courts",
-        "geo_local_area": "Hastings-Sunrise"
+        "geo_local_area": "Hastings-Sunrise",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -286,7 +371,12 @@
         "id": "DFPB0078",
         "name": "Fountain location:\nKerrisdale Centennial Park",
         "address": "2nd N-side entrance",
-        "geo_local_area": "Kerrisdale"
+        "geo_local_area": "Kerrisdale",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -302,7 +392,12 @@
         "id": "DFPB0084",
         "name": "Fountain location:\nKitsilano Beach Park - North of parking lot",
         "address": "besides parking lot",
-        "geo_local_area": "Kitsilano"
+        "geo_local_area": "Kitsilano",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -318,7 +413,12 @@
         "id": "DFPB0082",
         "name": "Fountain location:\nKitsilano Beach Park - washroom wall",
         "address": "opposite washrooms",
-        "geo_local_area": "Kitsilano"
+        "geo_local_area": "Kitsilano",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -334,7 +434,12 @@
         "id": "DFPB0086",
         "name": "Fountain location:\nLangara Golf Course - cambie pathway",
         "address": "cambie pathway",
-        "geo_local_area": "Oakridge"
+        "geo_local_area": "Oakridge",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -350,7 +455,12 @@
         "id": "DFPB0085",
         "name": "Fountain location:\nLangara Golf Course - servive yard",
         "address": "servive yard",
-        "geo_local_area": "Marpole"
+        "geo_local_area": "Marpole",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -366,7 +476,12 @@
         "id": "DFPB0091",
         "name": "Fountain location:\nMaclean Park",
         "address": null,
-        "geo_local_area": "Strathcona"
+        "geo_local_area": "Strathcona",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -382,7 +497,12 @@
         "id": "DFPB0092",
         "name": "Fountain location:\nMajor Matthews Park",
         "address": null,
-        "geo_local_area": "Mount Pleasant"
+        "geo_local_area": "Mount Pleasant",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -398,7 +518,12 @@
         "id": "DFPB0094",
         "name": "Fountain location:\nMaple Grove Park - East of pool",
         "address": "E-side of pool",
-        "geo_local_area": "Kerrisdale"
+        "geo_local_area": "Kerrisdale",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -414,7 +539,12 @@
         "id": "DFPB0097",
         "name": "Fountain location:\nMcCleery Golf Course - 5th tee",
         "address": "5th tee",
-        "geo_local_area": "Kerrisdale"
+        "geo_local_area": "Kerrisdale",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -430,7 +560,12 @@
         "id": "DFPB0101",
         "name": "Fountain location:\nMelbourne Park",
         "address": "front of tennis courts",
-        "geo_local_area": "Renfrew-Collingwood"
+        "geo_local_area": "Renfrew-Collingwood",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -446,7 +581,12 @@
         "id": "DFPB0102",
         "name": "Fountain location:\nMemorial South Park - West of Softball Diamond",
         "address": null,
-        "geo_local_area": "Sunset"
+        "geo_local_area": "Sunset",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -462,7 +602,12 @@
         "id": "DFPB0104",
         "name": "Fountain location:\nMemorial West Park",
         "address": "S of tennis courts",
-        "geo_local_area": "Dunbar-Southlands"
+        "geo_local_area": "Dunbar-Southlands",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -478,7 +623,12 @@
         "id": "DFPB0109",
         "name": "Fountain location:\nMount Pleasant Park",
         "address": "S-side of wading pool",
-        "geo_local_area": "Mount Pleasant"
+        "geo_local_area": "Mount Pleasant",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -494,7 +644,12 @@
         "id": "DFPB0114",
         "name": "Fountain location:\nNew Brighton Park - South west of playground",
         "address": "SW of playground",
-        "geo_local_area": "Hastings-Sunrise"
+        "geo_local_area": "Hastings-Sunrise",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -510,7 +665,12 @@
         "id": "DFPB0112",
         "name": "Fountain location:\nNew Brighton Park - West of tennis courts",
         "address": "W-side of tennis courts",
-        "geo_local_area": "Hastings-Sunrise"
+        "geo_local_area": "Hastings-Sunrise",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -526,7 +686,12 @@
         "id": "DFPB0190",
         "name": "Fountain location:\nPark Site On South East False Creek",
         "address": "NE side of the park",
-        "geo_local_area": "Mount Pleasant"
+        "geo_local_area": "Mount Pleasant",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -542,7 +707,12 @@
         "id": "DFPB0123",
         "name": "Fountain location:\nQueen Elizabeth Park - Pitch and Putt Course",
         "address": "Pitch and Putt Course",
-        "geo_local_area": "Riley Park"
+        "geo_local_area": "Riley Park",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -558,7 +728,12 @@
         "id": "DFPB0126",
         "name": "Fountain location:\nQuilchena Park",
         "address": "W-side of fieldhouse",
-        "geo_local_area": "Arbutus-Ridge"
+        "geo_local_area": "Arbutus-Ridge",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -574,7 +749,12 @@
         "id": "DFPB0127",
         "name": "Fountain location:\nRenfrew Community Park",
         "address": "adjacent to wading pool",
-        "geo_local_area": "Renfrew-Collingwood"
+        "geo_local_area": "Renfrew-Collingwood",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -590,7 +770,12 @@
         "id": "DFPB0128",
         "name": "Fountain location:\nRiverfront Park - East of washrooms",
         "address": "E-side of washrooms",
-        "geo_local_area": "Killarney"
+        "geo_local_area": "Killarney",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -606,7 +791,12 @@
         "id": "DFPB0133",
         "name": "Fountain location:\nRoss Park",
         "address": "in front of wading pool",
-        "geo_local_area": "Sunset"
+        "geo_local_area": "Sunset",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -622,7 +812,12 @@
         "id": "DFPB0135",
         "name": "Fountain location:\nRupert Park",
         "address": "E-side of playground",
-        "geo_local_area": "Hastings-Sunrise"
+        "geo_local_area": "Hastings-Sunrise",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -638,7 +833,12 @@
         "id": "DFPB0189",
         "name": "Fountain location:\nSeawall - Creekside",
         "address": "Seawall - in front of Creekside Community Recreation Centre",
-        "geo_local_area": "Mount Pleasant"
+        "geo_local_area": "Mount Pleasant",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -654,7 +854,12 @@
         "id": "DFPB0191",
         "name": "Fountain location:\nShannon Mews Park",
         "address": null,
-        "geo_local_area": "Kerrisdale"
+        "geo_local_area": "Kerrisdale",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -670,7 +875,12 @@
         "id": "DFPB0138",
         "name": "Fountain location:\nSlocan Greenway",
         "address": "12th and slocan",
-        "geo_local_area": "Renfrew-Collingwood"
+        "geo_local_area": "Renfrew-Collingwood",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -686,7 +896,12 @@
         "id": "DFPB0139",
         "name": "Fountain location:\nSlocan Park",
         "address": "near playground",
-        "geo_local_area": "Renfrew-Collingwood"
+        "geo_local_area": "Renfrew-Collingwood",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -702,7 +917,12 @@
         "id": "DFPB0140",
         "name": "Fountain location:\nSpanish Banks Beach Park",
         "address": "on north wall of washrooms",
-        "geo_local_area": "West Point Grey"
+        "geo_local_area": "West Point Grey",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -718,7 +938,12 @@
         "id": "DFPB0162",
         "name": "Fountain location:\nStanley Park - Admin building",
         "address": "Park Board Office",
-        "geo_local_area": null
+        "geo_local_area": null,
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -734,7 +959,12 @@
         "id": "DFPB0142",
         "name": "Fountain location:\nStanley Park - Lumbermen's Arch",
         "address": "Lumbermen's Arch",
-        "geo_local_area": null
+        "geo_local_area": null,
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -750,7 +980,12 @@
         "id": "DFPB0186",
         "name": "Fountain location:\nStanley Park - North east of Rose and Perennial Ga",
         "address": null,
-        "geo_local_area": null
+        "geo_local_area": null,
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -766,7 +1001,12 @@
         "id": "DFPB0149",
         "name": "Fountain location:\nStanley Park - Putting Green",
         "address": "Pitch and Putt Course",
-        "geo_local_area": null
+        "geo_local_area": null,
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -782,7 +1022,12 @@
         "id": "DFPB0151",
         "name": "Fountain location:\nStanley Park - Second Beach",
         "address": "Second Beach",
-        "geo_local_area": null
+        "geo_local_area": null,
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -798,7 +1043,12 @@
         "id": "DFPB0152",
         "name": "Fountain location:\nStanley Park - Second Beach Pool",
         "address": "Second Beach pool deck",
-        "geo_local_area": null
+        "geo_local_area": null,
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -814,7 +1064,12 @@
         "id": "DFPB0144",
         "name": "Fountain location:\nStanley Park - South west of playground",
         "address": "Rose Garden playground",
-        "geo_local_area": null
+        "geo_local_area": null,
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -830,7 +1085,12 @@
         "id": "DFPB0150",
         "name": "Fountain location:\nStanley Park - West of Shore to Shore sculpture",
         "address": "Totem poles",
-        "geo_local_area": null
+        "geo_local_area": null,
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -846,7 +1106,12 @@
         "id": "DFPB0165",
         "name": "Fountain location:\nSunrise Park",
         "address": "N-side of wading pool",
-        "geo_local_area": "Hastings-Sunrise"
+        "geo_local_area": "Hastings-Sunrise",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -862,7 +1127,12 @@
         "id": "DFPB0066",
         "name": "Fountain location:\nSunset Beach",
         "address": "on building wall",
-        "geo_local_area": "West End"
+        "geo_local_area": "West End",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -878,7 +1148,12 @@
         "id": "DFPB0175",
         "name": "Fountain location:\nVandusen Botanical Garden",
         "address": "near reflecting pond",
-        "geo_local_area": "Shaughnessy"
+        "geo_local_area": "Shaughnessy",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -894,7 +1169,12 @@
         "id": "DFPB0181",
         "name": "Fountain location:\nWest End minipark - JERVIS ST @ BURNABY ST",
         "address": "north end",
-        "geo_local_area": "West End"
+        "geo_local_area": "West End",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -910,7 +1190,12 @@
         "id": "DFPB0182",
         "name": "Fountain location:\nWest Point Grey Park - lawn bowling court",
         "address": "In lawn bowling court",
-        "geo_local_area": "West Point Grey"
+        "geo_local_area": "West Point Grey",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -926,7 +1211,12 @@
         "id": "DFPB0184",
         "name": "Fountain location:\nWinona Park",
         "address": "near playground",
-        "geo_local_area": "Marpole"
+        "geo_local_area": "Marpole",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -942,7 +1232,12 @@
         "id": "DFENG0806",
         "name": "Temporary Misting Station location: Andy Livingston Park",
         "address": "NW corner of Andy Livingston Park",
-        "geo_local_area": "Downtown"
+        "geo_local_area": "Downtown",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -958,7 +1253,12 @@
         "id": "DFENG0803",
         "name": "Temporary Misting Station location: Granville & W 10th",
         "address": "NE corner of Granville St & W 10th Ave",
-        "geo_local_area": "Fairview"
+        "geo_local_area": "Fairview",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -974,7 +1274,12 @@
         "id": "DFENG0807",
         "name": "Temporary Misting Station location: Nelson Park",
         "address": "NW corner of Thurlow St & Comox St",
-        "geo_local_area": "West End"
+        "geo_local_area": "West End",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -990,7 +1295,12 @@
         "id": "DFENG0802",
         "name": "Temporary Misting Station location: Robson & Cardero",
         "address": "SW corner of Robson St & Cardero St",
-        "geo_local_area": "West End"
+        "geo_local_area": "West End",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1006,7 +1316,12 @@
         "id": "DFENG0808",
         "name": "Temporary Misting Station location: West Blvd & W 45th",
         "address": "SE corner of West Boulevard & W 45th Ave",
-        "geo_local_area": "Kerrisdale"
+        "geo_local_area": "Kerrisdale",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1022,7 +1337,12 @@
         "id": "DFENG0500",
         "name": "Bottle Filling Station location: \nCharleson Park Pumping Station",
         "address": "North side of sewage pumping station 900 Charleson",
-        "geo_local_area": "Fairview"
+        "geo_local_area": "Fairview",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1038,7 +1358,12 @@
         "id": "DFENG0501",
         "name": "Bottle Filling Station location: \nGrandview Hwy Pumping Station",
         "address": null,
-        "geo_local_area": "Renfrew-Collingwood"
+        "geo_local_area": "Renfrew-Collingwood",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1054,7 +1379,12 @@
         "id": "DFENG0054",
         "name": "Fountain location : E 30th Ave & Gladstone St",
         "address": "East Side corner Gladstone at E 30th Ave",
-        "geo_local_area": "Kensington-Cedar Cottage"
+        "geo_local_area": "Kensington-Cedar Cottage",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1070,7 +1400,12 @@
         "id": "DFENG0001",
         "name": "Fountain location:\n28th & Main",
         "address": "Northeast corner of 28th & Main",
-        "geo_local_area": "Riley Park"
+        "geo_local_area": "Riley Park",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1086,7 +1421,12 @@
         "id": "DFENG0012",
         "name": "Fountain location:\n37th & Oak",
         "address": "Southeast corner of 37th & Oak",
-        "geo_local_area": "South Cambie"
+        "geo_local_area": "South Cambie",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1102,7 +1442,12 @@
         "id": "DFENG0013",
         "name": "Fountain location:\n37th & Ontario",
         "address": "Northwest corner of 37th & Ontario",
-        "geo_local_area": "Riley Park"
+        "geo_local_area": "Riley Park",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1118,7 +1463,12 @@
         "id": "DFENG0018",
         "name": "Fountain location:\n37th & Prince Edward",
         "address": "Northwest corner of 37th & Prince Edward",
-        "geo_local_area": "Riley Park"
+        "geo_local_area": "Riley Park",
+        "location": null,
+        "pet_friendly": "Y",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1134,7 +1484,12 @@
         "id": "DFENG0022",
         "name": "Fountain location:\nAshburn & Elliot",
         "address": "Northwest corner of Ashburn & Elliot",
-        "geo_local_area": "Victoria-Fraserview"
+        "geo_local_area": "Victoria-Fraserview",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1150,7 +1505,12 @@
         "id": "DFENG0005",
         "name": "Fountain location:\nCardero & Burnaby",
         "address": "In the mini park at Cardero & Burnaby",
-        "geo_local_area": "West End"
+        "geo_local_area": "West End",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1166,7 +1526,12 @@
         "id": "DFENG0033",
         "name": "Fountain location:\nDenman & Nelson",
         "address": "Southwest corner of Denman & Nelson",
-        "geo_local_area": "West End"
+        "geo_local_area": "West End",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1182,7 +1547,12 @@
         "id": "DFENG0017",
         "name": "Fountain location:\nElgin & 37th",
         "address": "Northwest corner of Elgin & 37th",
-        "geo_local_area": "Kensington-Cedar Cottage"
+        "geo_local_area": "Kensington-Cedar Cottage",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1198,7 +1568,12 @@
         "id": "DFENG0029",
         "name": "Fountain location:\nGranville & 59th",
         "address": "Northeast corner of Granville & 59th",
-        "geo_local_area": "Marpole"
+        "geo_local_area": "Marpole",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1214,7 +1589,12 @@
         "id": "DFENG0020",
         "name": "Fountain location:\nHastings & Gore",
         "address": "Northeast corner of Hastings & Gore",
-        "geo_local_area": "Strathcona"
+        "geo_local_area": "Strathcona",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1230,7 +1610,12 @@
         "id": "DFENG0010",
         "name": "Fountain location:\nRobson & Chilco",
         "address": "In mini park at Robson & Chilco",
-        "geo_local_area": "West End"
+        "geo_local_area": "West End",
+        "location": null,
+        "pet_friendly": "Y",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1246,7 +1631,12 @@
         "id": "DFENG0030",
         "name": "Fountain location:\nUnion & Hawks",
         "address": "In mini park at Union & Hawks",
-        "geo_local_area": "Strathcona"
+        "geo_local_area": "Strathcona",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1262,7 +1652,12 @@
         "id": "DFENG0050",
         "name": "Fountain location: 10th & Kingsway",
         "address": "Northwest corner of 10th & Kingsway",
-        "geo_local_area": "Mount Pleasant"
+        "geo_local_area": "Mount Pleasant",
+        "location": null,
+        "pet_friendly": "Y",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1278,7 +1673,12 @@
         "id": "DFENG0047",
         "name": "Fountain location: 4963 Cambie St",
         "address": "Northwest corner of Cambie and W 35th",
-        "geo_local_area": "South Cambie"
+        "geo_local_area": "South Cambie",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1294,7 +1694,12 @@
         "id": "DFENG0039",
         "name": "Fountain location: Davie & Bute (Jim Deva Plaza)",
         "address": "1200 Davie Street",
-        "geo_local_area": "West End"
+        "geo_local_area": "West End",
+        "location": null,
+        "pet_friendly": "Y",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1310,7 +1715,12 @@
         "id": "DFENG0037",
         "name": "Fountain location: Oak & 46th",
         "address": "Northeast corner of Oak & 46th",
-        "geo_local_area": "Oakridge"
+        "geo_local_area": "Oakridge",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1326,7 +1736,12 @@
         "id": "DFENG0040",
         "name": "Fountain location: Point Grey Road & Waterloo",
         "address": "1600 Waterloo St",
-        "geo_local_area": "Kitsilano"
+        "geo_local_area": "Kitsilano",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1342,7 +1757,12 @@
         "id": "DFENG0041",
         "name": "Fountain location: River District Crossing & E Kent Ave North",
         "address": "Northeast corner of River District Crossing & E Kent Ave North",
-        "geo_local_area": "Killarney"
+        "geo_local_area": "Killarney",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1358,7 +1778,12 @@
         "id": "DFENG0036",
         "name": "Fountain location:Pt.Grey & MacDonald",
         "address": "Northwest corner of Pt. Grey & MacDonald",
-        "geo_local_area": "Kitsilano"
+        "geo_local_area": "Kitsilano",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1374,7 +1799,12 @@
         "id": "DFENG0035",
         "name": "Fountian Location: Fraser & Broadway",
         "address": "Northwest corner of Fraser & Broadway",
-        "geo_local_area": "Mount Pleasant"
+        "geo_local_area": "Mount Pleasant",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1390,7 +1820,12 @@
         "id": "DFENG0702",
         "name": "Temporary Fountain location: 2067 W 15th Ave",
         "address": "NE corner of 2000 W 15th Ave at Arbutus Greenway",
-        "geo_local_area": "Kitsilano"
+        "geo_local_area": "Kitsilano",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1406,7 +1841,12 @@
         "id": "DFENG0708",
         "name": "Temporary Fountain location: London Drugs",
         "address": "733 Granville St",
-        "geo_local_area": "Downtown"
+        "geo_local_area": "Downtown",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1422,7 +1862,12 @@
         "id": "DFENG0605",
         "name": "Temporary Handwashing Station location: 15 E Hastings",
         "address": "15 E Hastings St",
-        "geo_local_area": "Downtown"
+        "geo_local_area": "Downtown",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1438,7 +1883,12 @@
         "id": "DFENG0604",
         "name": "Temporary Handwashing Station location: Dunlevy & E Cordova",
         "address": "255 Dunlevy Av",
-        "geo_local_area": "Strathcona"
+        "geo_local_area": "Strathcona",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1454,7 +1904,12 @@
         "id": "DFENG0602",
         "name": "Temporary Handwashing Station location: E Hastings & Columbia",
         "address": "101 E Hastings St",
-        "geo_local_area": "Downtown"
+        "geo_local_area": "Downtown",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1470,7 +1925,12 @@
         "id": "DFENG0606",
         "name": "Temporary Handwashing Station location: The Gathering Place",
         "address": "609 Helmcken St",
-        "geo_local_area": "Downtown"
+        "geo_local_area": "Downtown",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1486,7 +1946,12 @@
         "id": "DFPB0002",
         "name": "Fountain location:\nAdanac Park",
         "address": "SW side of Field house",
-        "geo_local_area": "Hastings-Sunrise"
+        "geo_local_area": "Hastings-Sunrise",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1502,7 +1967,12 @@
         "id": "DFPB0005",
         "name": "Fountain location:\nAndy Livingstone Park - North of basketball court",
         "address": "by amphitheatre steps near bas",
-        "geo_local_area": "Downtown"
+        "geo_local_area": "Downtown",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1518,7 +1988,12 @@
         "id": "DFPB0009",
         "name": "Fountain location:\nArt Phillips Park (Discovery Square)",
         "address": "NW plaza",
-        "geo_local_area": "Downtown"
+        "geo_local_area": "Downtown",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1534,7 +2009,12 @@
         "id": "DFPB0010",
         "name": "Fountain location:\nBalaclava Park",
         "address": "W of wading pool",
-        "geo_local_area": "Dunbar-Southlands"
+        "geo_local_area": "Dunbar-Southlands",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1550,7 +2030,12 @@
         "id": "DFPB0013",
         "name": "Fountain location:\nBurrard View Park",
         "address": "N-side of wading pool",
-        "geo_local_area": "Hastings-Sunrise"
+        "geo_local_area": "Hastings-Sunrise",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1566,7 +2051,12 @@
         "id": "DFPB0192",
         "name": "Fountain location:\nCedar Cottage Park",
         "address": "Near Sport courts",
-        "geo_local_area": "Kensington-Cedar Cottage"
+        "geo_local_area": "Kensington-Cedar Cottage",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1582,7 +2072,12 @@
         "id": "DFPB0016",
         "name": "Fountain location:\nChaldecott Park",
         "address": "W-side of spray park",
-        "geo_local_area": "Dunbar-Southlands"
+        "geo_local_area": "Dunbar-Southlands",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1598,7 +2093,12 @@
         "id": "DFPB0019",
         "name": "Fountain location:\nChina Creek South Park",
         "address": "S-side of skate park",
-        "geo_local_area": "Mount Pleasant"
+        "geo_local_area": "Mount Pleasant",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1614,7 +2114,12 @@
         "id": "DFPB0020",
         "name": "Fountain location:\nClark Park",
         "address": null,
-        "geo_local_area": "Kensington-Cedar Cottage"
+        "geo_local_area": "Kensington-Cedar Cottage",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1630,7 +2135,12 @@
         "id": "DFPB0022",
         "name": "Fountain location:\nClinton Park - North side of ball diamond",
         "address": "N-side of B-ball diamond",
-        "geo_local_area": "Hastings-Sunrise"
+        "geo_local_area": "Hastings-Sunrise",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1646,7 +2156,12 @@
         "id": "DFPB0024",
         "name": "Fountain location:\nCollingwood Park",
         "address": "in front of wading pool",
-        "geo_local_area": "Renfrew-Collingwood"
+        "geo_local_area": "Renfrew-Collingwood",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1662,7 +2177,12 @@
         "id": "DFPB0027",
         "name": "Fountain location:\nConnaught Park - East side of fieldhouse",
         "address": "near fieldhouse",
-        "geo_local_area": "Kitsilano"
+        "geo_local_area": "Kitsilano",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1678,7 +2198,12 @@
         "id": "DFPB0028",
         "name": "Fountain location:\nCoopers' Park",
         "address": null,
-        "geo_local_area": "Downtown"
+        "geo_local_area": "Downtown",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1694,7 +2219,12 @@
         "id": "DFPB0029",
         "name": "Fountain location:\nCoopers' Park - underneath bridge, near basket",
         "address": "underneath bridge, near basket",
-        "geo_local_area": "Downtown"
+        "geo_local_area": "Downtown",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1710,7 +2240,12 @@
         "id": "DFPB0031",
         "name": "Fountain location:\nCreekside Park",
         "address": null,
-        "geo_local_area": "Downtown"
+        "geo_local_area": "Downtown",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1726,7 +2261,12 @@
         "id": "DFPB0037",
         "name": "Fountain location:\nEbisu Park",
         "address": "near playground",
-        "geo_local_area": "Marpole"
+        "geo_local_area": "Marpole",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1742,7 +2282,12 @@
         "id": "DFPB0041",
         "name": "Fountain location:\nEnglish Bay Beach Park - Davie st entrance",
         "address": "Davie st entrance",
-        "geo_local_area": "West End"
+        "geo_local_area": "West End",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1758,7 +2303,12 @@
         "id": "DFPB0044",
         "name": "Fountain location:\nFalaise Park",
         "address": "in front of wading pool",
-        "geo_local_area": "Renfrew-Collingwood"
+        "geo_local_area": "Renfrew-Collingwood",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1774,7 +2324,12 @@
         "id": "DFPB0049",
         "name": "Fountain location:\nFraserview Golf Course - 6th tee",
         "address": "6th tee",
-        "geo_local_area": "Killarney"
+        "geo_local_area": "Killarney",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1790,7 +2345,12 @@
         "id": "DFPB0048",
         "name": "Fountain location:\nFraserview Golf Course - clubhouse building",
         "address": "clubhouse building",
-        "geo_local_area": "Killarney"
+        "geo_local_area": "Killarney",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1806,7 +2366,12 @@
         "id": "DFPB0051",
         "name": "Fountain location:\nGarden Park",
         "address": "N-side of field house",
-        "geo_local_area": "Grandview-Woodland"
+        "geo_local_area": "Grandview-Woodland",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1822,7 +2387,12 @@
         "id": "DFPB0052",
         "name": "Fountain location:\nGaston Park",
         "address": "near basketball court",
-        "geo_local_area": "Renfrew-Collingwood"
+        "geo_local_area": "Renfrew-Collingwood",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1838,7 +2408,12 @@
         "id": "DFPB0054",
         "name": "Fountain location:\nGeorge Wainborn Park",
         "address": "NE corner near seawall",
-        "geo_local_area": "Downtown"
+        "geo_local_area": "Downtown",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1854,7 +2429,12 @@
         "id": "DFPB0061",
         "name": "Fountain location:\nHarbour Green Park - foot of Jervis Mews",
         "address": "foot of Jervis Mews",
-        "geo_local_area": "Downtown"
+        "geo_local_area": "Downtown",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1870,7 +2450,12 @@
         "id": "DFPB0064",
         "name": "Fountain location:\nHastings Community Park - SE of tennis courts",
         "address": "besides path leading to spray",
-        "geo_local_area": "Hastings-Sunrise"
+        "geo_local_area": "Hastings-Sunrise",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1886,7 +2471,12 @@
         "id": "DFPB0065",
         "name": "Fountain location:\nHastings Park - Italian gardens",
         "address": "near skate park",
-        "geo_local_area": "Hastings-Sunrise"
+        "geo_local_area": "Hastings-Sunrise",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1902,7 +2492,12 @@
         "id": "DFPB0070",
         "name": "Fountain location:\nHastings Park -Plateau Sport Parks / Empire Fields",
         "address": "empire field - soccer fields",
-        "geo_local_area": "Hastings-Sunrise"
+        "geo_local_area": "Hastings-Sunrise",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1918,7 +2513,12 @@
         "id": "DFPB0069",
         "name": "Fountain location:\nHastings Park -Plateau Sport Parks / Empire Fields",
         "address": "East of playgrounds",
-        "geo_local_area": "Hastings-Sunrise"
+        "geo_local_area": "Hastings-Sunrise",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1934,7 +2534,12 @@
         "id": "DFPB0074",
         "name": "Fountain location:\nJohn Hendry (Trout Lake) Park",
         "address": "nearby beach",
-        "geo_local_area": "Kensington-Cedar Cottage"
+        "geo_local_area": "Kensington-Cedar Cottage",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1950,7 +2555,12 @@
         "id": "DFPB0077",
         "name": "Fountain location:\nKensington Park",
         "address": "between baseball diamond and parking lots",
-        "geo_local_area": "Kensington-Cedar Cottage"
+        "geo_local_area": "Kensington-Cedar Cottage",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1966,7 +2576,12 @@
         "id": "DFPB0081",
         "name": "Fountain location:\nKingcrest Park",
         "address": "E-side of washroom",
-        "geo_local_area": "Kensington-Cedar Cottage"
+        "geo_local_area": "Kensington-Cedar Cottage",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1982,7 +2597,12 @@
         "id": "DFPB0087",
         "name": "Fountain location:\nLangara Golf Course - East of tennis courts",
         "address": "56th and Ontario",
-        "geo_local_area": "Oakridge"
+        "geo_local_area": "Oakridge",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -1998,7 +2618,12 @@
         "id": "DFPB0096",
         "name": "Fountain location:\nMcBride Park",
         "address": "S of playground",
-        "geo_local_area": "Kitsilano"
+        "geo_local_area": "Kitsilano",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2014,7 +2639,12 @@
         "id": "DFPB0098",
         "name": "Fountain location:\nMcCleery Golf Course - clubhouse building",
         "address": "clubhouse building",
-        "geo_local_area": "Kerrisdale"
+        "geo_local_area": "Kerrisdale",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2030,7 +2660,12 @@
         "id": "DFPB0099",
         "name": "Fountain location:\nMcCleery Golf Course - driving range",
         "address": "driving range",
-        "geo_local_area": "Kerrisdale"
+        "geo_local_area": "Kerrisdale",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2046,7 +2681,12 @@
         "id": "DFPB0103",
         "name": "Fountain location:\nMemorial South Park - West of wading pool",
         "address": "W-side of wading pool",
-        "geo_local_area": "Sunset"
+        "geo_local_area": "Sunset",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2062,7 +2702,12 @@
         "id": "DFPB0105",
         "name": "Fountain location:\nMoberly Park - West of tennis courts",
         "address": "in front of tennis courts",
-        "geo_local_area": "Sunset"
+        "geo_local_area": "Sunset",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2078,7 +2723,12 @@
         "id": "DFPB0108",
         "name": "Fountain location:\nMosaic Creek Park",
         "address": "near children's play area",
-        "geo_local_area": "Grandview-Woodland"
+        "geo_local_area": "Grandview-Woodland",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2094,7 +2744,12 @@
         "id": "DFPB0113",
         "name": "Fountain location:\nNew Brighton Park - South of pool",
         "address": "S-side of pool",
-        "geo_local_area": "Hastings-Sunrise"
+        "geo_local_area": "Hastings-Sunrise",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2110,7 +2765,12 @@
         "id": "DFPB0119",
         "name": "Fountain location:\nOppenheimer Park",
         "address": null,
-        "geo_local_area": "Strathcona"
+        "geo_local_area": "Strathcona",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2126,7 +2786,12 @@
         "id": "DFPB0125",
         "name": "Fountain location:\nQueen Elizabeth Park - At Conservatory",
         "address": "At Conservatory",
-        "geo_local_area": "Riley Park"
+        "geo_local_area": "Riley Park",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2142,7 +2807,12 @@
         "id": "DFPB0130",
         "name": "Fountain location:\nRobson Park",
         "address": "N-side of wading pool",
-        "geo_local_area": "Mount Pleasant"
+        "geo_local_area": "Mount Pleasant",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2158,7 +2828,12 @@
         "id": "DFPB0136",
         "name": "Fountain location:\nRupert Park - East of fieldhouse",
         "address": "E-side of Field house",
-        "geo_local_area": "Hastings-Sunrise"
+        "geo_local_area": "Hastings-Sunrise",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2174,7 +2849,12 @@
         "id": "DFPB0155",
         "name": "Fountain location:\nStanley Park - Brockton Oval Fieldhouse",
         "address": "brockton oval",
-        "geo_local_area": null
+        "geo_local_area": null,
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2190,7 +2870,12 @@
         "id": "DFPB0158",
         "name": "Fountain location:\nStanley Park - Brockton Point Viewpoint",
         "address": "Brockton point - lighthouse",
-        "geo_local_area": null
+        "geo_local_area": null,
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2206,7 +2891,12 @@
         "id": "DFPB0145",
         "name": "Fountain location:\nStanley Park - Ceperley Washrooms",
         "address": "Ceperley washrooms",
-        "geo_local_area": null
+        "geo_local_area": null,
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2222,7 +2912,12 @@
         "id": "DFPB0160",
         "name": "Fountain location:\nStanley Park - Lawn Bowling Club",
         "address": "Lawn Bowling",
-        "geo_local_area": null
+        "geo_local_area": null,
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2238,7 +2933,12 @@
         "id": "DFPB0154",
         "name": "Fountain location:\nStanley Park - Legends Of The Moon Washroom",
         "address": "Legends Of The Moon - Washroom",
-        "geo_local_area": null
+        "geo_local_area": null,
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2254,7 +2954,12 @@
         "id": "DFPB0147",
         "name": "Fountain location:\nStanley Park - Prospect Point Washrooms",
         "address": "prospect point washrooms",
-        "geo_local_area": null
+        "geo_local_area": null,
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2270,7 +2975,12 @@
         "id": "DFPB0157",
         "name": "Fountain location:\nStanley Park - Stanley Park Pavilion",
         "address": "pavillion outside washrooms",
-        "geo_local_area": null
+        "geo_local_area": null,
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2286,7 +2996,12 @@
         "id": "DFPB0146",
         "name": "Fountain location:\nStanley Park - West of Restaurant",
         "address": "W - side of Fish House",
-        "geo_local_area": null
+        "geo_local_area": null,
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2302,7 +3017,12 @@
         "id": "DFPB0148",
         "name": "Fountain location:\nStanley Park - West side of Stanley Park Train",
         "address": null,
-        "geo_local_area": null
+        "geo_local_area": null,
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2318,7 +3038,12 @@
         "id": "DFPB0163",
         "name": "Fountain location:\nStrathcona Park - North west of basketball court",
         "address": "besides basketball court",
-        "geo_local_area": "Strathcona"
+        "geo_local_area": "Strathcona",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2334,7 +3059,12 @@
         "id": "DFPB0167",
         "name": "Fountain location:\nSunset Park",
         "address": "front of wading pool",
-        "geo_local_area": "Sunset"
+        "geo_local_area": "Sunset",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2350,7 +3080,12 @@
         "id": "DFPB0169",
         "name": "Fountain location:\nTea Swamp Park",
         "address": "NE corner of park",
-        "geo_local_area": "Mount Pleasant"
+        "geo_local_area": "Mount Pleasant",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2366,7 +3101,12 @@
         "id": "DFPB0171",
         "name": "Fountain location:\nTisdall Park",
         "address": "near North baseball diamond",
-        "geo_local_area": "Oakridge"
+        "geo_local_area": "Oakridge",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2382,7 +3122,12 @@
         "id": "DFPB0187",
         "name": "Fountain location:\nVancouver Technical HS",
         "address": "NE of the sport field",
-        "geo_local_area": "Renfrew-Collingwood"
+        "geo_local_area": "Renfrew-Collingwood",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2398,7 +3143,12 @@
         "id": "DFPB0174",
         "name": "Fountain location:\nVandusen Botanical Garden - upper gardens",
         "address": "upper gardens",
-        "geo_local_area": "Shaughnessy"
+        "geo_local_area": "Shaughnessy",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2414,7 +3164,12 @@
         "id": "DFPB0177",
         "name": "Fountain location:\nVictoria Park",
         "address": "adjacent to children's play area",
-        "geo_local_area": "Grandview-Woodland"
+        "geo_local_area": "Grandview-Woodland",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2430,7 +3185,12 @@
         "id": "DFPB0178",
         "name": "Fountain location:\nVictory Square",
         "address": "south corner of park",
-        "geo_local_area": "Downtown"
+        "geo_local_area": "Downtown",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2446,7 +3206,12 @@
         "id": "DFPB0180",
         "name": "Fountain location:\nWest End minipark",
         "address": "Bute & Haro",
-        "geo_local_area": "West End"
+        "geo_local_area": "West End",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2462,7 +3227,12 @@
         "id": "DFPB0185",
         "name": "Fountain location:\nWoodland Park",
         "address": "in front of wading pool",
-        "geo_local_area": "Grandview-Woodland"
+        "geo_local_area": "Grandview-Woodland",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2478,7 +3248,12 @@
         "id": "DFENG0801",
         "name": "Temporary Misting Station location: Columbia & Powell",
         "address": "NE corner of Columbia St & Powell St",
-        "geo_local_area": "Downtown"
+        "geo_local_area": "Downtown",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2494,7 +3269,12 @@
         "id": "DFENG0809",
         "name": "Temporary Misting Station location: Main St & 14th Ave",
         "address": "Main st & 14th Ave",
-        "geo_local_area": "Mount Pleasant"
+        "geo_local_area": "Mount Pleasant",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2510,7 +3290,12 @@
         "id": "DFENG0805",
         "name": "Temporary Misting Station location: Thornton Park",
         "address": "East side of Thornton Park across from Pacific Central",
-        "geo_local_area": "Strathcona"
+        "geo_local_area": "Strathcona",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2526,7 +3311,12 @@
         "id": "DFENG0502",
         "name": "Bottle Filling Station location: \nGranville Island Pumping Station",
         "address": "North side of sewage pumping station on seawall east of the granville island entrance",
-        "geo_local_area": "Fairview"
+        "geo_local_area": "Fairview",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2542,7 +3332,12 @@
         "id": "DFENG0004",
         "name": "Fountain location:\n56th & Ontario",
         "address": "Northwest corner of 56th & Ontario",
-        "geo_local_area": "Oakridge"
+        "geo_local_area": "Oakridge",
+        "location": null,
+        "pet_friendly": "Y",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2558,7 +3353,12 @@
         "id": "DFENG0032",
         "name": "Fountain location:\nBroadway & Stephens",
         "address": "Northwest corner of Broadway & Stephens",
-        "geo_local_area": "Kitsilano"
+        "geo_local_area": "Kitsilano",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2574,7 +3374,12 @@
         "id": "DFENG0016",
         "name": "Fountain location:\nBroadway & Victoria",
         "address": "Southeast corner of Broadway & Victoria",
-        "geo_local_area": "Kensington-Cedar Cottage"
+        "geo_local_area": "Kensington-Cedar Cottage",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2590,7 +3395,12 @@
         "id": "DFENG0021",
         "name": "Fountain location:\nCommercial & 3rd",
         "address": "Northeast corner of Commercial & 3rd",
-        "geo_local_area": "Grandview-Woodland"
+        "geo_local_area": "Grandview-Woodland",
+        "location": null,
+        "pet_friendly": "Y",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2606,7 +3416,12 @@
         "id": "DFENG0025",
         "name": "Fountain location:\nComox & Cardero",
         "address": "Northeast corner of Comox & Cardero",
-        "geo_local_area": "West End"
+        "geo_local_area": "West End",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2622,7 +3437,12 @@
         "id": "DFENG0026",
         "name": "Fountain location:\nComox & Chilco",
         "address": "In mini park at Comox & Chilco",
-        "geo_local_area": "West End"
+        "geo_local_area": "West End",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2638,7 +3458,12 @@
         "id": "DFENG0027",
         "name": "Fountain location:\nComox & Denman",
         "address": "Northwest corner of Comox & Denman",
-        "geo_local_area": "West End"
+        "geo_local_area": "West End",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2654,7 +3479,12 @@
         "id": "DFENG0019",
         "name": "Fountain location:\nGranville & Robson",
         "address": "Northwest corner of Granville & Robson",
-        "geo_local_area": "Downtown"
+        "geo_local_area": "Downtown",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2670,7 +3500,12 @@
         "id": "DFENG0023",
         "name": "Fountain location:\nMain & 11th",
         "address": "Southeast corner of Main & 11th",
-        "geo_local_area": "Mount Pleasant"
+        "geo_local_area": "Mount Pleasant",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2686,7 +3521,12 @@
         "id": "DFENG0007",
         "name": "Fountain location:\nNelson & Broughton",
         "address": "In mini park at Nelson & Broughton",
-        "geo_local_area": "West End"
+        "geo_local_area": "West End",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2702,7 +3542,12 @@
         "id": "DFENG0051",
         "name": "Fountain location: 10th & Willow",
         "address": "Northwest corner of 10th & Willow",
-        "geo_local_area": "Fairview"
+        "geo_local_area": "Fairview",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2718,7 +3563,12 @@
         "id": "DFENG0049",
         "name": "Fountain location: 11th & Prince Edward",
         "address": "Northeast corner of 11th & Prince Edward",
-        "geo_local_area": "Mount Pleasant"
+        "geo_local_area": "Mount Pleasant",
+        "location": null,
+        "pet_friendly": "Y",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2734,7 +3584,12 @@
         "id": "DFENG0045",
         "name": "Fountain location: 2001 W 10th Avenue",
         "address": "North side of 10th Avenue",
-        "geo_local_area": "Kitsilano"
+        "geo_local_area": "Kitsilano",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2750,7 +3605,12 @@
         "id": "DFENG0048",
         "name": "Fountain location: 375 W 59th Avenue",
         "address": "Northeast corner of Alberta St and W 59th Ave",
-        "geo_local_area": "Marpole"
+        "geo_local_area": "Marpole",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2766,7 +3626,12 @@
         "id": "DFENG0052",
         "name": "Fountain location: 8683 Kerr",
         "address": "Southwest side of Kerr",
-        "geo_local_area": "Killarney"
+        "geo_local_area": "Killarney",
+        "location": null,
+        "pet_friendly": "Y",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2782,7 +3647,12 @@
         "id": "DFENG0031",
         "name": "Fountain location: Cambie & 10th",
         "address": "Northeast corner of Cambie & 10th",
-        "geo_local_area": "Mount Pleasant"
+        "geo_local_area": "Mount Pleasant",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2798,7 +3668,12 @@
         "id": "DFENG0711",
         "name": "Temporary Fountain location: E Hastings & Heatley",
         "address": "NE corner of E Hastings St and Heatley Ave",
-        "geo_local_area": "Strathcona"
+        "geo_local_area": "Strathcona",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2814,7 +3689,12 @@
         "id": "DFENG0710",
         "name": "Temporary Fountain location: Wessex & Kingsway",
         "address": "3357 Kingsway",
-        "geo_local_area": "Renfrew-Collingwood"
+        "geo_local_area": "Renfrew-Collingwood",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2830,7 +3710,12 @@
         "id": "DFENG0603",
         "name": "Temporary Handwashing Station location: Evelyne Saller Centre",
         "address": "320 Alexander  St",
-        "geo_local_area": "Strathcona"
+        "geo_local_area": "Strathcona",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2846,7 +3731,12 @@
         "id": "DFENG0601",
         "name": "Temporary Handwashing Station location: Union Gospel Mission",
         "address": "601 E Hastings St",
-        "geo_local_area": "Strathcona"
+        "geo_local_area": "Strathcona",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2862,7 +3752,12 @@
         "id": "DFPB0001",
         "name": "Fountain location:\nAberdeen Park",
         "address": "plaza",
-        "geo_local_area": "Renfrew-Collingwood"
+        "geo_local_area": "Renfrew-Collingwood",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2878,7 +3773,12 @@
         "id": "DFPB0003",
         "name": "Fountain location:\nAlexandra Park",
         "address": "west plaza gateway",
-        "geo_local_area": "West End"
+        "geo_local_area": "West End",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2894,7 +3794,12 @@
         "id": "DFPB0006",
         "name": "Fountain location:\nAndy Livingstone Park - South of soccer fields",
         "address": "north side of fieldhouse",
-        "geo_local_area": "Downtown"
+        "geo_local_area": "Downtown",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2910,7 +3815,12 @@
         "id": "DFPB0007",
         "name": "Fountain location:\nArbutus Greenway Park",
         "address": "S-side of playground",
-        "geo_local_area": "Kitsilano"
+        "geo_local_area": "Kitsilano",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2926,7 +3836,12 @@
         "id": "DFPB0012",
         "name": "Fountain location:\nBobolink Park",
         "address": "in front of wading pool",
-        "geo_local_area": "Victoria-Fraserview"
+        "geo_local_area": "Victoria-Fraserview",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2942,7 +3857,12 @@
         "id": "DFPB0132",
         "name": "Fountain location:\nBrewers Park",
         "address": "S-side of wading pool",
-        "geo_local_area": "Kensington-Cedar Cottage"
+        "geo_local_area": "Kensington-Cedar Cottage",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2958,7 +3878,12 @@
         "id": "DFPB0030",
         "name": "Fountain location:\nCRAB Park at Portside",
         "address": null,
-        "geo_local_area": "Downtown"
+        "geo_local_area": "Downtown",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2974,7 +3899,12 @@
         "id": "DFPB0017",
         "name": "Fountain location:\nCharleson Park",
         "address": "N of school off of seawall",
-        "geo_local_area": "Fairview"
+        "geo_local_area": "Fairview",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -2990,7 +3920,12 @@
         "id": "DFPB0018",
         "name": "Fountain location:\nChina Creek North Park",
         "address": "S central side along jogging c",
-        "geo_local_area": "Mount Pleasant"
+        "geo_local_area": "Mount Pleasant",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3006,7 +3941,12 @@
         "id": "DFPB0025",
         "name": "Fountain location:\nColumbia Park",
         "address": "in front of wading pool",
-        "geo_local_area": "Oakridge"
+        "geo_local_area": "Oakridge",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3022,7 +3962,12 @@
         "id": "DFPB0026",
         "name": "Fountain location:\nConnaught Park - North of playground",
         "address": null,
-        "geo_local_area": "Kitsilano"
+        "geo_local_area": "Kitsilano",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3038,7 +3983,12 @@
         "id": "DFPB0032",
         "name": "Fountain location:\nDavid Lam Park - South west of basketball courts",
         "address": "near playground and tennis court",
-        "geo_local_area": "Downtown"
+        "geo_local_area": "Downtown",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3054,7 +4004,12 @@
         "id": "DFPB0034",
         "name": "Fountain location:\nDevonian Harbour Park",
         "address": "near Stanley Park entrance",
-        "geo_local_area": null
+        "geo_local_area": null,
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3070,7 +4025,12 @@
         "id": "DFPB0035",
         "name": "Fountain location:\nDouglas Park - Right side of wading pool",
         "address": "in front of wading pool",
-        "geo_local_area": "South Cambie"
+        "geo_local_area": "South Cambie",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3086,7 +4046,12 @@
         "id": "DFPB0040",
         "name": "Fountain location:\nEmery Barnes Park - South west of playground",
         "address": null,
-        "geo_local_area": "Downtown"
+        "geo_local_area": "Downtown",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3102,7 +4067,12 @@
         "id": "DFPB0042",
         "name": "Fountain location:\nEnglish Bay Beach Park - West of bath-house",
         "address": "opposite entrance to bathhouse",
-        "geo_local_area": "West End"
+        "geo_local_area": "West End",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3118,7 +4088,12 @@
         "id": "DFPB0043",
         "name": "Fountain location:\nEnglish Bay Beach Park - concessions",
         "address": "concessions",
-        "geo_local_area": "West End"
+        "geo_local_area": "West End",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3134,7 +4109,12 @@
         "id": "DFPB0045",
         "name": "Fountain location:\nFraser River Park - South west",
         "address": null,
-        "geo_local_area": "Kerrisdale"
+        "geo_local_area": "Kerrisdale",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3150,7 +4130,12 @@
         "id": "DFPB0047",
         "name": "Fountain location:\nFraserview Golf Course - West of kerr st.",
         "address": "West of kerr st.",
-        "geo_local_area": "Killarney"
+        "geo_local_area": "Killarney",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3166,7 +4151,12 @@
         "id": "DFPB0050",
         "name": "Fountain location:\nFraserview Golf Course - driving range",
         "address": "driving range",
-        "geo_local_area": "Killarney"
+        "geo_local_area": "Killarney",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3182,7 +4172,12 @@
         "id": "DFPB0056",
         "name": "Fountain location:\nGrandview Park - South of playground",
         "address": "By the Playground",
-        "geo_local_area": "Grandview-Woodland"
+        "geo_local_area": "Grandview-Woodland",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3198,7 +4193,12 @@
         "id": "DFPB0057",
         "name": "Fountain location:\nGranville Loop Park",
         "address": null,
-        "geo_local_area": "Fairview"
+        "geo_local_area": "Fairview",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3214,7 +4214,12 @@
         "id": "DFPB0059",
         "name": "Fountain location:\nGuelph Park",
         "address": "w-side of tennis courts",
-        "geo_local_area": "Mount Pleasant"
+        "geo_local_area": "Mount Pleasant",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3230,7 +4235,12 @@
         "id": "DFPB0062",
         "name": "Fountain location:\nHarbour Green Park - In front of washrooms",
         "address": "near spray pool",
-        "geo_local_area": "Downtown"
+        "geo_local_area": "Downtown",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3246,7 +4256,12 @@
         "id": "DFPB0060",
         "name": "Fountain location:\nHarbour Green Park - Viewpoint",
         "address": "west, by seawall",
-        "geo_local_area": "Downtown"
+        "geo_local_area": "Downtown",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3262,7 +4277,12 @@
         "id": "DFPB0066",
         "name": "Fountain location:\nHastings Park -Plateau Sport Parks / Empire Fields",
         "address": "field house at empire field",
-        "geo_local_area": "Hastings-Sunrise"
+        "geo_local_area": "Hastings-Sunrise",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3278,7 +4298,12 @@
         "id": "DFPB0068",
         "name": "Fountain location:\nHastings Park -Plateau Sport Parks / Empire Fields",
         "address": "East of basketball courts",
-        "geo_local_area": "Hastings-Sunrise"
+        "geo_local_area": "Hastings-Sunrise",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3294,7 +4319,12 @@
         "id": "DFPB0067",
         "name": "Fountain location:\nHastings Park -Plateau Sport Parks / Empire Fields",
         "address": "north of empire field",
-        "geo_local_area": "Hastings-Sunrise"
+        "geo_local_area": "Hastings-Sunrise",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3310,7 +4340,12 @@
         "id": "DFPB0071",
         "name": "Fountain location:\nHillcrest Park - North of playground",
         "address": null,
-        "geo_local_area": "Riley Park"
+        "geo_local_area": "Riley Park",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3326,7 +4361,12 @@
         "id": "DFPB0073",
         "name": "Fountain location:\nJericho Beach Park",
         "address": null,
-        "geo_local_area": "West Point Grey"
+        "geo_local_area": "West Point Grey",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3342,7 +4382,12 @@
         "id": "DFPB0075",
         "name": "Fountain location:\nJonathan Rogers Park",
         "address": "E-side of wading pool",
-        "geo_local_area": "Mount Pleasant"
+        "geo_local_area": "Mount Pleasant",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3358,7 +4403,12 @@
         "id": "DFPB0080",
         "name": "Fountain location:\nKillarney Park - E 45th Ave. @ Killarney St.",
         "address": "north plaza",
-        "geo_local_area": "Killarney"
+        "geo_local_area": "Killarney",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3374,7 +4424,12 @@
         "id": "DFPB0079",
         "name": "Fountain location:\nKillarney Park - East of wading pool",
         "address": "in front of wading pool",
-        "geo_local_area": "Killarney"
+        "geo_local_area": "Killarney",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3390,7 +4445,12 @@
         "id": "DFPB0083",
         "name": "Fountain location:\nKitsilano Beach Park - South of playground",
         "address": "besides playground",
-        "geo_local_area": "Kitsilano"
+        "geo_local_area": "Kitsilano",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3406,7 +4466,12 @@
         "id": "DFPB0088",
         "name": "Fountain location:\nLangara Golf Course - clubhouse building",
         "address": "clubhouse building",
-        "geo_local_area": "Oakridge"
+        "geo_local_area": "Oakridge",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3422,7 +4487,12 @@
         "id": "DFPB0089",
         "name": "Fountain location:\nLocarno Beach Park",
         "address": "near concessions",
-        "geo_local_area": "West Point Grey"
+        "geo_local_area": "West Point Grey",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3438,7 +4508,12 @@
         "id": "DFPB0090",
         "name": "Fountain location:\nMacDonald Park",
         "address": "near NW corner of tennis court",
-        "geo_local_area": "Sunset"
+        "geo_local_area": "Sunset",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3454,7 +4529,12 @@
         "id": "DFPB0093",
         "name": "Fountain location:\nMaple Grove Park - South of baseball diamond",
         "address": "S-side of baseball diamond",
-        "geo_local_area": "Kerrisdale"
+        "geo_local_area": "Kerrisdale",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3470,7 +4550,12 @@
         "id": "DFPB0095",
         "name": "Fountain location:\nMarpole Park",
         "address": "west entrance to playground",
-        "geo_local_area": "Marpole"
+        "geo_local_area": "Marpole",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3486,7 +4571,12 @@
         "id": "DFPB0100",
         "name": "Fountain location:\nMcCleery Golf Course - servive yard",
         "address": "servive yard",
-        "geo_local_area": "Kerrisdale"
+        "geo_local_area": "Kerrisdale",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3502,7 +4592,12 @@
         "id": "DFPB0106",
         "name": "Fountain location:\nMoberly Park - Arts & Cultural Centre",
         "address": null,
-        "geo_local_area": "Sunset"
+        "geo_local_area": "Sunset",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3518,7 +4613,12 @@
         "id": "DFPB0107",
         "name": "Fountain location:\nMorton Park",
         "address": null,
-        "geo_local_area": "West End"
+        "geo_local_area": "West End",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3534,7 +4634,12 @@
         "id": "DFPB0110",
         "name": "Fountain location:\nNanaimo Park",
         "address": "in front of wading pool",
-        "geo_local_area": "Victoria-Fraserview"
+        "geo_local_area": "Victoria-Fraserview",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3550,7 +4655,12 @@
         "id": "DFPB0111",
         "name": "Fountain location:\nNelson Park",
         "address": "middle of park",
-        "geo_local_area": "West End"
+        "geo_local_area": "West End",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3566,7 +4676,12 @@
         "id": "DFPB0115",
         "name": "Fountain location:\nNorquay Park",
         "address": "front of wading pool",
-        "geo_local_area": "Renfrew-Collingwood"
+        "geo_local_area": "Renfrew-Collingwood",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3582,7 +4697,12 @@
         "id": "DFPB0117",
         "name": "Fountain location:\nOak Park - East of fieldhouse",
         "address": "East side of fieldhouse",
-        "geo_local_area": "Marpole"
+        "geo_local_area": "Marpole",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3598,7 +4718,12 @@
         "id": "DFPB0118",
         "name": "Fountain location:\nOak Park - East of spray park",
         "address": "In spray park",
-        "geo_local_area": "Marpole"
+        "geo_local_area": "Marpole",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3614,7 +4739,12 @@
         "id": "DFPB0116",
         "name": "Fountain location:\nOak Park - North west of field hockey",
         "address": "Near parking lot",
-        "geo_local_area": "Marpole"
+        "geo_local_area": "Marpole",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3630,7 +4760,12 @@
         "id": "DFPB0120",
         "name": "Fountain location:\nPandora Park",
         "address": "N-side of wading pool",
-        "geo_local_area": "Grandview-Woodland"
+        "geo_local_area": "Grandview-Woodland",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3646,7 +4781,12 @@
         "id": "DFPB0121",
         "name": "Fountain location:\nPark Site On South East False Creek - Hinge",
         "address": null,
-        "geo_local_area": "Mount Pleasant"
+        "geo_local_area": "Mount Pleasant",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3662,7 +4802,12 @@
         "id": "DFPB0122",
         "name": "Fountain location:\nPioneer Place (Pigeon Park)",
         "address": null,
-        "geo_local_area": "Downtown"
+        "geo_local_area": "Downtown",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3678,7 +4823,12 @@
         "id": "DFPB0124",
         "name": "Fountain location:\nQueen Elizabeth Park - 37th and Ontario",
         "address": "37th and Ontario",
-        "geo_local_area": "Riley Park"
+        "geo_local_area": "Riley Park",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3694,7 +4844,12 @@
         "id": "DFPB0188",
         "name": "Fountain location:\nRiley Park",
         "address": "West side of the park",
-        "geo_local_area": "Riley Park"
+        "geo_local_area": "Riley Park",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3710,7 +4865,12 @@
         "id": "DFPB0129",
         "name": "Fountain location:\nRiverfront Park - West of tennis courts",
         "address": "w-side of tennis courts",
-        "geo_local_area": "Killarney"
+        "geo_local_area": "Killarney",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3726,7 +4886,12 @@
         "id": "DFPB0131",
         "name": "Fountain location:\nRoss Park",
         "address": "near shelter",
-        "geo_local_area": "Sunset"
+        "geo_local_area": "Sunset",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3742,7 +4907,12 @@
         "id": "DFPB0134",
         "name": "Fountain location:\nRupert Park - South of golf entrance booth",
         "address": "S-side of golf entrance booth",
-        "geo_local_area": "Hastings-Sunrise"
+        "geo_local_area": "Hastings-Sunrise",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3758,7 +4928,12 @@
         "id": "DFPB0137",
         "name": "Fountain location:\nSeaforth Peace Park",
         "address": "S end plaza",
-        "geo_local_area": "Kitsilano"
+        "geo_local_area": "Kitsilano",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3774,7 +4949,12 @@
         "id": "DFPB0159",
         "name": "Fountain location:\nStanley Park - Brockton Cricket Pavilion",
         "address": "Brockton Clubhouse",
-        "geo_local_area": null
+        "geo_local_area": null,
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3790,7 +4970,12 @@
         "id": "DFPB0161",
         "name": "Fountain location:\nStanley Park - Dog Off-leash area",
         "address": "Beside Dog off-leash area",
-        "geo_local_area": null
+        "geo_local_area": null,
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3806,7 +4991,12 @@
         "id": "DFPB0141",
         "name": "Fountain location:\nStanley Park - Prospect Point Lookout",
         "address": "Prospect Point viewing",
-        "geo_local_area": null
+        "geo_local_area": null,
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3822,7 +5012,12 @@
         "id": "DFPB0156",
         "name": "Fountain location:\nStanley Park - Prospect Point Picnic Site",
         "address": "Prospect Point picnic area",
-        "geo_local_area": null
+        "geo_local_area": null,
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3838,7 +5033,12 @@
         "id": "DFPB0143",
         "name": "Fountain location:\nStanley Park - Tennis Courts",
         "address": "near Tennis Courts & Fish House",
-        "geo_local_area": null
+        "geo_local_area": null,
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3854,7 +5054,12 @@
         "id": "DFPB0153",
         "name": "Fountain location:\nStanley Park - Third Beach Seawall",
         "address": "Third beach seawall",
-        "geo_local_area": null
+        "geo_local_area": null,
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3870,7 +5075,12 @@
         "id": "DFPB0164",
         "name": "Fountain location:\nStrathcona Park - besides baseball diamond",
         "address": "besides baseball diamond",
-        "geo_local_area": "Strathcona"
+        "geo_local_area": "Strathcona",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3886,7 +5096,12 @@
         "id": "DFPB0168",
         "name": "Fountain location:\nSutcliffe Park",
         "address": "S-side of false creek communit",
-        "geo_local_area": "Fairview"
+        "geo_local_area": "Fairview",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3902,7 +5117,12 @@
         "id": "DFPB0170",
         "name": "Fountain location:\nTecumseh Park",
         "address": "middle of park",
-        "geo_local_area": "Victoria-Fraserview"
+        "geo_local_area": "Victoria-Fraserview",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3918,7 +5138,12 @@
         "id": "DFPB0172",
         "name": "Fountain location:\nTrafalgar Park",
         "address": "E-side of wading pool",
-        "geo_local_area": "Arbutus-Ridge"
+        "geo_local_area": "Arbutus-Ridge",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3934,7 +5159,12 @@
         "id": "DFPB0173",
         "name": "Fountain location:\nTrillium Park",
         "address": "on west side of building",
-        "geo_local_area": "Strathcona"
+        "geo_local_area": "Strathcona",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3950,7 +5180,12 @@
         "id": "DFPB0176",
         "name": "Fountain location:\nVanier Park (Burrard Civic Marina)",
         "address": null,
-        "geo_local_area": "Kitsilano"
+        "geo_local_area": "Kitsilano",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3966,7 +5201,12 @@
         "id": "DFPB0179",
         "name": "Fountain location:\nW.C. Shelly Park",
         "address": null,
-        "geo_local_area": "Grandview-Woodland"
+        "geo_local_area": "Grandview-Woodland",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3982,7 +5222,12 @@
         "id": "DFPB0183",
         "name": "Fountain location:\nWest Point Grey Park - North of wading pool",
         "address": "N-side of wading pool",
-        "geo_local_area": "West Point Grey"
+        "geo_local_area": "West Point Grey",
+        "location": null,
+        "pet_friendly": null,
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -3998,7 +5243,12 @@
         "id": "DFENG0811",
         "name": "Temporary Misting Station Location: Oppenheimer Park",
         "address": "NE Corner of Oppenheimer Park",
-        "geo_local_area": "Strathcona"
+        "geo_local_area": "Strathcona",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -4014,7 +5264,12 @@
         "id": "DFENG0804",
         "name": "Temporary Misting Station location: Commercial & E 10th",
         "address": "NE corner of Commercial St & E 10th Ave",
-        "geo_local_area": "Kensington-Cedar Cottage"
+        "geo_local_area": "Kensington-Cedar Cottage",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -4030,7 +5285,12 @@
         "id": "DFENG0810",
         "name": "Temporary Misting Station location: W 70th Ave & Hudson St",
         "address": "W 70th Ave & Hudson St",
-        "geo_local_area": "Marpole"
+        "geo_local_area": "Marpole",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -4046,7 +5306,12 @@
         "id": "DFENG0503",
         "name": "Bottle Filling Station location: \nGranville St Pumping Station",
         "address": "North side of sewage pumping station under Granville Bridge on bike route",
-        "geo_local_area": "Downtown"
+        "geo_local_area": "Downtown",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -4062,7 +5327,12 @@
         "id": "DFENG0504",
         "name": "Bottle Filling Station location: \nKitsilano Pumping Station",
         "address": "North side of sewage pumping station on w/s/ 1300 Arbutus",
-        "geo_local_area": "Kitsilano"
+        "geo_local_area": "Kitsilano",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -4078,7 +5348,12 @@
         "id": "DFENG0505",
         "name": "Bottle Filling Station location: \nThornton Park Pumping Station",
         "address": "West side of sewage pumping station on w/s/ 1200 Station St",
-        "geo_local_area": "Strathcona"
+        "geo_local_area": "Strathcona",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -4094,7 +5369,12 @@
         "id": "DFENG0011",
         "name": "Fountain location:\n1650 W 7th",
         "address": "Midblock, outside of 1650 W 7th",
-        "geo_local_area": "Fairview"
+        "geo_local_area": "Fairview",
+        "location": null,
+        "pet_friendly": "Y",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -4110,7 +5390,12 @@
         "id": "DFENG0002",
         "name": "Fountain location:\n39th & Nanaimo",
         "address": "Southwest corner of 39th & Nanaimo",
-        "geo_local_area": "Kensington-Cedar Cottage"
+        "geo_local_area": "Kensington-Cedar Cottage",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -4126,7 +5411,12 @@
         "id": "DFENG0003",
         "name": "Fountain location:\n4th & Arbutus",
         "address": "Northeast corner of 4th & Arbutus",
-        "geo_local_area": "Kitsilano"
+        "geo_local_area": "Kitsilano",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -4142,7 +5432,12 @@
         "id": "DFENG0014",
         "name": "Fountain location:\n7th & Yukon",
         "address": "Southwest corner of 7th & Yukon",
-        "geo_local_area": "Mount Pleasant"
+        "geo_local_area": "Mount Pleasant",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -4158,7 +5453,12 @@
         "id": "DFENG0015",
         "name": "Fountain location:\nBroadway & Ontario",
         "address": "Southwest corner of Broadway & Ontario",
-        "geo_local_area": "Mount Pleasant"
+        "geo_local_area": "Mount Pleasant",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -4174,7 +5474,12 @@
         "id": "DFENG0024",
         "name": "Fountain location:\nBurrard & Davie",
         "address": "Northwest corner of Burrard & Davie",
-        "geo_local_area": "West End"
+        "geo_local_area": "West End",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -4190,7 +5495,12 @@
         "id": "DFENG0028",
         "name": "Fountain location:\nGilford & Comox",
         "address": "Northwest corner of Gilford & Comox",
-        "geo_local_area": "West End"
+        "geo_local_area": "West End",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -4206,7 +5516,12 @@
         "id": "DFENG0006",
         "name": "Fountain location:\nGilford & Nelson",
         "address": "Northwest corner of Gilford & Nelson",
-        "geo_local_area": "West End"
+        "geo_local_area": "West End",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -4222,7 +5537,12 @@
         "id": "DFENG0034",
         "name": "Fountain location:\nHastings & Kamloops",
         "address": "Northeast corner of Hastings & Kamloops",
-        "geo_local_area": "Hastings-Sunrise"
+        "geo_local_area": "Hastings-Sunrise",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -4238,7 +5558,12 @@
         "id": "DFENG0008",
         "name": "Fountain location:\nNicola & Beach",
         "address": "Northeast corner of Nicola & Beach",
-        "geo_local_area": "West End"
+        "geo_local_area": "West End",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -4254,7 +5579,12 @@
         "id": "DFENG0046",
         "name": "Fountain location: 733 W 14th Avenue",
         "address": "North side of 14th Avenue",
-        "geo_local_area": "Fairview"
+        "geo_local_area": "Fairview",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -4270,7 +5600,12 @@
         "id": "DFENG0044",
         "name": "Fountain location: Cambie & 29th Avenue",
         "address": "Southwest corner of Cambie & 29th Avenue",
-        "geo_local_area": "South Cambie"
+        "geo_local_area": "South Cambie",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -4286,7 +5621,12 @@
         "id": "DFENG0053",
         "name": "Fountain location: Gilford St & Haro St",
         "address": "Gilford mini park",
-        "geo_local_area": "West End"
+        "geo_local_area": "West End",
+        "location": null,
+        "pet_friendly": "Y",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -4302,7 +5642,12 @@
         "id": "DFENG0043",
         "name": "Fountain location: Ormidale St & Vanness Avenue",
         "address": "Southeast corner of Ormidale St & Vanness Avenue",
-        "geo_local_area": "Renfrew-Collingwood"
+        "geo_local_area": "Renfrew-Collingwood",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -4318,7 +5663,12 @@
         "id": "DFENG0042",
         "name": "Fountain location: W 63rd Avenue & Yukon Street",
         "address": "Southeast corner of W 63rd Avenue & Yukon Street",
-        "geo_local_area": "Marpole"
+        "geo_local_area": "Marpole",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -4334,7 +5684,12 @@
         "id": "DFENG0038",
         "name": "Fountain location:Nelson & Howe",
         "address": "Southeast corner of Nelson & Howe",
-        "geo_local_area": "Downtown"
+        "geo_local_area": "Downtown",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -4350,7 +5705,12 @@
         "id": "DFENG0705",
         "name": "Temporary Fountain location: Commercial & E Broadway",
         "address": "NE corner of Commercial Drive & East Broadway",
-        "geo_local_area": "Grandview-Woodland"
+        "geo_local_area": "Grandview-Woodland",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -4366,7 +5726,12 @@
         "id": "DFENG0703",
         "name": "Temporary Fountain location: Main & E Hastings",
         "address": "NW corner of E Hastings St and Main St",
-        "geo_local_area": "Downtown"
+        "geo_local_area": "Downtown",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -4382,7 +5747,12 @@
         "id": "DFENG0706",
         "name": "Temporary Fountain location: Powell & Gore",
         "address": "SW corner of Powell St and Gore Ave",
-        "geo_local_area": "Strathcona"
+        "geo_local_area": "Strathcona",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -4398,7 +5768,12 @@
         "id": "DFENG0707",
         "name": "Temporary Fountain location: Powell & Jackson",
         "address": "477 Powell St",
-        "geo_local_area": "Strathcona"
+        "geo_local_area": "Strathcona",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -4414,7 +5789,12 @@
         "id": "DFENG0608",
         "name": "Temporary Handwashing Station location: 201 Central",
         "address": "201 Central St",
-        "geo_local_area": "Strathcona"
+        "geo_local_area": "Strathcona",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -4430,7 +5810,12 @@
         "id": "DFENG0609",
         "name": "Temporary Handwashing Station location: 384 Main",
         "address": "384 Main St",
-        "geo_local_area": "Strathcona"
+        "geo_local_area": "Strathcona",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     },
     {
@@ -4446,7 +5831,12 @@
         "id": "DFENG0607",
         "name": "Temporary Handwashing Station location: ICBC 999 Kingsway",
         "address": "999 Kingsway",
-        "geo_local_area": "Kensington-Cedar Cottage"
+        "geo_local_area": "Kensington-Cedar Cottage",
+        "location": null,
+        "pet_friendly": "N",
+        "wheelchair_accessible": null,
+        "bottle_filler": null,
+        "last_service_date": null
       }
     }
   ]

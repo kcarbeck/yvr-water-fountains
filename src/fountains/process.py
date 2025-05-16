@@ -46,8 +46,20 @@ def main(infile: str, outfile: str) -> None:
             "geo_local_area": "geo_local_area",
         }
     )
-    keep = ["id", "name", "address", "geo_local_area", "latitude", "longitude"]
-    df = df[keep]
+
+    # Define all columns to keep (add new ones as needed)
+    all_columns = [
+        "id", "name", "address", "geo_local_area", "latitude", "longitude",
+        "location", "pet_friendly", "wheelchair_accessible", "bottle_filler", "last_service_date"
+    ]
+
+    # Ensure all columns exist in DataFrame, fill missing with None
+    for col in all_columns:
+        if col not in df.columns:
+            df[col] = None
+
+    # Subset and order columns
+    df = df[all_columns]
 
     # Build GeoJSON features
     features = [

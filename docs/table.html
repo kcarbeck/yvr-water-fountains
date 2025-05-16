@@ -7,6 +7,8 @@
     <style>
       body{padding:1rem;}
       table.dataTable {width:100% !important;}
+      th, td {vertical-align: middle;}
+      thead th {position: sticky; top: 0; background: #fff; z-index: 2;}
     </style>
     </head><body>
     <a href='index.html' class='btn btn-link'>&larr; Map</a>
@@ -17,6 +19,9 @@
       <th>Name</th>
       <th>Neighbourhood</th>
       <th>Address</th>
+      <th>Rating</th>
+      <th>IG Photo</th>
+      <th>IG Post</th>
       <th>Pet OK</th>
       <th>Wheelchair</th>
       <th>Bottle</th>
@@ -28,6 +33,9 @@
       <td>Almond Park</td>
       <td>Kitsilano</td>
       <td>S-side of playground</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -37,6 +45,9 @@
       <td>Arbutus Village Park</td>
       <td>Arbutus-Ridge</td>
       <td>S-side of playground</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -46,6 +57,9 @@
       <td>Beaconsfield Park</td>
       <td>Renfrew-Collingwood</td>
       <td>adjacent to field house</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -55,6 +69,9 @@
       <td>Carnarvon Park</td>
       <td>Arbutus-Ridge</td>
       <td>S-side of wading pool</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -64,6 +81,9 @@
       <td>Clinton Park - East side of wading pool</td>
       <td>Hastings-Sunrise</td>
       <td>E-side of wading pool</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -73,6 +93,9 @@
       <td>Coal Harbour Park</td>
       <td>Downtown</td>
       <td>near playground</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -82,6 +105,9 @@
       <td>David Lam Park - South west of playgrounds</td>
       <td>Downtown</td>
       <td>E area, near playground</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -91,6 +117,9 @@
       <td>Douglas Park (community centre)</td>
       <td>South Cambie</td>
       <td>exterior of building</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -100,6 +129,9 @@
       <td>Elm Park</td>
       <td>Kerrisdale</td>
       <td>N-side of field house</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -109,6 +141,9 @@
       <td>Emery Barnes Park - Dog off-leash area</td>
       <td>Downtown</td>
       <td>None</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -118,6 +153,9 @@
       <td>Fraser River Park - park entrance by Angus Dr</td>
       <td>Kerrisdale</td>
       <td>near park entrance by Angus Dr</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -127,6 +165,9 @@
       <td>George Park</td>
       <td>Sunset</td>
       <td>southeast corner of park</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -136,6 +177,9 @@
       <td>Grandview Park - West of Stage</td>
       <td>Grandview-Woodland</td>
       <td>Close to the Stage</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -145,6 +189,9 @@
       <td>Grays Park</td>
       <td>Kensington-Cedar Cottage</td>
       <td>front of wading pool</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -154,6 +201,9 @@
       <td>Hastings Community Park - South of wading pool</td>
       <td>Hastings-Sunrise</td>
       <td>besides wading pool</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -163,6 +213,9 @@
       <td>Hillcrest Park - East side</td>
       <td>Riley Park</td>
       <td>None</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -172,6 +225,9 @@
       <td>Kaslo Park</td>
       <td>Hastings-Sunrise</td>
       <td>SE corner of tennis courts</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -181,6 +237,9 @@
       <td>Kerrisdale Centennial Park</td>
       <td>Kerrisdale</td>
       <td>2nd N-side entrance</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -190,6 +249,9 @@
       <td>Kitsilano Beach Park - North of parking lot</td>
       <td>Kitsilano</td>
       <td>besides parking lot</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -199,6 +261,9 @@
       <td>Kitsilano Beach Park - washroom wall</td>
       <td>Kitsilano</td>
       <td>opposite washrooms</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -208,6 +273,9 @@
       <td>Langara Golf Course - cambie pathway</td>
       <td>Oakridge</td>
       <td>cambie pathway</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -217,6 +285,9 @@
       <td>Langara Golf Course - servive yard</td>
       <td>Marpole</td>
       <td>servive yard</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -226,6 +297,9 @@
       <td>Maclean Park</td>
       <td>Strathcona</td>
       <td>None</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -235,6 +309,9 @@
       <td>Major Matthews Park</td>
       <td>Mount Pleasant</td>
       <td>None</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -244,6 +321,9 @@
       <td>Maple Grove Park - East of pool</td>
       <td>Kerrisdale</td>
       <td>E-side of pool</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -253,6 +333,9 @@
       <td>McCleery Golf Course - 5th tee</td>
       <td>Kerrisdale</td>
       <td>5th tee</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -262,6 +345,9 @@
       <td>Melbourne Park</td>
       <td>Renfrew-Collingwood</td>
       <td>front of tennis courts</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -271,6 +357,9 @@
       <td>Memorial South Park - West of Softball Diamond</td>
       <td>Sunset</td>
       <td>None</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -280,6 +369,9 @@
       <td>Memorial West Park</td>
       <td>Dunbar-Southlands</td>
       <td>S of tennis courts</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -289,6 +381,9 @@
       <td>Mount Pleasant Park</td>
       <td>Mount Pleasant</td>
       <td>S-side of wading pool</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -298,6 +393,9 @@
       <td>New Brighton Park - South west of playground</td>
       <td>Hastings-Sunrise</td>
       <td>SW of playground</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -307,6 +405,9 @@
       <td>New Brighton Park - West of tennis courts</td>
       <td>Hastings-Sunrise</td>
       <td>W-side of tennis courts</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -316,6 +417,9 @@
       <td>Park Site On South East False Creek</td>
       <td>Mount Pleasant</td>
       <td>NE side of the park</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -325,6 +429,9 @@
       <td>Queen Elizabeth Park - Pitch and Putt Course</td>
       <td>Riley Park</td>
       <td>Pitch and Putt Course</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -334,6 +441,9 @@
       <td>Quilchena Park</td>
       <td>Arbutus-Ridge</td>
       <td>W-side of fieldhouse</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -343,6 +453,9 @@
       <td>Renfrew Community Park</td>
       <td>Renfrew-Collingwood</td>
       <td>adjacent to wading pool</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -352,6 +465,9 @@
       <td>Riverfront Park - East of washrooms</td>
       <td>Killarney</td>
       <td>E-side of washrooms</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -361,6 +477,9 @@
       <td>Ross Park</td>
       <td>Sunset</td>
       <td>in front of wading pool</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -370,6 +489,9 @@
       <td>Rupert Park</td>
       <td>Hastings-Sunrise</td>
       <td>E-side of playground</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -379,6 +501,9 @@
       <td>Seawall - Creekside</td>
       <td>Mount Pleasant</td>
       <td>Seawall - in front of Creekside Community Recreation Centre</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -388,6 +513,9 @@
       <td>Shannon Mews Park</td>
       <td>Kerrisdale</td>
       <td>None</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -397,6 +525,9 @@
       <td>Slocan Greenway</td>
       <td>Renfrew-Collingwood</td>
       <td>12th and slocan</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -406,6 +537,9 @@
       <td>Slocan Park</td>
       <td>Renfrew-Collingwood</td>
       <td>near playground</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -415,6 +549,9 @@
       <td>Spanish Banks Beach Park</td>
       <td>West Point Grey</td>
       <td>on north wall of washrooms</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -424,6 +561,9 @@
       <td>Stanley Park - Admin building</td>
       <td>None</td>
       <td>Park Board Office</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -433,6 +573,9 @@
       <td>Stanley Park - Lumbermen's Arch</td>
       <td>None</td>
       <td>Lumbermen's Arch</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -442,6 +585,9 @@
       <td>Stanley Park - North east of Rose and Perennial Ga</td>
       <td>None</td>
       <td>None</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -451,6 +597,9 @@
       <td>Stanley Park - Putting Green</td>
       <td>None</td>
       <td>Pitch and Putt Course</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -460,6 +609,9 @@
       <td>Stanley Park - Second Beach</td>
       <td>None</td>
       <td>Second Beach</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -469,6 +621,9 @@
       <td>Stanley Park - Second Beach Pool</td>
       <td>None</td>
       <td>Second Beach pool deck</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -478,6 +633,9 @@
       <td>Stanley Park - South west of playground</td>
       <td>None</td>
       <td>Rose Garden playground</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -487,6 +645,9 @@
       <td>Stanley Park - West of Shore to Shore sculpture</td>
       <td>None</td>
       <td>Totem poles</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -496,6 +657,9 @@
       <td>Sunrise Park</td>
       <td>Hastings-Sunrise</td>
       <td>N-side of wading pool</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -505,6 +669,9 @@
       <td>Sunset Beach</td>
       <td>West End</td>
       <td>on building wall</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -514,6 +681,9 @@
       <td>Vandusen Botanical Garden</td>
       <td>Shaughnessy</td>
       <td>near reflecting pond</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -523,6 +693,9 @@
       <td>West End minipark - JERVIS ST @ BURNABY ST</td>
       <td>West End</td>
       <td>north end</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -532,6 +705,9 @@
       <td>West Point Grey Park - lawn bowling court</td>
       <td>West Point Grey</td>
       <td>In lawn bowling court</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -541,6 +717,9 @@
       <td>Winona Park</td>
       <td>Marpole</td>
       <td>near playground</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -550,6 +729,9 @@
       <td>Andy Livingston Park</td>
       <td>Downtown</td>
       <td>NW corner of Andy Livingston Park</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -559,6 +741,9 @@
       <td>Granville & W 10th</td>
       <td>Fairview</td>
       <td>NE corner of Granville St & W 10th Ave</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -568,6 +753,9 @@
       <td>Nelson Park</td>
       <td>West End</td>
       <td>NW corner of Thurlow St & Comox St</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -577,6 +765,9 @@
       <td>Robson & Cardero</td>
       <td>West End</td>
       <td>SW corner of Robson St & Cardero St</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -586,6 +777,9 @@
       <td>West Blvd & W 45th</td>
       <td>Kerrisdale</td>
       <td>SE corner of West Boulevard & W 45th Ave</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -595,6 +789,9 @@
       <td>Charleson Park Pumping Station</td>
       <td>Fairview</td>
       <td>North side of sewage pumping station 900 Charleson</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -604,6 +801,9 @@
       <td>Grandview Hwy Pumping Station</td>
       <td>Renfrew-Collingwood</td>
       <td>None</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -613,6 +813,9 @@
       <td>E 30th Ave & Gladstone St</td>
       <td>Kensington-Cedar Cottage</td>
       <td>East Side corner Gladstone at E 30th Ave</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -622,6 +825,9 @@
       <td>28th & Main</td>
       <td>Riley Park</td>
       <td>Northeast corner of 28th & Main</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -631,6 +837,9 @@
       <td>37th & Oak</td>
       <td>South Cambie</td>
       <td>Southeast corner of 37th & Oak</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -640,6 +849,9 @@
       <td>37th & Ontario</td>
       <td>Riley Park</td>
       <td>Northwest corner of 37th & Ontario</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -649,6 +861,9 @@
       <td>37th & Prince Edward</td>
       <td>Riley Park</td>
       <td>Northwest corner of 37th & Prince Edward</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -658,6 +873,9 @@
       <td>Ashburn & Elliot</td>
       <td>Victoria-Fraserview</td>
       <td>Northwest corner of Ashburn & Elliot</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -667,6 +885,9 @@
       <td>Cardero & Burnaby</td>
       <td>West End</td>
       <td>In the mini park at Cardero & Burnaby</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -676,6 +897,9 @@
       <td>Denman & Nelson</td>
       <td>West End</td>
       <td>Southwest corner of Denman & Nelson</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -685,6 +909,9 @@
       <td>Elgin & 37th</td>
       <td>Kensington-Cedar Cottage</td>
       <td>Northwest corner of Elgin & 37th</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -694,6 +921,9 @@
       <td>Granville & 59th</td>
       <td>Marpole</td>
       <td>Northeast corner of Granville & 59th</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -703,6 +933,9 @@
       <td>Hastings & Gore</td>
       <td>Strathcona</td>
       <td>Northeast corner of Hastings & Gore</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -712,6 +945,9 @@
       <td>Robson & Chilco</td>
       <td>West End</td>
       <td>In mini park at Robson & Chilco</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -721,6 +957,9 @@
       <td>Union & Hawks</td>
       <td>Strathcona</td>
       <td>In mini park at Union & Hawks</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -730,6 +969,9 @@
       <td>10th & Kingsway</td>
       <td>Mount Pleasant</td>
       <td>Northwest corner of 10th & Kingsway</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -739,6 +981,9 @@
       <td>4963 Cambie St</td>
       <td>South Cambie</td>
       <td>Northwest corner of Cambie and W 35th</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -748,6 +993,9 @@
       <td>Davie & Bute (Jim Deva Plaza)</td>
       <td>West End</td>
       <td>1200 Davie Street</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -757,6 +1005,9 @@
       <td>Oak & 46th</td>
       <td>Oakridge</td>
       <td>Northeast corner of Oak & 46th</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -766,6 +1017,9 @@
       <td>Point Grey Road & Waterloo</td>
       <td>Kitsilano</td>
       <td>1600 Waterloo St</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -775,6 +1029,9 @@
       <td>River District Crossing & E Kent Ave North</td>
       <td>Killarney</td>
       <td>Northeast corner of River District Crossing & E Kent Ave North</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -784,6 +1041,9 @@
       <td>Pt.Grey & MacDonald</td>
       <td>Kitsilano</td>
       <td>Northwest corner of Pt. Grey & MacDonald</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -793,6 +1053,9 @@
       <td>Fraser & Broadway</td>
       <td>Mount Pleasant</td>
       <td>Northwest corner of Fraser & Broadway</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -802,6 +1065,9 @@
       <td>2067 W 15th Ave</td>
       <td>Kitsilano</td>
       <td>NE corner of 2000 W 15th Ave at Arbutus Greenway</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -811,6 +1077,9 @@
       <td>London Drugs</td>
       <td>Downtown</td>
       <td>733 Granville St</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -820,6 +1089,9 @@
       <td>15 E Hastings</td>
       <td>Downtown</td>
       <td>15 E Hastings St</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -829,6 +1101,9 @@
       <td>Dunlevy & E Cordova</td>
       <td>Strathcona</td>
       <td>255 Dunlevy Av</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -838,6 +1113,9 @@
       <td>E Hastings & Columbia</td>
       <td>Downtown</td>
       <td>101 E Hastings St</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -847,6 +1125,9 @@
       <td>The Gathering Place</td>
       <td>Downtown</td>
       <td>609 Helmcken St</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -856,6 +1137,9 @@
       <td>Adanac Park</td>
       <td>Hastings-Sunrise</td>
       <td>SW side of Field house</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -865,6 +1149,9 @@
       <td>Andy Livingstone Park - North of basketball court</td>
       <td>Downtown</td>
       <td>by amphitheatre steps near bas</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -874,6 +1161,9 @@
       <td>Art Phillips Park (Discovery Square)</td>
       <td>Downtown</td>
       <td>NW plaza</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -883,6 +1173,9 @@
       <td>Balaclava Park</td>
       <td>Dunbar-Southlands</td>
       <td>W of wading pool</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -892,6 +1185,9 @@
       <td>Burrard View Park</td>
       <td>Hastings-Sunrise</td>
       <td>N-side of wading pool</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -901,6 +1197,9 @@
       <td>Cedar Cottage Park</td>
       <td>Kensington-Cedar Cottage</td>
       <td>Near Sport courts</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -910,6 +1209,9 @@
       <td>Chaldecott Park</td>
       <td>Dunbar-Southlands</td>
       <td>W-side of spray park</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -919,6 +1221,9 @@
       <td>China Creek South Park</td>
       <td>Mount Pleasant</td>
       <td>S-side of skate park</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -928,6 +1233,9 @@
       <td>Clark Park</td>
       <td>Kensington-Cedar Cottage</td>
       <td>None</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -937,6 +1245,9 @@
       <td>Clinton Park - North side of ball diamond</td>
       <td>Hastings-Sunrise</td>
       <td>N-side of B-ball diamond</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -946,6 +1257,9 @@
       <td>Collingwood Park</td>
       <td>Renfrew-Collingwood</td>
       <td>in front of wading pool</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -955,6 +1269,9 @@
       <td>Connaught Park - East side of fieldhouse</td>
       <td>Kitsilano</td>
       <td>near fieldhouse</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -964,6 +1281,9 @@
       <td>Coopers' Park</td>
       <td>Downtown</td>
       <td>None</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -973,6 +1293,9 @@
       <td>Coopers' Park - underneath bridge, near basket</td>
       <td>Downtown</td>
       <td>underneath bridge, near basket</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -982,6 +1305,9 @@
       <td>Creekside Park</td>
       <td>Downtown</td>
       <td>None</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -991,6 +1317,9 @@
       <td>Ebisu Park</td>
       <td>Marpole</td>
       <td>near playground</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1000,6 +1329,9 @@
       <td>English Bay Beach Park - Davie st entrance</td>
       <td>West End</td>
       <td>Davie st entrance</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1009,6 +1341,9 @@
       <td>Falaise Park</td>
       <td>Renfrew-Collingwood</td>
       <td>in front of wading pool</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1018,6 +1353,9 @@
       <td>Fraserview Golf Course - 6th tee</td>
       <td>Killarney</td>
       <td>6th tee</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1027,6 +1365,9 @@
       <td>Fraserview Golf Course - clubhouse building</td>
       <td>Killarney</td>
       <td>clubhouse building</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1036,6 +1377,9 @@
       <td>Garden Park</td>
       <td>Grandview-Woodland</td>
       <td>N-side of field house</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1045,6 +1389,9 @@
       <td>Gaston Park</td>
       <td>Renfrew-Collingwood</td>
       <td>near basketball court</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1054,6 +1401,9 @@
       <td>George Wainborn Park</td>
       <td>Downtown</td>
       <td>NE corner near seawall</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1063,6 +1413,9 @@
       <td>Harbour Green Park - foot of Jervis Mews</td>
       <td>Downtown</td>
       <td>foot of Jervis Mews</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1072,6 +1425,9 @@
       <td>Hastings Community Park - SE of tennis courts</td>
       <td>Hastings-Sunrise</td>
       <td>besides path leading to spray</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1081,6 +1437,9 @@
       <td>Hastings Park - Italian gardens</td>
       <td>Hastings-Sunrise</td>
       <td>near skate park</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1090,6 +1449,9 @@
       <td>Hastings Park -Plateau Sport Parks / Empire Fields</td>
       <td>Hastings-Sunrise</td>
       <td>empire field - soccer fields</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1099,6 +1461,9 @@
       <td>Hastings Park -Plateau Sport Parks / Empire Fields</td>
       <td>Hastings-Sunrise</td>
       <td>East of playgrounds</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1108,6 +1473,9 @@
       <td>John Hendry (Trout Lake) Park</td>
       <td>Kensington-Cedar Cottage</td>
       <td>nearby beach</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1117,6 +1485,9 @@
       <td>Kensington Park</td>
       <td>Kensington-Cedar Cottage</td>
       <td>between baseball diamond and parking lots</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1126,6 +1497,9 @@
       <td>Kingcrest Park</td>
       <td>Kensington-Cedar Cottage</td>
       <td>E-side of washroom</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1135,6 +1509,9 @@
       <td>Langara Golf Course - East of tennis courts</td>
       <td>Oakridge</td>
       <td>56th and Ontario</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1144,6 +1521,9 @@
       <td>McBride Park</td>
       <td>Kitsilano</td>
       <td>S of playground</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1153,6 +1533,9 @@
       <td>McCleery Golf Course - clubhouse building</td>
       <td>Kerrisdale</td>
       <td>clubhouse building</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1162,6 +1545,9 @@
       <td>McCleery Golf Course - driving range</td>
       <td>Kerrisdale</td>
       <td>driving range</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1171,6 +1557,9 @@
       <td>Memorial South Park - West of wading pool</td>
       <td>Sunset</td>
       <td>W-side of wading pool</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1180,6 +1569,9 @@
       <td>Moberly Park - West of tennis courts</td>
       <td>Sunset</td>
       <td>in front of tennis courts</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1189,6 +1581,9 @@
       <td>Mosaic Creek Park</td>
       <td>Grandview-Woodland</td>
       <td>near children's play area</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1198,6 +1593,9 @@
       <td>New Brighton Park - South of pool</td>
       <td>Hastings-Sunrise</td>
       <td>S-side of pool</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1207,6 +1605,9 @@
       <td>Oppenheimer Park</td>
       <td>Strathcona</td>
       <td>None</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1216,6 +1617,9 @@
       <td>Queen Elizabeth Park - At Conservatory</td>
       <td>Riley Park</td>
       <td>At Conservatory</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1225,6 +1629,9 @@
       <td>Robson Park</td>
       <td>Mount Pleasant</td>
       <td>N-side of wading pool</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1234,6 +1641,9 @@
       <td>Rupert Park - East of fieldhouse</td>
       <td>Hastings-Sunrise</td>
       <td>E-side of Field house</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1243,6 +1653,9 @@
       <td>Stanley Park - Brockton Oval Fieldhouse</td>
       <td>None</td>
       <td>brockton oval</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1252,6 +1665,9 @@
       <td>Stanley Park - Brockton Point Viewpoint</td>
       <td>None</td>
       <td>Brockton point - lighthouse</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1261,6 +1677,9 @@
       <td>Stanley Park - Ceperley Washrooms</td>
       <td>None</td>
       <td>Ceperley washrooms</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1270,6 +1689,9 @@
       <td>Stanley Park - Lawn Bowling Club</td>
       <td>None</td>
       <td>Lawn Bowling</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1279,6 +1701,9 @@
       <td>Stanley Park - Legends Of The Moon Washroom</td>
       <td>None</td>
       <td>Legends Of The Moon - Washroom</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1288,6 +1713,9 @@
       <td>Stanley Park - Prospect Point Washrooms</td>
       <td>None</td>
       <td>prospect point washrooms</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1297,6 +1725,9 @@
       <td>Stanley Park - Stanley Park Pavilion</td>
       <td>None</td>
       <td>pavillion outside washrooms</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1306,6 +1737,9 @@
       <td>Stanley Park - West of Restaurant</td>
       <td>None</td>
       <td>W - side of Fish House</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1315,6 +1749,9 @@
       <td>Stanley Park - West side of Stanley Park Train</td>
       <td>None</td>
       <td>None</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1324,6 +1761,9 @@
       <td>Strathcona Park - North west of basketball court</td>
       <td>Strathcona</td>
       <td>besides basketball court</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1333,6 +1773,9 @@
       <td>Sunset Park</td>
       <td>Sunset</td>
       <td>front of wading pool</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1342,6 +1785,9 @@
       <td>Tea Swamp Park</td>
       <td>Mount Pleasant</td>
       <td>NE corner of park</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1351,6 +1797,9 @@
       <td>Tisdall Park</td>
       <td>Oakridge</td>
       <td>near North baseball diamond</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1360,6 +1809,9 @@
       <td>Vancouver Technical HS</td>
       <td>Renfrew-Collingwood</td>
       <td>NE of the sport field</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1369,6 +1821,9 @@
       <td>Vandusen Botanical Garden - upper gardens</td>
       <td>Shaughnessy</td>
       <td>upper gardens</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1378,6 +1833,9 @@
       <td>Victoria Park</td>
       <td>Grandview-Woodland</td>
       <td>adjacent to children's play area</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1387,6 +1845,9 @@
       <td>Victory Square</td>
       <td>Downtown</td>
       <td>south corner of park</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1396,6 +1857,9 @@
       <td>West End minipark</td>
       <td>West End</td>
       <td>Bute & Haro</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1405,6 +1869,9 @@
       <td>Woodland Park</td>
       <td>Grandview-Woodland</td>
       <td>in front of wading pool</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1414,6 +1881,9 @@
       <td>Columbia & Powell</td>
       <td>Downtown</td>
       <td>NE corner of Columbia St & Powell St</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1423,6 +1893,9 @@
       <td>Main St & 14th Ave</td>
       <td>Mount Pleasant</td>
       <td>Main st & 14th Ave</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1432,6 +1905,9 @@
       <td>Thornton Park</td>
       <td>Strathcona</td>
       <td>East side of Thornton Park across from Pacific Central</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1441,6 +1917,9 @@
       <td>Granville Island Pumping Station</td>
       <td>Fairview</td>
       <td>North side of sewage pumping station on seawall east of the granville island entrance</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1450,6 +1929,9 @@
       <td>56th & Ontario</td>
       <td>Oakridge</td>
       <td>Northwest corner of 56th & Ontario</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1459,6 +1941,9 @@
       <td>Broadway & Stephens</td>
       <td>Kitsilano</td>
       <td>Northwest corner of Broadway & Stephens</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1468,6 +1953,9 @@
       <td>Broadway & Victoria</td>
       <td>Kensington-Cedar Cottage</td>
       <td>Southeast corner of Broadway & Victoria</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1477,6 +1965,9 @@
       <td>Commercial & 3rd</td>
       <td>Grandview-Woodland</td>
       <td>Northeast corner of Commercial & 3rd</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1486,6 +1977,9 @@
       <td>Comox & Cardero</td>
       <td>West End</td>
       <td>Northeast corner of Comox & Cardero</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1495,6 +1989,9 @@
       <td>Comox & Chilco</td>
       <td>West End</td>
       <td>In mini park at Comox & Chilco</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1504,6 +2001,9 @@
       <td>Comox & Denman</td>
       <td>West End</td>
       <td>Northwest corner of Comox & Denman</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1513,6 +2013,9 @@
       <td>Granville & Robson</td>
       <td>Downtown</td>
       <td>Northwest corner of Granville & Robson</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1522,6 +2025,9 @@
       <td>Main & 11th</td>
       <td>Mount Pleasant</td>
       <td>Southeast corner of Main & 11th</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1531,6 +2037,9 @@
       <td>Nelson & Broughton</td>
       <td>West End</td>
       <td>In mini park at Nelson & Broughton</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1540,6 +2049,9 @@
       <td>10th & Willow</td>
       <td>Fairview</td>
       <td>Northwest corner of 10th & Willow</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1549,6 +2061,9 @@
       <td>11th & Prince Edward</td>
       <td>Mount Pleasant</td>
       <td>Northeast corner of 11th & Prince Edward</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1558,6 +2073,9 @@
       <td>2001 W 10th Avenue</td>
       <td>Kitsilano</td>
       <td>North side of 10th Avenue</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1567,6 +2085,9 @@
       <td>375 W 59th Avenue</td>
       <td>Marpole</td>
       <td>Northeast corner of Alberta St and W 59th Ave</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1576,6 +2097,9 @@
       <td>8683 Kerr</td>
       <td>Killarney</td>
       <td>Southwest side of Kerr</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1585,6 +2109,9 @@
       <td>Cambie & 10th</td>
       <td>Mount Pleasant</td>
       <td>Northeast corner of Cambie & 10th</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1594,6 +2121,9 @@
       <td>E Hastings & Heatley</td>
       <td>Strathcona</td>
       <td>NE corner of E Hastings St and Heatley Ave</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1603,6 +2133,9 @@
       <td>Wessex & Kingsway</td>
       <td>Renfrew-Collingwood</td>
       <td>3357 Kingsway</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1612,6 +2145,9 @@
       <td>Evelyne Saller Centre</td>
       <td>Strathcona</td>
       <td>320 Alexander  St</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1621,6 +2157,9 @@
       <td>Union Gospel Mission</td>
       <td>Strathcona</td>
       <td>601 E Hastings St</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1630,6 +2169,9 @@
       <td>Aberdeen Park</td>
       <td>Renfrew-Collingwood</td>
       <td>plaza</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1639,6 +2181,9 @@
       <td>Alexandra Park</td>
       <td>West End</td>
       <td>west plaza gateway</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1648,6 +2193,9 @@
       <td>Andy Livingstone Park - South of soccer fields</td>
       <td>Downtown</td>
       <td>north side of fieldhouse</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1657,6 +2205,9 @@
       <td>Arbutus Greenway Park</td>
       <td>Kitsilano</td>
       <td>S-side of playground</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1666,6 +2217,9 @@
       <td>Bobolink Park</td>
       <td>Victoria-Fraserview</td>
       <td>in front of wading pool</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1675,6 +2229,9 @@
       <td>Brewers Park</td>
       <td>Kensington-Cedar Cottage</td>
       <td>S-side of wading pool</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1684,6 +2241,9 @@
       <td>CRAB Park at Portside</td>
       <td>Downtown</td>
       <td>None</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1693,6 +2253,9 @@
       <td>Charleson Park</td>
       <td>Fairview</td>
       <td>N of school off of seawall</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1702,6 +2265,9 @@
       <td>China Creek North Park</td>
       <td>Mount Pleasant</td>
       <td>S central side along jogging c</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1711,6 +2277,9 @@
       <td>Columbia Park</td>
       <td>Oakridge</td>
       <td>in front of wading pool</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1720,6 +2289,9 @@
       <td>Connaught Park - North of playground</td>
       <td>Kitsilano</td>
       <td>None</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1729,6 +2301,9 @@
       <td>David Lam Park - South west of basketball courts</td>
       <td>Downtown</td>
       <td>near playground and tennis court</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1738,6 +2313,9 @@
       <td>Devonian Harbour Park</td>
       <td>None</td>
       <td>near Stanley Park entrance</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1747,6 +2325,9 @@
       <td>Douglas Park - Right side of wading pool</td>
       <td>South Cambie</td>
       <td>in front of wading pool</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1756,6 +2337,9 @@
       <td>Emery Barnes Park - South west of playground</td>
       <td>Downtown</td>
       <td>None</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1765,6 +2349,9 @@
       <td>English Bay Beach Park - West of bath-house</td>
       <td>West End</td>
       <td>opposite entrance to bathhouse</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1774,6 +2361,9 @@
       <td>English Bay Beach Park - concessions</td>
       <td>West End</td>
       <td>concessions</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1783,6 +2373,9 @@
       <td>Fraser River Park - South west</td>
       <td>Kerrisdale</td>
       <td>None</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1792,6 +2385,9 @@
       <td>Fraserview Golf Course - West of kerr st.</td>
       <td>Killarney</td>
       <td>West of kerr st.</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1801,6 +2397,9 @@
       <td>Fraserview Golf Course - driving range</td>
       <td>Killarney</td>
       <td>driving range</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1810,6 +2409,9 @@
       <td>Grandview Park - South of playground</td>
       <td>Grandview-Woodland</td>
       <td>By the Playground</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1819,6 +2421,9 @@
       <td>Granville Loop Park</td>
       <td>Fairview</td>
       <td>None</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1828,6 +2433,9 @@
       <td>Guelph Park</td>
       <td>Mount Pleasant</td>
       <td>w-side of tennis courts</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1837,6 +2445,9 @@
       <td>Harbour Green Park - In front of washrooms</td>
       <td>Downtown</td>
       <td>near spray pool</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1846,6 +2457,9 @@
       <td>Harbour Green Park - Viewpoint</td>
       <td>Downtown</td>
       <td>west, by seawall</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1855,6 +2469,9 @@
       <td>Hastings Park -Plateau Sport Parks / Empire Fields</td>
       <td>Hastings-Sunrise</td>
       <td>field house at empire field</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1864,6 +2481,9 @@
       <td>Hastings Park -Plateau Sport Parks / Empire Fields</td>
       <td>Hastings-Sunrise</td>
       <td>East of basketball courts</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1873,6 +2493,9 @@
       <td>Hastings Park -Plateau Sport Parks / Empire Fields</td>
       <td>Hastings-Sunrise</td>
       <td>north of empire field</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1882,6 +2505,9 @@
       <td>Hillcrest Park - North of playground</td>
       <td>Riley Park</td>
       <td>None</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1891,6 +2517,9 @@
       <td>Jericho Beach Park</td>
       <td>West Point Grey</td>
       <td>None</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1900,6 +2529,9 @@
       <td>Jonathan Rogers Park</td>
       <td>Mount Pleasant</td>
       <td>E-side of wading pool</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1909,6 +2541,9 @@
       <td>Killarney Park - E 45th Ave. @ Killarney St.</td>
       <td>Killarney</td>
       <td>north plaza</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1918,6 +2553,9 @@
       <td>Killarney Park - East of wading pool</td>
       <td>Killarney</td>
       <td>in front of wading pool</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1927,6 +2565,9 @@
       <td>Kitsilano Beach Park - South of playground</td>
       <td>Kitsilano</td>
       <td>besides playground</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1936,6 +2577,9 @@
       <td>Langara Golf Course - clubhouse building</td>
       <td>Oakridge</td>
       <td>clubhouse building</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1945,6 +2589,9 @@
       <td>Locarno Beach Park</td>
       <td>West Point Grey</td>
       <td>near concessions</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1954,6 +2601,9 @@
       <td>MacDonald Park</td>
       <td>Sunset</td>
       <td>near NW corner of tennis court</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1963,6 +2613,9 @@
       <td>Maple Grove Park - South of baseball diamond</td>
       <td>Kerrisdale</td>
       <td>S-side of baseball diamond</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1972,6 +2625,9 @@
       <td>Marpole Park</td>
       <td>Marpole</td>
       <td>west entrance to playground</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1981,6 +2637,9 @@
       <td>McCleery Golf Course - servive yard</td>
       <td>Kerrisdale</td>
       <td>servive yard</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1990,6 +2649,9 @@
       <td>Moberly Park - Arts & Cultural Centre</td>
       <td>Sunset</td>
       <td>None</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -1999,6 +2661,9 @@
       <td>Morton Park</td>
       <td>West End</td>
       <td>None</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -2008,6 +2673,9 @@
       <td>Nanaimo Park</td>
       <td>Victoria-Fraserview</td>
       <td>in front of wading pool</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -2017,6 +2685,9 @@
       <td>Nelson Park</td>
       <td>West End</td>
       <td>middle of park</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -2026,6 +2697,9 @@
       <td>Norquay Park</td>
       <td>Renfrew-Collingwood</td>
       <td>front of wading pool</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -2035,6 +2709,9 @@
       <td>Oak Park - East of fieldhouse</td>
       <td>Marpole</td>
       <td>East side of fieldhouse</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -2044,6 +2721,9 @@
       <td>Oak Park - East of spray park</td>
       <td>Marpole</td>
       <td>In spray park</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -2053,6 +2733,9 @@
       <td>Oak Park - North west of field hockey</td>
       <td>Marpole</td>
       <td>Near parking lot</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -2062,6 +2745,9 @@
       <td>Pandora Park</td>
       <td>Grandview-Woodland</td>
       <td>N-side of wading pool</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -2071,6 +2757,9 @@
       <td>Park Site On South East False Creek - Hinge</td>
       <td>Mount Pleasant</td>
       <td>None</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -2080,6 +2769,9 @@
       <td>Pioneer Place (Pigeon Park)</td>
       <td>Downtown</td>
       <td>None</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -2089,6 +2781,9 @@
       <td>Queen Elizabeth Park - 37th and Ontario</td>
       <td>Riley Park</td>
       <td>37th and Ontario</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -2098,6 +2793,9 @@
       <td>Riley Park</td>
       <td>Riley Park</td>
       <td>West side of the park</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -2107,6 +2805,9 @@
       <td>Riverfront Park - West of tennis courts</td>
       <td>Killarney</td>
       <td>w-side of tennis courts</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -2116,6 +2817,9 @@
       <td>Ross Park</td>
       <td>Sunset</td>
       <td>near shelter</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -2125,6 +2829,9 @@
       <td>Rupert Park - South of golf entrance booth</td>
       <td>Hastings-Sunrise</td>
       <td>S-side of golf entrance booth</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -2134,6 +2841,9 @@
       <td>Seaforth Peace Park</td>
       <td>Kitsilano</td>
       <td>S end plaza</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -2143,6 +2853,9 @@
       <td>Stanley Park - Brockton Cricket Pavilion</td>
       <td>None</td>
       <td>Brockton Clubhouse</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -2152,6 +2865,9 @@
       <td>Stanley Park - Dog Off-leash area</td>
       <td>None</td>
       <td>Beside Dog off-leash area</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -2161,6 +2877,9 @@
       <td>Stanley Park - Prospect Point Lookout</td>
       <td>None</td>
       <td>Prospect Point viewing</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -2170,6 +2889,9 @@
       <td>Stanley Park - Prospect Point Picnic Site</td>
       <td>None</td>
       <td>Prospect Point picnic area</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -2179,6 +2901,9 @@
       <td>Stanley Park - Tennis Courts</td>
       <td>None</td>
       <td>near Tennis Courts & Fish House</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -2188,6 +2913,9 @@
       <td>Stanley Park - Third Beach Seawall</td>
       <td>None</td>
       <td>Third beach seawall</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -2197,6 +2925,9 @@
       <td>Strathcona Park - besides baseball diamond</td>
       <td>Strathcona</td>
       <td>besides baseball diamond</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -2206,6 +2937,9 @@
       <td>Sutcliffe Park</td>
       <td>Fairview</td>
       <td>S-side of false creek communit</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -2215,6 +2949,9 @@
       <td>Tecumseh Park</td>
       <td>Victoria-Fraserview</td>
       <td>middle of park</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -2224,6 +2961,9 @@
       <td>Trafalgar Park</td>
       <td>Arbutus-Ridge</td>
       <td>E-side of wading pool</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -2233,6 +2973,9 @@
       <td>Trillium Park</td>
       <td>Strathcona</td>
       <td>on west side of building</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -2242,6 +2985,9 @@
       <td>Vanier Park (Burrard Civic Marina)</td>
       <td>Kitsilano</td>
       <td>None</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -2251,6 +2997,9 @@
       <td>W.C. Shelly Park</td>
       <td>Grandview-Woodland</td>
       <td>None</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -2260,6 +3009,9 @@
       <td>West Point Grey Park - North of wading pool</td>
       <td>West Point Grey</td>
       <td>N-side of wading pool</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -2269,6 +3021,9 @@
       <td>Oppenheimer Park</td>
       <td>Strathcona</td>
       <td>NE Corner of Oppenheimer Park</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -2278,6 +3033,9 @@
       <td>Commercial & E 10th</td>
       <td>Kensington-Cedar Cottage</td>
       <td>NE corner of Commercial St & E 10th Ave</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -2287,6 +3045,9 @@
       <td>W 70th Ave & Hudson St</td>
       <td>Marpole</td>
       <td>W 70th Ave & Hudson St</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -2296,6 +3057,9 @@
       <td>Granville St Pumping Station</td>
       <td>Downtown</td>
       <td>North side of sewage pumping station under Granville Bridge on bike route</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -2305,6 +3069,9 @@
       <td>Kitsilano Pumping Station</td>
       <td>Kitsilano</td>
       <td>North side of sewage pumping station on w/s/ 1300 Arbutus</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -2314,6 +3081,9 @@
       <td>Thornton Park Pumping Station</td>
       <td>Strathcona</td>
       <td>West side of sewage pumping station on w/s/ 1200 Station St</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -2323,6 +3093,9 @@
       <td>1650 W 7th</td>
       <td>Fairview</td>
       <td>Midblock, outside of 1650 W 7th</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -2332,6 +3105,9 @@
       <td>39th & Nanaimo</td>
       <td>Kensington-Cedar Cottage</td>
       <td>Southwest corner of 39th & Nanaimo</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -2341,6 +3117,9 @@
       <td>4th & Arbutus</td>
       <td>Kitsilano</td>
       <td>Northeast corner of 4th & Arbutus</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -2350,6 +3129,9 @@
       <td>7th & Yukon</td>
       <td>Mount Pleasant</td>
       <td>Southwest corner of 7th & Yukon</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -2359,6 +3141,9 @@
       <td>Broadway & Ontario</td>
       <td>Mount Pleasant</td>
       <td>Southwest corner of Broadway & Ontario</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -2368,6 +3153,9 @@
       <td>Burrard & Davie</td>
       <td>West End</td>
       <td>Northwest corner of Burrard & Davie</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -2377,6 +3165,9 @@
       <td>Gilford & Comox</td>
       <td>West End</td>
       <td>Northwest corner of Gilford & Comox</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -2386,6 +3177,9 @@
       <td>Gilford & Nelson</td>
       <td>West End</td>
       <td>Northwest corner of Gilford & Nelson</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -2395,6 +3189,9 @@
       <td>Hastings & Kamloops</td>
       <td>Hastings-Sunrise</td>
       <td>Northeast corner of Hastings & Kamloops</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -2404,6 +3201,9 @@
       <td>Nicola & Beach</td>
       <td>West End</td>
       <td>Northeast corner of Nicola & Beach</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -2413,6 +3213,9 @@
       <td>733 W 14th Avenue</td>
       <td>Fairview</td>
       <td>North side of 14th Avenue</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -2422,6 +3225,9 @@
       <td>Cambie & 29th Avenue</td>
       <td>South Cambie</td>
       <td>Southwest corner of Cambie & 29th Avenue</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -2431,6 +3237,9 @@
       <td>Gilford St & Haro St</td>
       <td>West End</td>
       <td>Gilford mini park</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -2440,6 +3249,9 @@
       <td>Ormidale St & Vanness Avenue</td>
       <td>Renfrew-Collingwood</td>
       <td>Southeast corner of Ormidale St & Vanness Avenue</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -2449,6 +3261,9 @@
       <td>W 63rd Avenue & Yukon Street</td>
       <td>Marpole</td>
       <td>Southeast corner of W 63rd Avenue & Yukon Street</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -2458,6 +3273,9 @@
       <td>Nelson & Howe</td>
       <td>Downtown</td>
       <td>Southeast corner of Nelson & Howe</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -2467,6 +3285,9 @@
       <td>Commercial & E Broadway</td>
       <td>Grandview-Woodland</td>
       <td>NE corner of Commercial Drive & East Broadway</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -2476,6 +3297,9 @@
       <td>Main & E Hastings</td>
       <td>Downtown</td>
       <td>NW corner of E Hastings St and Main St</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -2485,6 +3309,9 @@
       <td>Powell & Gore</td>
       <td>Strathcona</td>
       <td>SW corner of Powell St and Gore Ave</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -2494,6 +3321,9 @@
       <td>Powell & Jackson</td>
       <td>Strathcona</td>
       <td>477 Powell St</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -2503,6 +3333,9 @@
       <td>201 Central</td>
       <td>Strathcona</td>
       <td>201 Central St</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -2512,6 +3345,9 @@
       <td>384 Main</td>
       <td>Strathcona</td>
       <td>384 Main St</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -2521,6 +3357,9 @@
       <td>ICBC 999 Kingsway</td>
       <td>Kensington-Cedar Cottage</td>
       <td>999 Kingsway</td>
+      <td>—</td>
+      <td></td>
+      <td></td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>

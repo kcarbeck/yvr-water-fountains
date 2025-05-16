@@ -8,6 +8,8 @@ import pandas as pd
 import click
 from pathlib import Path
 import folium
+import instaloader
+import re
 
 @click.command()
 @click.option(
@@ -90,6 +92,15 @@ def main(infile: str, outfile: str) -> None:
         f"✓ saved {len(df):,} cleaned records → {outfile} "
         f"and copied to {dest}"
     )
+
+    # Merge with ratings.csv if it exists
+    ratings_path = Path("data/ratings.csv")
+    if ratings_path.exists():
+        ratings = pd.read_csv(ratings_path)
+        df = df.merge(ratings, how="left", on="id")
+        click.echo(f"✓ merged with ratings.csv ({len(ratings)} IG posts)")
+    else:
+        click.echo("⚠️  data/ratings.csv not found. Skipping IG merge.")
 
     # Add popups to features
     for feature in features:

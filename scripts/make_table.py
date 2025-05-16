@@ -70,6 +70,9 @@ BOOT = "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
 DAT_CSS = "https://cdn.jsdelivr.net/npm/datatables@1.13.8/media/css/jquery.dataTables.min.css"
 DAT_JS  = "https://cdn.jsdelivr.net/npm/datatables@1.13.8/media/js/jquery.dataTables.min.js"
 JQ      = "https://code.jquery.com/jquery-3.7.1.min.js"
+COLVIS  = "https://cdn.jsdelivr.net/npm/datatables.net-buttons@2.4.2/js/buttons.colVis.min.js"
+RESP_JS = "https://cdn.jsdelivr.net/npm/datatables.net-responsive@2.5.0/js/dataTables.responsive.min.js"
+RESP_CSS= "https://cdn.jsdelivr.net/npm/datatables.net-responsive-bs5@2.5.0/css/responsive.bootstrap5.min.css"
 
 html_table = df.to_html(
     classes="table table-striped table-hover nowrap",
@@ -83,28 +86,83 @@ DST.write_text(
         f"""
     <!doctype html><html><head><meta charset='utf-8'>
     <title>Vancouver Water Fountains – Table</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="stylesheet" href="{BOOT}">
-    <link rel="stylesheet" href="{DAT_CSS}">
+    <meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">
+    <link rel=\"stylesheet\" href=\"{BOOT}\">
+    <link rel=\"stylesheet\" href=\"{DAT_CSS}\">
+    <link rel=\"stylesheet\" href=\"{RESP_CSS}\">
     <style>
       body{{padding:1rem;}}
       table.dataTable {{width:100% !important;}}
       th, td {{vertical-align: middle;}}
       thead th {{position: sticky; top: 0; background: #fff; z-index: 2;}}
+      /* Color coding for features */
+      td.feature-yes {{background:#e6ffe6; color:#155724;}}
+      td.feature-no {{background:#ffe6e6; color:#721c24;}}
+      td.feature-unknown {{background:#f2f2f2; color:#888;}}
+      tr.clickable-row:hover {{background:#d9edf7 !important;cursor:pointer;}}
     </style>
     </head><body>
     <a href='index.html' class='btn btn-link'>&larr; Map</a>
     <h2 class='mb-3'>All Vancouver Fountains</h2>
-    <div class="table-responsive">{html_table}</div>
+    <div class=\"table-responsive\">{html_table}</div>
 
-    <script src="{JQ}"></script>
-    <script src="{DAT_JS}"></script>
+    <script src=\"{JQ}\"></script>
+    <script src=\"{DAT_JS}\"></script>
+    <script src=\"{COLVIS}\"></script>
+    <script src=\"{RESP_JS}\"></script>
     <script>
       $(function(){{
-        $('table').DataTable({{
+        var table = $('table').DataTable({{
           responsive: true,
           pageLength: 25,
-          order: [[1,'asc']],     // sort by Neighbourhood
+          order: [[1,'asc']],
+          dom: 'Bfrtip',
+          buttons: [
+            'colvis'
+          ],
+          initComplete: function() {{
+            // Add dropdown filters to each column
+            this.api().columns().every(function() {{
+              var column = this;
+              var colIdx = column.index();
+              var header = $(column.header());
+              var title = header.text();
+              if (['Neighbourhood','Pet OK','Wheelchair','Bottle','Visited'].includes(title)) {{
+                var select = $('<select><option value="">All</option></select>')
+                  .appendTo(header.empty().attr('title', 'Filter by ' + title))
+                  .on('change', function() {{
+                    var val = $.fn.dataTable.util.escapeRegex($(this).val());
+                    column.search(val ? '^'+val+'$' : '', true, false).draw();
+                  }});
+                column.data().unique().sort().each(function(d) {{
+                  if (d && d !== '—') select.append('<option value="'+d+'">'+d+'</option>');
+                }});
+              }} else {{
+                header.attr('title', title);
+              }}
+            }});
+          }}
+        }});
+        // Color coding for features
+        table.rows().every(function() {{
+          var row = this.node();
+          $(row).addClass('clickable-row');
+          $(row).find('td').each(function(i) {{
+            var col = table.column(i).header().textContent;
+            var val = $(this).text().trim().toLowerCase();
+            if(['pet ok','wheelchair','bottle'].includes(col.toLowerCase())) {{
+              if(val === 'yes') $(this).addClass('feature-yes');
+              else if(val === 'no') $(this).addClass('feature-no');
+              else $(this).addClass('feature-unknown');
+            }}
+          }});
+        }});
+        // Tooltips for headers
+        $('th').tooltip({{container:'body', placement:'top'}});
+        // Clickable rows
+        $('tbody').on('click', 'tr.clickable-row', function() {{
+          var name = $(this).find('td:first').text();
+          alert('Fountain: ' + name);
         }});
       }});
     </script>

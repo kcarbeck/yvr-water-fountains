@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>YVR Water Fountains Map</title>
+  <link rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    body { margin:0; font-family: system-ui, sans-serif; }
+    nav { padding:0.6rem 1rem; background:#008cba; color:#fff; }
+    nav a { color:#fff; text-decoration:none; margin-left:1rem; }
+    #map { height: 92vh; }
+  </style>
+</head>
+<body>
+  <nav>
+    YVR Water Fountains
+    <a href="table.html">Table view</a>
+  </nav>
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    const map = L.map('map').setView([49.27, -123.12], 12);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap'
+    }).addTo(map);
+
+    fetch('data/fountains_processed.geojson')
+      .then(r => r.json())
+      .then(gj => {
+        L.geoJSON(gj, {
+          onEachFeature: (f, layer) => {
+            const p = f.properties;
+            layer.bindPopup(`<strong>${p.name||'Unnamed'}</strong><br>${p.address}<br>${p.geo_local_area}`);
+          },
+          pointToLayer: (_, latlng) => L.circleMarker(latlng, {radius:6, color:'#008cba'})
+        }).addTo(map);
+      });
+  </script>
+</body>
+</html>

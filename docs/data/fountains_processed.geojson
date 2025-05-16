@@ -1,0 +1,4453 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.184745,
+          49.261086
+        ]
+      },
+      "properties": {
+        "id": "DFPB0004",
+        "name": "Fountain location:\nAlmond Park",
+        "address": "S-side of playground",
+        "geo_local_area": "Kitsilano"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.157976,
+          49.248784
+        ]
+      },
+      "properties": {
+        "id": "DFPB0008",
+        "name": "Fountain location:\nArbutus Village Park",
+        "address": "S-side of playground",
+        "geo_local_area": "Arbutus-Ridge"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.050056,
+          49.255297
+        ]
+      },
+      "properties": {
+        "id": "DFPB0011",
+        "name": "Fountain location:\nBeaconsfield Park",
+        "address": "adjacent to field house",
+        "geo_local_area": "Renfrew-Collingwood"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.172499,
+          49.257032
+        ]
+      },
+      "properties": {
+        "id": "DFPB0014",
+        "name": "Fountain location:\nCarnarvon Park",
+        "address": "S-side of wading pool",
+        "geo_local_area": "Arbutus-Ridge"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.050122,
+          49.270805
+        ]
+      },
+      "properties": {
+        "id": "DFPB0021",
+        "name": "Fountain location:\nClinton Park - East side of wading pool",
+        "address": "E-side of wading pool",
+        "geo_local_area": "Hastings-Sunrise"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.12537,
+          49.289977
+        ]
+      },
+      "properties": {
+        "id": "DFPB0023",
+        "name": "Fountain location:\nCoal Harbour Park",
+        "address": "near playground",
+        "geo_local_area": "Downtown"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.123274,
+          49.2725
+        ]
+      },
+      "properties": {
+        "id": "DFPB0033",
+        "name": "Fountain location:\nDavid Lam Park - South west of playgrounds",
+        "address": "E area, near playground",
+        "geo_local_area": "Downtown"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.122487,
+          49.252042
+        ]
+      },
+      "properties": {
+        "id": "DFPB0036",
+        "name": "Fountain location:\nDouglas Park (community centre)",
+        "address": "exterior of building",
+        "geo_local_area": "South Cambie"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.163386,
+          49.233589
+        ]
+      },
+      "properties": {
+        "id": "DFPB0038",
+        "name": "Fountain location:\nElm Park",
+        "address": "N-side of field house",
+        "geo_local_area": "Kerrisdale"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.123781,
+          49.277097
+        ]
+      },
+      "properties": {
+        "id": "DFPB0039",
+        "name": "Fountain location:\nEmery Barnes Park - Dog off-leash area",
+        "address": null,
+        "geo_local_area": "Downtown"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.149322,
+          49.207235
+        ]
+      },
+      "properties": {
+        "id": "DFPB0046",
+        "name": "Fountain location:\nFraser River Park - park entrance by Angus Dr",
+        "address": "near park entrance by Angus Dr",
+        "geo_local_area": "Kerrisdale"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.093587,
+          49.212522
+        ]
+      },
+      "properties": {
+        "id": "DFPB0053",
+        "name": "Fountain location:\nGeorge Park",
+        "address": "southeast corner of park",
+        "geo_local_area": "Sunset"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.070795,
+          49.273678
+        ]
+      },
+      "properties": {
+        "id": "DFPB0055",
+        "name": "Fountain location:\nGrandview Park - West of Stage",
+        "address": "Close to the Stage",
+        "geo_local_area": "Grandview-Woodland"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.084979,
+          49.241082
+        ]
+      },
+      "properties": {
+        "id": "DFPB0058",
+        "name": "Fountain location:\nGrays Park",
+        "address": "front of wading pool",
+        "geo_local_area": "Kensington-Cedar Cottage"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.038206,
+          49.280485
+        ]
+      },
+      "properties": {
+        "id": "DFPB0063",
+        "name": "Fountain location:\nHastings Community Park - South of wading pool",
+        "address": "besides wading pool",
+        "geo_local_area": "Hastings-Sunrise"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.106954,
+          49.245768
+        ]
+      },
+      "properties": {
+        "id": "DFPB0072",
+        "name": "Fountain location:\nHillcrest Park - East side",
+        "address": null,
+        "geo_local_area": "Riley Park"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.045137,
+          49.26406
+        ]
+      },
+      "properties": {
+        "id": "DFPB0076",
+        "name": "Fountain location:\nKaslo Park",
+        "address": "SE corner of tennis courts",
+        "geo_local_area": "Hastings-Sunrise"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.157185,
+          49.233436
+        ]
+      },
+      "properties": {
+        "id": "DFPB0078",
+        "name": "Fountain location:\nKerrisdale Centennial Park",
+        "address": "2nd N-side entrance",
+        "geo_local_area": "Kerrisdale"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.151728,
+          49.276845
+        ]
+      },
+      "properties": {
+        "id": "DFPB0084",
+        "name": "Fountain location:\nKitsilano Beach Park - North of parking lot",
+        "address": "besides parking lot",
+        "geo_local_area": "Kitsilano"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.153805,
+          49.274483
+        ]
+      },
+      "properties": {
+        "id": "DFPB0082",
+        "name": "Fountain location:\nKitsilano Beach Park - washroom wall",
+        "address": "opposite washrooms",
+        "geo_local_area": "Kitsilano"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.116321,
+          49.22318
+        ]
+      },
+      "properties": {
+        "id": "DFPB0086",
+        "name": "Fountain location:\nLangara Golf Course - cambie pathway",
+        "address": "cambie pathway",
+        "geo_local_area": "Oakridge"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.111706,
+          49.218272
+        ]
+      },
+      "properties": {
+        "id": "DFPB0085",
+        "name": "Fountain location:\nLangara Golf Course - servive yard",
+        "address": "servive yard",
+        "geo_local_area": "Marpole"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.089427,
+          49.278948
+        ]
+      },
+      "properties": {
+        "id": "DFPB0091",
+        "name": "Fountain location:\nMaclean Park",
+        "address": null,
+        "geo_local_area": "Strathcona"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.106994,
+          49.261681
+        ]
+      },
+      "properties": {
+        "id": "DFPB0092",
+        "name": "Fountain location:\nMajor Matthews Park",
+        "address": null,
+        "geo_local_area": "Mount Pleasant"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.159687,
+          49.223285
+        ]
+      },
+      "properties": {
+        "id": "DFPB0094",
+        "name": "Fountain location:\nMaple Grove Park - East of pool",
+        "address": "E-side of pool",
+        "geo_local_area": "Kerrisdale"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.170881,
+          49.220483
+        ]
+      },
+      "properties": {
+        "id": "DFPB0097",
+        "name": "Fountain location:\nMcCleery Golf Course - 5th tee",
+        "address": "5th tee",
+        "geo_local_area": "Kerrisdale"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.029092,
+          49.236529
+        ]
+      },
+      "properties": {
+        "id": "DFPB0101",
+        "name": "Fountain location:\nMelbourne Park",
+        "address": "front of tennis courts",
+        "geo_local_area": "Renfrew-Collingwood"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.084757,
+          49.231628
+        ]
+      },
+      "properties": {
+        "id": "DFPB0102",
+        "name": "Fountain location:\nMemorial South Park - West of Softball Diamond",
+        "address": null,
+        "geo_local_area": "Sunset"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.187282,
+          49.243463
+        ]
+      },
+      "properties": {
+        "id": "DFPB0104",
+        "name": "Fountain location:\nMemorial West Park",
+        "address": "S of tennis courts",
+        "geo_local_area": "Dunbar-Southlands"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.106431,
+          49.256971
+        ]
+      },
+      "properties": {
+        "id": "DFPB0109",
+        "name": "Fountain location:\nMount Pleasant Park",
+        "address": "S-side of wading pool",
+        "geo_local_area": "Mount Pleasant"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.038675,
+          49.289537
+        ]
+      },
+      "properties": {
+        "id": "DFPB0114",
+        "name": "Fountain location:\nNew Brighton Park - South west of playground",
+        "address": "SW of playground",
+        "geo_local_area": "Hastings-Sunrise"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.035515,
+          49.289696
+        ]
+      },
+      "properties": {
+        "id": "DFPB0112",
+        "name": "Fountain location:\nNew Brighton Park - West of tennis courts",
+        "address": "W-side of tennis courts",
+        "geo_local_area": "Hastings-Sunrise"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.109414,
+          49.272342
+        ]
+      },
+      "properties": {
+        "id": "DFPB0190",
+        "name": "Fountain location:\nPark Site On South East False Creek",
+        "address": "NE side of the park",
+        "geo_local_area": "Mount Pleasant"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.111527,
+          49.239272
+        ]
+      },
+      "properties": {
+        "id": "DFPB0123",
+        "name": "Fountain location:\nQueen Elizabeth Park - Pitch and Putt Course",
+        "address": "Pitch and Putt Course",
+        "geo_local_area": "Riley Park"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.148813,
+          49.244725
+        ]
+      },
+      "properties": {
+        "id": "DFPB0126",
+        "name": "Fountain location:\nQuilchena Park",
+        "address": "W-side of fieldhouse",
+        "geo_local_area": "Arbutus-Ridge"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.042071,
+          49.252216
+        ]
+      },
+      "properties": {
+        "id": "DFPB0127",
+        "name": "Fountain location:\nRenfrew Community Park",
+        "address": "adjacent to wading pool",
+        "geo_local_area": "Renfrew-Collingwood"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.051802,
+          49.20586
+        ]
+      },
+      "properties": {
+        "id": "DFPB0128",
+        "name": "Fountain location:\nRiverfront Park - East of washrooms",
+        "address": "E-side of washrooms",
+        "geo_local_area": "Killarney"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.082419,
+          49.216916
+        ]
+      },
+      "properties": {
+        "id": "DFPB0133",
+        "name": "Fountain location:\nRoss Park",
+        "address": "in front of wading pool",
+        "geo_local_area": "Sunset"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.033064,
+          49.271226
+        ]
+      },
+      "properties": {
+        "id": "DFPB0135",
+        "name": "Fountain location:\nRupert Park",
+        "address": "E-side of playground",
+        "geo_local_area": "Hastings-Sunrise"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.105739,
+          49.272183
+        ]
+      },
+      "properties": {
+        "id": "DFPB0189",
+        "name": "Fountain location:\nSeawall - Creekside",
+        "address": "Seawall - in front of Creekside Community Recreation Centre",
+        "geo_local_area": "Mount Pleasant"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.141477,
+          49.219703
+        ]
+      },
+      "properties": {
+        "id": "DFPB0191",
+        "name": "Fountain location:\nShannon Mews Park",
+        "address": null,
+        "geo_local_area": "Kerrisdale"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.049736,
+          49.25836
+        ]
+      },
+      "properties": {
+        "id": "DFPB0138",
+        "name": "Fountain location:\nSlocan Greenway",
+        "address": "12th and slocan",
+        "geo_local_area": "Renfrew-Collingwood"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.048358,
+          49.244399
+        ]
+      },
+      "properties": {
+        "id": "DFPB0139",
+        "name": "Fountain location:\nSlocan Park",
+        "address": "near playground",
+        "geo_local_area": "Renfrew-Collingwood"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.222382,
+          49.27759
+        ]
+      },
+      "properties": {
+        "id": "DFPB0140",
+        "name": "Fountain location:\nSpanish Banks Beach Park",
+        "address": "on north wall of washrooms",
+        "geo_local_area": "West Point Grey"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.148332,
+          49.310653
+        ]
+      },
+      "properties": {
+        "id": "DFPB0162",
+        "name": "Fountain location:\nStanley Park - Admin building",
+        "address": "Park Board Office",
+        "geo_local_area": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.13068,
+          49.303107
+        ]
+      },
+      "properties": {
+        "id": "DFPB0142",
+        "name": "Fountain location:\nStanley Park - Lumbermen's Arch",
+        "address": "Lumbermen's Arch",
+        "geo_local_area": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.134145,
+          49.299131
+        ]
+      },
+      "properties": {
+        "id": "DFPB0186",
+        "name": "Fountain location:\nStanley Park - North east of Rose and Perennial Ga",
+        "address": null,
+        "geo_local_area": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.146472,
+          49.293113
+        ]
+      },
+      "properties": {
+        "id": "DFPB0149",
+        "name": "Fountain location:\nStanley Park - Putting Green",
+        "address": "Pitch and Putt Course",
+        "geo_local_area": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.150013,
+          49.294985
+        ]
+      },
+      "properties": {
+        "id": "DFPB0151",
+        "name": "Fountain location:\nStanley Park - Second Beach",
+        "address": "Second Beach",
+        "geo_local_area": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.151041,
+          49.295574
+        ]
+      },
+      "properties": {
+        "id": "DFPB0152",
+        "name": "Fountain location:\nStanley Park - Second Beach Pool",
+        "address": "Second Beach pool deck",
+        "geo_local_area": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.148332,
+          49.310653
+        ]
+      },
+      "properties": {
+        "id": "DFPB0144",
+        "name": "Fountain location:\nStanley Park - South west of playground",
+        "address": "Rose Garden playground",
+        "geo_local_area": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.120675,
+          49.299058
+        ]
+      },
+      "properties": {
+        "id": "DFPB0150",
+        "name": "Fountain location:\nStanley Park - West of Shore to Shore sculpture",
+        "address": "Totem poles",
+        "geo_local_area": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.035654,
+          49.266999
+        ]
+      },
+      "properties": {
+        "id": "DFPB0165",
+        "name": "Fountain location:\nSunrise Park",
+        "address": "N-side of wading pool",
+        "geo_local_area": "Hastings-Sunrise"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.138005,
+          49.279002
+        ]
+      },
+      "properties": {
+        "id": "DFPB0066",
+        "name": "Fountain location:\nSunset Beach",
+        "address": "on building wall",
+        "geo_local_area": "West End"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.129424,
+          49.239507
+        ]
+      },
+      "properties": {
+        "id": "DFPB0175",
+        "name": "Fountain location:\nVandusen Botanical Garden",
+        "address": "near reflecting pond",
+        "geo_local_area": "Shaughnessy"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.136037,
+          49.282093
+        ]
+      },
+      "properties": {
+        "id": "DFPB0181",
+        "name": "Fountain location:\nWest End minipark - JERVIS ST @ BURNABY ST",
+        "address": "north end",
+        "geo_local_area": "West End"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.205147,
+          49.266959
+        ]
+      },
+      "properties": {
+        "id": "DFPB0182",
+        "name": "Fountain location:\nWest Point Grey Park - lawn bowling court",
+        "address": "In lawn bowling court",
+        "geo_local_area": "West Point Grey"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.113044,
+          49.215944
+        ]
+      },
+      "properties": {
+        "id": "DFPB0184",
+        "name": "Fountain location:\nWinona Park",
+        "address": "near playground",
+        "geo_local_area": "Marpole"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.105654,
+          49.279211
+        ]
+      },
+      "properties": {
+        "id": "DFENG0806",
+        "name": "Temporary Misting Station location: Andy Livingston Park",
+        "address": "NW corner of Andy Livingston Park",
+        "geo_local_area": "Downtown"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.138411,
+          49.262698
+        ]
+      },
+      "properties": {
+        "id": "DFENG0803",
+        "name": "Temporary Misting Station location: Granville & W 10th",
+        "address": "NE corner of Granville St & W 10th Ave",
+        "geo_local_area": "Fairview"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.129159,
+          49.281931
+        ]
+      },
+      "properties": {
+        "id": "DFENG0807",
+        "name": "Temporary Misting Station location: Nelson Park",
+        "address": "NW corner of Thurlow St & Comox St",
+        "geo_local_area": "West End"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.132493,
+          49.289447
+        ]
+      },
+      "properties": {
+        "id": "DFENG0802",
+        "name": "Temporary Misting Station location: Robson & Cardero",
+        "address": "SW corner of Robson St & Cardero St",
+        "geo_local_area": "West End"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.155629,
+          49.230778
+        ]
+      },
+      "properties": {
+        "id": "DFENG0808",
+        "name": "Temporary Misting Station location: West Blvd & W 45th",
+        "address": "SE corner of West Boulevard & W 45th Ave",
+        "geo_local_area": "Kerrisdale"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.125914,
+          49.266341
+        ]
+      },
+      "properties": {
+        "id": "DFENG0500",
+        "name": "Bottle Filling Station location: \nCharleson Park Pumping Station",
+        "address": "North side of sewage pumping station 900 Charleson",
+        "geo_local_area": "Fairview"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.041381,
+          49.257924
+        ]
+      },
+      "properties": {
+        "id": "DFENG0501",
+        "name": "Bottle Filling Station location: \nGrandview Hwy Pumping Station",
+        "address": null,
+        "geo_local_area": "Renfrew-Collingwood"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.062488,
+          49.242966
+        ]
+      },
+      "properties": {
+        "id": "DFENG0054",
+        "name": "Fountain location : E 30th Ave & Gladstone St",
+        "address": "East Side corner Gladstone at E 30th Ave",
+        "geo_local_area": "Kensington-Cedar Cottage"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.10102,
+          49.245762
+        ]
+      },
+      "properties": {
+        "id": "DFENG0001",
+        "name": "Fountain location:\n28th & Main",
+        "address": "Northeast corner of 28th & Main",
+        "geo_local_area": "Riley Park"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.127384,
+          49.237587
+        ]
+      },
+      "properties": {
+        "id": "DFENG0012",
+        "name": "Fountain location:\n37th & Oak",
+        "address": "Southeast corner of 37th & Oak",
+        "geo_local_area": "South Cambie"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.105647,
+          49.237446
+        ]
+      },
+      "properties": {
+        "id": "DFENG0013",
+        "name": "Fountain location:\n37th & Ontario",
+        "address": "Northwest corner of 37th & Ontario",
+        "geo_local_area": "Riley Park"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.097283,
+          49.237195
+        ]
+      },
+      "properties": {
+        "id": "DFENG0018",
+        "name": "Fountain location:\n37th & Prince Edward",
+        "address": "Northwest corner of 37th & Prince Edward",
+        "geo_local_area": "Riley Park"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.055044,
+          49.218755
+        ]
+      },
+      "properties": {
+        "id": "DFENG0022",
+        "name": "Fountain location:\nAshburn & Elliot",
+        "address": "Northwest corner of Ashburn & Elliot",
+        "geo_local_area": "Victoria-Fraserview"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.139554,
+          49.28452
+        ]
+      },
+      "properties": {
+        "id": "DFENG0005",
+        "name": "Fountain location:\nCardero & Burnaby",
+        "address": "In the mini park at Cardero & Burnaby",
+        "geo_local_area": "West End"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.138549,
+          49.289225
+        ]
+      },
+      "properties": {
+        "id": "DFENG0033",
+        "name": "Fountain location:\nDenman & Nelson",
+        "address": "Southwest corner of Denman & Nelson",
+        "geo_local_area": "West End"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.084037,
+          49.236527
+        ]
+      },
+      "properties": {
+        "id": "DFENG0017",
+        "name": "Fountain location:\nElgin & 37th",
+        "address": "Northwest corner of Elgin & 37th",
+        "geo_local_area": "Kensington-Cedar Cottage"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.139586,
+          49.217312
+        ]
+      },
+      "properties": {
+        "id": "DFENG0029",
+        "name": "Fountain location:\nGranville & 59th",
+        "address": "Northeast corner of Granville & 59th",
+        "geo_local_area": "Marpole"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.097231,
+          49.281386
+        ]
+      },
+      "properties": {
+        "id": "DFENG0020",
+        "name": "Fountain location:\nHastings & Gore",
+        "address": "Northeast corner of Hastings & Gore",
+        "geo_local_area": "Strathcona"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.13827,
+          49.293457
+        ]
+      },
+      "properties": {
+        "id": "DFENG0010",
+        "name": "Fountain location:\nRobson & Chilco",
+        "address": "In mini park at Robson & Chilco",
+        "geo_local_area": "West End"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.087389,
+          49.277572
+        ]
+      },
+      "properties": {
+        "id": "DFENG0030",
+        "name": "Fountain location:\nUnion & Hawks",
+        "address": "In mini park at Union & Hawks",
+        "geo_local_area": "Strathcona"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.098912,
+          49.261984
+        ]
+      },
+      "properties": {
+        "id": "DFENG0050",
+        "name": "Fountain location: 10th & Kingsway",
+        "address": "Northwest corner of 10th & Kingsway",
+        "geo_local_area": "Mount Pleasant"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.117008,
+          49.238962
+        ]
+      },
+      "properties": {
+        "id": "DFENG0047",
+        "name": "Fountain location: 4963 Cambie St",
+        "address": "Northwest corner of Cambie and W 35th",
+        "geo_local_area": "South Cambie"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.133952,
+          49.281882
+        ]
+      },
+      "properties": {
+        "id": "DFENG0039",
+        "name": "Fountain location: Davie & Bute (Jim Deva Plaza)",
+        "address": "1200 Davie Street",
+        "geo_local_area": "West End"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.127987,
+          49.229344
+        ]
+      },
+      "properties": {
+        "id": "DFENG0037",
+        "name": "Fountain location: Oak & 46th",
+        "address": "Northeast corner of Oak & 46th",
+        "geo_local_area": "Oakridge"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.179475,
+          49.271936
+        ]
+      },
+      "properties": {
+        "id": "DFENG0040",
+        "name": "Fountain location: Point Grey Road & Waterloo",
+        "address": "1600 Waterloo St",
+        "geo_local_area": "Kitsilano"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.031131,
+          49.205331
+        ]
+      },
+      "properties": {
+        "id": "DFENG0041",
+        "name": "Fountain location: River District Crossing & E Kent Ave North",
+        "address": "Northeast corner of River District Crossing & E Kent Ave North",
+        "geo_local_area": "Killarney"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.167863,
+          49.271674
+        ]
+      },
+      "properties": {
+        "id": "DFENG0036",
+        "name": "Fountain location:Pt.Grey & MacDonald",
+        "address": "Northwest corner of Pt. Grey & MacDonald",
+        "geo_local_area": "Kitsilano"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.089225,
+          49.262628
+        ]
+      },
+      "properties": {
+        "id": "DFENG0035",
+        "name": "Fountian Location: Fraser & Broadway",
+        "address": "Northwest corner of Fraser & Broadway",
+        "geo_local_area": "Mount Pleasant"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.152452,
+          49.25823
+        ]
+      },
+      "properties": {
+        "id": "DFENG0702",
+        "name": "Temporary Fountain location: 2067 W 15th Ave",
+        "address": "NE corner of 2000 W 15th Ave at Arbutus Greenway",
+        "geo_local_area": "Kitsilano"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.118113,
+          49.282333
+        ]
+      },
+      "properties": {
+        "id": "DFENG0708",
+        "name": "Temporary Fountain location: London Drugs",
+        "address": "733 Granville St",
+        "geo_local_area": "Downtown"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.104022,
+          49.281473
+        ]
+      },
+      "properties": {
+        "id": "DFENG0605",
+        "name": "Temporary Handwashing Station location: 15 E Hastings",
+        "address": "15 E Hastings St",
+        "geo_local_area": "Downtown"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.095427,
+          49.282337
+        ]
+      },
+      "properties": {
+        "id": "DFENG0604",
+        "name": "Temporary Handwashing Station location: Dunlevy & E Cordova",
+        "address": "255 Dunlevy Av",
+        "geo_local_area": "Strathcona"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.102144,
+          49.281547
+        ]
+      },
+      "properties": {
+        "id": "DFENG0602",
+        "name": "Temporary Handwashing Station location: E Hastings & Columbia",
+        "address": "101 E Hastings St",
+        "geo_local_area": "Downtown"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.123678,
+          49.277664
+        ]
+      },
+      "properties": {
+        "id": "DFENG0606",
+        "name": "Temporary Handwashing Station location: The Gathering Place",
+        "address": "609 Helmcken St",
+        "geo_local_area": "Downtown"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.024125,
+          49.275964
+        ]
+      },
+      "properties": {
+        "id": "DFPB0002",
+        "name": "Fountain location:\nAdanac Park",
+        "address": "SW side of Field house",
+        "geo_local_area": "Hastings-Sunrise"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.106179,
+          49.278917
+        ]
+      },
+      "properties": {
+        "id": "DFPB0005",
+        "name": "Fountain location:\nAndy Livingstone Park - North of basketball court",
+        "address": "by amphitheatre steps near bas",
+        "geo_local_area": "Downtown"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.120924,
+          49.286025
+        ]
+      },
+      "properties": {
+        "id": "DFPB0009",
+        "name": "Fountain location:\nArt Phillips Park (Discovery Square)",
+        "address": "NW plaza",
+        "geo_local_area": "Downtown"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.175327,
+          49.245719
+        ]
+      },
+      "properties": {
+        "id": "DFPB0010",
+        "name": "Fountain location:\nBalaclava Park",
+        "address": "W of wading pool",
+        "geo_local_area": "Dunbar-Southlands"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.050468,
+          49.290521
+        ]
+      },
+      "properties": {
+        "id": "DFPB0013",
+        "name": "Fountain location:\nBurrard View Park",
+        "address": "N-side of wading pool",
+        "geo_local_area": "Hastings-Sunrise"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.076772,
+          49.260898
+        ]
+      },
+      "properties": {
+        "id": "DFPB0192",
+        "name": "Fountain location:\nCedar Cottage Park",
+        "address": "Near Sport courts",
+        "geo_local_area": "Kensington-Cedar Cottage"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.191674,
+          49.24969
+        ]
+      },
+      "properties": {
+        "id": "DFPB0016",
+        "name": "Fountain location:\nChaldecott Park",
+        "address": "W-side of spray park",
+        "geo_local_area": "Dunbar-Southlands"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.079046,
+          49.26175
+        ]
+      },
+      "properties": {
+        "id": "DFPB0019",
+        "name": "Fountain location:\nChina Creek South Park",
+        "address": "S-side of skate park",
+        "geo_local_area": "Mount Pleasant"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.073092,
+          49.256852
+        ]
+      },
+      "properties": {
+        "id": "DFPB0020",
+        "name": "Fountain location:\nClark Park",
+        "address": null,
+        "geo_local_area": "Kensington-Cedar Cottage"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.051671,
+          49.271387
+        ]
+      },
+      "properties": {
+        "id": "DFPB0022",
+        "name": "Fountain location:\nClinton Park - North side of ball diamond",
+        "address": "N-side of B-ball diamond",
+        "geo_local_area": "Hastings-Sunrise"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.036365,
+          49.237051
+        ]
+      },
+      "properties": {
+        "id": "DFPB0024",
+        "name": "Fountain location:\nCollingwood Park",
+        "address": "in front of wading pool",
+        "geo_local_area": "Renfrew-Collingwood"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.159321,
+          49.262975
+        ]
+      },
+      "properties": {
+        "id": "DFPB0027",
+        "name": "Fountain location:\nConnaught Park - East side of fieldhouse",
+        "address": "near fieldhouse",
+        "geo_local_area": "Kitsilano"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.113042,
+          49.273915
+        ]
+      },
+      "properties": {
+        "id": "DFPB0028",
+        "name": "Fountain location:\nCoopers' Park",
+        "address": null,
+        "geo_local_area": "Downtown"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.114634,
+          49.272904
+        ]
+      },
+      "properties": {
+        "id": "DFPB0029",
+        "name": "Fountain location:\nCoopers' Park - underneath bridge, near basket",
+        "address": "underneath bridge, near basket",
+        "geo_local_area": "Downtown"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.102994,
+          49.27437
+        ]
+      },
+      "properties": {
+        "id": "DFPB0031",
+        "name": "Fountain location:\nCreekside Park",
+        "address": null,
+        "geo_local_area": "Downtown"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.132834,
+          49.205511
+        ]
+      },
+      "properties": {
+        "id": "DFPB0037",
+        "name": "Fountain location:\nEbisu Park",
+        "address": "near playground",
+        "geo_local_area": "Marpole"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.142558,
+          49.287525
+        ]
+      },
+      "properties": {
+        "id": "DFPB0041",
+        "name": "Fountain location:\nEnglish Bay Beach Park - Davie st entrance",
+        "address": "Davie st entrance",
+        "geo_local_area": "West End"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.029964,
+          49.254948
+        ]
+      },
+      "properties": {
+        "id": "DFPB0044",
+        "name": "Fountain location:\nFalaise Park",
+        "address": "in front of wading pool",
+        "geo_local_area": "Renfrew-Collingwood"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.04568,
+          49.208315
+        ]
+      },
+      "properties": {
+        "id": "DFPB0049",
+        "name": "Fountain location:\nFraserview Golf Course - 6th tee",
+        "address": "6th tee",
+        "geo_local_area": "Killarney"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.051518,
+          49.214039
+        ]
+      },
+      "properties": {
+        "id": "DFPB0048",
+        "name": "Fountain location:\nFraserview Golf Course - clubhouse building",
+        "address": "clubhouse building",
+        "geo_local_area": "Killarney"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.058413,
+          49.268495
+        ]
+      },
+      "properties": {
+        "id": "DFPB0051",
+        "name": "Fountain location:\nGarden Park",
+        "address": "N-side of field house",
+        "geo_local_area": "Grandview-Woodland"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.031396,
+          49.236603
+        ]
+      },
+      "properties": {
+        "id": "DFPB0052",
+        "name": "Fountain location:\nGaston Park",
+        "address": "near basketball court",
+        "geo_local_area": "Renfrew-Collingwood"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.129778,
+          49.271908
+        ]
+      },
+      "properties": {
+        "id": "DFPB0054",
+        "name": "Fountain location:\nGeorge Wainborn Park",
+        "address": "NE corner near seawall",
+        "geo_local_area": "Downtown"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.123165,
+          49.290645
+        ]
+      },
+      "properties": {
+        "id": "DFPB0061",
+        "name": "Fountain location:\nHarbour Green Park - foot of Jervis Mews",
+        "address": "foot of Jervis Mews",
+        "geo_local_area": "Downtown"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.040609,
+          49.280475
+        ]
+      },
+      "properties": {
+        "id": "DFPB0064",
+        "name": "Fountain location:\nHastings Community Park - SE of tennis courts",
+        "address": "besides path leading to spray",
+        "geo_local_area": "Hastings-Sunrise"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.042944,
+          49.28325
+        ]
+      },
+      "properties": {
+        "id": "DFPB0065",
+        "name": "Fountain location:\nHastings Park - Italian gardens",
+        "address": "near skate park",
+        "geo_local_area": "Hastings-Sunrise"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.034264,
+          49.282563
+        ]
+      },
+      "properties": {
+        "id": "DFPB0070",
+        "name": "Fountain location:\nHastings Park -Plateau Sport Parks / Empire Fields",
+        "address": "empire field - soccer fields",
+        "geo_local_area": "Hastings-Sunrise"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.034485,
+          49.282998
+        ]
+      },
+      "properties": {
+        "id": "DFPB0069",
+        "name": "Fountain location:\nHastings Park -Plateau Sport Parks / Empire Fields",
+        "address": "East of playgrounds",
+        "geo_local_area": "Hastings-Sunrise"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.061971,
+          49.254035
+        ]
+      },
+      "properties": {
+        "id": "DFPB0074",
+        "name": "Fountain location:\nJohn Hendry (Trout Lake) Park",
+        "address": "nearby beach",
+        "geo_local_area": "Kensington-Cedar Cottage"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.074275,
+          49.238243
+        ]
+      },
+      "properties": {
+        "id": "DFPB0077",
+        "name": "Fountain location:\nKensington Park",
+        "address": "between baseball diamond and parking lots",
+        "geo_local_area": "Kensington-Cedar Cottage"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.074564,
+          49.24743
+        ]
+      },
+      "properties": {
+        "id": "DFPB0081",
+        "name": "Fountain location:\nKingcrest Park",
+        "address": "E-side of washroom",
+        "geo_local_area": "Kensington-Cedar Cottage"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.10632,
+          49.219511
+        ]
+      },
+      "properties": {
+        "id": "DFPB0087",
+        "name": "Fountain location:\nLangara Golf Course - East of tennis courts",
+        "address": "56th and Ontario",
+        "geo_local_area": "Oakridge"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.180119,
+          49.268029
+        ]
+      },
+      "properties": {
+        "id": "DFPB0096",
+        "name": "Fountain location:\nMcBride Park",
+        "address": "S of playground",
+        "geo_local_area": "Kitsilano"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.167849,
+          49.22106
+        ]
+      },
+      "properties": {
+        "id": "DFPB0098",
+        "name": "Fountain location:\nMcCleery Golf Course - clubhouse building",
+        "address": "clubhouse building",
+        "geo_local_area": "Kerrisdale"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.169614,
+          49.220696
+        ]
+      },
+      "properties": {
+        "id": "DFPB0099",
+        "name": "Fountain location:\nMcCleery Golf Course - driving range",
+        "address": "driving range",
+        "geo_local_area": "Kerrisdale"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.086907,
+          49.231446
+        ]
+      },
+      "properties": {
+        "id": "DFPB0103",
+        "name": "Fountain location:\nMemorial South Park - West of wading pool",
+        "address": "W-side of wading pool",
+        "geo_local_area": "Sunset"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.084584,
+          49.214933
+        ]
+      },
+      "properties": {
+        "id": "DFPB0105",
+        "name": "Fountain location:\nMoberly Park - West of tennis courts",
+        "address": "in front of tennis courts",
+        "geo_local_area": "Sunset"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.074202,
+          49.273298
+        ]
+      },
+      "properties": {
+        "id": "DFPB0108",
+        "name": "Fountain location:\nMosaic Creek Park",
+        "address": "near children's play area",
+        "geo_local_area": "Grandview-Woodland"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.03665,
+          49.289374
+        ]
+      },
+      "properties": {
+        "id": "DFPB0113",
+        "name": "Fountain location:\nNew Brighton Park - South of pool",
+        "address": "S-side of pool",
+        "geo_local_area": "Hastings-Sunrise"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.094042,
+          49.283007
+        ]
+      },
+      "properties": {
+        "id": "DFPB0119",
+        "name": "Fountain location:\nOppenheimer Park",
+        "address": null,
+        "geo_local_area": "Strathcona"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.113528,
+          49.24238
+        ]
+      },
+      "properties": {
+        "id": "DFPB0125",
+        "name": "Fountain location:\nQueen Elizabeth Park - At Conservatory",
+        "address": "At Conservatory",
+        "geo_local_area": "Riley Park"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.091897,
+          49.257898
+        ]
+      },
+      "properties": {
+        "id": "DFPB0130",
+        "name": "Fountain location:\nRobson Park",
+        "address": "N-side of wading pool",
+        "geo_local_area": "Mount Pleasant"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.030612,
+          49.270254
+        ]
+      },
+      "properties": {
+        "id": "DFPB0136",
+        "name": "Fountain location:\nRupert Park - East of fieldhouse",
+        "address": "E-side of Field house",
+        "geo_local_area": "Hastings-Sunrise"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.126138,
+          49.299756
+        ]
+      },
+      "properties": {
+        "id": "DFPB0155",
+        "name": "Fountain location:\nStanley Park - Brockton Oval Fieldhouse",
+        "address": "brockton oval",
+        "geo_local_area": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.148332,
+          49.310653
+        ]
+      },
+      "properties": {
+        "id": "DFPB0158",
+        "name": "Fountain location:\nStanley Park - Brockton Point Viewpoint",
+        "address": "Brockton point - lighthouse",
+        "geo_local_area": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.148707,
+          49.293752
+        ]
+      },
+      "properties": {
+        "id": "DFPB0145",
+        "name": "Fountain location:\nStanley Park - Ceperley Washrooms",
+        "address": "Ceperley washrooms",
+        "geo_local_area": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.148332,
+          49.310653
+        ]
+      },
+      "properties": {
+        "id": "DFPB0160",
+        "name": "Fountain location:\nStanley Park - Lawn Bowling Club",
+        "address": "Lawn Bowling",
+        "geo_local_area": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.121285,
+          49.299634
+        ]
+      },
+      "properties": {
+        "id": "DFPB0154",
+        "name": "Fountain location:\nStanley Park - Legends Of The Moon Washroom",
+        "address": "Legends Of The Moon - Washroom",
+        "geo_local_area": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.142716,
+          49.312495
+        ]
+      },
+      "properties": {
+        "id": "DFPB0147",
+        "name": "Fountain location:\nStanley Park - Prospect Point Washrooms",
+        "address": "prospect point washrooms",
+        "geo_local_area": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.13379,
+          49.299606
+        ]
+      },
+      "properties": {
+        "id": "DFPB0157",
+        "name": "Fountain location:\nStanley Park - Stanley Park Pavilion",
+        "address": "pavillion outside washrooms",
+        "geo_local_area": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.146985,
+          49.292345
+        ]
+      },
+      "properties": {
+        "id": "DFPB0146",
+        "name": "Fountain location:\nStanley Park - West of Restaurant",
+        "address": "W - side of Fish House",
+        "geo_local_area": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.134514,
+          49.301668
+        ]
+      },
+      "properties": {
+        "id": "DFPB0148",
+        "name": "Fountain location:\nStanley Park - West side of Stanley Park Train",
+        "address": null,
+        "geo_local_area": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.085562,
+          49.276016
+        ]
+      },
+      "properties": {
+        "id": "DFPB0163",
+        "name": "Fountain location:\nStrathcona Park - North west of basketball court",
+        "address": "besides basketball court",
+        "geo_local_area": "Strathcona"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.096467,
+          49.222954
+        ]
+      },
+      "properties": {
+        "id": "DFPB0167",
+        "name": "Fountain location:\nSunset Park",
+        "address": "front of wading pool",
+        "geo_local_area": "Sunset"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.098575,
+          49.257462
+        ]
+      },
+      "properties": {
+        "id": "DFPB0169",
+        "name": "Fountain location:\nTea Swamp Park",
+        "address": "NE corner of park",
+        "geo_local_area": "Mount Pleasant"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.118251,
+          49.228476
+        ]
+      },
+      "properties": {
+        "id": "DFPB0171",
+        "name": "Fountain location:\nTisdall Park",
+        "address": "near North baseball diamond",
+        "geo_local_area": "Oakridge"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.050119,
+          49.260625
+        ]
+      },
+      "properties": {
+        "id": "DFPB0187",
+        "name": "Fountain location:\nVancouver Technical HS",
+        "address": "NE of the sport field",
+        "geo_local_area": "Renfrew-Collingwood"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.129924,
+          49.238721
+        ]
+      },
+      "properties": {
+        "id": "DFPB0174",
+        "name": "Fountain location:\nVandusen Botanical Garden - upper gardens",
+        "address": "upper gardens",
+        "geo_local_area": "Shaughnessy"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.066747,
+          49.271719
+        ]
+      },
+      "properties": {
+        "id": "DFPB0177",
+        "name": "Fountain location:\nVictoria Park",
+        "address": "adjacent to children's play area",
+        "geo_local_area": "Grandview-Woodland"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.110051,
+          49.281951
+        ]
+      },
+      "properties": {
+        "id": "DFPB0178",
+        "name": "Fountain location:\nVictory Square",
+        "address": "south corner of park",
+        "geo_local_area": "Downtown"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.12803,
+          49.285296
+        ]
+      },
+      "properties": {
+        "id": "DFPB0180",
+        "name": "Fountain location:\nWest End minipark",
+        "address": "Bute & Haro",
+        "geo_local_area": "West End"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.073409,
+          49.278548
+        ]
+      },
+      "properties": {
+        "id": "DFPB0185",
+        "name": "Fountain location:\nWoodland Park",
+        "address": "in front of wading pool",
+        "geo_local_area": "Grandview-Woodland"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.102033,
+          49.283301
+        ]
+      },
+      "properties": {
+        "id": "DFENG0801",
+        "name": "Temporary Misting Station location: Columbia & Powell",
+        "address": "NE corner of Columbia St & Powell St",
+        "geo_local_area": "Downtown"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.100806,
+          49.258476
+        ]
+      },
+      "properties": {
+        "id": "DFENG0809",
+        "name": "Temporary Misting Station location: Main St & 14th Ave",
+        "address": "Main st & 14th Ave",
+        "geo_local_area": "Mount Pleasant"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.098856,
+          49.273801
+        ]
+      },
+      "properties": {
+        "id": "DFENG0805",
+        "name": "Temporary Misting Station location: Thornton Park",
+        "address": "East side of Thornton Park across from Pacific Central",
+        "geo_local_area": "Strathcona"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.136177,
+          49.269566
+        ]
+      },
+      "properties": {
+        "id": "DFENG0502",
+        "name": "Bottle Filling Station location: \nGranville Island Pumping Station",
+        "address": "North side of sewage pumping station on seawall east of the granville island entrance",
+        "geo_local_area": "Fairview"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.106415,
+          49.219505
+        ]
+      },
+      "properties": {
+        "id": "DFENG0004",
+        "name": "Fountain location:\n56th & Ontario",
+        "address": "Northwest corner of 56th & Ontario",
+        "geo_local_area": "Oakridge"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.166647,
+          49.264235
+        ]
+      },
+      "properties": {
+        "id": "DFENG0032",
+        "name": "Fountain location:\nBroadway & Stephens",
+        "address": "Northwest corner of Broadway & Stephens",
+        "geo_local_area": "Kitsilano"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.065619,
+          49.262066
+        ]
+      },
+      "properties": {
+        "id": "DFENG0016",
+        "name": "Fountain location:\nBroadway & Victoria",
+        "address": "Southeast corner of Broadway & Victoria",
+        "geo_local_area": "Kensington-Cedar Cottage"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.069391,
+          49.267819
+        ]
+      },
+      "properties": {
+        "id": "DFENG0021",
+        "name": "Fountain location:\nCommercial & 3rd",
+        "address": "Northeast corner of Commercial & 3rd",
+        "geo_local_area": "Grandview-Woodland"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.136516,
+          49.286738
+        ]
+      },
+      "properties": {
+        "id": "DFENG0025",
+        "name": "Fountain location:\nComox & Cardero",
+        "address": "Northeast corner of Comox & Cardero",
+        "geo_local_area": "West End"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.142647,
+          49.290674
+        ]
+      },
+      "properties": {
+        "id": "DFENG0026",
+        "name": "Fountain location:\nComox & Chilco",
+        "address": "In mini park at Comox & Chilco",
+        "geo_local_area": "West End"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.13969,
+          49.288786
+        ]
+      },
+      "properties": {
+        "id": "DFENG0027",
+        "name": "Fountain location:\nComox & Denman",
+        "address": "Northwest corner of Comox & Denman",
+        "geo_local_area": "West End"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.119937,
+          49.281542
+        ]
+      },
+      "properties": {
+        "id": "DFENG0019",
+        "name": "Fountain location:\nGranville & Robson",
+        "address": "Northwest corner of Granville & Robson",
+        "geo_local_area": "Downtown"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.100784,
+          49.261059
+        ]
+      },
+      "properties": {
+        "id": "DFENG0023",
+        "name": "Fountain location:\nMain & 11th",
+        "address": "Southeast corner of Main & 11th",
+        "geo_local_area": "Mount Pleasant"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.133337,
+          49.28571
+        ]
+      },
+      "properties": {
+        "id": "DFENG0007",
+        "name": "Fountain location:\nNelson & Broughton",
+        "address": "In mini park at Nelson & Broughton",
+        "geo_local_area": "West End"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.122156,
+          49.262387
+        ]
+      },
+      "properties": {
+        "id": "DFENG0051",
+        "name": "Fountain location: 10th & Willow",
+        "address": "Northwest corner of 10th & Willow",
+        "geo_local_area": "Fairview"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.09634,
+          49.261036
+        ]
+      },
+      "properties": {
+        "id": "DFENG0049",
+        "name": "Fountain location: 11th & Prince Edward",
+        "address": "Northeast corner of 11th & Prince Edward",
+        "geo_local_area": "Mount Pleasant"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.152238,
+          49.262911
+        ]
+      },
+      "properties": {
+        "id": "DFENG0045",
+        "name": "Fountain location: 2001 W 10th Avenue",
+        "address": "North side of 10th Avenue",
+        "geo_local_area": "Kitsilano"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.11323,
+          49.217003
+        ]
+      },
+      "properties": {
+        "id": "DFENG0048",
+        "name": "Fountain location: 375 W 59th Avenue",
+        "address": "Northeast corner of Alberta St and W 59th Ave",
+        "geo_local_area": "Marpole"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.042394,
+          49.20577
+        ]
+      },
+      "properties": {
+        "id": "DFENG0052",
+        "name": "Fountain location: 8683 Kerr",
+        "address": "Southwest side of Kerr",
+        "geo_local_area": "Killarney"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.114544,
+          49.262294
+        ]
+      },
+      "properties": {
+        "id": "DFENG0031",
+        "name": "Fountain location: Cambie & 10th",
+        "address": "Northeast corner of Cambie & 10th",
+        "geo_local_area": "Mount Pleasant"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.089387,
+          49.281264
+        ]
+      },
+      "properties": {
+        "id": "DFENG0711",
+        "name": "Temporary Fountain location: E Hastings & Heatley",
+        "address": "NE corner of E Hastings St and Heatley Ave",
+        "geo_local_area": "Strathcona"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.034049,
+          49.233332
+        ]
+      },
+      "properties": {
+        "id": "DFENG0710",
+        "name": "Temporary Fountain location: Wessex & Kingsway",
+        "address": "3357 Kingsway",
+        "geo_local_area": "Renfrew-Collingwood"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.097629,
+          49.284006
+        ]
+      },
+      "properties": {
+        "id": "DFENG0603",
+        "name": "Temporary Handwashing Station location: Evelyne Saller Centre",
+        "address": "320 Alexander  St",
+        "geo_local_area": "Strathcona"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.091297,
+          49.281446
+        ]
+      },
+      "properties": {
+        "id": "DFENG0601",
+        "name": "Temporary Handwashing Station location: Union Gospel Mission",
+        "address": "601 E Hastings St",
+        "geo_local_area": "Strathcona"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.027239,
+          49.235052
+        ]
+      },
+      "properties": {
+        "id": "DFPB0001",
+        "name": "Fountain location:\nAberdeen Park",
+        "address": "plaza",
+        "geo_local_area": "Renfrew-Collingwood"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.142377,
+          49.28566
+        ]
+      },
+      "properties": {
+        "id": "DFPB0003",
+        "name": "Fountain location:\nAlexandra Park",
+        "address": "west plaza gateway",
+        "geo_local_area": "West End"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.10356,
+          49.278057
+        ]
+      },
+      "properties": {
+        "id": "DFPB0006",
+        "name": "Fountain location:\nAndy Livingstone Park - South of soccer fields",
+        "address": "north side of fieldhouse",
+        "geo_local_area": "Downtown"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.155303,
+          49.262234
+        ]
+      },
+      "properties": {
+        "id": "DFPB0007",
+        "name": "Fountain location:\nArbutus Greenway Park",
+        "address": "S-side of playground",
+        "geo_local_area": "Kitsilano"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.056092,
+          49.215626
+        ]
+      },
+      "properties": {
+        "id": "DFPB0012",
+        "name": "Fountain location:\nBobolink Park",
+        "address": "in front of wading pool",
+        "geo_local_area": "Victoria-Fraserview"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.066211,
+          49.247555
+        ]
+      },
+      "properties": {
+        "id": "DFPB0132",
+        "name": "Fountain location:\nBrewers Park",
+        "address": "S-side of wading pool",
+        "geo_local_area": "Kensington-Cedar Cottage"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.101806,
+          49.28476
+        ]
+      },
+      "properties": {
+        "id": "DFPB0030",
+        "name": "Fountain location:\nCRAB Park at Portside",
+        "address": null,
+        "geo_local_area": "Downtown"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.125886,
+          49.268118
+        ]
+      },
+      "properties": {
+        "id": "DFPB0017",
+        "name": "Fountain location:\nCharleson Park",
+        "address": "N of school off of seawall",
+        "geo_local_area": "Fairview"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.083119,
+          49.264478
+        ]
+      },
+      "properties": {
+        "id": "DFPB0018",
+        "name": "Fountain location:\nChina Creek North Park",
+        "address": "S central side along jogging c",
+        "geo_local_area": "Mount Pleasant"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.11299,
+          49.23193
+        ]
+      },
+      "properties": {
+        "id": "DFPB0025",
+        "name": "Fountain location:\nColumbia Park",
+        "address": "in front of wading pool",
+        "geo_local_area": "Oakridge"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.161415,
+          49.261873
+        ]
+      },
+      "properties": {
+        "id": "DFPB0026",
+        "name": "Fountain location:\nConnaught Park - North of playground",
+        "address": null,
+        "geo_local_area": "Kitsilano"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.125705,
+          49.271738
+        ]
+      },
+      "properties": {
+        "id": "DFPB0032",
+        "name": "Fountain location:\nDavid Lam Park - South west of basketball courts",
+        "address": "near playground and tennis court",
+        "geo_local_area": "Downtown"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.135986,
+          49.295091
+        ]
+      },
+      "properties": {
+        "id": "DFPB0034",
+        "name": "Fountain location:\nDevonian Harbour Park",
+        "address": "near Stanley Park entrance",
+        "geo_local_area": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.122302,
+          49.253195
+        ]
+      },
+      "properties": {
+        "id": "DFPB0035",
+        "name": "Fountain location:\nDouglas Park - Right side of wading pool",
+        "address": "in front of wading pool",
+        "geo_local_area": "South Cambie"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.124267,
+          49.276642
+        ]
+      },
+      "properties": {
+        "id": "DFPB0040",
+        "name": "Fountain location:\nEmery Barnes Park - South west of playground",
+        "address": null,
+        "geo_local_area": "Downtown"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.14302,
+          49.286133
+        ]
+      },
+      "properties": {
+        "id": "DFPB0042",
+        "name": "Fountain location:\nEnglish Bay Beach Park - West of bath-house",
+        "address": "opposite entrance to bathhouse",
+        "geo_local_area": "West End"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.13792,
+          49.279007
+        ]
+      },
+      "properties": {
+        "id": "DFPB0043",
+        "name": "Fountain location:\nEnglish Bay Beach Park - concessions",
+        "address": "concessions",
+        "geo_local_area": "West End"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.150793,
+          49.206525
+        ]
+      },
+      "properties": {
+        "id": "DFPB0045",
+        "name": "Fountain location:\nFraser River Park - South west",
+        "address": null,
+        "geo_local_area": "Kerrisdale"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.042268,
+          49.211401
+        ]
+      },
+      "properties": {
+        "id": "DFPB0047",
+        "name": "Fountain location:\nFraserview Golf Course - West of kerr st.",
+        "address": "West of kerr st.",
+        "geo_local_area": "Killarney"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.05138,
+          49.212497
+        ]
+      },
+      "properties": {
+        "id": "DFPB0050",
+        "name": "Fountain location:\nFraserview Golf Course - driving range",
+        "address": "driving range",
+        "geo_local_area": "Killarney"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.069852,
+          49.273848
+        ]
+      },
+      "properties": {
+        "id": "DFPB0056",
+        "name": "Fountain location:\nGrandview Park - South of playground",
+        "address": "By the Playground",
+        "geo_local_area": "Grandview-Woodland"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.137741,
+          49.267233
+        ]
+      },
+      "properties": {
+        "id": "DFPB0057",
+        "name": "Fountain location:\nGranville Loop Park",
+        "address": null,
+        "geo_local_area": "Fairview"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.09556,
+          49.264326
+        ]
+      },
+      "properties": {
+        "id": "DFPB0059",
+        "name": "Fountain location:\nGuelph Park",
+        "address": "w-side of tennis courts",
+        "geo_local_area": "Mount Pleasant"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.121679,
+          49.290107
+        ]
+      },
+      "properties": {
+        "id": "DFPB0062",
+        "name": "Fountain location:\nHarbour Green Park - In front of washrooms",
+        "address": "near spray pool",
+        "geo_local_area": "Downtown"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.123255,
+          49.291334
+        ]
+      },
+      "properties": {
+        "id": "DFPB0060",
+        "name": "Fountain location:\nHarbour Green Park - Viewpoint",
+        "address": "west, by seawall",
+        "geo_local_area": "Downtown"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.034248,
+          49.282669
+        ]
+      },
+      "properties": {
+        "id": "DFPB0066",
+        "name": "Fountain location:\nHastings Park -Plateau Sport Parks / Empire Fields",
+        "address": "field house at empire field",
+        "geo_local_area": "Hastings-Sunrise"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.034264,
+          49.282563
+        ]
+      },
+      "properties": {
+        "id": "DFPB0068",
+        "name": "Fountain location:\nHastings Park -Plateau Sport Parks / Empire Fields",
+        "address": "East of basketball courts",
+        "geo_local_area": "Hastings-Sunrise"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.033375,
+          49.283814
+        ]
+      },
+      "properties": {
+        "id": "DFPB0067",
+        "name": "Fountain location:\nHastings Park -Plateau Sport Parks / Empire Fields",
+        "address": "north of empire field",
+        "geo_local_area": "Hastings-Sunrise"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.106969,
+          49.245663
+        ]
+      },
+      "properties": {
+        "id": "DFPB0071",
+        "name": "Fountain location:\nHillcrest Park - North of playground",
+        "address": null,
+        "geo_local_area": "Riley Park"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.191722,
+          49.272014
+        ]
+      },
+      "properties": {
+        "id": "DFPB0073",
+        "name": "Fountain location:\nJericho Beach Park",
+        "address": null,
+        "geo_local_area": "West Point Grey"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.107499,
+          49.26427
+        ]
+      },
+      "properties": {
+        "id": "DFPB0075",
+        "name": "Fountain location:\nJonathan Rogers Park",
+        "address": "E-side of wading pool",
+        "geo_local_area": "Mount Pleasant"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.045328,
+          49.2293
+        ]
+      },
+      "properties": {
+        "id": "DFPB0080",
+        "name": "Fountain location:\nKillarney Park - E 45th Ave. @ Killarney St.",
+        "address": "north plaza",
+        "geo_local_area": "Killarney"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.041867,
+          49.227164
+        ]
+      },
+      "properties": {
+        "id": "DFPB0079",
+        "name": "Fountain location:\nKillarney Park - East of wading pool",
+        "address": "in front of wading pool",
+        "geo_local_area": "Killarney"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.153187,
+          49.274787
+        ]
+      },
+      "properties": {
+        "id": "DFPB0083",
+        "name": "Fountain location:\nKitsilano Beach Park - South of playground",
+        "address": "besides playground",
+        "geo_local_area": "Kitsilano"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.112528,
+          49.22389
+        ]
+      },
+      "properties": {
+        "id": "DFPB0088",
+        "name": "Fountain location:\nLangara Golf Course - clubhouse building",
+        "address": "clubhouse building",
+        "geo_local_area": "Oakridge"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.20715,
+          49.275075
+        ]
+      },
+      "properties": {
+        "id": "DFPB0089",
+        "name": "Fountain location:\nLocarno Beach Park",
+        "address": "near concessions",
+        "geo_local_area": "West Point Grey"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.098496,
+          49.230075
+        ]
+      },
+      "properties": {
+        "id": "DFPB0090",
+        "name": "Fountain location:\nMacDonald Park",
+        "address": "near NW corner of tennis court",
+        "geo_local_area": "Sunset"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.160816,
+          49.223612
+        ]
+      },
+      "properties": {
+        "id": "DFPB0093",
+        "name": "Fountain location:\nMaple Grove Park - South of baseball diamond",
+        "address": "S-side of baseball diamond",
+        "geo_local_area": "Kerrisdale"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.138943,
+          49.205729
+        ]
+      },
+      "properties": {
+        "id": "DFPB0095",
+        "name": "Fountain location:\nMarpole Park",
+        "address": "west entrance to playground",
+        "geo_local_area": "Marpole"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.170725,
+          49.220738
+        ]
+      },
+      "properties": {
+        "id": "DFPB0100",
+        "name": "Fountain location:\nMcCleery Golf Course - servive yard",
+        "address": "servive yard",
+        "geo_local_area": "Kerrisdale"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.087185,
+          49.215443
+        ]
+      },
+      "properties": {
+        "id": "DFPB0106",
+        "name": "Fountain location:\nMoberly Park - Arts & Cultural Centre",
+        "address": null,
+        "geo_local_area": "Sunset"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.142249,
+          49.287535
+        ]
+      },
+      "properties": {
+        "id": "DFPB0107",
+        "name": "Fountain location:\nMorton Park",
+        "address": null,
+        "geo_local_area": "West End"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.056905,
+          49.228382
+        ]
+      },
+      "properties": {
+        "id": "DFPB0110",
+        "name": "Fountain location:\nNanaimo Park",
+        "address": "in front of wading pool",
+        "geo_local_area": "Victoria-Fraserview"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.129966,
+          49.282944
+        ]
+      },
+      "properties": {
+        "id": "DFPB0111",
+        "name": "Fountain location:\nNelson Park",
+        "address": "middle of park",
+        "geo_local_area": "West End"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.050813,
+          49.238278
+        ]
+      },
+      "properties": {
+        "id": "DFPB0115",
+        "name": "Fountain location:\nNorquay Park",
+        "address": "front of wading pool",
+        "geo_local_area": "Renfrew-Collingwood"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.12814,
+          49.216987
+        ]
+      },
+      "properties": {
+        "id": "DFPB0117",
+        "name": "Fountain location:\nOak Park - East of fieldhouse",
+        "address": "East side of fieldhouse",
+        "geo_local_area": "Marpole"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.127372,
+          49.21669
+        ]
+      },
+      "properties": {
+        "id": "DFPB0118",
+        "name": "Fountain location:\nOak Park - East of spray park",
+        "address": "In spray park",
+        "geo_local_area": "Marpole"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.129107,
+          49.216712
+        ]
+      },
+      "properties": {
+        "id": "DFPB0116",
+        "name": "Fountain location:\nOak Park - North west of field hockey",
+        "address": "Near parking lot",
+        "geo_local_area": "Marpole"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.057391,
+          49.282419
+        ]
+      },
+      "properties": {
+        "id": "DFPB0120",
+        "name": "Fountain location:\nPandora Park",
+        "address": "N-side of wading pool",
+        "geo_local_area": "Grandview-Woodland"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.110191,
+          49.271157
+        ]
+      },
+      "properties": {
+        "id": "DFPB0121",
+        "name": "Fountain location:\nPark Site On South East False Creek - Hinge",
+        "address": null,
+        "geo_local_area": "Mount Pleasant"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.10449,
+          49.281769
+        ]
+      },
+      "properties": {
+        "id": "DFPB0122",
+        "name": "Fountain location:\nPioneer Place (Pigeon Park)",
+        "address": null,
+        "geo_local_area": "Downtown"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.105606,
+          49.237525
+        ]
+      },
+      "properties": {
+        "id": "DFPB0124",
+        "name": "Fountain location:\nQueen Elizabeth Park - 37th and Ontario",
+        "address": "37th and Ontario",
+        "geo_local_area": "Riley Park"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.104792,
+          49.242688
+        ]
+      },
+      "properties": {
+        "id": "DFPB0188",
+        "name": "Fountain location:\nRiley Park",
+        "address": "West side of the park",
+        "geo_local_area": "Riley Park"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.050966,
+          49.205844
+        ]
+      },
+      "properties": {
+        "id": "DFPB0129",
+        "name": "Fountain location:\nRiverfront Park - West of tennis courts",
+        "address": "w-side of tennis courts",
+        "geo_local_area": "Killarney"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.08262,
+          49.217052
+        ]
+      },
+      "properties": {
+        "id": "DFPB0131",
+        "name": "Fountain location:\nRoss Park",
+        "address": "near shelter",
+        "geo_local_area": "Sunset"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.03062,
+          49.273177
+        ]
+      },
+      "properties": {
+        "id": "DFPB0134",
+        "name": "Fountain location:\nRupert Park - South of golf entrance booth",
+        "address": "S-side of golf entrance booth",
+        "geo_local_area": "Hastings-Sunrise"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.14619,
+          49.271096
+        ]
+      },
+      "properties": {
+        "id": "DFPB0137",
+        "name": "Fountain location:\nSeaforth Peace Park",
+        "address": "S end plaza",
+        "geo_local_area": "Kitsilano"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.148332,
+          49.310653
+        ]
+      },
+      "properties": {
+        "id": "DFPB0159",
+        "name": "Fountain location:\nStanley Park - Brockton Cricket Pavilion",
+        "address": "Brockton Clubhouse",
+        "geo_local_area": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.148332,
+          49.310653
+        ]
+      },
+      "properties": {
+        "id": "DFPB0161",
+        "name": "Fountain location:\nStanley Park - Dog Off-leash area",
+        "address": "Beside Dog off-leash area",
+        "geo_local_area": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.142438,
+          49.313489
+        ]
+      },
+      "properties": {
+        "id": "DFPB0141",
+        "name": "Fountain location:\nStanley Park - Prospect Point Lookout",
+        "address": "Prospect Point viewing",
+        "geo_local_area": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.148188,
+          49.310725
+        ]
+      },
+      "properties": {
+        "id": "DFPB0156",
+        "name": "Fountain location:\nStanley Park - Prospect Point Picnic Site",
+        "address": "Prospect Point picnic area",
+        "geo_local_area": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.145998,
+          49.292326
+        ]
+      },
+      "properties": {
+        "id": "DFPB0143",
+        "name": "Fountain location:\nStanley Park - Tennis Courts",
+        "address": "near Tennis Courts & Fish House",
+        "geo_local_area": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.15632,
+          49.303263
+        ]
+      },
+      "properties": {
+        "id": "DFPB0153",
+        "name": "Fountain location:\nStanley Park - Third Beach Seawall",
+        "address": "Third beach seawall",
+        "geo_local_area": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.086674,
+          49.274933
+        ]
+      },
+      "properties": {
+        "id": "DFPB0164",
+        "name": "Fountain location:\nStrathcona Park - besides baseball diamond",
+        "address": "besides baseball diamond",
+        "geo_local_area": "Strathcona"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.134016,
+          49.269227
+        ]
+      },
+      "properties": {
+        "id": "DFPB0168",
+        "name": "Fountain location:\nSutcliffe Park",
+        "address": "S-side of false creek communit",
+        "geo_local_area": "Fairview"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.070176,
+          49.229713
+        ]
+      },
+      "properties": {
+        "id": "DFPB0170",
+        "name": "Fountain location:\nTecumseh Park",
+        "address": "middle of park",
+        "geo_local_area": "Victoria-Fraserview"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.163822,
+          49.251379
+        ]
+      },
+      "properties": {
+        "id": "DFPB0172",
+        "name": "Fountain location:\nTrafalgar Park",
+        "address": "E-side of wading pool",
+        "geo_local_area": "Arbutus-Ridge"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.093107,
+          49.275066
+        ]
+      },
+      "properties": {
+        "id": "DFPB0173",
+        "name": "Fountain location:\nTrillium Park",
+        "address": "on west side of building",
+        "geo_local_area": "Strathcona"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.139754,
+          49.275218
+        ]
+      },
+      "properties": {
+        "id": "DFPB0176",
+        "name": "Fountain location:\nVanier Park (Burrard Civic Marina)",
+        "address": null,
+        "geo_local_area": "Kitsilano"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.073093,
+          49.263154
+        ]
+      },
+      "properties": {
+        "id": "DFPB0179",
+        "name": "Fountain location:\nW.C. Shelly Park",
+        "address": null,
+        "geo_local_area": "Grandview-Woodland"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.205248,
+          49.266127
+        ]
+      },
+      "properties": {
+        "id": "DFPB0183",
+        "name": "Fountain location:\nWest Point Grey Park - North of wading pool",
+        "address": "N-side of wading pool",
+        "geo_local_area": "West Point Grey"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.093796,
+          49.282808
+        ]
+      },
+      "properties": {
+        "id": "DFENG0811",
+        "name": "Temporary Misting Station Location: Oppenheimer Park",
+        "address": "NE Corner of Oppenheimer Park",
+        "geo_local_area": "Strathcona"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.069583,
+          49.261443
+        ]
+      },
+      "properties": {
+        "id": "DFENG0804",
+        "name": "Temporary Misting Station location: Commercial & E 10th",
+        "address": "NE corner of Commercial St & E 10th Ave",
+        "geo_local_area": "Kensington-Cedar Cottage"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.134724,
+          49.208585
+        ]
+      },
+      "properties": {
+        "id": "DFENG0810",
+        "name": "Temporary Misting Station location: W 70th Ave & Hudson St",
+        "address": "W 70th Ave & Hudson St",
+        "geo_local_area": "Marpole"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.131579,
+          49.273334
+        ]
+      },
+      "properties": {
+        "id": "DFENG0503",
+        "name": "Bottle Filling Station location: \nGranville St Pumping Station",
+        "address": "North side of sewage pumping station under Granville Bridge on bike route",
+        "geo_local_area": "Downtown"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.152781,
+          49.273714
+        ]
+      },
+      "properties": {
+        "id": "DFENG0504",
+        "name": "Bottle Filling Station location: \nKitsilano Pumping Station",
+        "address": "North side of sewage pumping station on w/s/ 1300 Arbutus",
+        "geo_local_area": "Kitsilano"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.098886,
+          49.273037
+        ]
+      },
+      "properties": {
+        "id": "DFENG0505",
+        "name": "Bottle Filling Station location: \nThornton Park Pumping Station",
+        "address": "West side of sewage pumping station on w/s/ 1200 Station St",
+        "geo_local_area": "Strathcona"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.142081,
+          49.265329
+        ]
+      },
+      "properties": {
+        "id": "DFENG0011",
+        "name": "Fountain location:\n1650 W 7th",
+        "address": "Midblock, outside of 1650 W 7th",
+        "geo_local_area": "Fairview"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.058912,
+          49.234752
+        ]
+      },
+      "properties": {
+        "id": "DFENG0002",
+        "name": "Fountain location:\n39th & Nanaimo",
+        "address": "Southwest corner of 39th & Nanaimo",
+        "geo_local_area": "Kensington-Cedar Cottage"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.152706,
+          49.268228
+        ]
+      },
+      "properties": {
+        "id": "DFENG0003",
+        "name": "Fountain location:\n4th & Arbutus",
+        "address": "Northeast corner of 4th & Arbutus",
+        "geo_local_area": "Kitsilano"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.112967,
+          49.26466
+        ]
+      },
+      "properties": {
+        "id": "DFENG0014",
+        "name": "Fountain location:\n7th & Yukon",
+        "address": "Southwest corner of 7th & Yukon",
+        "geo_local_area": "Mount Pleasant"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.105026,
+          49.262875
+        ]
+      },
+      "properties": {
+        "id": "DFENG0015",
+        "name": "Fountain location:\nBroadway & Ontario",
+        "address": "Southwest corner of Broadway & Ontario",
+        "geo_local_area": "Mount Pleasant"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.129232,
+          49.279248
+        ]
+      },
+      "properties": {
+        "id": "DFENG0024",
+        "name": "Fountain location:\nBurrard & Davie",
+        "address": "Northwest corner of Burrard & Davie",
+        "geo_local_area": "West End"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.141287,
+          49.289777
+        ]
+      },
+      "properties": {
+        "id": "DFENG0028",
+        "name": "Fountain location:\nGilford & Comox",
+        "address": "Northwest corner of Gilford & Comox",
+        "geo_local_area": "West End"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.140225,
+          49.290499
+        ]
+      },
+      "properties": {
+        "id": "DFENG0006",
+        "name": "Fountain location:\nGilford & Nelson",
+        "address": "Northwest corner of Gilford & Nelson",
+        "geo_local_area": "West End"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.054448,
+          49.280998
+        ]
+      },
+      "properties": {
+        "id": "DFENG0034",
+        "name": "Fountain location:\nHastings & Kamloops",
+        "address": "Northeast corner of Hastings & Kamloops",
+        "geo_local_area": "Hastings-Sunrise"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.140508,
+          49.282385
+        ]
+      },
+      "properties": {
+        "id": "DFENG0008",
+        "name": "Fountain location:\nNicola & Beach",
+        "address": "Northeast corner of Nicola & Beach",
+        "geo_local_area": "West End"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.121414,
+          49.258738
+        ]
+      },
+      "properties": {
+        "id": "DFENG0046",
+        "name": "Fountain location: 733 W 14th Avenue",
+        "address": "North side of 14th Avenue",
+        "geo_local_area": "Fairview"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.116339,
+          49.245083
+        ]
+      },
+      "properties": {
+        "id": "DFENG0044",
+        "name": "Fountain location: Cambie & 29th Avenue",
+        "address": "Southwest corner of Cambie & 29th Avenue",
+        "geo_local_area": "South Cambie"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.138092,
+          49.291825
+        ]
+      },
+      "properties": {
+        "id": "DFENG0053",
+        "name": "Fountain location: Gilford St & Haro St",
+        "address": "Gilford mini park",
+        "geo_local_area": "West End"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.024717,
+          49.234702
+        ]
+      },
+      "properties": {
+        "id": "DFENG0043",
+        "name": "Fountain location: Ormidale St & Vanness Avenue",
+        "address": "Southeast corner of Ormidale St & Vanness Avenue",
+        "geo_local_area": "Renfrew-Collingwood"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.114629,
+          49.213173
+        ]
+      },
+      "properties": {
+        "id": "DFENG0042",
+        "name": "Fountain location: W 63rd Avenue & Yukon Street",
+        "address": "Southeast corner of W 63rd Avenue & Yukon Street",
+        "geo_local_area": "Marpole"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.123513,
+          49.279672
+        ]
+      },
+      "properties": {
+        "id": "DFENG0038",
+        "name": "Fountain location:Nelson & Howe",
+        "address": "Southeast corner of Nelson & Howe",
+        "geo_local_area": "Downtown"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.069471,
+          49.262436
+        ]
+      },
+      "properties": {
+        "id": "DFENG0705",
+        "name": "Temporary Fountain location: Commercial & E Broadway",
+        "address": "NE corner of Commercial Drive & East Broadway",
+        "geo_local_area": "Grandview-Woodland"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.099907,
+          49.281431
+        ]
+      },
+      "properties": {
+        "id": "DFENG0703",
+        "name": "Temporary Fountain location: Main & E Hastings",
+        "address": "NW corner of E Hastings St and Main St",
+        "geo_local_area": "Downtown"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.097852,
+          49.283263
+        ]
+      },
+      "properties": {
+        "id": "DFENG0706",
+        "name": "Temporary Fountain location: Powell & Gore",
+        "address": "SW corner of Powell St and Gore Ave",
+        "geo_local_area": "Strathcona"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.093446,
+          49.283174
+        ]
+      },
+      "properties": {
+        "id": "DFENG0707",
+        "name": "Temporary Fountain location: Powell & Jackson",
+        "address": "477 Powell St",
+        "geo_local_area": "Strathcona"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.099444,
+          49.271398
+        ]
+      },
+      "properties": {
+        "id": "DFENG0608",
+        "name": "Temporary Handwashing Station location: 201 Central",
+        "address": "201 Central St",
+        "geo_local_area": "Strathcona"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.097359,
+          49.281754
+        ]
+      },
+      "properties": {
+        "id": "DFENG0609",
+        "name": "Temporary Handwashing Station location: 384 Main",
+        "address": "384 Main St",
+        "geo_local_area": "Strathcona"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.085449,
+          49.254676
+        ]
+      },
+      "properties": {
+        "id": "DFENG0607",
+        "name": "Temporary Handwashing Station location: ICBC 999 Kingsway",
+        "address": "999 Kingsway",
+        "geo_local_area": "Kensington-Cedar Cottage"
+      }
+    }
+  ]
+}

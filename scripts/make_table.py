@@ -17,7 +17,7 @@ df = (
         [
             "name",
             "geo_local_area",
-            "location",
+            "address",
             "pet_friendly",
             "wheelchair_accessible",
             "bottle_filler",
@@ -28,7 +28,7 @@ df = (
         columns={
             "name": "Name",
             "geo_local_area": "Neighbourhood",
-            "location": "Address",
+            "address": "Address",
             "pet_friendly": "Pet OK",
             "wheelchair_accessible": "Wheelchair",
             "bottle_filler": "Bottle",

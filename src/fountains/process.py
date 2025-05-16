@@ -7,6 +7,7 @@ import shutil, os
 import pandas as pd
 import click
 from pathlib import Path
+import folium
 
 @click.command()
 @click.option(
@@ -30,8 +31,17 @@ def main(infile: str, outfile: str) -> None:
     # Extract features into DataFrame
     records = []
     for feature in gj["features"]:
-        props = feature["properties"]
+        props = feature["properties"].copy()
         lon, lat = feature["geometry"]["coordinates"]
+        # Clean up name: extract after colon and newline if present
+        if "name" in props and props["name"]:
+            name_val = props["name"]
+            if ":" in name_val:
+                name_val = name_val.split(":", 1)[-1].strip()
+            name_val = name_val.replace("\n", " ").strip()
+            props["name"] = name_val
+        # Use 'location' as address
+        props["address"] = props.get("location", None)
         props["longitude"] = lon
         props["latitude"] = lat
         records.append(props)
@@ -41,8 +51,6 @@ def main(infile: str, outfile: str) -> None:
     df = df.rename(
         columns={
             "mapid": "id",
-            "name": "name",
-            "location": "address",
             "geo_local_area": "geo_local_area",
         }
     )
@@ -50,7 +58,7 @@ def main(infile: str, outfile: str) -> None:
     # Define all columns to keep (add new ones as needed)
     all_columns = [
         "id", "name", "address", "geo_local_area", "latitude", "longitude",
-        "location", "pet_friendly", "wheelchair_accessible", "bottle_filler", "last_service_date"
+        "pet_friendly", "wheelchair_accessible", "bottle_filler", "last_service_date"
     ]
 
     # Ensure all columns exist in DataFrame, fill missing with None
@@ -82,6 +90,21 @@ def main(infile: str, outfile: str) -> None:
         f"✓ saved {len(df):,} cleaned records → {outfile} "
         f"and copied to {dest}"
     )
+
+    # Add popups to features
+    for feature in features:
+        lon, lat = feature["geometry"]["coordinates"]
+        row = pd.Series(feature["properties"])
+        popup = folium.Popup(f"""
+<b>{row['name']}</b><br>
+Neighbourhood: {row['geo_local_area']}<br>
+Address: {row['address']}<br>
+Pet Friendly: {row['pet_friendly']}<br>
+Wheelchair Accessible: {row['wheelchair_accessible']}<br>
+Bottle Filler: {row['bottle_filler']}<br>
+Last Service: {row['last_service_date']}
+""", max_width=300)
+        folium.Marker(location=(lat, lon), popup=popup).add_to(folium.FeatureGroup(name="Fountains"))
 
 if __name__ == "__main__":  # pragma: no cover
     main()

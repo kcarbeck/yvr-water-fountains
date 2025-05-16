@@ -1,30 +1,54 @@
+# author: katherine carbeck
+# 16 may 2025
+# clean geojson exported from vancouver open data export to GeoJSON feature collection that folium/ leaflet can load
+
+import geojson
 import pandas as pd
 import click
 from pathlib import Path
 
 @click.command()
-@click.option("--infile", default="data/fountains_raw.csv")
-@click.option("--outfile", default="data/fountains_processed.geojson")
-def process(infile, outfile):
-    df = (
-        pd.read_csv(infile)
-          .rename(columns={"fields.geo_point_2d": "coords"})
-    )
-    df["latitude"]  = df["coords"].apply(lambda x: float(x.strip("[]").split(",")[0]))
-    df["longitude"] = df["coords"].apply(lambda x: float(x.strip("[]").split(",")[1]))
-    keep = [
-        "recordid", "fields.name", "fields.address", "latitude",
-        "longitude", "fields.geo_local_area"
-    ]
-    df = df[keep].rename(columns={
-        "recordid": "id",
-        "fields.name": "name",
-        "fields.address": "address",
-        "fields.geo_local_area": "geo_local_area"
-    })
+@click.option(
+    "--infile",
+    default="data/fountains_raw.geojson",
+    show_default=True,
+    help="Raw GeoJSON file downloaded",
+)
+@click.option(
+    "--outfile",
+    default="data/fountains_processed.geojson",
+    show_default=True,
+    help="Destination GeoJSON path",
+)
+def main(infile: str, outfile: str) -> None:
+    """Transform raw → tidy → GeoJSON."""
+    # Load GeoJSON
+    with open(infile) as f:
+        gj = geojson.load(f)
+    
+    # Extract features into DataFrame
+    records = []
+    for feature in gj["features"]:
+        props = feature["properties"]
+        lon, lat = feature["geometry"]["coordinates"]
+        props["longitude"] = lon
+        props["latitude"] = lat
+        records.append(props)
+    df = pd.DataFrame(records)
 
-    # convert → geojson
-    import json, geojson
+    # Rename & subset useful columns
+    df = df.rename(
+        columns={
+            "mapid": "id",
+            "name": "name",
+            "location": "address",
+            "geo_local_area": "geo_local_area",
+        }
+    )
+    keep = ["id", "name", "address", "geo_local_area", "latitude", "longitude"]
+    df = df[keep]
+
+    # Build GeoJSON features
     features = [
         geojson.Feature(
             geometry=geojson.Point((row.longitude, row.latitude)),
@@ -32,9 +56,11 @@ def process(infile, outfile):
         )
         for _, row in df.iterrows()
     ]
-    geojson_data = geojson.FeatureCollection(features)
-    Path(outfile).write_text(geojson.dumps(geojson_data, indent=2))
-    click.echo(f"Saved {len(df)} cleaned records to {outfile}")
 
-if __name__ == "__main__":
-    process()
+    Path(outfile).parent.mkdir(parents=True, exist_ok=True)
+    Path(outfile).write_text(geojson.dumps(geojson.FeatureCollection(features), indent=2))
+
+    click.echo(f"✓ saved {len(df):,} cleaned records → {outfile}")
+
+if __name__ == "__main__":  # pragma: no cover
+    main()

@@ -1,0 +1,4 @@
+df = pd.json_normalize([f["properties"] for f in gj["features"]])
+(df[["name","address","geo_local_area"]]
+   .sort_values("geo_local_area")
+   .to_html("docs/table.html", index=False, classes="table table-striped"))

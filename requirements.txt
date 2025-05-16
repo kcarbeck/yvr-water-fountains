@@ -3,3 +3,5 @@ requests
 geopandas
 sqlalchemy
 click
+folium
+geojson

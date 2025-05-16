@@ -65,13 +65,6 @@ col_rename = {
 }
 df = df.rename(columns=col_rename)
 
-# Prettify booleans → icons
-def iconize(val: str | bool, ok="✅", bad="❌"):
-    return ok if str(val).strip().lower() in {"yes", "true", "1"} else bad
-for col in ["Pet OK", "Wheelchair", "Bottle"]:
-    if col in df.columns:
-        df[col] = df[col].apply(iconize)
-
 # -------- build html --------
 BOOT = "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
 DAT_CSS = "https://cdn.jsdelivr.net/npm/datatables@1.13.8/media/css/jquery.dataTables.min.css"

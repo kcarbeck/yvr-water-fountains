@@ -46,6 +46,10 @@ def main(infile: str, outfile: str) -> None:
         props["address"] = props.get("location", None)
         props["longitude"] = lon
         props["latitude"] = lat
+        # Set missing info to 'Unknown'
+        for col in ["pet_friendly", "wheelchair_accessible", "bottle_filler", "in_operation"]:
+            if col not in props or props[col] is None:
+                props[col] = "Unknown"
         records.append(props)
     df = pd.DataFrame(records)
 
@@ -60,13 +64,13 @@ def main(infile: str, outfile: str) -> None:
     # Define all columns to keep (add new ones as needed)
     all_columns = [
         "id", "name", "address", "geo_local_area", "latitude", "longitude",
-        "pet_friendly", "wheelchair_accessible", "bottle_filler", "last_service_date"
+        "pet_friendly", "wheelchair_accessible", "bottle_filler", "in_operation", "last_service_date"
     ]
 
-    # Ensure all columns exist in DataFrame, fill missing with None
+    # Ensure all columns exist in DataFrame, fill missing with 'Unknown'
     for col in all_columns:
         if col not in df.columns:
-            df[col] = None
+            df[col] = "Unknown"
 
     # Subset and order columns
     df = df[all_columns]

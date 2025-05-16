@@ -15,10 +15,11 @@
         "name": "Almond Park",
         "address": "S-side of playground",
         "geo_local_area": "Kitsilano",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -35,10 +36,11 @@
         "name": "Arbutus Village Park",
         "address": "S-side of playground",
         "geo_local_area": "Arbutus-Ridge",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -55,10 +57,11 @@
         "name": "Beaconsfield Park",
         "address": "adjacent to field house",
         "geo_local_area": "Renfrew-Collingwood",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -75,10 +78,11 @@
         "name": "Carnarvon Park",
         "address": "S-side of wading pool",
         "geo_local_area": "Arbutus-Ridge",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -95,10 +99,11 @@
         "name": "Clinton Park - East side of wading pool",
         "address": "E-side of wading pool",
         "geo_local_area": "Hastings-Sunrise",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -115,10 +120,11 @@
         "name": "Coal Harbour Park",
         "address": "near playground",
         "geo_local_area": "Downtown",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -135,10 +141,11 @@
         "name": "David Lam Park - South west of playgrounds",
         "address": "E area, near playground",
         "geo_local_area": "Downtown",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -155,10 +162,11 @@
         "name": "Douglas Park (community centre)",
         "address": "exterior of building",
         "geo_local_area": "South Cambie",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -175,10 +183,11 @@
         "name": "Elm Park",
         "address": "N-side of field house",
         "geo_local_area": "Kerrisdale",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -195,10 +204,11 @@
         "name": "Emery Barnes Park - Dog off-leash area",
         "address": null,
         "geo_local_area": "Downtown",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Unknown",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -215,10 +225,11 @@
         "name": "Fraser River Park - park entrance by Angus Dr",
         "address": "near park entrance by Angus Dr",
         "geo_local_area": "Kerrisdale",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -235,10 +246,11 @@
         "name": "George Park",
         "address": "southeast corner of park",
         "geo_local_area": "Sunset",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -255,10 +267,11 @@
         "name": "Grandview Park - West of Stage",
         "address": "Close to the Stage",
         "geo_local_area": "Grandview-Woodland",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -275,10 +288,11 @@
         "name": "Grays Park",
         "address": "front of wading pool",
         "geo_local_area": "Kensington-Cedar Cottage",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -295,10 +309,11 @@
         "name": "Hastings Community Park - South of wading pool",
         "address": "besides wading pool",
         "geo_local_area": "Hastings-Sunrise",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -315,10 +330,11 @@
         "name": "Hillcrest Park - East side",
         "address": null,
         "geo_local_area": "Riley Park",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Unknown",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -335,10 +351,11 @@
         "name": "Kaslo Park",
         "address": "SE corner of tennis courts",
         "geo_local_area": "Hastings-Sunrise",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -355,10 +372,11 @@
         "name": "Kerrisdale Centennial Park",
         "address": "2nd N-side entrance",
         "geo_local_area": "Kerrisdale",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -375,10 +393,11 @@
         "name": "Kitsilano Beach Park - North of parking lot",
         "address": "besides parking lot",
         "geo_local_area": "Kitsilano",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -395,10 +414,11 @@
         "name": "Kitsilano Beach Park - washroom wall",
         "address": "opposite washrooms",
         "geo_local_area": "Kitsilano",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -415,10 +435,11 @@
         "name": "Langara Golf Course - cambie pathway",
         "address": "cambie pathway",
         "geo_local_area": "Oakridge",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -435,10 +456,11 @@
         "name": "Langara Golf Course - servive yard",
         "address": "servive yard",
         "geo_local_area": "Marpole",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -455,10 +477,11 @@
         "name": "Maclean Park",
         "address": null,
         "geo_local_area": "Strathcona",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Unknown",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -475,10 +498,11 @@
         "name": "Major Matthews Park",
         "address": null,
         "geo_local_area": "Mount Pleasant",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Unknown",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -495,10 +519,11 @@
         "name": "Maple Grove Park - East of pool",
         "address": "E-side of pool",
         "geo_local_area": "Kerrisdale",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -515,10 +540,11 @@
         "name": "McCleery Golf Course - 5th tee",
         "address": "5th tee",
         "geo_local_area": "Kerrisdale",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -535,10 +561,11 @@
         "name": "Melbourne Park",
         "address": "front of tennis courts",
         "geo_local_area": "Renfrew-Collingwood",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -555,10 +582,11 @@
         "name": "Memorial South Park - West of Softball Diamond",
         "address": null,
         "geo_local_area": "Sunset",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Unknown",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -575,10 +603,11 @@
         "name": "Memorial West Park",
         "address": "S of tennis courts",
         "geo_local_area": "Dunbar-Southlands",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -595,10 +624,11 @@
         "name": "Mount Pleasant Park",
         "address": "S-side of wading pool",
         "geo_local_area": "Mount Pleasant",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -615,10 +645,11 @@
         "name": "New Brighton Park - South west of playground",
         "address": "SW of playground",
         "geo_local_area": "Hastings-Sunrise",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -635,10 +666,11 @@
         "name": "New Brighton Park - West of tennis courts",
         "address": "W-side of tennis courts",
         "geo_local_area": "Hastings-Sunrise",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -655,10 +687,11 @@
         "name": "Park Site On South East False Creek",
         "address": "NE side of the park",
         "geo_local_area": "Mount Pleasant",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Unknown",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -675,10 +708,11 @@
         "name": "Queen Elizabeth Park - Pitch and Putt Course",
         "address": "Pitch and Putt Course",
         "geo_local_area": "Riley Park",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "year-round",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -695,10 +729,11 @@
         "name": "Quilchena Park",
         "address": "W-side of fieldhouse",
         "geo_local_area": "Arbutus-Ridge",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -715,10 +750,11 @@
         "name": "Renfrew Community Park",
         "address": "adjacent to wading pool",
         "geo_local_area": "Renfrew-Collingwood",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -735,10 +771,11 @@
         "name": "Riverfront Park - East of washrooms",
         "address": "E-side of washrooms",
         "geo_local_area": "Killarney",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -755,10 +792,11 @@
         "name": "Ross Park",
         "address": "in front of wading pool",
         "geo_local_area": "Sunset",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -775,10 +813,11 @@
         "name": "Rupert Park",
         "address": "E-side of playground",
         "geo_local_area": "Hastings-Sunrise",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -795,10 +834,11 @@
         "name": "Seawall - Creekside",
         "address": "Seawall - in front of Creekside Community Recreation Centre",
         "geo_local_area": "Mount Pleasant",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Unknown",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -815,10 +855,11 @@
         "name": "Shannon Mews Park",
         "address": null,
         "geo_local_area": "Kerrisdale",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Unknown",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -835,10 +876,11 @@
         "name": "Slocan Greenway",
         "address": "12th and slocan",
         "geo_local_area": "Renfrew-Collingwood",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -855,10 +897,11 @@
         "name": "Slocan Park",
         "address": "near playground",
         "geo_local_area": "Renfrew-Collingwood",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -875,10 +918,11 @@
         "name": "Spanish Banks Beach Park",
         "address": "on north wall of washrooms",
         "geo_local_area": "West Point Grey",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -895,10 +939,11 @@
         "name": "Stanley Park - Admin building",
         "address": "Park Board Office",
         "geo_local_area": null,
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "year-round",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -915,10 +960,11 @@
         "name": "Stanley Park - Lumbermen's Arch",
         "address": "Lumbermen's Arch",
         "geo_local_area": null,
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "year-round",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -935,10 +981,11 @@
         "name": "Stanley Park - North east of Rose and Perennial Ga",
         "address": null,
         "geo_local_area": null,
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Unknown",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -955,10 +1002,11 @@
         "name": "Stanley Park - Putting Green",
         "address": "Pitch and Putt Course",
         "geo_local_area": null,
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Unknown",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -975,10 +1023,11 @@
         "name": "Stanley Park - Second Beach",
         "address": "Second Beach",
         "geo_local_area": null,
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "year-round",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -995,10 +1044,11 @@
         "name": "Stanley Park - Second Beach Pool",
         "address": "Second Beach pool deck",
         "geo_local_area": null,
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -1015,10 +1065,11 @@
         "name": "Stanley Park - South west of playground",
         "address": "Rose Garden playground",
         "geo_local_area": null,
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Unknown",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -1035,10 +1086,11 @@
         "name": "Stanley Park - West of Shore to Shore sculpture",
         "address": "Totem poles",
         "geo_local_area": null,
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Unknown",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -1055,10 +1107,11 @@
         "name": "Sunrise Park",
         "address": "N-side of wading pool",
         "geo_local_area": "Hastings-Sunrise",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -1075,10 +1128,11 @@
         "name": "Sunset Beach",
         "address": "on building wall",
         "geo_local_area": "West End",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -1095,10 +1149,11 @@
         "name": "Vandusen Botanical Garden",
         "address": "near reflecting pond",
         "geo_local_area": "Shaughnessy",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -1115,10 +1170,11 @@
         "name": "West End minipark - JERVIS ST @ BURNABY ST",
         "address": "north end",
         "geo_local_area": "West End",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -1135,10 +1191,11 @@
         "name": "West Point Grey Park - lawn bowling court",
         "address": "In lawn bowling court",
         "geo_local_area": "West Point Grey",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -1155,10 +1212,11 @@
         "name": "Winona Park",
         "address": "near playground",
         "geo_local_area": "Marpole",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -1176,9 +1234,10 @@
         "address": "NW corner of Andy Livingston Park",
         "geo_local_area": "Downtown",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "May-October",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -1196,9 +1255,10 @@
         "address": "NE corner of Granville St & W 10th Ave",
         "geo_local_area": "Fairview",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "May-October",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -1216,9 +1276,10 @@
         "address": "NW corner of Thurlow St & Comox St",
         "geo_local_area": "West End",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "May-October",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -1236,9 +1297,10 @@
         "address": "SW corner of Robson St & Cardero St",
         "geo_local_area": "West End",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "May-October",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -1256,9 +1318,10 @@
         "address": "SE corner of West Boulevard & W 45th Ave",
         "geo_local_area": "Kerrisdale",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "May-October",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -1276,9 +1339,10 @@
         "address": "North side of sewage pumping station 900 Charleson",
         "geo_local_area": "Fairview",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Year Round",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -1296,9 +1360,10 @@
         "address": null,
         "geo_local_area": "Renfrew-Collingwood",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Year Round",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -1316,9 +1381,10 @@
         "address": "East Side corner Gladstone at E 30th Ave",
         "geo_local_area": "Kensington-Cedar Cottage",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Year Round",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -1336,9 +1402,10 @@
         "address": "Northeast corner of 28th & Main",
         "geo_local_area": "Riley Park",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "May-October",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -1356,9 +1423,10 @@
         "address": "Southeast corner of 37th & Oak",
         "geo_local_area": "South Cambie",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "May-October",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -1376,9 +1444,10 @@
         "address": "Northwest corner of 37th & Ontario",
         "geo_local_area": "Riley Park",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "May-October",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -1396,9 +1465,10 @@
         "address": "Northwest corner of 37th & Prince Edward",
         "geo_local_area": "Riley Park",
         "pet_friendly": "Y",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "May-October",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -1416,9 +1486,10 @@
         "address": "Northwest corner of Ashburn & Elliot",
         "geo_local_area": "Victoria-Fraserview",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "May-October",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -1436,9 +1507,10 @@
         "address": "In the mini park at Cardero & Burnaby",
         "geo_local_area": "West End",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "May-October",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -1456,9 +1528,10 @@
         "address": "Southwest corner of Denman & Nelson",
         "geo_local_area": "West End",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "May-October",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -1476,9 +1549,10 @@
         "address": "Northwest corner of Elgin & 37th",
         "geo_local_area": "Kensington-Cedar Cottage",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "May-October",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -1496,9 +1570,10 @@
         "address": "Northeast corner of Granville & 59th",
         "geo_local_area": "Marpole",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Year Round",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -1516,9 +1591,10 @@
         "address": "Northeast corner of Hastings & Gore",
         "geo_local_area": "Strathcona",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Year Round",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -1536,9 +1612,10 @@
         "address": "In mini park at Robson & Chilco",
         "geo_local_area": "West End",
         "pet_friendly": "Y",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Year Round",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -1556,9 +1633,10 @@
         "address": "In mini park at Union & Hawks",
         "geo_local_area": "Strathcona",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Year Round",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -1576,9 +1654,10 @@
         "address": "Northwest corner of 10th & Kingsway",
         "geo_local_area": "Mount Pleasant",
         "pet_friendly": "Y",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "May-October",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -1596,9 +1675,10 @@
         "address": "Northwest corner of Cambie and W 35th",
         "geo_local_area": "South Cambie",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Year Round",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -1616,9 +1696,10 @@
         "address": "1200 Davie Street",
         "geo_local_area": "West End",
         "pet_friendly": "Y",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Year Round",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -1636,9 +1717,10 @@
         "address": "Northeast corner of Oak & 46th",
         "geo_local_area": "Oakridge",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Year Round",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -1656,9 +1738,10 @@
         "address": "1600 Waterloo St",
         "geo_local_area": "Kitsilano",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Year Round",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -1676,9 +1759,10 @@
         "address": "Northeast corner of River District Crossing & E Kent Ave North",
         "geo_local_area": "Killarney",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "May-October",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -1696,9 +1780,10 @@
         "address": "Northwest corner of Pt. Grey & MacDonald",
         "geo_local_area": "Kitsilano",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Year Round",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -1716,9 +1801,10 @@
         "address": "Northwest corner of Fraser & Broadway",
         "geo_local_area": "Mount Pleasant",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Year Round",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -1736,9 +1822,10 @@
         "address": "NE corner of 2000 W 15th Ave at Arbutus Greenway",
         "geo_local_area": "Kitsilano",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "May-October",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -1756,9 +1843,10 @@
         "address": "733 Granville St",
         "geo_local_area": "Downtown",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "May-October",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -1776,9 +1864,10 @@
         "address": "15 E Hastings St",
         "geo_local_area": "Downtown",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "May-October",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -1796,9 +1885,10 @@
         "address": "255 Dunlevy Av",
         "geo_local_area": "Strathcona",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "May-October",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -1816,9 +1906,10 @@
         "address": "101 E Hastings St",
         "geo_local_area": "Downtown",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "May-October",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -1836,9 +1927,10 @@
         "address": "609 Helmcken St",
         "geo_local_area": "Downtown",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "May-October",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -1855,10 +1947,11 @@
         "name": "Adanac Park",
         "address": "SW side of Field house",
         "geo_local_area": "Hastings-Sunrise",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -1875,10 +1968,11 @@
         "name": "Andy Livingstone Park - North of basketball court",
         "address": "by amphitheatre steps near bas",
         "geo_local_area": "Downtown",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -1895,10 +1989,11 @@
         "name": "Art Phillips Park (Discovery Square)",
         "address": "NW plaza",
         "geo_local_area": "Downtown",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -1915,10 +2010,11 @@
         "name": "Balaclava Park",
         "address": "W of wading pool",
         "geo_local_area": "Dunbar-Southlands",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -1935,10 +2031,11 @@
         "name": "Burrard View Park",
         "address": "N-side of wading pool",
         "geo_local_area": "Hastings-Sunrise",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -1955,10 +2052,11 @@
         "name": "Cedar Cottage Park",
         "address": "Near Sport courts",
         "geo_local_area": "Kensington-Cedar Cottage",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Unknown",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -1975,10 +2073,11 @@
         "name": "Chaldecott Park",
         "address": "W-side of spray park",
         "geo_local_area": "Dunbar-Southlands",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -1995,10 +2094,11 @@
         "name": "China Creek South Park",
         "address": "S-side of skate park",
         "geo_local_area": "Mount Pleasant",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -2015,10 +2115,11 @@
         "name": "Clark Park",
         "address": null,
         "geo_local_area": "Kensington-Cedar Cottage",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Unknown",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -2035,10 +2136,11 @@
         "name": "Clinton Park - North side of ball diamond",
         "address": "N-side of B-ball diamond",
         "geo_local_area": "Hastings-Sunrise",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -2055,10 +2157,11 @@
         "name": "Collingwood Park",
         "address": "in front of wading pool",
         "geo_local_area": "Renfrew-Collingwood",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -2075,10 +2178,11 @@
         "name": "Connaught Park - East side of fieldhouse",
         "address": "near fieldhouse",
         "geo_local_area": "Kitsilano",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "year-round",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -2095,10 +2199,11 @@
         "name": "Coopers' Park",
         "address": null,
         "geo_local_area": "Downtown",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Unknown",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -2115,10 +2220,11 @@
         "name": "Coopers' Park - underneath bridge, near basket",
         "address": "underneath bridge, near basket",
         "geo_local_area": "Downtown",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -2135,10 +2241,11 @@
         "name": "Creekside Park",
         "address": null,
         "geo_local_area": "Downtown",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Unknown",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -2155,10 +2262,11 @@
         "name": "Ebisu Park",
         "address": "near playground",
         "geo_local_area": "Marpole",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -2175,10 +2283,11 @@
         "name": "English Bay Beach Park - Davie st entrance",
         "address": "Davie st entrance",
         "geo_local_area": "West End",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -2195,10 +2304,11 @@
         "name": "Falaise Park",
         "address": "in front of wading pool",
         "geo_local_area": "Renfrew-Collingwood",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -2215,10 +2325,11 @@
         "name": "Fraserview Golf Course - 6th tee",
         "address": "6th tee",
         "geo_local_area": "Killarney",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -2235,10 +2346,11 @@
         "name": "Fraserview Golf Course - clubhouse building",
         "address": "clubhouse building",
         "geo_local_area": "Killarney",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -2255,10 +2367,11 @@
         "name": "Garden Park",
         "address": "N-side of field house",
         "geo_local_area": "Grandview-Woodland",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -2275,10 +2388,11 @@
         "name": "Gaston Park",
         "address": "near basketball court",
         "geo_local_area": "Renfrew-Collingwood",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -2295,10 +2409,11 @@
         "name": "George Wainborn Park",
         "address": "NE corner near seawall",
         "geo_local_area": "Downtown",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -2315,10 +2430,11 @@
         "name": "Harbour Green Park - foot of Jervis Mews",
         "address": "foot of Jervis Mews",
         "geo_local_area": "Downtown",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -2335,10 +2451,11 @@
         "name": "Hastings Community Park - SE of tennis courts",
         "address": "besides path leading to spray",
         "geo_local_area": "Hastings-Sunrise",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -2355,10 +2472,11 @@
         "name": "Hastings Park - Italian gardens",
         "address": "near skate park",
         "geo_local_area": "Hastings-Sunrise",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -2375,10 +2493,11 @@
         "name": "Hastings Park -Plateau Sport Parks / Empire Fields",
         "address": "empire field - soccer fields",
         "geo_local_area": "Hastings-Sunrise",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Unknown",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -2395,10 +2514,11 @@
         "name": "Hastings Park -Plateau Sport Parks / Empire Fields",
         "address": "East of playgrounds",
         "geo_local_area": "Hastings-Sunrise",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Unknown",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -2415,10 +2535,11 @@
         "name": "John Hendry (Trout Lake) Park",
         "address": "nearby beach",
         "geo_local_area": "Kensington-Cedar Cottage",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -2435,10 +2556,11 @@
         "name": "Kensington Park",
         "address": "between baseball diamond and parking lots",
         "geo_local_area": "Kensington-Cedar Cottage",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -2455,10 +2577,11 @@
         "name": "Kingcrest Park",
         "address": "E-side of washroom",
         "geo_local_area": "Kensington-Cedar Cottage",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -2475,10 +2598,11 @@
         "name": "Langara Golf Course - East of tennis courts",
         "address": "56th and Ontario",
         "geo_local_area": "Oakridge",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -2495,10 +2619,11 @@
         "name": "McBride Park",
         "address": "S of playground",
         "geo_local_area": "Kitsilano",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -2515,10 +2640,11 @@
         "name": "McCleery Golf Course - clubhouse building",
         "address": "clubhouse building",
         "geo_local_area": "Kerrisdale",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -2535,10 +2661,11 @@
         "name": "McCleery Golf Course - driving range",
         "address": "driving range",
         "geo_local_area": "Kerrisdale",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -2555,10 +2682,11 @@
         "name": "Memorial South Park - West of wading pool",
         "address": "W-side of wading pool",
         "geo_local_area": "Sunset",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "year-round",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -2575,10 +2703,11 @@
         "name": "Moberly Park - West of tennis courts",
         "address": "in front of tennis courts",
         "geo_local_area": "Sunset",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -2595,10 +2724,11 @@
         "name": "Mosaic Creek Park",
         "address": "near children's play area",
         "geo_local_area": "Grandview-Woodland",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -2615,10 +2745,11 @@
         "name": "New Brighton Park - South of pool",
         "address": "S-side of pool",
         "geo_local_area": "Hastings-Sunrise",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -2635,10 +2766,11 @@
         "name": "Oppenheimer Park",
         "address": null,
         "geo_local_area": "Strathcona",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Unknown",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -2655,10 +2787,11 @@
         "name": "Queen Elizabeth Park - At Conservatory",
         "address": "At Conservatory",
         "geo_local_area": "Riley Park",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -2675,10 +2808,11 @@
         "name": "Robson Park",
         "address": "N-side of wading pool",
         "geo_local_area": "Mount Pleasant",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -2695,10 +2829,11 @@
         "name": "Rupert Park - East of fieldhouse",
         "address": "E-side of Field house",
         "geo_local_area": "Hastings-Sunrise",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -2715,10 +2850,11 @@
         "name": "Stanley Park - Brockton Oval Fieldhouse",
         "address": "brockton oval",
         "geo_local_area": null,
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -2735,10 +2871,11 @@
         "name": "Stanley Park - Brockton Point Viewpoint",
         "address": "Brockton point - lighthouse",
         "geo_local_area": null,
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -2755,10 +2892,11 @@
         "name": "Stanley Park - Ceperley Washrooms",
         "address": "Ceperley washrooms",
         "geo_local_area": null,
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -2775,10 +2913,11 @@
         "name": "Stanley Park - Lawn Bowling Club",
         "address": "Lawn Bowling",
         "geo_local_area": null,
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -2795,10 +2934,11 @@
         "name": "Stanley Park - Legends Of The Moon Washroom",
         "address": "Legends Of The Moon - Washroom",
         "geo_local_area": null,
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Unknown",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -2815,10 +2955,11 @@
         "name": "Stanley Park - Prospect Point Washrooms",
         "address": "prospect point washrooms",
         "geo_local_area": null,
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -2835,10 +2976,11 @@
         "name": "Stanley Park - Stanley Park Pavilion",
         "address": "pavillion outside washrooms",
         "geo_local_area": null,
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Unknown",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -2855,10 +2997,11 @@
         "name": "Stanley Park - West of Restaurant",
         "address": "W - side of Fish House",
         "geo_local_area": null,
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -2875,10 +3018,11 @@
         "name": "Stanley Park - West side of Stanley Park Train",
         "address": null,
         "geo_local_area": null,
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Unknown",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -2895,10 +3039,11 @@
         "name": "Strathcona Park - North west of basketball court",
         "address": "besides basketball court",
         "geo_local_area": "Strathcona",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -2915,10 +3060,11 @@
         "name": "Sunset Park",
         "address": "front of wading pool",
         "geo_local_area": "Sunset",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -2935,10 +3081,11 @@
         "name": "Tea Swamp Park",
         "address": "NE corner of park",
         "geo_local_area": "Mount Pleasant",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -2955,10 +3102,11 @@
         "name": "Tisdall Park",
         "address": "near North baseball diamond",
         "geo_local_area": "Oakridge",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -2975,10 +3123,11 @@
         "name": "Vancouver Technical HS",
         "address": "NE of the sport field",
         "geo_local_area": "Renfrew-Collingwood",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Unknown",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -2995,10 +3144,11 @@
         "name": "Vandusen Botanical Garden - upper gardens",
         "address": "upper gardens",
         "geo_local_area": "Shaughnessy",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -3015,10 +3165,11 @@
         "name": "Victoria Park",
         "address": "adjacent to children's play area",
         "geo_local_area": "Grandview-Woodland",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -3035,10 +3186,11 @@
         "name": "Victory Square",
         "address": "south corner of park",
         "geo_local_area": "Downtown",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -3055,10 +3207,11 @@
         "name": "West End minipark",
         "address": "Bute & Haro",
         "geo_local_area": "West End",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -3075,10 +3228,11 @@
         "name": "Woodland Park",
         "address": "in front of wading pool",
         "geo_local_area": "Grandview-Woodland",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -3096,9 +3250,10 @@
         "address": "NE corner of Columbia St & Powell St",
         "geo_local_area": "Downtown",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "May-October",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -3116,9 +3271,10 @@
         "address": "Main st & 14th Ave",
         "geo_local_area": "Mount Pleasant",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "May-October",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -3136,9 +3292,10 @@
         "address": "East side of Thornton Park across from Pacific Central",
         "geo_local_area": "Strathcona",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "May-October",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -3156,9 +3313,10 @@
         "address": "North side of sewage pumping station on seawall east of the granville island entrance",
         "geo_local_area": "Fairview",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Year Round",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -3176,9 +3334,10 @@
         "address": "Northwest corner of 56th & Ontario",
         "geo_local_area": "Oakridge",
         "pet_friendly": "Y",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "May-October",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -3196,9 +3355,10 @@
         "address": "Northwest corner of Broadway & Stephens",
         "geo_local_area": "Kitsilano",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "May-October",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -3216,9 +3376,10 @@
         "address": "Southeast corner of Broadway & Victoria",
         "geo_local_area": "Kensington-Cedar Cottage",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "May-October",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -3236,9 +3397,10 @@
         "address": "Northeast corner of Commercial & 3rd",
         "geo_local_area": "Grandview-Woodland",
         "pet_friendly": "Y",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "May-October",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -3256,9 +3418,10 @@
         "address": "Northeast corner of Comox & Cardero",
         "geo_local_area": "West End",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Year Round",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -3276,9 +3439,10 @@
         "address": "In mini park at Comox & Chilco",
         "geo_local_area": "West End",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "May-October",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -3296,9 +3460,10 @@
         "address": "Northwest corner of Comox & Denman",
         "geo_local_area": "West End",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Year Round",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -3316,9 +3481,10 @@
         "address": "Northwest corner of Granville & Robson",
         "geo_local_area": "Downtown",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Year Round",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -3336,9 +3502,10 @@
         "address": "Southeast corner of Main & 11th",
         "geo_local_area": "Mount Pleasant",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Year Round",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -3356,9 +3523,10 @@
         "address": "In mini park at Nelson & Broughton",
         "geo_local_area": "West End",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "May-October",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -3376,9 +3544,10 @@
         "address": "Northwest corner of 10th & Willow",
         "geo_local_area": "Fairview",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Year Round",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -3396,9 +3565,10 @@
         "address": "Northeast corner of 11th & Prince Edward",
         "geo_local_area": "Mount Pleasant",
         "pet_friendly": "Y",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "May-October",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -3416,9 +3586,10 @@
         "address": "North side of 10th Avenue",
         "geo_local_area": "Kitsilano",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "May-October",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -3436,9 +3607,10 @@
         "address": "Northeast corner of Alberta St and W 59th Ave",
         "geo_local_area": "Marpole",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Year Round",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -3456,9 +3628,10 @@
         "address": "Southwest side of Kerr",
         "geo_local_area": "Killarney",
         "pet_friendly": "Y",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "May-October",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -3476,9 +3649,10 @@
         "address": "Northeast corner of Cambie & 10th",
         "geo_local_area": "Mount Pleasant",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Year Round",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -3496,9 +3670,10 @@
         "address": "NE corner of E Hastings St and Heatley Ave",
         "geo_local_area": "Strathcona",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "May-October",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -3516,9 +3691,10 @@
         "address": "3357 Kingsway",
         "geo_local_area": "Renfrew-Collingwood",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "May-October",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -3536,9 +3712,10 @@
         "address": "320 Alexander  St",
         "geo_local_area": "Strathcona",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "May-October",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -3556,9 +3733,10 @@
         "address": "601 E Hastings St",
         "geo_local_area": "Strathcona",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "May-October",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -3575,10 +3753,11 @@
         "name": "Aberdeen Park",
         "address": "plaza",
         "geo_local_area": "Renfrew-Collingwood",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -3595,10 +3774,11 @@
         "name": "Alexandra Park",
         "address": "west plaza gateway",
         "geo_local_area": "West End",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -3615,10 +3795,11 @@
         "name": "Andy Livingstone Park - South of soccer fields",
         "address": "north side of fieldhouse",
         "geo_local_area": "Downtown",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -3635,10 +3816,11 @@
         "name": "Arbutus Greenway Park",
         "address": "S-side of playground",
         "geo_local_area": "Kitsilano",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -3655,10 +3837,11 @@
         "name": "Bobolink Park",
         "address": "in front of wading pool",
         "geo_local_area": "Victoria-Fraserview",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -3675,10 +3858,11 @@
         "name": "Brewers Park",
         "address": "S-side of wading pool",
         "geo_local_area": "Kensington-Cedar Cottage",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -3695,10 +3879,11 @@
         "name": "CRAB Park at Portside",
         "address": null,
         "geo_local_area": "Downtown",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Unknown",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -3715,10 +3900,11 @@
         "name": "Charleson Park",
         "address": "N of school off of seawall",
         "geo_local_area": "Fairview",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -3735,10 +3921,11 @@
         "name": "China Creek North Park",
         "address": "S central side along jogging c",
         "geo_local_area": "Mount Pleasant",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -3755,10 +3942,11 @@
         "name": "Columbia Park",
         "address": "in front of wading pool",
         "geo_local_area": "Oakridge",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -3775,10 +3963,11 @@
         "name": "Connaught Park - North of playground",
         "address": null,
         "geo_local_area": "Kitsilano",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Unknown",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -3795,10 +3984,11 @@
         "name": "David Lam Park - South west of basketball courts",
         "address": "near playground and tennis court",
         "geo_local_area": "Downtown",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -3815,10 +4005,11 @@
         "name": "Devonian Harbour Park",
         "address": "near Stanley Park entrance",
         "geo_local_area": null,
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "year-round",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -3835,10 +4026,11 @@
         "name": "Douglas Park - Right side of wading pool",
         "address": "in front of wading pool",
         "geo_local_area": "South Cambie",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -3855,10 +4047,11 @@
         "name": "Emery Barnes Park - South west of playground",
         "address": null,
         "geo_local_area": "Downtown",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Unknown",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -3875,10 +4068,11 @@
         "name": "English Bay Beach Park - West of bath-house",
         "address": "opposite entrance to bathhouse",
         "geo_local_area": "West End",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "year-round",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -3895,10 +4089,11 @@
         "name": "English Bay Beach Park - concessions",
         "address": "concessions",
         "geo_local_area": "West End",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -3915,10 +4110,11 @@
         "name": "Fraser River Park - South west",
         "address": null,
         "geo_local_area": "Kerrisdale",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -3935,10 +4131,11 @@
         "name": "Fraserview Golf Course - West of kerr st.",
         "address": "West of kerr st.",
         "geo_local_area": "Killarney",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -3955,10 +4152,11 @@
         "name": "Fraserview Golf Course - driving range",
         "address": "driving range",
         "geo_local_area": "Killarney",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -3975,10 +4173,11 @@
         "name": "Grandview Park - South of playground",
         "address": "By the Playground",
         "geo_local_area": "Grandview-Woodland",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -3995,10 +4194,11 @@
         "name": "Granville Loop Park",
         "address": null,
         "geo_local_area": "Fairview",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Unknown",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -4015,10 +4215,11 @@
         "name": "Guelph Park",
         "address": "w-side of tennis courts",
         "geo_local_area": "Mount Pleasant",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -4035,10 +4236,11 @@
         "name": "Harbour Green Park - In front of washrooms",
         "address": "near spray pool",
         "geo_local_area": "Downtown",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -4055,10 +4257,11 @@
         "name": "Harbour Green Park - Viewpoint",
         "address": "west, by seawall",
         "geo_local_area": "Downtown",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -4075,10 +4278,11 @@
         "name": "Hastings Park -Plateau Sport Parks / Empire Fields",
         "address": "field house at empire field",
         "geo_local_area": "Hastings-Sunrise",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -4095,10 +4299,11 @@
         "name": "Hastings Park -Plateau Sport Parks / Empire Fields",
         "address": "East of basketball courts",
         "geo_local_area": "Hastings-Sunrise",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Unknown",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -4115,10 +4320,11 @@
         "name": "Hastings Park -Plateau Sport Parks / Empire Fields",
         "address": "north of empire field",
         "geo_local_area": "Hastings-Sunrise",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -4135,10 +4341,11 @@
         "name": "Hillcrest Park - North of playground",
         "address": null,
         "geo_local_area": "Riley Park",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Unknown",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -4155,10 +4362,11 @@
         "name": "Jericho Beach Park",
         "address": null,
         "geo_local_area": "West Point Grey",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Unknown",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -4175,10 +4383,11 @@
         "name": "Jonathan Rogers Park",
         "address": "E-side of wading pool",
         "geo_local_area": "Mount Pleasant",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -4195,10 +4404,11 @@
         "name": "Killarney Park - E 45th Ave. @ Killarney St.",
         "address": "north plaza",
         "geo_local_area": "Killarney",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -4215,10 +4425,11 @@
         "name": "Killarney Park - East of wading pool",
         "address": "in front of wading pool",
         "geo_local_area": "Killarney",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -4235,10 +4446,11 @@
         "name": "Kitsilano Beach Park - South of playground",
         "address": "besides playground",
         "geo_local_area": "Kitsilano",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -4255,10 +4467,11 @@
         "name": "Langara Golf Course - clubhouse building",
         "address": "clubhouse building",
         "geo_local_area": "Oakridge",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -4275,10 +4488,11 @@
         "name": "Locarno Beach Park",
         "address": "near concessions",
         "geo_local_area": "West Point Grey",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -4295,10 +4509,11 @@
         "name": "MacDonald Park",
         "address": "near NW corner of tennis court",
         "geo_local_area": "Sunset",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -4315,10 +4530,11 @@
         "name": "Maple Grove Park - South of baseball diamond",
         "address": "S-side of baseball diamond",
         "geo_local_area": "Kerrisdale",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -4335,10 +4551,11 @@
         "name": "Marpole Park",
         "address": "west entrance to playground",
         "geo_local_area": "Marpole",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -4355,10 +4572,11 @@
         "name": "McCleery Golf Course - servive yard",
         "address": "servive yard",
         "geo_local_area": "Kerrisdale",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -4375,10 +4593,11 @@
         "name": "Moberly Park - Arts & Cultural Centre",
         "address": null,
         "geo_local_area": "Sunset",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Unknown",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -4395,10 +4614,11 @@
         "name": "Morton Park",
         "address": null,
         "geo_local_area": "West End",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -4415,10 +4635,11 @@
         "name": "Nanaimo Park",
         "address": "in front of wading pool",
         "geo_local_area": "Victoria-Fraserview",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -4435,10 +4656,11 @@
         "name": "Nelson Park",
         "address": "middle of park",
         "geo_local_area": "West End",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -4455,10 +4677,11 @@
         "name": "Norquay Park",
         "address": "front of wading pool",
         "geo_local_area": "Renfrew-Collingwood",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -4475,10 +4698,11 @@
         "name": "Oak Park - East of fieldhouse",
         "address": "East side of fieldhouse",
         "geo_local_area": "Marpole",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -4495,10 +4719,11 @@
         "name": "Oak Park - East of spray park",
         "address": "In spray park",
         "geo_local_area": "Marpole",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -4515,10 +4740,11 @@
         "name": "Oak Park - North west of field hockey",
         "address": "Near parking lot",
         "geo_local_area": "Marpole",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -4535,10 +4761,11 @@
         "name": "Pandora Park",
         "address": "N-side of wading pool",
         "geo_local_area": "Grandview-Woodland",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -4555,10 +4782,11 @@
         "name": "Park Site On South East False Creek - Hinge",
         "address": null,
         "geo_local_area": "Mount Pleasant",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Unknown",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -4575,10 +4803,11 @@
         "name": "Pioneer Place (Pigeon Park)",
         "address": null,
         "geo_local_area": "Downtown",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Unknown",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -4595,10 +4824,11 @@
         "name": "Queen Elizabeth Park - 37th and Ontario",
         "address": "37th and Ontario",
         "geo_local_area": "Riley Park",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -4615,10 +4845,11 @@
         "name": "Riley Park",
         "address": "West side of the park",
         "geo_local_area": "Riley Park",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Unknown",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -4635,10 +4866,11 @@
         "name": "Riverfront Park - West of tennis courts",
         "address": "w-side of tennis courts",
         "geo_local_area": "Killarney",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -4655,10 +4887,11 @@
         "name": "Ross Park",
         "address": "near shelter",
         "geo_local_area": "Sunset",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -4675,10 +4908,11 @@
         "name": "Rupert Park - South of golf entrance booth",
         "address": "S-side of golf entrance booth",
         "geo_local_area": "Hastings-Sunrise",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -4695,10 +4929,11 @@
         "name": "Seaforth Peace Park",
         "address": "S end plaza",
         "geo_local_area": "Kitsilano",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -4715,10 +4950,11 @@
         "name": "Stanley Park - Brockton Cricket Pavilion",
         "address": "Brockton Clubhouse",
         "geo_local_area": null,
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Unknown",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -4735,10 +4971,11 @@
         "name": "Stanley Park - Dog Off-leash area",
         "address": "Beside Dog off-leash area",
         "geo_local_area": null,
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -4755,10 +4992,11 @@
         "name": "Stanley Park - Prospect Point Lookout",
         "address": "Prospect Point viewing",
         "geo_local_area": null,
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -4775,10 +5013,11 @@
         "name": "Stanley Park - Prospect Point Picnic Site",
         "address": "Prospect Point picnic area",
         "geo_local_area": null,
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -4795,10 +5034,11 @@
         "name": "Stanley Park - Tennis Courts",
         "address": "near Tennis Courts & Fish House",
         "geo_local_area": null,
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "year-round",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -4815,10 +5055,11 @@
         "name": "Stanley Park - Third Beach Seawall",
         "address": "Third beach seawall",
         "geo_local_area": null,
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -4835,10 +5076,11 @@
         "name": "Strathcona Park - besides baseball diamond",
         "address": "besides baseball diamond",
         "geo_local_area": "Strathcona",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -4855,10 +5097,11 @@
         "name": "Sutcliffe Park",
         "address": "S-side of false creek communit",
         "geo_local_area": "Fairview",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -4875,10 +5118,11 @@
         "name": "Tecumseh Park",
         "address": "middle of park",
         "geo_local_area": "Victoria-Fraserview",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -4895,10 +5139,11 @@
         "name": "Trafalgar Park",
         "address": "E-side of wading pool",
         "geo_local_area": "Arbutus-Ridge",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -4915,10 +5160,11 @@
         "name": "Trillium Park",
         "address": "on west side of building",
         "geo_local_area": "Strathcona",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -4935,10 +5181,11 @@
         "name": "Vanier Park (Burrard Civic Marina)",
         "address": null,
         "geo_local_area": "Kitsilano",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "year-round",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -4955,10 +5202,11 @@
         "name": "W.C. Shelly Park",
         "address": null,
         "geo_local_area": "Grandview-Woodland",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -4975,10 +5223,11 @@
         "name": "West Point Grey Park - North of wading pool",
         "address": "N-side of wading pool",
         "geo_local_area": "West Point Grey",
-        "pet_friendly": null,
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "pet_friendly": "Unknown",
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "spring to fall",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -4996,9 +5245,10 @@
         "address": "NE Corner of Oppenheimer Park",
         "geo_local_area": "Strathcona",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "May-October",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -5016,9 +5266,10 @@
         "address": "NE corner of Commercial St & E 10th Ave",
         "geo_local_area": "Kensington-Cedar Cottage",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "May-October",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -5036,9 +5287,10 @@
         "address": "W 70th Ave & Hudson St",
         "geo_local_area": "Marpole",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "May-October",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -5056,9 +5308,10 @@
         "address": "North side of sewage pumping station under Granville Bridge on bike route",
         "geo_local_area": "Downtown",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Year Round",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -5076,9 +5329,10 @@
         "address": "North side of sewage pumping station on w/s/ 1300 Arbutus",
         "geo_local_area": "Kitsilano",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Year Round",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -5096,9 +5350,10 @@
         "address": "West side of sewage pumping station on w/s/ 1200 Station St",
         "geo_local_area": "Strathcona",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Year Round",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -5116,9 +5371,10 @@
         "address": "Midblock, outside of 1650 W 7th",
         "geo_local_area": "Fairview",
         "pet_friendly": "Y",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "May-October",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -5136,9 +5392,10 @@
         "address": "Southwest corner of 39th & Nanaimo",
         "geo_local_area": "Kensington-Cedar Cottage",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "May-October",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -5156,9 +5413,10 @@
         "address": "Northeast corner of 4th & Arbutus",
         "geo_local_area": "Kitsilano",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "May-October",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -5176,9 +5434,10 @@
         "address": "Southwest corner of 7th & Yukon",
         "geo_local_area": "Mount Pleasant",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "May-October",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -5196,9 +5455,10 @@
         "address": "Southwest corner of Broadway & Ontario",
         "geo_local_area": "Mount Pleasant",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "May-October",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -5216,9 +5476,10 @@
         "address": "Northwest corner of Burrard & Davie",
         "geo_local_area": "West End",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Year Round",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -5236,9 +5497,10 @@
         "address": "Northwest corner of Gilford & Comox",
         "geo_local_area": "West End",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "May-October",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -5256,9 +5518,10 @@
         "address": "Northwest corner of Gilford & Nelson",
         "geo_local_area": "West End",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "May-October",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -5276,9 +5539,10 @@
         "address": "Northeast corner of Hastings & Kamloops",
         "geo_local_area": "Hastings-Sunrise",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "May-October",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -5296,9 +5560,10 @@
         "address": "Northeast corner of Nicola & Beach",
         "geo_local_area": "West End",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "May-October",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -5316,9 +5581,10 @@
         "address": "North side of 14th Avenue",
         "geo_local_area": "Fairview",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Year Round",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -5336,9 +5602,10 @@
         "address": "Southwest corner of Cambie & 29th Avenue",
         "geo_local_area": "South Cambie",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Year Round",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -5356,9 +5623,10 @@
         "address": "Gilford mini park",
         "geo_local_area": "West End",
         "pet_friendly": "Y",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Year Round",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -5376,9 +5644,10 @@
         "address": "Southeast corner of Ormidale St & Vanness Avenue",
         "geo_local_area": "Renfrew-Collingwood",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Year Round",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -5396,9 +5665,10 @@
         "address": "Southeast corner of W 63rd Avenue & Yukon Street",
         "geo_local_area": "Marpole",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Year Round",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -5416,9 +5686,10 @@
         "address": "Southeast corner of Nelson & Howe",
         "geo_local_area": "Downtown",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "Year Round",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -5436,9 +5707,10 @@
         "address": "NE corner of Commercial Drive & East Broadway",
         "geo_local_area": "Grandview-Woodland",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "May-October",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -5456,9 +5728,10 @@
         "address": "NW corner of E Hastings St and Main St",
         "geo_local_area": "Downtown",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "May-October",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -5476,9 +5749,10 @@
         "address": "SW corner of Powell St and Gore Ave",
         "geo_local_area": "Strathcona",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "May-October",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -5496,9 +5770,10 @@
         "address": "477 Powell St",
         "geo_local_area": "Strathcona",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "May-October",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -5516,9 +5791,10 @@
         "address": "201 Central St",
         "geo_local_area": "Strathcona",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "May-October",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -5536,9 +5812,10 @@
         "address": "384 Main St",
         "geo_local_area": "Strathcona",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "May-October",
+        "last_service_date": "Unknown"
       }
     },
     {
@@ -5556,9 +5833,10 @@
         "address": "999 Kingsway",
         "geo_local_area": "Kensington-Cedar Cottage",
         "pet_friendly": "N",
-        "wheelchair_accessible": null,
-        "bottle_filler": null,
-        "last_service_date": null
+        "wheelchair_accessible": "Unknown",
+        "bottle_filler": "Unknown",
+        "in_operation": "May-October",
+        "last_service_date": "Unknown"
       }
     }
   ]

@@ -64,3 +64,9 @@ def main(infile: str, outfile: str) -> None:
 
 if __name__ == "__main__":  # pragma: no cover
     main()
+
+
+# after writing outfile so everytime i rebuild the new GeoJSON is sent to docs/data/
+import shutil, os
+dest = Path("docs/data") / Path(outfile).name
+shutil.copy2(outfile, dest)

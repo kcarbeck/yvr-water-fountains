@@ -3,6 +3,7 @@
 # clean geojson exported from vancouver open data export to GeoJSON feature collection that folium/ leaflet can load
 
 import geojson
+import shutil, os
 import pandas as pd
 import click
 from pathlib import Path
@@ -60,13 +61,15 @@ def main(infile: str, outfile: str) -> None:
     Path(outfile).parent.mkdir(parents=True, exist_ok=True)
     Path(outfile).write_text(geojson.dumps(geojson.FeatureCollection(features), indent=2))
 
-    click.echo(f"✓ saved {len(df):,} cleaned records → {outfile}")
+    # copy into docs/data so GitHub Pages can serve it
+    dest = Path("docs/data") / Path(outfile).name
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(outfile, dest)
+
+    click.echo(
+        f"✓ saved {len(df):,} cleaned records → {outfile} "
+        f"and copied to {dest}"
+    )
 
 if __name__ == "__main__":  # pragma: no cover
     main()
-
-
-# after writing outfile so everytime i rebuild the new GeoJSON is sent to docs/data/
-import shutil, os
-dest = Path("docs/data") / Path(outfile).name
-shutil.copy2(outfile, dest)

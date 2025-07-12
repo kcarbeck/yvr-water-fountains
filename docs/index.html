@@ -74,26 +74,6 @@
       margin-right: 0.5rem;
     }
     
-    .search-container {
-      position: absolute;
-      top: 100px;
-      left: 10px;
-      z-index: 1000;
-      background: white;
-      padding: 1rem;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      width: 250px;
-    }
-    
-    .search-input {
-      width: 100%;
-      padding: 0.5rem;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      font-size: 0.9rem;
-    }
-    
     #map { 
       height: calc(100vh - 120px); 
     }
@@ -141,15 +121,106 @@
       background: #6c757d !important;
     }
     
+    /* Bottom sheet styles */
+    .bottom-sheet {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: white;
+      border-radius: 20px 20px 0 0;
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
+      transform: translateY(100%);
+      transition: transform 0.3s ease-out;
+      z-index: 2000;
+      max-height: 80vh;
+      overflow-y: auto;
+      padding: 0;
+    }
+    
+    .bottom-sheet.active {
+      transform: translateY(0);
+    }
+    
+    .bottom-sheet-handle {
+      width: 40px;
+      height: 4px;
+      background: #ddd;
+      border-radius: 2px;
+      margin: 12px auto;
+    }
+    
+    .bottom-sheet-content {
+      padding: 0 20px 20px 20px;
+    }
+    
+    .bottom-sheet-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #333;
+    }
+    
+    .bottom-sheet-info {
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: flex-start;
+    }
+    
+    .bottom-sheet-label {
+      font-weight: 500;
+      color: #666;
+      min-width: 100px;
+      flex-shrink: 0;
+    }
+    
+    .bottom-sheet-value {
+      color: #333;
+      flex: 1;
+    }
+    
+    .bottom-sheet-close {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: #666;
+      cursor: pointer;
+      padding: 0;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .bottom-sheet-close:hover {
+      color: #333;
+    }
+    
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 1999;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease-out;
+    }
+    
+    .overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    
     @media (max-width: 768px) {
       .header h1 {
         font-size: 1.2rem;
-      }
-      
-      .search-container {
-        width: calc(100% - 20px);
-        left: 10px;
-        right: 10px;
       }
       
       .legend {
@@ -157,6 +228,11 @@
         bottom: 20px;
         right: 10px;
         top: auto;
+      }
+      
+      /* Hide popups on mobile */
+      .leaflet-popup {
+        display: none !important;
       }
     }
   </style>
@@ -169,10 +245,6 @@
       <a href="table.html">📊 Table View</a>
       <a href="#" id="locate-me">📍 My Location</a>
     </div>
-  </div>
-  
-  <div class="search-container">
-    <input type="text" class="search-input" placeholder="Search fountains..." id="search-input">
   </div>
   
   <div class="legend">
@@ -191,6 +263,16 @@
   </div>
   
   <div id="map"></div>
+  
+  <!-- Bottom sheet for mobile -->
+  <div class="overlay" id="overlay"></div>
+  <div class="bottom-sheet" id="bottom-sheet">
+    <div class="bottom-sheet-handle"></div>
+    <button class="bottom-sheet-close" id="bottom-sheet-close">&times;</button>
+    <div class="bottom-sheet-content" id="bottom-sheet-content">
+      <!-- Content will be populated by JavaScript -->
+    </div>
+  </div>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script>
@@ -200,7 +282,65 @@
     }).addTo(map);
 
     let allMarkers = [];
-    let searchResults = [];
+    let currentFountainData = null;
+
+    // Check if device is mobile
+    function isMobile() {
+      return window.innerWidth <= 768;
+    }
+
+    // Show bottom sheet
+    function showBottomSheet(fountainData) {
+      currentFountainData = fountainData;
+      const bottomSheet = document.getElementById('bottom-sheet');
+      const overlay = document.getElementById('overlay');
+      const content = document.getElementById('bottom-sheet-content');
+      
+      content.innerHTML = `
+        <div class="bottom-sheet-title">${fountainData.name || 'Unnamed Fountain'}</div>
+        <div class="bottom-sheet-info">
+          <span class="bottom-sheet-label">📍 Location:</span>
+          <span class="bottom-sheet-value">${fountainData.address || '—'}</span>
+        </div>
+        <div class="bottom-sheet-info">
+          <span class="bottom-sheet-label">🏘️ Neighbourhood:</span>
+          <span class="bottom-sheet-value">${fountainData.geo_local_area || '—'}</span>
+        </div>
+        ${fountainData.rating ? `<div class="bottom-sheet-info">
+          <span class="bottom-sheet-label">⭐ Rating:</span>
+          <span class="bottom-sheet-value">${fountainData.rating}/5</span>
+        </div>` : ''}
+        ${fountainData.pet_friendly ? `<div class="bottom-sheet-info">
+          <span class="bottom-sheet-label">🐕 Pet Friendly:</span>
+          <span class="bottom-sheet-value">${fountainData.pet_friendly}</span>
+        </div>` : ''}
+        ${fountainData.wheelchair_accessible ? `<div class="bottom-sheet-info">
+          <span class="bottom-sheet-label">♿ Wheelchair:</span>
+          <span class="bottom-sheet-value">${fountainData.wheelchair_accessible}</span>
+        </div>` : ''}
+        ${fountainData.bottle_filler ? `<div class="bottom-sheet-info">
+          <span class="bottom-sheet-label">💧 Bottle Filler:</span>
+          <span class="bottom-sheet-value">${fountainData.bottle_filler}</span>
+        </div>` : ''}
+        ${fountainData.visited !== 'Yes' ? `<button class="visit-button" onclick="markAsVisited('${fountainData.id}')">✅ Mark as Visited</button>` : ''}
+      `;
+      
+      bottomSheet.classList.add('active');
+      overlay.classList.add('active');
+    }
+
+    // Hide bottom sheet
+    function hideBottomSheet() {
+      const bottomSheet = document.getElementById('bottom-sheet');
+      const overlay = document.getElementById('overlay');
+      bottomSheet.classList.remove('active');
+      overlay.classList.remove('active');
+      currentFountainData = null;
+    }
+
+    // Event listeners for bottom sheet
+    document.getElementById('bottom-sheet-close').addEventListener('click', hideBottomSheet);
+    document.getElementById('overlay').addEventListener('click', hideBottomSheet);
 
     fetch('data/fountains_processed.geojson')
       .then(r => r.json())
@@ -222,7 +362,7 @@
               markerRadius = 10;
             }
             
-            // Create custom popup content
+            // Create custom popup content for desktop
             const popupContent = `
               <div class="popup-content">
                 <div class="popup-title">${p.name || 'Unnamed Fountain'}</div>
@@ -254,7 +394,15 @@
               </div>
             `;
             
-            layer.bindPopup(popupContent);
+            // Bind popup for desktop, click handler for mobile
+            if (isMobile()) {
+              layer.on('click', () => {
+                showBottomSheet(p);
+              });
+            } else {
+              layer.bindPopup(popupContent);
+            }
+            
             if (p.id) markerById[p.id] = layer;
             allMarkers.push(layer);
           },
@@ -280,29 +428,6 @@
           }
         }).addTo(map);
 
-        // Search functionality
-        const searchInput = document.getElementById('search-input');
-        searchInput.addEventListener('input', (e) => {
-          const searchTerm = e.target.value.toLowerCase();
-          
-          // Clear previous search results
-          searchResults.forEach(marker => {
-            marker.setStyle({ opacity: 1, fillOpacity: 0.7 });
-          });
-          searchResults = [];
-          
-          if (searchTerm.length > 2) {
-            allMarkers.forEach(marker => {
-              const popup = marker.getPopup();
-              const content = popup.getContent();
-              if (content.toLowerCase().includes(searchTerm)) {
-                marker.setStyle({ opacity: 0.3, fillOpacity: 0.3 });
-                searchResults.push(marker);
-              }
-            });
-          }
-        });
-
         // Locate me functionality
         document.getElementById('locate-me').addEventListener('click', () => {
           if (navigator.geolocation) {
@@ -322,7 +447,13 @@
         if (hash && markerById[hash]) {
           const marker = markerById[hash];
           map.setView(marker.getLatLng(), 16, {animate:true});
-          marker.openPopup();
+          if (isMobile()) {
+            // Find the fountain data for this marker
+            const fountainData = gj.features.find(f => f.properties.id === hash).properties;
+            showBottomSheet(fountainData);
+          } else {
+            marker.openPopup();
+          }
         }
       });
 

@@ -49,30 +49,7 @@
       background: rgba(255,255,255,0.3);
     }
     
-    .legend {
-      position: absolute;
-      top: 100px;
-      right: 10px;
-      background: white;
-      padding: 1rem;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      z-index: 1000;
-      font-size: 0.8rem;
-    }
-    
-    .legend-item {
-      display: flex;
-      align-items: center;
-      margin-bottom: 0.5rem;
-    }
-    
-    .legend-color {
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      margin-right: 0.5rem;
-    }
+
     
     #map { 
       height: calc(100vh - 120px); 
@@ -102,24 +79,7 @@
       color: #333;
     }
     
-    .visit-button {
-      background: #28a745;
-      color: white;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 4px;
-      cursor: pointer;
-      margin-top: 0.5rem;
-      font-size: 0.8rem;
-    }
-    
-    .visit-button:hover {
-      background: #218838;
-    }
-    
-    .visited {
-      background: #6c757d !important;
-    }
+
     
     /* Bottom sheet styles */
     .bottom-sheet {
@@ -223,12 +183,7 @@
         font-size: 1.2rem;
       }
       
-      .legend {
-        position: fixed;
-        bottom: 20px;
-        right: 10px;
-        top: auto;
-      }
+
       
       /* Hide popups on mobile */
       .leaflet-popup {
@@ -247,20 +202,7 @@
     </div>
   </div>
   
-  <div class="legend">
-    <div class="legend-item">
-      <div class="legend-color" style="background: #28a745;"></div>
-      <span>Visited</span>
-    </div>
-    <div class="legend-item">
-      <div class="legend-color" style="background: #007bff;"></div>
-      <span>Not Visited</span>
-    </div>
-    <div class="legend-item">
-      <div class="legend-color" style="background: #ffc107;"></div>
-      <span>Highly Rated</span>
-    </div>
-  </div>
+
   
   <div id="map"></div>
   
@@ -300,11 +242,19 @@
         <div class="bottom-sheet-title">${fountainData.name || 'Unnamed Fountain'}</div>
         <div class="bottom-sheet-info">
           <span class="bottom-sheet-label">📍 Location:</span>
-          <span class="bottom-sheet-value">${fountainData.address || '—'}</span>
+          <span class="bottom-sheet-value">${fountainData.location || fountainData.address || '—'}</span>
         </div>
         <div class="bottom-sheet-info">
           <span class="bottom-sheet-label">🏘️ Neighbourhood:</span>
           <span class="bottom-sheet-value">${fountainData.geo_local_area || '—'}</span>
+        </div>
+        <div class="bottom-sheet-info">
+          <span class="bottom-sheet-label">🏗️ Maintainer:</span>
+          <span class="bottom-sheet-value">${fountainData.maintainer || '—'}</span>
+        </div>
+        <div class="bottom-sheet-info">
+          <span class="bottom-sheet-label">📅 Operation:</span>
+          <span class="bottom-sheet-value">${fountainData.in_operation || '—'}</span>
         </div>
         ${fountainData.rating ? `<div class="bottom-sheet-info">
           <span class="bottom-sheet-label">⭐ Rating:</span>
@@ -322,7 +272,26 @@
           <span class="bottom-sheet-label">💧 Bottle Filler:</span>
           <span class="bottom-sheet-value">${fountainData.bottle_filler}</span>
         </div>` : ''}
-        ${fountainData.visited !== 'Yes' ? `<button class="visit-button" onclick="markAsVisited('${fountainData.id}')">✅ Mark as Visited</button>` : ''}
+        ${fountainData.last_service_date ? `<div class="bottom-sheet-info">
+          <span class="bottom-sheet-label">🔧 Last Service:</span>
+          <span class="bottom-sheet-value">${fountainData.last_service_date}</span>
+        </div>` : ''}
+        ${fountainData.flow ? `<div class="bottom-sheet-info">
+          <span class="bottom-sheet-label">💦 Flow:</span>
+          <span class="bottom-sheet-value">${fountainData.flow}</span>
+        </div>` : ''}
+        ${fountainData.temp ? `<div class="bottom-sheet-info">
+          <span class="bottom-sheet-label">🌡️ Temperature:</span>
+          <span class="bottom-sheet-value">${fountainData.temp}</span>
+        </div>` : ''}
+        ${fountainData.drainage ? `<div class="bottom-sheet-info">
+          <span class="bottom-sheet-label">🚰 Drainage:</span>
+          <span class="bottom-sheet-value">${fountainData.drainage}</span>
+        </div>` : ''}
+        ${fountainData.caption ? `<div class="bottom-sheet-info">
+          <span class="bottom-sheet-label">📝 Notes:</span>
+          <span class="bottom-sheet-value">${fountainData.caption}</span>
+        </div>` : ''}
       `;
       
       bottomSheet.classList.add('active');
@@ -351,16 +320,9 @@
           onEachFeature: (f, layer) => {
             const p = f.properties;
             
-            // Determine marker color based on status
-            let markerColor = '#007bff'; // Default blue for unvisited
+            // Use consistent marker styling
+            let markerColor = '#007bff'; // Default blue
             let markerRadius = 8;
-            
-            if (p.visited === 'Yes') {
-              markerColor = '#28a745'; // Green for visited
-            } else if (p.rating && parseFloat(p.rating) >= 4) {
-              markerColor = '#ffc107'; // Yellow for highly rated
-              markerRadius = 10;
-            }
             
             // Create custom popup content for desktop
             const popupContent = `
@@ -368,11 +330,19 @@
                 <div class="popup-title">${p.name || 'Unnamed Fountain'}</div>
                 <div class="popup-info">
                   <span class="popup-label">📍 Location:</span>
-                  <span class="popup-value">${p.address || '—'}</span>
+                  <span class="popup-value">${p.location || p.address || '—'}</span>
                 </div>
                 <div class="popup-info">
                   <span class="popup-label">🏘️ Neighbourhood:</span>
                   <span class="popup-value">${p.geo_local_area || '—'}</span>
+                </div>
+                <div class="popup-info">
+                  <span class="popup-label">🏗️ Maintainer:</span>
+                  <span class="popup-value">${p.maintainer || '—'}</span>
+                </div>
+                <div class="popup-info">
+                  <span class="popup-label">📅 Operation:</span>
+                  <span class="popup-value">${p.in_operation || '—'}</span>
                 </div>
                 ${p.rating ? `<div class="popup-info">
                   <span class="popup-label">⭐ Rating:</span>
@@ -390,7 +360,26 @@
                   <span class="popup-label">💧 Bottle Filler:</span>
                   <span class="popup-value">${p.bottle_filler}</span>
                 </div>` : ''}
-                ${p.visited !== 'Yes' ? `<button class="visit-button" onclick="markAsVisited('${p.id}')">✅ Mark as Visited</button>` : ''}
+                ${p.last_service_date ? `<div class="popup-info">
+                  <span class="popup-label">🔧 Last Service:</span>
+                  <span class="popup-value">${p.last_service_date}</span>
+                </div>` : ''}
+                ${p.flow ? `<div class="popup-info">
+                  <span class="popup-label">💦 Flow:</span>
+                  <span class="popup-value">${p.flow}</span>
+                </div>` : ''}
+                ${p.temp ? `<div class="popup-info">
+                  <span class="popup-label">🌡️ Temperature:</span>
+                  <span class="popup-value">${p.temp}</span>
+                </div>` : ''}
+                ${p.drainage ? `<div class="popup-info">
+                  <span class="popup-label">🚰 Drainage:</span>
+                  <span class="popup-value">${p.drainage}</span>
+                </div>` : ''}
+                ${p.caption ? `<div class="popup-info">
+                  <span class="popup-label">📝 Notes:</span>
+                  <span class="popup-value">${p.caption}</span>
+                </div>` : ''}
               </div>
             `;
             
@@ -407,21 +396,10 @@
             allMarkers.push(layer);
           },
           pointToLayer: (f, latlng) => {
-            const p = f.properties;
-            let markerColor = '#007bff';
-            let markerRadius = 8;
-            
-            if (p.visited === 'Yes') {
-              markerColor = '#28a745';
-            } else if (p.rating && parseFloat(p.rating) >= 4) {
-              markerColor = '#ffc107';
-              markerRadius = 10;
-            }
-            
             return L.circleMarker(latlng, {
-              radius: markerRadius,
-              color: markerColor,
-              fillColor: markerColor,
+              radius: 8,
+              color: '#007bff',
+              fillColor: '#007bff',
               fillOpacity: 0.7,
               weight: 2
             });
@@ -457,13 +435,7 @@
         }
       });
 
-    function markAsVisited(fountainId) {
-      // In a real app, this would save to localStorage or a database
-      localStorage.setItem(`visited_${fountainId}`, 'true');
-      alert('Fountain marked as visited!');
-      // Refresh the map to update colors
-      location.reload();
-    }
+
   </script>
 </body>
 </html>

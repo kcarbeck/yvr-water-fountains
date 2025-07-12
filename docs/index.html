@@ -2,21 +2,194 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>YVR Water Fountains Map</title>
-  <link rel="stylesheet"
-        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <style>
-    body { margin:0; font-family: system-ui, sans-serif; }
-    nav { padding:0.6rem 1rem; background:#008cba; color:#fff; }
-    nav a { color:#fff; text-decoration:none; margin-left:1rem; }
-    #map { height: 92vh; }
+    body { 
+      margin: 0; 
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+    }
+    
+    .header {
+      background: linear-gradient(135deg, #008cba, #005f7f);
+      color: white;
+      padding: 1rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .header h1 {
+      margin: 0;
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+    
+    .header p {
+      margin: 0.5rem 0 0 0;
+      opacity: 0.9;
+      font-size: 0.9rem;
+    }
+    
+    .nav-links {
+      margin-top: 1rem;
+    }
+    
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      background: rgba(255,255,255,0.2);
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      margin-right: 0.5rem;
+      font-size: 0.9rem;
+      transition: background 0.2s;
+    }
+    
+    .nav-links a:hover {
+      background: rgba(255,255,255,0.3);
+    }
+    
+    .legend {
+      position: absolute;
+      top: 100px;
+      right: 10px;
+      background: white;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      z-index: 1000;
+      font-size: 0.8rem;
+    }
+    
+    .legend-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+    
+    .legend-color {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      margin-right: 0.5rem;
+    }
+    
+    .search-container {
+      position: absolute;
+      top: 100px;
+      left: 10px;
+      z-index: 1000;
+      background: white;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      width: 250px;
+    }
+    
+    .search-input {
+      width: 100%;
+      padding: 0.5rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 0.9rem;
+    }
+    
+    #map { 
+      height: calc(100vh - 120px); 
+    }
+    
+    .popup-content {
+      max-width: 300px;
+      font-size: 0.9rem;
+    }
+    
+    .popup-title {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #333;
+    }
+    
+    .popup-info {
+      margin-bottom: 0.5rem;
+    }
+    
+    .popup-label {
+      font-weight: 500;
+      color: #666;
+    }
+    
+    .popup-value {
+      color: #333;
+    }
+    
+    .visit-button {
+      background: #28a745;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 0.5rem;
+      font-size: 0.8rem;
+    }
+    
+    .visit-button:hover {
+      background: #218838;
+    }
+    
+    .visited {
+      background: #6c757d !important;
+    }
+    
+    @media (max-width: 768px) {
+      .header h1 {
+        font-size: 1.2rem;
+      }
+      
+      .search-container {
+        width: calc(100% - 20px);
+        left: 10px;
+        right: 10px;
+      }
+      
+      .legend {
+        position: fixed;
+        bottom: 20px;
+        right: 10px;
+        top: auto;
+      }
+    }
   </style>
 </head>
 <body>
-  <nav>
-    YVR Water Fountains
-    <a href="table.html">Table view</a>
-  </nav>
+  <div class="header">
+    <h1>🚰 YVR Water Fountains</h1>
+    <p>Find drinking fountains across Vancouver</p>
+    <div class="nav-links">
+      <a href="table.html">📊 Table View</a>
+      <a href="#" id="locate-me">📍 My Location</a>
+    </div>
+  </div>
+  
+  <div class="search-container">
+    <input type="text" class="search-input" placeholder="Search fountains..." id="search-input">
+  </div>
+  
+  <div class="legend">
+    <div class="legend-item">
+      <div class="legend-color" style="background: #28a745;"></div>
+      <span>Visited</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color" style="background: #007bff;"></div>
+      <span>Not Visited</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color" style="background: #ffc107;"></div>
+      <span>Highly Rated</span>
+    </div>
+  </div>
+  
   <div id="map"></div>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -26,34 +199,123 @@
       attribution: '© OpenStreetMap'
     }).addTo(map);
 
+    let allMarkers = [];
+    let searchResults = [];
+
     fetch('data/fountains_processed.geojson')
       .then(r => r.json())
       .then(gj => {
         const markerById = {};
+        
         const geoLayer = L.geoJSON(gj, {
           onEachFeature: (f, layer) => {
             const p = f.properties;
-            // Build popup HTML with all relevant info
-            let popup = `<strong>${p.name||'Unnamed'}</strong><br>`;
-            popup += `<table class='table table-sm table-borderless mb-0'>`;
-            popup += `<tr><th>Neighbourhood</th><td>${p.geo_local_area||'—'}</td></tr>`;
-            popup += `<tr><th>Address</th><td>${p.address||'—'}</td></tr>`;
-            popup += `<tr><th>Rating</th><td>${p.rating ? p.rating : '—'}</td></tr>`;
-            if (p.photo_url) popup += `<tr><th>IG Photo</th><td><img src='${p.photo_url}' width='60'></td></tr>`;
-            if (p.ig_post_url) popup += `<tr><th>IG Post</th><td><a href='${p.ig_post_url}' target='_blank'>View Post</a></td></tr>`;
-            popup += `<tr><th>Pet OK</th><td>${p.pet_friendly||'—'}</td></tr>`;
-            popup += `<tr><th>Wheelchair</th><td>${p.wheelchair_accessible||'—'}</td></tr>`;
-            popup += `<tr><th>Bottle</th><td>${p.bottle_filler||'—'}</td></tr>`;
-            popup += `<tr><th>Serviced</th><td>${p.last_service_date||'—'}</td></tr>`;
-            popup += `<tr><th>Visited</th><td>${p.visited||'—'}</td></tr>`;
-            popup += `<tr><th>Visit Date</th><td>${p.visit_date||'—'}</td></tr>`;
-            popup += `<tr><th>Caption</th><td>${p.caption||'—'}</td></tr>`;
-            popup += `</table>`;
-            layer.bindPopup(popup);
+            
+            // Determine marker color based on status
+            let markerColor = '#007bff'; // Default blue for unvisited
+            let markerRadius = 8;
+            
+            if (p.visited === 'Yes') {
+              markerColor = '#28a745'; // Green for visited
+            } else if (p.rating && parseFloat(p.rating) >= 4) {
+              markerColor = '#ffc107'; // Yellow for highly rated
+              markerRadius = 10;
+            }
+            
+            // Create custom popup content
+            const popupContent = `
+              <div class="popup-content">
+                <div class="popup-title">${p.name || 'Unnamed Fountain'}</div>
+                <div class="popup-info">
+                  <span class="popup-label">📍 Location:</span>
+                  <span class="popup-value">${p.address || '—'}</span>
+                </div>
+                <div class="popup-info">
+                  <span class="popup-label">🏘️ Neighbourhood:</span>
+                  <span class="popup-value">${p.geo_local_area || '—'}</span>
+                </div>
+                ${p.rating ? `<div class="popup-info">
+                  <span class="popup-label">⭐ Rating:</span>
+                  <span class="popup-value">${p.rating}/5</span>
+                </div>` : ''}
+                ${p.pet_friendly ? `<div class="popup-info">
+                  <span class="popup-label">🐕 Pet Friendly:</span>
+                  <span class="popup-value">${p.pet_friendly}</span>
+                </div>` : ''}
+                ${p.wheelchair_accessible ? `<div class="popup-info">
+                  <span class="popup-label">♿ Wheelchair:</span>
+                  <span class="popup-value">${p.wheelchair_accessible}</span>
+                </div>` : ''}
+                ${p.bottle_filler ? `<div class="popup-info">
+                  <span class="popup-label">💧 Bottle Filler:</span>
+                  <span class="popup-value">${p.bottle_filler}</span>
+                </div>` : ''}
+                ${p.visited !== 'Yes' ? `<button class="visit-button" onclick="markAsVisited('${p.id}')">✅ Mark as Visited</button>` : ''}
+              </div>
+            `;
+            
+            layer.bindPopup(popupContent);
             if (p.id) markerById[p.id] = layer;
+            allMarkers.push(layer);
           },
-          pointToLayer: (_, latlng) => L.circleMarker(latlng, {radius:6, color:'#008cba'})
+          pointToLayer: (f, latlng) => {
+            const p = f.properties;
+            let markerColor = '#007bff';
+            let markerRadius = 8;
+            
+            if (p.visited === 'Yes') {
+              markerColor = '#28a745';
+            } else if (p.rating && parseFloat(p.rating) >= 4) {
+              markerColor = '#ffc107';
+              markerRadius = 10;
+            }
+            
+            return L.circleMarker(latlng, {
+              radius: markerRadius,
+              color: markerColor,
+              fillColor: markerColor,
+              fillOpacity: 0.7,
+              weight: 2
+            });
+          }
         }).addTo(map);
+
+        // Search functionality
+        const searchInput = document.getElementById('search-input');
+        searchInput.addEventListener('input', (e) => {
+          const searchTerm = e.target.value.toLowerCase();
+          
+          // Clear previous search results
+          searchResults.forEach(marker => {
+            marker.setStyle({ opacity: 1, fillOpacity: 0.7 });
+          });
+          searchResults = [];
+          
+          if (searchTerm.length > 2) {
+            allMarkers.forEach(marker => {
+              const popup = marker.getPopup();
+              const content = popup.getContent();
+              if (content.toLowerCase().includes(searchTerm)) {
+                marker.setStyle({ opacity: 0.3, fillOpacity: 0.3 });
+                searchResults.push(marker);
+              }
+            });
+          }
+        });
+
+        // Locate me functionality
+        document.getElementById('locate-me').addEventListener('click', () => {
+          if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition((position) => {
+              const { latitude, longitude } = position.coords;
+              map.setView([latitude, longitude], 15);
+            }, () => {
+              alert('Unable to get your location');
+            });
+          } else {
+            alert('Geolocation is not supported by this browser');
+          }
+        });
 
         // Focus on marker if hash is present
         const hash = window.location.hash.replace('#','');
@@ -63,6 +325,14 @@
           marker.openPopup();
         }
       });
+
+    function markAsVisited(fountainId) {
+      // In a real app, this would save to localStorage or a database
+      localStorage.setItem(`visited_${fountainId}`, 'true');
+      alert('Fountain marked as visited!');
+      // Refresh the map to update colors
+      location.reload();
+    }
   </script>
 </body>
 </html>

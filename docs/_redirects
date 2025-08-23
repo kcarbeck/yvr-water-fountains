@@ -1,0 +1,9 @@
+# Netlify redirects file
+# This file handles URL routing for the static site
+
+# Default redirects for clean URLs
+/map /index.html 200
+/table /table.html 200
+
+# Force HTTPS (optional)
+http://yvr-water-fountains.netlify.app/* https://yvr-water-fountains.netlify.app/:splat 301!

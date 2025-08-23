@@ -57,11 +57,11 @@ col_rename = {
     "name": "Name",
     "geo_local_area": "Neighbourhood",
     "address": "Address",
-    "pet_friendly": "Pet OK",
-    "wheelchair_accessible": "Wheelchair",
-    "bottle_filler": "Bottle",
-    "last_service_date": "Serviced",
-    "visited": "Visited",
+    "pet_friendly": "Pet Friendly",
+    "wheelchair_accessible": "Accessibility",
+    "bottle_filler": "Bottle Filler",
+    "last_service_date": "Last Serviced",
+    "visited": "Last Visited",
     "visit_date": "Visit Date",
     "caption": "Caption"
 }
@@ -141,7 +141,7 @@ DST.write_text(
                 var colIdx = column.index();
                 var header = $(column.header());
                 var title = header.text();
-                if (["Neighbourhood","Pet OK","Wheelchair","Bottle","Visited"].includes(title)) {{
+                if (["Neighbourhood","Pet Friendly","Accessibility","Bottle Filler","Last Visited"].includes(title)) {{
                   var select = $('<select><option value="">All</option></select>')
                     .appendTo(header.empty().attr('title', 'Filter by ' + title))
                     .on('change', function() {{
@@ -164,7 +164,7 @@ DST.write_text(
             $(row).find('td').each(function(i) {{
               var col = table.column(i).header().textContent;
               var val = $(this).text().trim().toLowerCase();
-              if(["pet ok","wheelchair","bottle"].includes(col.toLowerCase())) {{
+              if(["pet friendly","accessibility","bottle filler"].includes(col.toLowerCase())) {{
                 if(val === 'yes') $(this).addClass('feature-yes');
                 else if(val === 'no') $(this).addClass('feature-no');
                 else $(this).addClass('feature-unknown');

@@ -1,0 +1,59 @@
+[build]
+  # Build command - regenerate data before deployment
+  command = "python scripts/generate_geojson_api.py"
+  
+  # Directory to publish (the docs folder contains our web app)
+  publish = "docs"
+  
+  # Environment for build
+  [build.environment]
+    PYTHON_VERSION = "3.9"
+
+# Custom headers for better performance
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Cache static assets
+[[headers]]
+  for = "/data/*.geojson"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"  # Cache for 1 hour
+
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"  # Cache for 1 day
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"  # Cache for 1 day
+
+# Redirects (if needed)
+# [[redirects]]
+#   from = "/old-path"
+#   to = "/new-path"
+#   status = 301
+
+# SPA fallback (not needed for our static site)
+# [[redirects]]
+#   from = "/*"
+#   to = "/index.html"
+#   status = 200
+
+[context.production]
+  # Production-specific settings
+  command = "python scripts/generate_geojson_api.py"
+
+[context.deploy-preview]
+  # Settings for deploy previews (PR builds)
+  command = "python scripts/generate_geojson_api.py"
+
+[context.branch-deploy]
+  # Settings for branch deployments
+  command = "python scripts/generate_geojson_api.py"

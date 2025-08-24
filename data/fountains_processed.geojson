@@ -4393,15 +4393,15 @@
         "wheelchair_accessible": "Unknown",
         "bottle_filler": "Unknown",
         "last_service_date": "Unknown",
-        "rating": "",
-        "ig_post_url": "",
-        "flow": "",
-        "temp": "",
-        "drainage": "",
-        "caption": "",
-        "visited": "",
-        "visit_date": "",
-        "photo_url": ""
+        "rating": "7",
+        "ig_post_url": "https://www.instagram.com/p/DJuVLSLvfzk/",
+        "flow": "5",
+        "temp": "5",
+        "drainage": "5",
+        "caption": "Empire fields, south side by the basketball courts and parking lot. I feel like this waterfountain doesn't get much attention. So far it's fine, except the short side stream is going wild! 7/10. Will have to come back when it's hot out to see how it does for temperature.",
+        "visited": "YES",
+        "visit_date": "05/16/2025",
+        "photo_url": "https://www.instagram.com/p/DJuVLSLvfzk/media/?size=m"
       }
     },
     {
@@ -4837,15 +4837,15 @@
         "wheelchair_accessible": "Unknown",
         "bottle_filler": "Unknown",
         "last_service_date": "Unknown",
-        "rating": "",
-        "ig_post_url": "",
-        "flow": "",
-        "temp": "",
-        "drainage": "",
-        "caption": "",
-        "visited": "",
-        "visit_date": "",
-        "photo_url": ""
+        "rating": "7.5",
+        "ig_post_url": "https://www.instagram.com/p/DJpu8cbSfTE/",
+        "flow": "5",
+        "temp": "5",
+        "drainage": "5",
+        "caption": "Last summer, this fountain was the worst. So far this year, it's fine! Good enough drainage, decent water pressure, ok temperature. I give it a perfectly average score of 7.5/10",
+        "visited": "YES",
+        "visit_date": "05/14/2025 ",
+        "photo_url": "https://www.instagram.com/p/DJpu8cbSfTE/media/?size=m"
       }
     },
     {
@@ -7517,43 +7517,6 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -123.034248,
-          49.282669
-        ]
-      },
-      "properties": {
-        "id": "DFPB0066",
-        "name": "Hastings Park -Plateau Sport Parks / Empire Fields",
-        "location": "field house at empire field",
-        "maintainer": "Parks",
-        "in_operation": "spring to fall",
-        "pet_friendly": null,
-        "photo_name": "Hastings Park (Empire Field) - drinking fountain - 2006.JPG",
-        "geo_local_area": "Hastings-Sunrise",
-        "geo_point_2d": {
-          "lon": -123.03424848993296,
-          "lat": 49.282669236667665
-        },
-        "address": "field house at empire field",
-        "wheelchair_accessible": "Unknown",
-        "bottle_filler": "Unknown",
-        "last_service_date": "Unknown",
-        "rating": "",
-        "ig_post_url": "",
-        "flow": "",
-        "temp": "",
-        "drainage": "",
-        "caption": "",
-        "visited": "",
-        "visit_date": "",
-        "photo_url": ""
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
           -123.034264,
           49.282563
         ]
@@ -7612,15 +7575,15 @@
         "wheelchair_accessible": "Unknown",
         "bottle_filler": "Unknown",
         "last_service_date": "Unknown",
-        "rating": "",
-        "ig_post_url": "",
-        "flow": "",
-        "temp": "",
-        "drainage": "",
-        "caption": "",
-        "visited": "",
-        "visit_date": "",
-        "photo_url": ""
+        "rating": "7.5",
+        "ig_post_url": "https://www.instagram.com/p/DJr14deSmgW/",
+        "flow": "5",
+        "temp": "6",
+        "drainage": "6",
+        "caption": "6-7/10. It's a 7 right now, last summer it was 6 because the temperature is not great and the stream can get weak. Convenient though, on hot summer runs.",
+        "visited": "YES",
+        "visit_date": "05/15/2025 ",
+        "photo_url": "https://www.instagram.com/p/DJr14deSmgW/media/?size=m"
       }
     },
     {

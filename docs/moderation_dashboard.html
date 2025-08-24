@@ -247,6 +247,17 @@
         <div class="container">
             <h1><i class="fas fa-shield-alt"></i> Moderation Dashboard</h1>
             <p>Review and manage fountain reviews</p>
+            <div class="mt-3">
+                <a href="map.html" class="btn btn-outline-light btn-sm me-2">
+                    <i class="fas fa-map"></i> View Map
+                </a>
+                <a href="public_review_form.html" class="btn btn-outline-light btn-sm me-2">
+                    <i class="fas fa-user"></i> Public Review
+                </a>
+                <a href="admin_review_form.html" class="btn btn-outline-light btn-sm">
+                    <i class="fas fa-user-shield"></i> Admin Review
+                </a>
+            </div>
         </div>
     </div>
     
@@ -594,6 +605,8 @@
                     <div class="fountain-info">
                         <h5><i class="fas fa-tint"></i> ${fountainName}</h5>
                         <small>ID: ${fountainId}</small>
+                        ${review.review_type === 'instagram' ? '<span class="badge bg-info ms-2"><i class="fab fa-instagram"></i> Instagram Review</span>' : ''}
+                        ${review.review_type === 'user_submission' ? '<span class="badge bg-secondary ms-2"><i class="fas fa-user"></i> Public Review</span>' : ''}
                     </div>
                     
                     <div class="review-header">

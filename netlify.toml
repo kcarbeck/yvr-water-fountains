@@ -1,5 +1,5 @@
 [build]
-  # Build command - regenerate data before deployment
+  # Build command - generate API data from stable Supabase fountain data
   command = "python scripts/generate_geojson_api.py"
   
   # Directory to publish (the docs folder contains our web app)

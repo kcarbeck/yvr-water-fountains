@@ -591,11 +591,36 @@
                         marker.on('click', () => selectFountain(props, marker));
                         
                         // Add popup with fountain info and Instagram photo if available
-                        marker.bindPopup(`
-                            <strong>${props.name || 'Unnamed Fountain'}</strong><br>
-                            <small>ID: ${props.id || 'N/A'}</small><br>
-                            <small>${props.geo_local_area || ''}</small>
-                        `);
+                        let popupContent = `
+                            <div style="min-width: 200px;">
+                                <strong>${props.name || 'Unnamed Fountain'}</strong><br>
+                                <small>ID: ${props.id || 'N/A'}</small><br>
+                                <small>${props.geo_local_area || ''}</small>
+                        `;
+                        
+                        // Add Instagram photo if available
+                        if (props.ig_post_url && props.ig_post_url.trim()) {
+                            const photoUrl = getInstagramPhotoUrl(props.ig_post_url);
+                            if (photoUrl) {
+                                popupContent += `
+                                    <hr style="margin: 8px 0;">
+                                    <div style="text-align: center;">
+                                        <img src="${photoUrl}" alt="Instagram photo" 
+                                             style="max-width: 180px; max-height: 180px; border-radius: 8px; cursor: pointer;"
+                                             onclick="window.open('${props.ig_post_url}', '_blank')"
+                                             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                        <div style="display: none; color: #666; font-size: 12px; padding: 10px;">
+                                            <a href="${props.ig_post_url}" target="_blank" style="color: #e4405f;">
+                                                <i class="fab fa-instagram"></i> View Instagram Post
+                                            </a>
+                                        </div>
+                                    </div>
+                                `;
+                            }
+                        }
+                        
+                        popupContent += '</div>';
+                        marker.bindPopup(popupContent);
                         
                         allMarkers.push(marker);
                     }
@@ -764,11 +789,12 @@
         }
         
         
-        // Set today's date as default
-        document.getElementById('visitDate').value = new Date().toISOString().split('T')[0];
         
         // Initialize map when page loads
         document.addEventListener('DOMContentLoaded', function() {
+            // Set today's date as default
+            document.getElementById('visitDate').value = new Date().toISOString().split('T')[0];
+            
             initMap();
             
             // Initialize fountain search functionality
@@ -886,23 +912,34 @@
                     throw new Error(`Failed to submit review: ${insertError.message}`);
                 }
                 
-                // If there's an Instagram URL, add it to instagram_posts table
+                // If there's an Instagram URL, add it to instagram_posts table (check for duplicates first)
                 if (data.instagramUrl && data.instagramUrl.trim()) {
-                    const instagramData = {
-                        fountain_id: fountainUuid,
-                        rating_id: insertedRating.id,
-                        post_url: data.instagramUrl,
-                        caption: data.instagramCaption || data.additionalNotes || null,
-                        date_posted: data.visitDate
-                    };
-                    
-                    const { error: igError } = await supabaseClient
+                    // Check if this Instagram post URL already exists
+                    const { data: existingPost } = await supabaseClient
                         .from('instagram_posts')
-                        .insert([instagramData]);
+                        .select('id')
+                        .eq('post_url', data.instagramUrl)
+                        .single();
                     
-                    if (igError) {
-                        console.warn('Failed to save Instagram post data:', igError);
-                        // Don't fail the whole submission for Instagram errors
+                    if (!existingPost) {
+                        const instagramData = {
+                            fountain_id: fountainUuid,
+                            rating_id: insertedRating.id,
+                            post_url: data.instagramUrl,
+                            caption: data.instagramCaption || data.additionalNotes || null,
+                            date_posted: data.visitDate
+                        };
+                        
+                        const { error: igError } = await supabaseClient
+                            .from('instagram_posts')
+                            .insert([instagramData]);
+                        
+                        if (igError) {
+                            console.warn('Failed to save Instagram post data:', igError);
+                            // Don't fail the whole submission for Instagram errors
+                        }
+                    } else {
+                        console.log('Instagram post already exists, skipping duplicate');
                     }
                 }
                 

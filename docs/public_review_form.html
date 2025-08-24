@@ -707,11 +707,11 @@
             fountainMap.setView([49.251, -123.060], 11);
         }
         
-        // Set today's date as default
-        document.getElementById('visitDate').value = new Date().toISOString().split('T')[0];
-        
         // Initialize map when page loads
         document.addEventListener('DOMContentLoaded', function() {
+            // Set today's date as default
+            document.getElementById('visitDate').value = new Date().toISOString().split('T')[0];
+            
             initMap();
             
             // Initialize fountain search functionality

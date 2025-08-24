@@ -2,7 +2,8 @@
 # This file handles URL routing for the static site
 
 # Default redirects for clean URLs
-/map /index.html 200
+/map /map.html 200
+/ /map.html 200
 /table /table.html 200
 
 # Force HTTPS (optional)

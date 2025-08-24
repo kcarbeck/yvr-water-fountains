@@ -85,7 +85,7 @@ def validate_deployment():
     
     # Check required files exist
     required_files = [
-        docs_dir / "index.html",
+        docs_dir / "map.html",
         docs_dir / "table.html", 
         docs_dir / "data" / "fountains_processed.geojson"
     ]
@@ -146,18 +146,18 @@ def validate_deployment():
     
     # Check HTML files have proper titles and structure
     try:
-        index_file = docs_dir / "index.html"
+        index_file = docs_dir / "map.html"
         with open(index_file, 'r') as f:
             html_content = f.read()
         
         if "YVR Water Fountains" not in html_content:
-            print("⚠️  index.html missing proper title")
+            print("⚠️  map.html missing proper title")
         
         if "leaflet" not in html_content.lower():
-            print("⚠️  index.html missing Leaflet.js")
+            print("⚠️  map.html missing Leaflet.js")
         
         if "fountains_processed.geojson" not in html_content:
-            print("⚠️  index.html not loading fountain data")
+            print("⚠️  map.html not loading fountain data")
         
         print("✅ HTML files look good")
         

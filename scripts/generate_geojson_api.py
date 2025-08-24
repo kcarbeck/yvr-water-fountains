@@ -22,27 +22,31 @@ def generate_geojson_file():
     print("🔄 Generating GeoJSON for web app...")
     
     try:
-        # Get fountain data with coordinates
-        fountains_result = supabase.table("fountains").select("""
-            id, name, lat, lon, original_mapid, location_description, 
-            detailed_location, neighborhood, type, maintainer, 
-            in_operation, operational_season, pet_friendly, 
-            accessibility_features, photo_name
+        # Get fountain data with coordinates from the fountain_details view
+        fountains_result = supabase.table("fountain_details").select("""
+            id, name, lat, lon, city_name, neighborhood, location_description, 
+            type, maintainer, operational_season, currently_operational, 
+            pet_friendly, avg_rating, rating_count, last_visited
         """).execute()
         fountains_data = {f['id']: f for f in fountains_result.data}
         
-        # Get rating summaries
-        ratings_result = supabase.table("fountain_rating_summary").select("*").execute()
-        ratings_data = {r['fountain_id']: r for r in ratings_result.data}
+        # Get all ratings for each fountain
+        ratings_result = supabase.table("ratings").select("*").execute()
+        ratings_by_fountain = {}
+        for rating in ratings_result.data:
+            fountain_id = rating['fountain_id']
+            if fountain_id not in ratings_by_fountain:
+                ratings_by_fountain[fountain_id] = []
+            ratings_by_fountain[fountain_id].append(rating)
         
-        # Get all reviews for each fountain with Instagram data
-        reviews_result = supabase.table("fountain_reviews").select("*").execute()
-        reviews_by_fountain = {}
-        for review in reviews_result.data:
-            fountain_id = review['fountain_id']
-            if fountain_id not in reviews_by_fountain:
-                reviews_by_fountain[fountain_id] = []
-            reviews_by_fountain[fountain_id].append(review)
+        # Get Instagram posts
+        instagram_result = supabase.table("instagram_posts").select("*").execute()
+        instagram_by_fountain = {}
+        for post in instagram_result.data:
+            fountain_id = post['fountain_id']
+            if fountain_id not in instagram_by_fountain:
+                instagram_by_fountain[fountain_id] = []
+            instagram_by_fountain[fountain_id].append(post)
         
         print(f"📊 Found {len(fountains_data)} fountains")
         
@@ -54,22 +58,24 @@ def generate_geojson_file():
             if not fountain.get('lat') or not fountain.get('lon'):
                 continue
                 
-            # Get rating data for this fountain
-            rating_data = ratings_data.get(fountain_id, {})
-            fountain_reviews = reviews_by_fountain.get(fountain_id, [])
+            # Get ratings and Instagram posts for this fountain
+            fountain_ratings = ratings_by_fountain.get(fountain_id, [])
+            fountain_instagram = instagram_by_fountain.get(fountain_id, [])
             
-            # Get Instagram posts from reviews
+            # Get latest rating details
+            latest_rating = None
+            if fountain_ratings:
+                latest_rating = max(fountain_ratings, key=lambda x: x.get('visit_date', '1900-01-01') if x.get('visit_date') else '1900-01-01')
+            
+            # Format Instagram posts
             instagram_posts = []
-            for review in fountain_reviews:
-                if review.get('post_url'):
-                    instagram_posts.append({
-                        "url": review['post_url'],
-                        "post_id": review.get('post_id'),
-                        "caption": review.get('ig_caption'),
-                        "date_posted": review.get('visit_date'),
-                        "rating": review.get('overall_rating'),
-                        "reviewer": review.get('reviewer_name')
-                    })
+            for post in fountain_instagram:
+                instagram_posts.append({
+                    "url": post['post_url'],
+                    "caption": post.get('caption'),
+                    "date_posted": post.get('date_posted'),
+                    "rating_id": post.get('rating_id')
+                })
             
             feature = {
                 "type": "Feature",
@@ -78,39 +84,31 @@ def generate_geojson_file():
                     "coordinates": [float(fountain['lon']), float(fountain['lat'])]
                 },
                 "properties": {
-                    "id": fountain.get('original_mapid'),
-                    "fountain_id": fountain_id,
+                    "id": fountain_id,
                     "name": fountain.get('name') or 'Unnamed Fountain',
+                    "city": fountain.get('city_name'),
+                    "neighborhood": fountain.get('neighborhood'),
                     "location": fountain.get('location_description'),
-                    "detailed_location": fountain.get('detailed_location'),
-                    "geo_local_area": fountain.get('neighborhood'),
                     "type": fountain.get('type'),
                     "maintainer": fountain.get('maintainer'),
-                    "in_operation": format_operation_status(fountain),
-                    "pet_friendly": "Yes" if fountain.get('pet_friendly') else "No",
-                    "accessibility_features": fountain.get('accessibility_features'),
-                    "photo_name": fountain.get('photo_name'),
+                    "operational_season": fountain.get('operational_season'),
+                    "currently_operational": fountain.get('currently_operational'),
+                    "pet_friendly": fountain.get('pet_friendly'),
                     
                     # Rating summary data
-                    "avg_rating": rating_data.get('avg_overall_rating'),
-                    "avg_water_quality": rating_data.get('avg_water_quality'),
-                    "avg_flow_pressure": rating_data.get('avg_flow_pressure'),
-                    "avg_temperature": rating_data.get('avg_temperature'),
-                    "avg_drainage": rating_data.get('avg_drainage'),
-                    "avg_accessibility": rating_data.get('avg_accessibility'),
-                    "rating_count": rating_data.get('total_reviews', 0),
-                    "last_reviewed": rating_data.get('last_reviewed'),
+                    "avg_rating": fountain.get('avg_rating'),
+                    "rating_count": fountain.get('rating_count'),
+                    "last_visited": fountain.get('last_visited'),
                     
-                    # Latest review data (for backward compatibility)
-                    "rating": rating_data.get('latest_rating'),
-                    "flow": rating_data.get('latest_flow'),
-                    "temp": rating_data.get('latest_temp'),
-                    "drainage": rating_data.get('latest_drainage'),
-                    "caption": rating_data.get('latest_notes'),
-                    "latest_reviewer": rating_data.get('latest_reviewer'),
+                    # Latest rating data (for backward compatibility)
+                    "rating": latest_rating.get('overall_rating') if latest_rating else None,
+                    "flow": latest_rating.get('flow_pressure') if latest_rating else None,
+                    "temp": latest_rating.get('temperature') if latest_rating else None,
+                    "drainage": latest_rating.get('drainage') if latest_rating else None,
+                    "caption": latest_rating.get('notes') if latest_rating else None,
+                    "water_quality": latest_rating.get('water_quality') if latest_rating else None,
                     
-                    # Reviews and Instagram data
-                    "reviews": fountain_reviews,
+                    # Instagram data
                     "instagram_posts": instagram_posts,
                     "has_instagram": len(instagram_posts) > 0,
                     "instagram_count": len(instagram_posts)

@@ -17,11 +17,11 @@ def generate_geojson_file():
     
     try:
         # Get fountain data
-        fountains_result = supabase.table("fountains").select("id, name, lat, lon, original_mapid, location_description, neighborhood, type, maintainer, in_operation, pet_friendly").execute()
+        fountains_result = supabase.table("fountains").select("id, name, lat, lon, original_mapid, location_description, neighborhood, type, maintainer, operational_season, pet_friendly").execute()
         fountains_data = {f['id']: f for f in fountains_result.data}
         
         # Get ratings data
-        ratings_result = supabase.table("ratings").select("fountain_id, overall_rating, water_quality, flow_pressure, temperature, accessibility, visit_date, notes, user_name").execute()
+        ratings_result = supabase.table("ratings").select("fountain_id, overall_rating, water_quality, flow_pressure, temperature, accessibility, visit_date, notes, reviewer_name").execute()
         
         # Group ratings by fountain
         ratings_by_fountain = {}
@@ -48,7 +48,7 @@ def generate_geojson_file():
                 avg_overall = sum(r['overall_rating'] for r in fountain_ratings if r['overall_rating']) / len([r for r in fountain_ratings if r['overall_rating']])
                 latest_review = max(fountain_ratings, key=lambda x: x['visit_date'] if x['visit_date'] else '1900-01-01')
                 latest_rating = latest_review['overall_rating']
-                latest_reviewer = latest_review['user_name']
+                latest_reviewer = latest_review['reviewer_name']
                 latest_notes = latest_review['notes']
             else:
                 avg_overall = None
@@ -67,7 +67,7 @@ def generate_geojson_file():
                     "geo_local_area": fountain.get('neighborhood'),
                     "type": fountain.get('type'),
                     "maintainer": fountain.get('maintainer'),
-                    "in_operation": "Yes" if fountain.get('in_operation') else "No",
+                    "operational_season": fountain.get('operational_season', 'unknown'),
                     "pet_friendly": "Yes" if fountain.get('pet_friendly') else "No",
                     "avg_rating": round(avg_overall, 1) if avg_overall else None,
                     "rating_count": len(fountain_ratings),

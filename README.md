@@ -2,7 +2,7 @@
 
 An interactive web application mapping 429+ public drinking fountains across Vancouver and Burnaby, featuring Instagram-integrated reviews, community ratings, and comprehensive moderation system.
 
-**🌐 [View Live Application →](https://kcarbeck.github.io/yvr-water-fountains/index.html)**
+**🌐 [View Live Application →](https://kcarbeck.github.io/yvr-water-fountains/map.html)**
 
 ![Water Fountains Map](docs/images/map-preview.png)
 
@@ -21,7 +21,6 @@ An interactive web application mapping 429+ public drinking fountains across Van
 ### Frontend Architecture
 - **Framework**: Vanilla JavaScript with Leaflet.js for mapping
 - **Design**: Mobile-first responsive CSS with modern UI patterns
-- **Performance**: Optimized GeoJSON data (95% compression via gzip)
 - **UX**: Conditional popups (desktop) vs bottom sheets (mobile)
 
 ### Backend & Data Pipeline
@@ -106,7 +105,6 @@ This project demonstrates proficiency in:
 - **Instagram Integration** with [@yvrwaterfountains](https://www.instagram.com/yvrwaterfountains/) for systematic review collection
 - **Multi-dimensional Rating System** covering 6 criteria (overall, water quality, flow, temperature, cleanliness, accessibility)
 - **Professional Moderation Tools** for managing community-submitted reviews
-- **95% data compression** achieved through optimization
 - **Mobile-first design** supporting all modern browsers with Instagram post previews
 - **Zero-downtime deployment** via GitHub Pages
 

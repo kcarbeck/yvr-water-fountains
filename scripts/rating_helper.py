@@ -150,33 +150,33 @@ class RatingManager:
             logger.error(f"Error rejecting review: {e}")
             return False
     
-    def update_fountain_status(self, fountain_mapid: str, in_operation: bool, notes: str = None):
+    def update_fountain_status(self, fountain_mapid: str, operational_season: str, notes: str = None):
         """Update operational status of a fountain"""
         fountain_id = self.find_fountain_by_mapid(fountain_mapid)
         if not fountain_id:
             return False
         
-        update_data = {"in_operation": in_operation}
+        update_data = {"operational_season": operational_season}
         if notes:
             # You might want to add a notes field to fountains table for operational notes
             pass
         
         try:
             self.supabase.table("fountains").update(update_data).eq("id", fountain_id).execute()
-            logger.info(f"Updated fountain {fountain_mapid} operational status to {in_operation}")
+            logger.info(f"Updated fountain {fountain_mapid} operational season to {operational_season}")
             return True
         except Exception as e:
             logger.error(f"Error updating fountain status: {e}")
             return False
     
-    def search_fountains(self, city: str = None, in_operation: bool = None, min_rating: float = None):
+    def search_fountains(self, city: str = None, operational_season: str = None, min_rating: float = None):
         """Search fountains with filters"""
         query = self.supabase.table("fountain_details").select("*")
         
         if city:
             query = query.eq("city_name", city)
-        if in_operation is not None:
-            query = query.eq("in_operation", in_operation)
+        if operational_season is not None:
+            query = query.eq("operational_season", operational_season)
         if min_rating:
             query = query.gte("avg_rating", min_rating)
         

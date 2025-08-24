@@ -23,28 +23,22 @@ def clean_database():
     logger.info("🧹 Cleaning database...")
     
     try:
-        # Delete in proper order (respecting foreign keys)
+        # Delete in proper order (respecting foreign keys) using batch operations
         
-        # 1. Delete Instagram posts first (get all, then delete)
-        posts = supabase.table("instagram_posts").select("id").execute()
-        if posts.data:
-            for post in posts.data:
-                supabase.table("instagram_posts").delete().eq("id", post["id"]).execute()
-        logger.info(f"Deleted {len(posts.data) if posts.data else 0} Instagram posts")
+        # 1. Delete Instagram posts (CASCADE will handle this, but explicit for clarity)
+        result = supabase.table("instagram_posts").delete().neq("id", "00000000-0000-0000-0000-000000000000").execute()
+        instagram_count = len(result.data) if result.data else 0
+        logger.info(f"Deleted {instagram_count} Instagram posts")
         
-        # 2. Delete ratings
-        ratings = supabase.table("ratings").select("id").execute()
-        if ratings.data:
-            for rating in ratings.data:
-                supabase.table("ratings").delete().eq("id", rating["id"]).execute()
-        logger.info(f"Deleted {len(ratings.data) if ratings.data else 0} ratings")
+        # 2. Delete ratings (CASCADE will handle this, but explicit for clarity)
+        result = supabase.table("ratings").delete().neq("id", "00000000-0000-0000-0000-000000000000").execute()
+        rating_count = len(result.data) if result.data else 0
+        logger.info(f"Deleted {rating_count} ratings")
         
-        # 3. Delete fountains
-        fountains = supabase.table("fountains").select("id").execute()
-        if fountains.data:
-            for fountain in fountains.data:
-                supabase.table("fountains").delete().eq("id", fountain["id"]).execute()
-        logger.info(f"Deleted {len(fountains.data) if fountains.data else 0} fountains")
+        # 3. Delete fountains (this will CASCADE delete any remaining references)
+        result = supabase.table("fountains").delete().neq("id", "00000000-0000-0000-0000-000000000000").execute()
+        fountain_count = len(result.data) if result.data else 0
+        logger.info(f"Deleted {fountain_count} fountains")
         
         # 4. Reset source datasets (optional - keep for tracking)
         # result = supabase.table("source_datasets").delete().neq("id", "non-existent").execute()

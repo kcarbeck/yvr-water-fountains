@@ -83,16 +83,16 @@ class FountainETL:
                 continue
             
             # Parse operational season
-            in_operation = True
-            operational_season = None
+            operational_season = 'unknown'  # Default for blank/NA
             if pd.notna(row['IN_OPERATION']):
-                op_status = str(row['IN_OPERATION']).lower()
-                if op_status in ['spring to fall', 'may-october']:
-                    operational_season = op_status
-                elif op_status == 'year-round':
-                    operational_season = 'year-round'
-                elif op_status == '':
-                    in_operation = None  # Unknown
+                op_status = str(row['IN_OPERATION']).lower().strip()
+                if op_status and op_status != '':  # Not empty
+                    if op_status in ['spring to fall', 'may-october']:
+                        operational_season = op_status
+                    elif op_status in ['year-round', 'year round']:
+                        operational_season = 'year-round'
+                    else:
+                        operational_season = op_status  # Keep original if not recognized
             
             # Parse pet_friendly
             pet_friendly = False
@@ -109,12 +109,10 @@ class FountainETL:
                 "lat": lat,
                 "lon": lon,
                 "location": f"POINT({lon} {lat})",
-                "in_operation": in_operation,
                 "operational_season": operational_season,
                 "pet_friendly": pet_friendly,
                 "maintainer": str(row.get('MAINTAINER', '') or '').strip() or None,
-                "original_mapid": str(row.get('MAPID', '') or '').strip() or None,
-                "photo_name": str(row.get('PHOTO_NAME', '') or '').strip() or None
+                "original_mapid": str(row.get('MAPID', '') or '').strip() or None
             }
             
             fountains.append(fountain_data)
@@ -178,12 +176,10 @@ class FountainETL:
                 "lat": lat,
                 "lon": lon,
                 "location": f"POINT({lon} {lat})",
-                "in_operation": True,  # Assume true for Burnaby data
-                "operational_season": None,
+                "operational_season": 'unknown',  # Default for Burnaby data (not specified)
                 "pet_friendly": False,  # Not specified in Burnaby data
                 "maintainer": "Parks",  # Inferred from data source
-                "original_mapid": str(row.get('COMPKEY', '')) if pd.notna(row.get('COMPKEY')) else None,  # COMPKEY is Burnaby's equivalent to Vancouver's MAPID
-                "photo_name": None
+                "original_mapid": str(row.get('COMPKEY', '')) if pd.notna(row.get('COMPKEY')) else None  # COMPKEY is Burnaby's equivalent to Vancouver's MAPID
             }
             
             fountains.append(fountain_data)
@@ -248,8 +244,8 @@ class FountainETL:
                             if k in ['city_id', 'source_dataset_id']:
                                 # These must be integers, not floats
                                 v = int(v)
-                            elif k in ['pet_friendly', 'in_operation']:
-                                # These must be booleans, not floats
+                            elif k in ['pet_friendly']:
+                                # This must be boolean, not float
                                 v = bool(v) and v != 0.0
                             else:
                                 # Round other floats to avoid JSON precision issues

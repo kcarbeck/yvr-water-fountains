@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YVR Water Fountains Map - Find & Rate Drinking Fountains in Vancouver & Burnaby</title>
+  <meta name="description" content="Interactive map of 429+ water fountains across Vancouver and Burnaby. Find nearby drinking fountains, read community ratings, and discover pet-friendly options.">
+  <meta name="keywords" content="water fountains, Vancouver, Burnaby, drinking water, public fountains, hydration stations">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚰</text></svg>">
+  
+  <!-- Social media meta tags -->
+  <meta property="og:title" content="YVR Water Fountains Map">
+  <meta property="og:description" content="Find and rate drinking fountains across Vancouver and Burnaby">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://kcarbeck.github.io/yvr-water-fountains/map.html">
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="YVR Water Fountains Map">
+  <meta name="twitter:description" content="Find and rate drinking fountains across Vancouver and Burnaby">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    body { 
+      margin: 0; 
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+    }
+    
+    .header {
+      background: linear-gradient(135deg, #008cba, #005f7f);
+      color: white;
+      padding: 1rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .header h1 {
+      margin: 0;
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+    
+    .header p {
+      margin: 0.5rem 0 0 0;
+      opacity: 0.9;
+      font-size: 0.9rem;
+    }
+    
+    .nav-links {
+      margin-top: 1rem;
+    }
+    
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      background: rgba(255,255,255,0.2);
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      margin-right: 0.5rem;
+      font-size: 0.9rem;
+      transition: background 0.2s;
+    }
+    
+    .nav-links a:hover {
+      background: rgba(255,255,255,0.3);
+    }
+    
+    .nav-links-secondary {
+      margin-top: 0.5rem;
+      padding-top: 0.5rem;
+      border-top: 1px solid rgba(255,255,255,0.2);
+    }
+    
+    .nav-links-secondary a {
+      color: white;
+      text-decoration: none;
+      background: rgba(255,255,255,0.1);
+      padding: 0.4rem 0.8rem;
+      border-radius: 16px;
+      margin-right: 0.4rem;
+      margin-bottom: 0.3rem;
+      font-size: 0.8rem;
+      transition: background 0.2s;
+      display: inline-block;
+    }
+    
+    .nav-links-secondary a:hover {
+      background: rgba(255,255,255,0.2);
+    }
+    
+
+    
+    #map { 
+      height: calc(100vh - 200px); 
+    }
+    
+    .popup-content {
+      max-width: 300px;
+      font-size: 0.9rem;
+    }
+    
+    .popup-title {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #333;
+    }
+    
+    .popup-info {
+      margin-bottom: 0.5rem;
+    }
+    
+    .popup-label {
+      font-weight: 500;
+      color: #666;
+    }
+    
+    .popup-value {
+      color: #333;
+    }
+
+    .popup-title-link {
+      color: #007bff;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+
+    .popup-title-link:hover {
+      color: #0056b3;
+      text-decoration: underline;
+    }
+
+    .popup-clickable {
+      color: #007bff;
+      cursor: pointer;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .popup-clickable:hover {
+      color: #0056b3;
+      text-decoration: underline;
+    }
+
+    .instagram-photo-preview {
+      max-width: 120px;
+      max-height: 120px;
+      border-radius: 8px;
+      margin-top: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .instagram-photo-preview:hover {
+      transform: scale(1.05);
+    }
+
+    .instagram-preview-container {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .instagram-preview-text {
+      flex: 1;
+    }
+    
+
+    
+    /* Bottom sheet styles */
+    .bottom-sheet {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: white;
+      border-radius: 20px 20px 0 0;
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
+      transform: translateY(100%);
+      transition: transform 0.3s ease-out;
+      z-index: 2000;
+      max-height: 80vh;
+      overflow-y: auto;
+      padding: 0;
+    }
+    
+    .bottom-sheet.active {
+      transform: translateY(0);
+    }
+    
+    .bottom-sheet-handle {
+      width: 40px;
+      height: 4px;
+      background: #ddd;
+      border-radius: 2px;
+      margin: 12px auto;
+    }
+    
+    .bottom-sheet-content {
+      padding: 0 20px 20px 20px;
+    }
+    
+    .bottom-sheet-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #333;
+    }
+    
+    .bottom-sheet-info {
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: flex-start;
+    }
+    
+    .bottom-sheet-label {
+      font-weight: 500;
+      color: #666;
+      min-width: 100px;
+      flex-shrink: 0;
+    }
+    
+    .bottom-sheet-value {
+      color: #333;
+      flex: 1;
+    }
+    
+    .bottom-sheet-close {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: #666;
+      cursor: pointer;
+      padding: 0;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .bottom-sheet-close:hover {
+      color: #333;
+    }
+    
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 1999;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease-out;
+    }
+    
+    .overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    /* Tablet responsiveness */
+    @media (max-width: 1024px) {
+      .header {
+        padding: 0.8rem;
+      }
+      
+      .nav-links a {
+        padding: 0.4rem 0.8rem;
+        margin-right: 0.3rem;
+        margin-bottom: 0.3rem;
+        display: inline-block;
+      }
+      
+      #map {
+        height: calc(100vh - 180px);
+      }
+    }
+
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+      .header {
+        padding: 0.75rem;
+      }
+      
+      .header h1 {
+        font-size: 1.2rem;
+        margin-bottom: 0.3rem;
+      }
+      
+      .header p {
+        font-size: 0.8rem;
+        margin: 0.3rem 0 0.5rem 0;
+      }
+      
+      .nav-links {
+        margin-top: 0.75rem;
+      }
+      
+      .nav-links a {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.7rem;
+        margin-right: 0.3rem;
+        margin-bottom: 0.3rem;
+        display: inline-block;
+      }
+      
+      .nav-links-secondary a {
+        font-size: 0.7rem;
+        padding: 0.3rem 0.6rem;
+      }
+      
+      #map {
+        height: calc(100vh - 160px);
+      }
+      
+      .footer-content {
+        flex-direction: column;
+        text-align: center;
+        padding: 0 15px;
+      }
+      
+      .footer-section {
+        margin: 10px 0;
+        min-width: auto;
+      }
+      
+      .footer-section h3 {
+        font-size: 1rem;
+        margin-bottom: 8px;
+      }
+      
+      .footer-section a {
+        font-size: 0.85rem;
+        margin-bottom: 4px;
+      }
+      
+      .footer-bottom {
+        font-size: 0.75rem;
+        padding-top: 12px;
+      }
+      
+      /* Hide popups on mobile */
+      .leaflet-popup {
+        display: none !important;
+      }
+      
+      /* Bottom sheet mobile optimizations */
+      .bottom-sheet {
+        max-height: 85vh;
+      }
+      
+      .bottom-sheet-content {
+        padding: 0 15px 15px 15px;
+      }
+      
+      .bottom-sheet-title {
+        font-size: 1.1rem;
+        margin-bottom: 0.8rem;
+        padding-right: 30px;
+      }
+      
+      .bottom-sheet-info {
+        margin-bottom: 0.6rem;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      
+      .bottom-sheet-label {
+        min-width: auto;
+        margin-bottom: 2px;
+        font-size: 0.9rem;
+      }
+      
+      .bottom-sheet-value {
+        font-size: 0.9rem;
+      }
+
+      .bottom-sheet-title .popup-title-link {
+        font-size: 1.1rem;
+        display: block;
+        padding: 5px 0;
+      }
+      
+      .instagram-post {
+        padding: 8px;
+        margin-bottom: 8px;
+      }
+      
+      .instagram-post-header {
+        font-size: 0.85rem;
+      }
+      
+      .instagram-post-caption {
+        font-size: 0.8rem;
+      }
+      
+      .instagram-post-link {
+        font-size: 0.8rem;
+      }
+
+      .instagram-photo-preview {
+        max-width: 100px;
+        max-height: 100px;
+      }
+
+      .instagram-preview-container {
+        flex-direction: column;
+        gap: 8px;
+      }
+    }
+
+    /* Small mobile devices */
+    @media (max-width: 480px) {
+      .header {
+        padding: 0.5rem;
+      }
+      
+      .header h1 {
+        font-size: 1.1rem;
+      }
+      
+      .header p {
+        font-size: 0.75rem;
+      }
+      
+      .nav-links a {
+        font-size: 0.75rem;
+        padding: 0.3rem 0.5rem;
+        margin-right: 0.2rem;
+        margin-bottom: 0.2rem;
+      }
+      
+      #map {
+        height: calc(100vh - 140px);
+      }
+      
+      .bottom-sheet-title {
+        font-size: 1rem;
+        line-height: 1.2;
+      }
+      
+      .bottom-sheet-label,
+      .bottom-sheet-value {
+        font-size: 0.85rem;
+      }
+      
+      .footer-section h3 {
+        font-size: 0.9rem;
+      }
+      
+      .footer-section a {
+        font-size: 0.8rem;
+      }
+      
+      .footer-section p {
+        font-size: 0.8rem !important;
+      }
+
+      .bottom-sheet-title .popup-title-link {
+        font-size: 1rem;
+        padding: 8px 0;
+        line-height: 1.2;
+      }
+
+      .popup-clickable {
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        padding: 5px 0;
+      }
+
+      .instagram-photo-preview {
+        max-width: 80px;
+        max-height: 80px;
+        min-height: 44px;
+        min-width: 44px;
+      }
+    }
+
+    /* Large desktop screens */
+    @media (min-width: 1200px) {
+      .header {
+        padding: 1.2rem 2rem;
+      }
+      
+      .footer-content {
+        padding: 0 2rem;
+      }
+      
+      .popup-content {
+        max-width: 350px;
+        font-size: 0.95rem;
+      }
+    }
+    
+    /* Instagram posts styling */
+    .instagram-posts-container {
+      margin-top: 10px;
+    }
+    
+    .instagram-post {
+      border: 1px solid #e1e8ed;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      padding: 10px;
+      background: #f8f9fa;
+    }
+    
+    .instagram-post-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    
+    .instagram-post-rating {
+      font-weight: bold;
+      color: #1da1f2;
+    }
+    
+    .instagram-post-date {
+      font-size: 0.8em;
+      color: #657786;
+    }
+    
+    .instagram-post-caption {
+      font-size: 0.9em;
+      line-height: 1.4;
+      margin-bottom: 8px;
+    }
+    
+    .instagram-post-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      color: #1da1f2;
+      text-decoration: none;
+      font-size: 0.9em;
+    }
+    
+    .instagram-post-link:hover {
+      text-decoration: underline;
+    }
+    
+    .reviews-section {
+      margin-top: 15px;
+      border-top: 1px solid #e9ecef;
+      padding-top: 15px;
+    }
+    
+    .review-item {
+      border-left: 3px solid #007bff;
+      padding-left: 10px;
+      margin-bottom: 10px;
+    }
+    
+    .review-header {
+      display: flex;
+      justify-content: space-between;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    
+    .review-details {
+      font-size: 0.9em;
+      color: #666;
+      margin-bottom: 5px;
+    }
+    
+    .review-notes {
+      font-style: italic;
+    }
+
+    /* Footer styles */
+    .footer {
+      background-color: #f8f9fa;
+      padding: 20px 0;
+      margin-top: 20px;
+      border-top: 1px solid #e9ecef;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .footer-section {
+      flex: 1;
+      min-width: 200px;
+      margin: 0 15px;
+    }
+
+    .footer-section h3 {
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    .footer-section a {
+      display: block;
+      color: #007bff;
+      text-decoration: none;
+      margin-bottom: 5px;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .footer-section a:hover {
+      color: #0056b3;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 15px;
+      border-top: 1px solid #e9ecef;
+      margin-top: 20px;
+      font-size: 0.8rem;
+      color: #6c757d;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>🚰 YVR Water Fountains</h1>
+    <p>Find drinking fountains across Vancouver & Burnaby</p>
+    <div class="nav-links">
+      <a href="table.html">📊 Table View</a>
+      <a href="public_review_form.html">⭐ Submit Review</a>
+      <a href="#" id="locate-me">📍 My Location</a>
+      <a href="#" id="admin-access" style="font-size: 0.7rem; opacity: 0.6;">⚙️</a>
+    </div>
+  </div>
+  
+
+  
+  <div id="map"></div>
+  
+     <!-- Footer with additional links -->
+   <div class="footer">
+     <div class="footer-content">
+       <div class="footer-section">
+         <h3>Quick Links</h3>
+         <a href="table.html">📊 Data Table</a>
+         <a href="public_review_form.html">⭐ Rate a Fountain</a>
+       </div>
+       <div class="footer-section">
+         <h3>About</h3>
+         <p style="font-size: 0.9rem; color: #6c757d; margin: 0;">Community-maintained map of water fountains across Vancouver & Burnaby</p>
+       </div>
+     </div>
+     <div class="footer-bottom">
+       <p>🚰 YVR Water Fountains - Find & Rate Drinking Fountains in Vancouver & Burnaby</p>
+     </div>
+   </div>
+  
+  <!-- Bottom sheet for mobile -->
+  <div class="overlay" id="overlay"></div>
+  <div class="bottom-sheet" id="bottom-sheet">
+    <div class="bottom-sheet-handle"></div>
+    <button class="bottom-sheet-close" id="bottom-sheet-close">&times;</button>
+    <div class="bottom-sheet-content" id="bottom-sheet-content">
+      <!-- Content will be populated by JavaScript -->
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    const map = L.map('map').setView([49.251, -123.060], 11);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap'
+    }).addTo(map);
+
+    let allMarkers = [];
+    let currentFountainData = null;
+    let selectedFountainId = null;
+    let selectedMarker = null;
+    let markerById = {};
+
+    // Check if device is mobile
+    function isMobile() {
+      return window.innerWidth <= 768;
+    }
+
+    // Check if device is touch-capable
+    function isTouchDevice() {
+      return (('ontouchstart' in window) ||
+              (navigator.maxTouchPoints > 0) ||
+              (navigator.msMaxTouchPoints > 0));
+    }
+
+    // Responsive map initialization
+    function setInitialMapView() {
+      if (isMobile()) {
+        map.setView([49.251, -123.060], 10);
+      } else {
+        map.setView([49.251, -123.060], 11);
+      }
+    }
+
+    // Handle window resize for responsive behavior
+    function handleResize() {
+      map.invalidateSize();
+      
+      // Close bottom sheet on orientation change if needed
+      if (window.innerWidth > 768 && document.getElementById('bottom-sheet').classList.contains('active')) {
+        hideBottomSheet();
+      }
+    }
+
+    // Throttle function for resize events
+    function throttle(func, wait) {
+      let timeout;
+      return function executedFunction(...args) {
+        const later = () => {
+          clearTimeout(timeout);
+          func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+      };
+    }
+
+    // Show bottom sheet
+    function showBottomSheet(fountainData) {
+      currentFountainData = fountainData;
+      const bottomSheet = document.getElementById('bottom-sheet');
+      const overlay = document.getElementById('overlay');
+      const content = document.getElementById('bottom-sheet-content');
+      
+      // Get latest Instagram post details for mobile
+      const latestInstagramPost = fountainData.instagram_posts && fountainData.instagram_posts.length > 0 ? fountainData.instagram_posts[0] : null;
+      const latestPhotoUrl = latestInstagramPost ? getInstagramPhotoUrl(latestInstagramPost.url) : null;
+      const isAdminReview = fountainData.latest_reviewer === 'YVR Water Fountains' || fountainData.latest_reviewer === 'yvrwaterfountains';
+      
+      content.innerHTML = `
+        <div class="bottom-sheet-title">
+          <a href="#" class="popup-title-link" onclick="showFountainDetails('${fountainData.id || ''}')">${fountainData.name || 'Unnamed Fountain'}</a>
+        </div>
+        <div class="bottom-sheet-info">
+          <span class="bottom-sheet-label">📍 Location:</span>
+          <span class="bottom-sheet-value">${fountainData.location || fountainData.address || '—'}</span>
+        </div>
+        <div class="bottom-sheet-info">
+          <span class="bottom-sheet-label">🏘️ Neighbourhood:</span>
+          <span class="bottom-sheet-value">${fountainData.geo_local_area || '—'}</span>
+        </div>
+        <div class="bottom-sheet-info">
+          <span class="bottom-sheet-label">🏢 Operational:</span>
+          <span class="bottom-sheet-value">${formatOperational(fountainData.in_operation)}</span>
+        </div>
+        <div class="bottom-sheet-info">
+          <span class="bottom-sheet-label">🐕 Pet Friendly:</span>
+          <span class="bottom-sheet-value">${formatPetFriendly(fountainData.pet_friendly)}</span>
+        </div>
+        ${fountainData.avg_rating ? `<div class="bottom-sheet-info">
+          <span class="bottom-sheet-label">⭐ Avg Rating:</span>
+          <span class="bottom-sheet-value">
+            <a href="#" class="popup-clickable" onclick="showAllReviews('${fountainData.id || ''}')">${parseFloat(fountainData.avg_rating).toFixed(1)}/10</a>
+            (${fountainData.rating_count} review${fountainData.rating_count !== 1 ? 's' : ''})
+          </span>
+        </div>` : ''}
+        ${fountainData.rating ? `<div class="bottom-sheet-info">
+          <span class="bottom-sheet-label">📝 Latest Review:</span>
+          <span class="bottom-sheet-value">
+            ${isAdminReview && latestInstagramPost ? `<a href="${latestInstagramPost.url}" target="_blank" class="popup-clickable">${fountainData.rating}/10 by ${fountainData.latest_reviewer || 'Anonymous'}</a>` : `${fountainData.rating}/10 by ${fountainData.latest_reviewer || 'Anonymous'}`}
+          </span>
+        </div>` : ''}
+        ${fountainData.wheelchair_accessible ? `<div class="bottom-sheet-info">
+          <span class="bottom-sheet-label">♿ Wheelchair:</span>
+          <span class="bottom-sheet-value">${fountainData.wheelchair_accessible}</span>
+        </div>` : ''}
+        ${fountainData.bottle_filler ? `<div class="bottom-sheet-info">
+          <span class="bottom-sheet-label">💧 Bottle Filler:</span>
+          <span class="bottom-sheet-value">${fountainData.bottle_filler}</span>
+        </div>` : ''}
+        ${latestInstagramPost ? `<div class="bottom-sheet-info">
+          <span class="bottom-sheet-label">📸 Latest Instagram:</span>
+          <div class="instagram-preview-container">
+            <div class="instagram-preview-text">
+              <a href="${latestInstagramPost.url}" target="_blank" class="popup-clickable">@yvrwaterfountains post</a>
+              ${latestInstagramPost.date_posted ? `<br><small>${formatDate(latestInstagramPost.date_posted)}</small>` : ''}
+            </div>
+            ${latestPhotoUrl ? `<img src="${latestPhotoUrl}" alt="Instagram photo" class="instagram-photo-preview" onclick="window.open('${latestInstagramPost.url}', '_blank')">` : ''}
+          </div>
+        </div>` : ''}
+        ${fountainData.caption && !isAdminReview ? `<div class="bottom-sheet-info">
+          <span class="bottom-sheet-label">📝 Notes:</span>
+          <span class="bottom-sheet-value">${fountainData.caption}</span>
+        </div>` : ''}
+        ${fountainData.has_instagram && fountainData.instagram_posts && fountainData.instagram_posts.length > 1 ? `<div class="bottom-sheet-info">
+          <span class="bottom-sheet-label">📸 All Instagram Posts:</span>
+          <div class="instagram-posts-container" id="instagram-${fountainData.id}">
+            ${generateInstagramPosts(fountainData.instagram_posts.slice(1))}
+          </div>
+        </div>` : ''}
+      `;
+      
+      bottomSheet.classList.add('active');
+      overlay.classList.add('active');
+    }
+
+    // Hide bottom sheet
+    function hideBottomSheet() {
+      const bottomSheet = document.getElementById('bottom-sheet');
+      const overlay = document.getElementById('overlay');
+      bottomSheet.classList.remove('active');
+      overlay.classList.remove('active');
+      currentFountainData = null;
+    }
+
+    // Event listeners for bottom sheet
+    document.getElementById('bottom-sheet-close').addEventListener('click', hideBottomSheet);
+    document.getElementById('overlay').addEventListener('click', hideBottomSheet);
+
+    // Function to generate Instagram posts HTML
+    function generateInstagramPosts(posts) {
+      if (!posts || posts.length === 0) return '';
+      
+      return posts.slice(0, 3).map(post => `
+        <div class="instagram-post">
+          <div class="instagram-post-header">
+            <span class="instagram-post-rating">⭐ ${post.rating}/10</span>
+            <span class="instagram-post-date">${formatDate(post.date_posted)}</span>
+          </div>
+          ${post.caption ? `<div class="instagram-post-caption">${post.caption}</div>` : ''}
+          <a href="${post.url}" target="_blank" class="instagram-post-link">
+            <i class="fab fa-instagram"></i> View on Instagram
+          </a>
+        </div>
+      `).join('') + (posts.length > 3 ? `<div style="text-align: center; margin-top: 10px;">
+        <small>+${posts.length - 3} more posts...</small>
+      </div>` : '');
+    }
+
+    // Function to show Instagram posts modal/popup
+    function showInstagramPosts(fountainId) {
+      // This would open a modal or expand the view
+      // For now, just console log
+      console.log('Show Instagram posts for fountain:', fountainId);
+    }
+
+    // Helper function to format dates
+    function formatDate(dateString) {
+      if (!dateString) return '';
+      const date = new Date(dateString);
+      return date.toLocaleDateString('en-US', { 
+        month: 'short', 
+        day: 'numeric', 
+        year: 'numeric' 
+      });
+    }
+
+    // Helper function to format pet friendly display
+    function formatPetFriendly(value) {
+      if (!value || value.toLowerCase() === 'na' || value.toLowerCase() === 'unknown') return 'unknown';
+      if (value.toLowerCase().includes('yes') || value.toLowerCase().includes('y')) return 'y';
+      if (value.toLowerCase().includes('no') || value.toLowerCase().includes('n')) return 'n';
+      return 'unknown';
+    }
+
+    // Helper function to format operational status
+    function formatOperational(value) {
+      if (!value || value.toLowerCase() === 'na' || value.toLowerCase() === 'unknown') return 'unknown';
+      return value;
+    }
+
+    // Helper function to get Instagram photo URL from post URL
+    function getInstagramPhotoUrl(instagramUrl) {
+      if (!instagramUrl) return null;
+      // Extract Instagram post ID and create media URL
+      const match = instagramUrl.match(/\/p\/([^\/]+)\//);
+      if (match) {
+        const postId = match[1];
+        return `https://instagram.com/p/${postId}/media/?size=m`;
+      }
+      return null;
+    }
+
+    // Function to show fountain details page
+    function showFountainDetails(fountainId) {
+      // For now, just console log - could link to a details page
+      console.log('Show fountain details for:', fountainId);
+      // Could implement: window.open(`fountain-details.html?id=${fountainId}`, '_blank');
+    }
+
+    // Function to show all reviews for a fountain
+    function showAllReviews(fountainId) {
+      console.log('Show all reviews for fountain:', fountainId);
+      // Could implement: window.open(`reviews.html?fountain=${fountainId}`, '_blank');
+    }
+
+    fetch('data/fountains_processed.geojson')
+      .then(r => r.json())
+      .then(gj => {
+        const markerById = {};
+        
+        const geoLayer = L.geoJSON(gj, {
+          onEachFeature: (f, layer) => {
+            const p = f.properties;
+            
+            // Use consistent marker styling
+            let markerColor = '#007bff'; // Default blue
+            let markerRadius = 8;
+            
+            // Get latest Instagram post details
+            const latestInstagramPost = p.instagram_posts && p.instagram_posts.length > 0 ? p.instagram_posts[0] : null;
+            const latestPhotoUrl = latestInstagramPost ? getInstagramPhotoUrl(latestInstagramPost.url) : null;
+            const isAdminReview = p.latest_reviewer === 'YVR Water Fountains' || p.latest_reviewer === 'yvrwaterfountains';
+            
+            // Create custom popup content for desktop
+            const popupContent = `
+              <div class="popup-content">
+                <div class="popup-title">
+                  <a href="#" class="popup-title-link" onclick="showFountainDetails('${p.id || ''}')">${p.name || 'Unnamed Fountain'}</a>
+                </div>
+                <div class="popup-info">
+                  <span class="popup-label">📍 Location:</span>
+                  <span class="popup-value">${p.location || p.address || '—'}</span>
+                </div>
+                <div class="popup-info">
+                  <span class="popup-label">🏘️ Neighbourhood:</span>
+                  <span class="popup-value">${p.geo_local_area || '—'}</span>
+                </div>
+                <div class="popup-info">
+                  <span class="popup-label">🏢 Operational:</span>
+                  <span class="popup-value">${formatOperational(p.in_operation)}</span>
+                </div>
+                <div class="popup-info">
+                  <span class="popup-label">🐕 Pet Friendly:</span>
+                  <span class="popup-value">${formatPetFriendly(p.pet_friendly)}</span>
+                </div>
+                ${p.avg_rating ? `<div class="popup-info">
+                  <span class="popup-label">⭐ Avg Rating:</span>
+                  <span class="popup-value">
+                    <a href="#" class="popup-clickable" onclick="showAllReviews('${p.id || ''}')">${parseFloat(p.avg_rating).toFixed(1)}/10</a>
+                    (${p.rating_count} review${p.rating_count !== 1 ? 's' : ''})
+                  </span>
+                </div>` : ''}
+                ${p.rating ? `<div class="popup-info">
+                  <span class="popup-label">📝 Latest Review:</span>
+                  <span class="popup-value">
+                    ${isAdminReview && latestInstagramPost ? `<a href="${latestInstagramPost.url}" target="_blank" class="popup-clickable">${p.rating}/10 by ${p.latest_reviewer || 'Anonymous'}</a>` : `${p.rating}/10 by ${p.latest_reviewer || 'Anonymous'}`}
+                  </span>
+                </div>` : ''}
+                ${p.wheelchair_accessible ? `<div class="popup-info">
+                  <span class="popup-label">♿ Wheelchair:</span>
+                  <span class="popup-value">${p.wheelchair_accessible}</span>
+                </div>` : ''}
+                ${p.bottle_filler ? `<div class="popup-info">
+                  <span class="popup-label">💧 Bottle Filler:</span>
+                  <span class="popup-value">${p.bottle_filler}</span>
+                </div>` : ''}
+                ${latestInstagramPost ? `<div class="popup-info">
+                  <span class="popup-label">📸 Latest Instagram:</span>
+                  <div class="instagram-preview-container">
+                    <div class="instagram-preview-text">
+                      <a href="${latestInstagramPost.url}" target="_blank" class="popup-clickable">@yvrwaterfountains post</a>
+                      ${latestInstagramPost.date_posted ? `<br><small>${formatDate(latestInstagramPost.date_posted)}</small>` : ''}
+                    </div>
+                    ${latestPhotoUrl ? `<img src="${latestPhotoUrl}" alt="Instagram photo" class="instagram-photo-preview" onclick="window.open('${latestInstagramPost.url}', '_blank')">` : ''}
+                  </div>
+                </div>` : ''}
+                ${p.caption && !isAdminReview ? `<div class="popup-info">
+                  <span class="popup-label">📝 Notes:</span>
+                  <span class="popup-value">${p.caption}</span>
+                </div>` : ''}
+              </div>
+            `;
+            
+            // Bind popup for desktop, click handler for mobile
+            if (isMobile()) {
+              layer.on('click', () => {
+                showBottomSheet(p);
+              });
+            } else {
+              layer.bindPopup(popupContent);
+            }
+            
+            if (p.id) markerById[p.id] = layer;
+            allMarkers.push(layer);
+          },
+          pointToLayer: (f, latlng) => {
+            return L.circleMarker(latlng, {
+              radius: 8,
+              color: '#007bff',
+              fillColor: '#007bff',
+              fillOpacity: 0.7,
+              weight: 2
+            });
+          }
+        }).addTo(map);
+
+        // Locate me functionality
+        document.getElementById('locate-me').addEventListener('click', () => {
+          if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition((position) => {
+              const { latitude, longitude } = position.coords;
+              map.setView([latitude, longitude], 15);
+            }, () => {
+              alert('Unable to get your location');
+            });
+          } else {
+            alert('Geolocation is not supported by this browser');
+          }
+        });
+
+        // Focus on marker if hash is present
+        const hash = window.location.hash.replace('#','');
+        if (hash && markerById[hash]) {
+          const marker = markerById[hash];
+          map.setView(marker.getLatLng(), 16, {animate:true});
+          if (isMobile()) {
+            // Find the fountain data for this marker
+            const fountainData = gj.features.find(f => f.properties.id === hash).properties;
+            showBottomSheet(fountainData);
+          } else {
+            marker.openPopup();
+          }
+        }
+      });
+
+      // Admin access functionality
+      document.getElementById('admin-access').addEventListener('click', (e) => {
+        e.preventDefault();
+        const password = prompt('Enter admin password:');
+        if (password === 'yvr2024admin') {
+          // Create admin panel
+          const adminPanel = document.createElement('div');
+          adminPanel.style.cssText = `
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            z-index: 3000;
+            text-align: center;
+          `;
+          adminPanel.innerHTML = `
+            <h3>🔧 Admin Panel</h3>
+            <div style="margin: 15px 0;">
+              <a href="admin_review_form.html" style="display: block; margin: 10px 0; padding: 10px; background: #007bff; color: white; text-decoration: none; border-radius: 5px;">📝 Admin Review Form</a>
+              <a href="moderation_dashboard.html" style="display: block; margin: 10px 0; padding: 10px; background: #007bff; color: white; text-decoration: none; border-radius: 5px;">🛡️ Moderation Dashboard</a>
+            </div>
+            <button onclick="this.parentElement.remove()" style="background: #dc3545; color: white; border: none; padding: 8px 16px; border-radius: 5px; cursor: pointer;">Close</button>
+          `;
+          document.body.appendChild(adminPanel);
+        } else if (password !== null) {
+          alert('Incorrect password');
+        }
+      });
+
+      // Initialize responsive behavior
+      setInitialMapView();
+      
+      // Add resize event listener with throttling
+      window.addEventListener('resize', throttle(handleResize, 150));
+      
+      // Add touch event support for better mobile interaction
+      if (isTouchDevice()) {
+        document.body.classList.add('touch-device');
+        
+        // Improve touch scrolling for bottom sheet
+        const bottomSheet = document.getElementById('bottom-sheet');
+        bottomSheet.addEventListener('touchstart', function(e) {
+          this.startY = e.touches[0].pageY;
+        }, { passive: true });
+        
+        bottomSheet.addEventListener('touchmove', function(e) {
+          if (this.scrollTop === 0 && e.touches[0].pageY > this.startY) {
+            e.preventDefault();
+          }
+        }, { passive: false });
+        
+        // Add swipe-down to close bottom sheet
+        let startY = 0;
+        const bottomSheetContent = document.getElementById('bottom-sheet-content');
+        
+        bottomSheet.addEventListener('touchstart', function(e) {
+          startY = e.touches[0].clientY;
+        }, { passive: true });
+        
+        bottomSheet.addEventListener('touchend', function(e) {
+          const endY = e.changedTouches[0].clientY;
+          const diffY = startY - endY;
+          
+          // If swipe down and near the top of the sheet, close it
+          if (diffY < -100 && this.scrollTop < 20) {
+            hideBottomSheet();
+          }
+        }, { passive: true });
+      }
+      
+      // Handle orientation change
+      window.addEventListener('orientationchange', function() {
+        setTimeout(() => {
+          map.invalidateSize();
+          if (isMobile()) {
+            setInitialMapView();
+          }
+        }, 100);
+      });
+
+  </script>
+</body>
+</html>

@@ -1046,11 +1046,13 @@
         }
       });
 
-      // Admin access functionality
+      // Admin access functionality (secure)
       document.getElementById('admin-access').addEventListener('click', (e) => {
         e.preventDefault();
         const password = prompt('Enter admin password:');
-        if (password === 'yvr2024admin') {
+        const adminPassword = window.APP_CONFIG.ADMIN_PASSWORD || 'default_admin_pass';
+        
+        if (password === adminPassword) {
           // Create admin panel
           const adminPanel = document.createElement('div');
           adminPanel.style.cssText = `

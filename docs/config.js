@@ -7,6 +7,9 @@ window.APP_CONFIG = {
     SUPABASE_URL: 'https://your-project.supabase.co',
     SUPABASE_ANON_KEY: 'your-anon-key-here',
     
+    // Admin configuration (set via environment variable - keep secure!)
+    ADMIN_PASSWORD: 'default_admin_pass',
+    
     // Feature flags
     ENABLE_SUPABASE: false, // Automatically set based on credential availability
     FALLBACK_TO_GEOJSON: true, // Always maintain static data fallback

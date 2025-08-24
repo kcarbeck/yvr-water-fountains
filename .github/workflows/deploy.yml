@@ -51,6 +51,7 @@ jobs:
       env:
         SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
         SUPABASE_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+        ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
       run: |
         # Update config.js with actual values if available
         if [ -n "$SUPABASE_URL" ] && [ -n "$SUPABASE_KEY" ]; then
@@ -60,15 +61,29 @@ jobs:
         window.APP_CONFIG = {
             SUPABASE_URL: '$SUPABASE_URL',
             SUPABASE_ANON_KEY: '$SUPABASE_KEY',
+            ADMIN_PASSWORD: '${ADMIN_PASSWORD:-default_admin_pass}',
             ENABLE_SUPABASE: true,
             FALLBACK_TO_GEOJSON: true,
             MAP_CENTER: [49.251, -123.060],
             MAP_ZOOM: 11,
-            GEOJSON_PATH: 'data/fountains_processed.geojson'
+            GEOJSON_PATH: 'data/fountains_processed.geojson',
+            VERSION: '1.0.0',
+            DEPLOYMENT_TYPE: 'github-pages'
         };
+        
+        // Auto-detect Supabase configuration
+        if (window.APP_CONFIG.SUPABASE_URL && window.APP_CONFIG.SUPABASE_ANON_KEY) {
+            console.log('✅ Supabase integration enabled');
+        } else {
+            console.log('📁 Using static data mode');
+        }
         EOF
         else
           echo "Using default configuration (static data only)..."
+          # Update just the admin password if provided
+          if [ -n "$ADMIN_PASSWORD" ]; then
+            sed -i "s/ADMIN_PASSWORD: 'default_admin_pass'/ADMIN_PASSWORD: '$ADMIN_PASSWORD'/" docs/config.js
+          fi
         fi
         
     - name: Setup Pages

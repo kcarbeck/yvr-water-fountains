@@ -1,5 +1,79 @@
-*notes/
-.env
+# SECURITY: Environment variables and secrets - NEVER COMMIT THESE!
+.env*
+!env.example
+*.key
+*.pem
+*_keys.txt
+*secret*
+*credential*
+*password*
+
+# SECURITY: Admin functionality and sensitive documentation
+admin/
+*.md
+!README.md
+!LICENSE
+
+# SECURITY: Development and testing files
+venv/
+env/
+ENV/
+notebooks/
+tests/
 __pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Development tools
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs and temporary files
+*.log
+logs/
+*.tmp
+*.temp
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Cache and build
+.cache/
 node_modules/
-README_PRIVATE.md
+dist/
+build/
+*.egg-info/
+
+# Jupyter notebooks (development only)
+.ipynb_checkpoints/
+*.ipynb
+
+# Backup files
+*.bak
+*.backup
+*.old
+
+# Data files (except essential ones)
+data/raw/
+data/*.csv
+!data/fountains_processed.geojson
+
+# Scripts that might contain sensitive operations
+scripts/clean_and_reload.py
+scripts/etl_pipeline.py

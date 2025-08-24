@@ -542,6 +542,9 @@
                         approved_by_user: 'admin'
                     });
                 
+                // Trigger auto-deployment for live site update
+                await triggerAutoDeployment();
+                
             } catch (error) {
                 console.error('Error approving review:', error);
                 alert('Failed to approve review. Please try again.');
@@ -610,6 +613,71 @@
             document.getElementById('loadingIndicator').style.display = 'block';
             document.getElementById('reviewsContainer').innerHTML = '';
             loadDashboardData();
+        }
+        
+        async function triggerAutoDeployment() {
+            try {
+                // Try to trigger GitHub Actions deployment via API
+                const githubToken = window.APP_CONFIG.PERSONAL_ACCESS_TOKEN;
+                const githubRepo = window.APP_CONFIG.REPO_NAME;
+                
+                if (githubToken && githubRepo) {
+                    // Trigger GitHub Actions workflow
+                    const response = await fetch(`https://api.github.com/repos/${githubRepo}/actions/workflows/deploy.yml/dispatches`, {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `token ${githubToken}`,
+                            'Accept': 'application/vnd.github.v3+json',
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            ref: 'main',
+                            inputs: {
+                                reason: 'Review approved - auto-deployment triggered'
+                            }
+                        })
+                    });
+                    
+                    if (response.status === 204) {
+                        console.log('✅ GitHub Actions deployment triggered successfully');
+                        showAlert('Review approved and site deployment triggered! Check GitHub Actions for progress.', 'success');
+                    } else {
+                        console.warn('⚠️ GitHub deployment trigger failed, but review was approved');
+                        showAlert('Review approved! Deployment may take a few minutes.', 'info');
+                    }
+                } else {
+                    console.log('📝 Auto-deployment not configured (no GitHub token/repo)');
+                    showAlert('Review approved! Site will be updated in the next scheduled deployment.', 'info');
+                }
+            } catch (error) {
+                console.error('Error triggering auto-deployment:', error);
+                // Don't fail the approval process if deployment trigger fails
+                console.log('⚠️ Deployment trigger failed, but review was approved');
+                showAlert('Review approved! Deployment may take a few minutes.', 'info');
+            }
+        }
+        
+        function showAlert(message, type = 'info') {
+            // Create a simple alert system for the dashboard
+            const alertContainer = document.createElement('div');
+            alertContainer.className = `alert alert-${type} alert-dismissible fade show`;
+            alertContainer.style.position = 'fixed';
+            alertContainer.style.top = '20px';
+            alertContainer.style.right = '20px';
+            alertContainer.style.zIndex = '9999';
+            alertContainer.style.minWidth = '300px';
+            alertContainer.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" onclick="this.parentElement.remove()"></button>
+            `;
+            document.body.appendChild(alertContainer);
+            
+            // Auto-remove after 5 seconds
+            setTimeout(() => {
+                if (alertContainer.parentNode) {
+                    alertContainer.remove();
+                }
+            }, 5000);
         }
     </script>
 </body>

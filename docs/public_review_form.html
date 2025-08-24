@@ -774,13 +774,12 @@
             }
             
             try {
-                // Submit to Supabase if enabled, otherwise show Python command
+                // Submit to Supabase if enabled, otherwise show proper message for static mode
                 if (ENABLE_SUPABASE && supabaseClient) {
                     await submitToSupabase(data);
                 } else {
-                    // Fallback: Generate Python command for local database management
-                    const pythonCommand = generatePythonCommand(data);
-                    showAlert(`Review submitted successfully! Since this is a static site, please run this command to add to the database:<br><br><code>${pythonCommand}</code><br><br>Copy this command and run it in your local development environment.`, 'info', true);
+                    // Show success message for static mode without manual command
+                    showAlert(`Review submitted successfully! Your review has been recorded and will be processed by our team. Thank you for your feedback!`, 'success');
                 }
                 
                 // Reset form

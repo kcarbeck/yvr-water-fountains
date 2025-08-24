@@ -50,8 +50,10 @@ jobs:
     - name: Configure app for GitHub Pages
       env:
         SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-        SUPABASE_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+        SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
         ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+        PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+        REPO_NAME: ${{ secrets.REPO_NAME }}
       run: |
         # Update config.js with actual values if available
         if [ -n "$SUPABASE_URL" ] && [ -n "$SUPABASE_KEY" ]; then
@@ -62,8 +64,11 @@ jobs:
             SUPABASE_URL: '$SUPABASE_URL',
             SUPABASE_ANON_KEY: '$SUPABASE_KEY',
             ADMIN_PASSWORD: '${ADMIN_PASSWORD:-default_admin_pass}',
+            PERSONAL_ACCESS_TOKEN: '${PERSONAL_ACCESS_TOKEN:-null}',
+            REPO_NAME: '${REPO_NAME:-null}',
             ENABLE_SUPABASE: true,
             FALLBACK_TO_GEOJSON: true,
+            ENABLE_AUTO_DEPLOY: ${PERSONAL_ACCESS_TOKEN:+true},
             MAP_CENTER: [49.251, -123.060],
             MAP_ZOOM: 11,
             GEOJSON_PATH: 'data/fountains_processed.geojson',

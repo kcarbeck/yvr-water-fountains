@@ -10,9 +10,14 @@ window.APP_CONFIG = {
     // Admin configuration (set via environment variable - keep secure!)
     ADMIN_PASSWORD: 'default_admin_pass',
     
+    // GitHub configuration (for auto-deployment when reviews are approved)
+    PERSONAL_ACCESS_TOKEN: null, // Personal access token for triggering deployments
+    REPO_NAME: null, // Repository in format 'username/repo-name'
+    
     // Feature flags
     ENABLE_SUPABASE: false, // Automatically set based on credential availability
     FALLBACK_TO_GEOJSON: true, // Always maintain static data fallback
+    ENABLE_AUTO_DEPLOY: false, // Set to true when GitHub token is configured
     
     // App settings
     MAP_CENTER: [49.251, -123.060],

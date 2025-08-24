@@ -178,48 +178,6 @@
     </div>
     
     <div class="container">
-        <!-- Instructions Section -->
-        <div class="alert alert-info mb-4">
-            <h4><i class="fas fa-info-circle"></i> Moderation Instructions</h4>
-            <div class="row">
-                <div class="col-md-6">
-                    <h6>🔍 Review Process</h6>
-                    <ul class="mb-3">
-                        <li><strong>Check legitimacy:</strong> Verify the review appears genuine</li>
-                        <li><strong>Validate ratings:</strong> Ensure ratings are reasonable (1-10)</li>
-                        <li><strong>Review notes:</strong> Check for appropriate language and useful content</li>
-                        <li><strong>Verify fountain:</strong> Confirm the fountain ID and location match</li>
-                    </ul>
-                    
-                    <h6>✅ Approval Criteria</h6>
-                    <ul class="mb-0">
-                        <li>Review appears genuine and helpful</li>
-                        <li>Ratings are within reasonable range</li>
-                        <li>No spam, offensive language, or promotional content</li>
-                        <li>Fountain information is accurate</li>
-                    </ul>
-                </div>
-                <div class="col-md-6">
-                    <h6>❌ Rejection Reasons</h6>
-                    <ul class="mb-3">
-                        <li>Spam or promotional content</li>
-                        <li>Offensive or inappropriate language</li>
-                        <li>Duplicate reviews from same person</li>
-                        <li>Obviously fake or unrealistic ratings</li>
-                        <li>Wrong fountain ID or location</li>
-                    </ul>
-                    
-                    <h6>📝 Moderation Notes</h6>
-                    <ul class="mb-0">
-                        <li>Always add notes explaining rejection reasons</li>
-                        <li>Be constructive and helpful in feedback</li>
-                        <li>Note any issues for the reviewer to fix</li>
-                        <li>Approved reviews go live immediately</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        
         <!-- Stats Row -->
         <div class="row mb-4">
             <div class="col-md-3">
@@ -338,8 +296,16 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
     <script>
-        // Mock data for demonstration - replace with actual API calls
+        // Configuration - Replace with your actual Supabase credentials
+        const SUPABASE_URL = 'YOUR_SUPABASE_URL';
+        const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+        
+        // Initialize Supabase client
+        const { createClient } = supabase;
+        const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        
         let currentRejectReviewId = null;
         
         // Sample data structure
@@ -383,45 +349,136 @@
         };
         
         // Initialize dashboard
-        function initDashboard() {
-            updateStats();
-            loadReviews('pending');
+        async function initDashboard() {
+            await updateStats();
+            await loadReviews('pending');
             
             // Add tab click handlers
             document.querySelectorAll('[data-bs-toggle="tab"]').forEach(tab => {
-                tab.addEventListener('shown.bs.tab', function(e) {
+                tab.addEventListener('shown.bs.tab', async function(e) {
                     const status = e.target.getAttribute('data-bs-target').substring(1);
-                    loadReviews(status);
+                    await loadReviews(status);
                 });
             });
         }
         
         // Update statistics
-        function updateStats() {
-            document.getElementById('pendingCount').textContent = mockReviews.pending.length;
-            document.getElementById('approvedCount').textContent = mockReviews.approved.length;
-            document.getElementById('rejectedCount').textContent = mockReviews.rejected.length;
-            document.getElementById('totalReviews').textContent = 
-                mockReviews.pending.length + mockReviews.approved.length + mockReviews.rejected.length;
-        }
-        
-        // Load reviews for a specific status
-        function loadReviews(status) {
-            const container = document.getElementById(`${status}Reviews`);
-            const reviews = mockReviews[status] || [];
-            
-            if (reviews.length === 0) {
-                container.innerHTML = `
-                    <div class="empty-state">
-                        <i class="fas fa-inbox"></i>
-                        <h4>No ${status} reviews</h4>
-                        <p>There are no ${status} reviews at the moment.</p>
-                    </div>
-                `;
+        async function updateStats() {
+            if (SUPABASE_URL === 'YOUR_SUPABASE_URL') {
+                // Use mock data if Supabase not configured
+                document.getElementById('pendingCount').textContent = mockReviews.pending.length;
+                document.getElementById('approvedCount').textContent = mockReviews.approved.length;
+                document.getElementById('rejectedCount').textContent = mockReviews.rejected.length;
+                document.getElementById('totalReviews').textContent = 
+                    mockReviews.pending.length + mockReviews.approved.length + mockReviews.rejected.length;
                 return;
             }
             
-            container.innerHTML = reviews.map(review => createReviewCard(review, status)).join('');
+            try {
+                // Get counts from Supabase
+                const { data: pendingData } = await supabaseClient
+                    .from('ratings')
+                    .select('id', { count: 'exact' })
+                    .eq('review_status', 'pending');
+                
+                const { data: approvedData } = await supabaseClient
+                    .from('ratings')
+                    .select('id', { count: 'exact' })
+                    .eq('review_status', 'approved')
+                    .gte('approved_at', new Date().toISOString().split('T')[0]);
+                
+                const { data: rejectedData } = await supabaseClient
+                    .from('ratings')
+                    .select('id', { count: 'exact' })
+                    .eq('review_status', 'rejected')
+                    .gte('approved_at', new Date().toISOString().split('T')[0]);
+                
+                const { data: totalData } = await supabaseClient
+                    .from('ratings')
+                    .select('id', { count: 'exact' });
+                
+                document.getElementById('pendingCount').textContent = pendingData?.length || 0;
+                document.getElementById('approvedCount').textContent = approvedData?.length || 0;
+                document.getElementById('rejectedCount').textContent = rejectedData?.length || 0;
+                document.getElementById('totalReviews').textContent = totalData?.length || 0;
+                
+            } catch (error) {
+                console.error('Error loading stats:', error);
+                showToast('Error loading statistics', 'danger');
+            }
+        }
+        
+        // Load reviews for a specific status
+        async function loadReviews(status) {
+            const container = document.getElementById(`${status}Reviews`);
+            
+            if (SUPABASE_URL === 'YOUR_SUPABASE_URL') {
+                // Use mock data if Supabase not configured
+                const reviews = mockReviews[status] || [];
+                
+                if (reviews.length === 0) {
+                    container.innerHTML = `
+                        <div class="empty-state">
+                            <i class="fas fa-inbox"></i>
+                            <h4>No ${status} reviews</h4>
+                            <p>There are no ${status} reviews at the moment.</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                container.innerHTML = reviews.map(review => createReviewCard(review, status)).join('');
+                return;
+            }
+            
+            try {
+                // Load from Supabase
+                let query = supabaseClient
+                    .from('ratings')
+                    .select(`
+                        *,
+                        fountains!inner(name, original_mapid)
+                    `)
+                    .eq('review_status', status)
+                    .order('created_at', { ascending: false });
+                
+                // For approved/rejected, only show recent ones (last 7 days)
+                if (status !== 'pending') {
+                    const weekAgo = new Date();
+                    weekAgo.setDate(weekAgo.getDate() - 7);
+                    query = query.gte('approved_at', weekAgo.toISOString());
+                }
+                
+                const { data: reviews, error } = await query;
+                
+                if (error) {
+                    throw error;
+                }
+                
+                if (!reviews || reviews.length === 0) {
+                    container.innerHTML = `
+                        <div class="empty-state">
+                            <i class="fas fa-inbox"></i>
+                            <h4>No ${status} reviews</h4>
+                            <p>There are no ${status} reviews at the moment.</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                container.innerHTML = reviews.map(review => createReviewCard(review, status)).join('');
+                
+            } catch (error) {
+                console.error('Error loading reviews:', error);
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <h4>Error loading reviews</h4>
+                        <p>Unable to load ${status} reviews. Please check your connection.</p>
+                    </div>
+                `;
+                showToast(`Error loading ${status} reviews`, 'danger');
+            }
         }
         
         // Create review card HTML
@@ -432,11 +489,15 @@
                 rejected: '#dc3545'
             };
             
+            // Handle both mock data and Supabase data
+            const fountainName = review.fountains?.name || review.fountain_name || 'Unknown Fountain';
+            const fountainId = review.fountains?.original_mapid || review.fountain_id || 'N/A';
+            
             return `
                 <div class="review-card" style="border-left-color: ${statusColor[status]}">
                     <div class="fountain-info">
-                        <h5><i class="fas fa-tint"></i> ${review.fountain_name}</h5>
-                        <small>ID: ${review.fountain_id}</small>
+                        <h5><i class="fas fa-tint"></i> ${fountainName}</h5>
+                        <small>ID: ${fountainId}</small>
                     </div>
                     
                     <div class="review-header">
@@ -507,9 +568,13 @@
         }
         
         // Approve review
-        function approveReview(reviewId) {
-            if (confirm('Are you sure you want to approve this review?')) {
-                // Find and move review
+        async function approveReview(reviewId) {
+            if (!confirm('Are you sure you want to approve this review?')) {
+                return;
+            }
+            
+            if (SUPABASE_URL === 'YOUR_SUPABASE_URL') {
+                // Mock data fallback
                 const reviewIndex = mockReviews.pending.findIndex(r => r.id === reviewId);
                 if (reviewIndex !== -1) {
                     const review = mockReviews.pending.splice(reviewIndex, 1)[0];
@@ -520,11 +585,32 @@
                     updateStats();
                     loadReviews('pending');
                     
-                    // In real implementation, make API call
                     console.log(`python scripts/rating_helper.py approve ${reviewId}`);
-                    
                     showToast('Review approved successfully!', 'success');
                 }
+                return;
+            }
+            
+            try {
+                // Use Supabase function to approve review
+                const { data, error } = await supabaseClient.rpc('approve_review', {
+                    review_id: reviewId,
+                    approved_by_user: 'admin'
+                });
+                
+                if (error) {
+                    throw error;
+                }
+                
+                // Refresh the dashboard
+                await updateStats();
+                await loadReviews('pending');
+                
+                showToast('Review approved successfully!', 'success');
+                
+            } catch (error) {
+                console.error('Error approving review:', error);
+                showToast('Failed to approve review. Please try again.', 'danger');
             }
         }
         
@@ -536,7 +622,7 @@
         }
         
         // Confirm rejection
-        document.getElementById('confirmReject').addEventListener('click', function() {
+        document.getElementById('confirmReject').addEventListener('click', async function() {
             const reason = document.querySelector('input[name="rejectReason"]:checked')?.value;
             const additionalNotes = document.getElementById('additionalNotes').value;
             
@@ -545,27 +631,54 @@
                 return;
             }
             
-            // Find and move review
-            const reviewIndex = mockReviews.pending.findIndex(r => r.id === currentRejectReviewId);
-            if (reviewIndex !== -1) {
-                const review = mockReviews.pending.splice(reviewIndex, 1)[0];
-                review.rejected_at = new Date().toISOString();
-                review.rejected_by = 'admin';
-                review.moderation_notes = reason + (additionalNotes ? `: ${additionalNotes}` : '');
-                mockReviews.rejected.unshift(review);
-                
-                updateStats();
-                loadReviews('pending');
-                
-                // In real implementation, make API call
-                console.log(`python scripts/rating_helper.py reject ${currentRejectReviewId} "${review.moderation_notes}"`);
-                
-                showToast('Review rejected.', 'warning');
+            const moderationNotes = reason + (additionalNotes ? `: ${additionalNotes}` : '');
+            
+            if (SUPABASE_URL === 'YOUR_SUPABASE_URL') {
+                // Mock data fallback
+                const reviewIndex = mockReviews.pending.findIndex(r => r.id === currentRejectReviewId);
+                if (reviewIndex !== -1) {
+                    const review = mockReviews.pending.splice(reviewIndex, 1)[0];
+                    review.rejected_at = new Date().toISOString();
+                    review.rejected_by = 'admin';
+                    review.moderation_notes = moderationNotes;
+                    mockReviews.rejected.unshift(review);
+                    
+                    updateStats();
+                    loadReviews('pending');
+                    
+                    console.log(`python scripts/rating_helper.py reject ${currentRejectReviewId} "${moderationNotes}"`);
+                    showToast('Review rejected.', 'warning');
+                }
+            } else {
+                try {
+                    // Use Supabase function to reject review
+                    const { data, error } = await supabaseClient.rpc('reject_review', {
+                        review_id: currentRejectReviewId,
+                        moderation_notes_text: moderationNotes,
+                        rejected_by_user: 'admin'
+                    });
+                    
+                    if (error) {
+                        throw error;
+                    }
+                    
+                    // Refresh the dashboard
+                    await updateStats();
+                    await loadReviews('pending');
+                    
+                    showToast('Review rejected.', 'warning');
+                    
+                } catch (error) {
+                    console.error('Error rejecting review:', error);
+                    showToast('Failed to reject review. Please try again.', 'danger');
+                    return;
+                }
             }
             
             // Close modal and reset
             bootstrap.Modal.getInstance(document.getElementById('rejectModal')).hide();
-            document.querySelector('input[name="rejectReason"]:checked').checked = false;
+            const checkedRadio = document.querySelector('input[name="rejectReason"]:checked');
+            if (checkedRadio) checkedRadio.checked = false;
             document.getElementById('additionalNotes').value = '';
             currentRejectReviewId = null;
         });

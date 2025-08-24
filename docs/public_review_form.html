@@ -6,6 +6,7 @@
     <title>YVR Water Fountains - Public Review Form</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
         body {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -166,68 +167,33 @@
         </div>
         
         <div class="form-container">
-            <!-- Instructions Section -->
-            <div class="alert alert-info mb-4">
-                <h4><i class="fas fa-info-circle"></i> How to Submit a Review</h4>
-                <div class="row">
-                    <div class="col-md-6">
-                        <h6>📍 Step 1: Find Your Fountain</h6>
-                        <ul class="mb-3">
-                            <li>Search by location, street name, or landmark</li>
-                            <li>Select the correct fountain from suggestions</li>
-                            <li>The fountain ID will auto-fill</li>
-                        </ul>
-                        
-                        <h6>⭐ Step 2: Rate Your Experience</h6>
-                        <ul class="mb-3">
-                            <li><strong>Overall Rating:</strong> Your general impression (1=terrible, 10=excellent)</li>
-                            <li><strong>Water Quality:</strong> Taste, clarity, freshness</li>
-                            <li><strong>Flow Strength:</strong> Water pressure and flow rate</li>
-                            <li><strong>Temperature:</strong> How refreshing the water feels</li>
-                            <li><strong>Cleanliness:</strong> Fountain condition and hygiene</li>
-                        </ul>
-                    </div>
-                    <div class="col-md-6">
-                        <h6>📝 Step 3: Add Details</h6>
-                        <ul class="mb-3">
-                            <li>Share specific observations in the notes</li>
-                            <li>Mention accessibility features you noticed</li>
-                            <li>Note any issues or maintenance needs</li>
-                        </ul>
-                        
-                        <h6>✅ Step 4: Submit</h6>
-                        <ul class="mb-0">
-                            <li>Review your ratings before submitting</li>
-                            <li>Your review helps other people find good fountains</li>
-                            <li>Reviews are moderated before appearing on the map</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            
             <form id="reviewForm">
                 <!-- Fountain Selection -->
                 <div class="form-section">
-                    <h3><i class="fas fa-map-marker-alt"></i> Fountain Information</h3>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label for="fountainSearch" class="form-label">Fountain Search</label>
-                            <div class="fountain-search">
-                                <input type="text" class="form-control" id="fountainSearch" 
-                                       placeholder="Search by name or location..." required>
-                                <div class="fountain-suggestions" id="fountainSuggestions"></div>
+                    <h3><i class="fas fa-map-marker-alt"></i> Fountain Selection</h3>
+                    <p class="text-muted mb-3">Click on a fountain on the map below to select it for your review</p>
+                    
+                    <!-- Map Container -->
+                    <div id="fountainMap" style="height: 400px; border-radius: 10px; margin-bottom: 1rem;"></div>
+                    
+                    <!-- Selected Fountain Info -->
+                    <div id="selectedFountainInfo" class="alert alert-info" style="display: none;">
+                        <h5><i class="fas fa-check-circle"></i> Selected Fountain</h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <strong>ID:</strong> <span id="selectedFountainId"></span><br>
+                                <strong>Name:</strong> <span id="selectedFountainName"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <strong>Location:</strong> <span id="selectedFountainLocation"></span><br>
+                                <strong>Neighborhood:</strong> <span id="selectedFountainNeighborhood"></span>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <label for="fountainId" class="form-label">Fountain ID</label>
-                            <input type="text" class="form-control" id="fountainId" 
-                                   placeholder="e.g., DFPB0113" required readonly>
-                        </div>
                     </div>
-                    <div class="mt-3">
-                        <label for="fountainName" class="form-label">Fountain Name</label>
-                        <input type="text" class="form-control" id="fountainName" readonly>
-                    </div>
+                    
+                    <!-- Hidden form fields -->
+                    <input type="hidden" id="fountainId" required>
+                    <input type="hidden" id="fountainName">
                 </div>
                 
                 <!-- Personal Information -->
@@ -433,80 +399,161 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
     <script>
-        let fountains = [];
+        // Configuration - Replace with your actual Supabase credentials
+        const SUPABASE_URL = 'YOUR_SUPABASE_URL';
+        const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
         
-        // Load fountains for search
-        async function loadFountains() {
+        // Initialize Supabase client
+        const { createClient } = supabase;
+        const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        
+        let fountainMap;
+        let fountains = [];
+        let selectedMarker = null;
+        let allMarkers = [];
+        
+        // Initialize the map
+        function initMap() {
+            fountainMap = L.map('fountainMap').setView([49.251, -123.060], 11);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap'
+            }).addTo(fountainMap);
+            
+            loadFountainsOnMap();
+        }
+        
+        // Load fountains on the map
+        async function loadFountainsOnMap() {
             try {
-                const response = await fetch('data/fountains_processed.geojson');
-                const data = await response.json();
-                fountains = data.features.map(f => ({
-                    id: f.properties.id || f.properties.mapid,
-                    name: f.properties.name,
-                    neighborhood: f.properties.geo_local_area
-                })).filter(f => f.id); // Only include fountains with IDs
+                // Try to load from Supabase first, fallback to GeoJSON
+                let data;
+                if (SUPABASE_URL !== 'YOUR_SUPABASE_URL') {
+                    try {
+                        const { data: fountainData, error } = await supabaseClient
+                            .from('fountains')
+                            .select('*');
+                        
+                        if (!error && fountainData) {
+                            // Convert Supabase data to GeoJSON format
+                            data = {
+                                type: "FeatureCollection",
+                                features: fountainData.map(f => ({
+                                    type: "Feature",
+                                    geometry: {
+                                        type: "Point",
+                                        coordinates: [f.lon, f.lat]
+                                    },
+                                    properties: {
+                                        id: f.original_mapid || f.id,
+                                        name: f.name,
+                                        location: f.location_note,
+                                        address: f.location_note,
+                                        geo_local_area: f.geo_local_area
+                                    }
+                                }))
+                            };
+                        } else {
+                            throw new Error('Failed to load from Supabase');
+                        }
+                    } catch (supabaseError) {
+                        console.warn('Supabase load failed, falling back to GeoJSON:', supabaseError);
+                        const response = await fetch('data/fountains_processed.geojson');
+                        data = await response.json();
+                    }
+                } else {
+                    const response = await fetch('data/fountains_processed.geojson');
+                    data = await response.json();
+                }
+                
+                fountains = data.features;
+                
+                // Clear existing markers
+                allMarkers.forEach(marker => fountainMap.removeLayer(marker));
+                allMarkers = [];
+                
+                // Add fountain markers
+                data.features.forEach(feature => {
+                    const props = feature.properties;
+                    if (feature.geometry && feature.geometry.coordinates) {
+                        const [lng, lat] = feature.geometry.coordinates;
+                        
+                        // Create marker with different styles for selected/unselected
+                        const marker = L.circleMarker([lat, lng], {
+                            radius: 8,
+                            fillColor: '#007bff',
+                            color: '#007bff',
+                            weight: 2,
+                            opacity: 1,
+                            fillOpacity: 0.7
+                        }).addTo(fountainMap);
+                        
+                        // Add click handler for fountain selection
+                        marker.on('click', () => selectFountain(props, marker));
+                        
+                        // Add popup with fountain info
+                        marker.bindPopup(`
+                            <strong>${props.name || 'Unnamed Fountain'}</strong><br>
+                            <small>ID: ${props.id || 'N/A'}</small><br>
+                            <small>${props.geo_local_area || ''}</small>
+                        `);
+                        
+                        allMarkers.push(marker);
+                    }
+                });
+                
             } catch (error) {
                 console.error('Error loading fountains:', error);
                 showAlert('Error loading fountain data', 'danger');
             }
         }
         
-        // Fountain search functionality
-        const fountainSearch = document.getElementById('fountainSearch');
-        const fountainSuggestions = document.getElementById('fountainSuggestions');
-        const fountainId = document.getElementById('fountainId');
-        const fountainName = document.getElementById('fountainName');
-        
-        fountainSearch.addEventListener('input', function() {
-            const query = this.value.toLowerCase();
-            if (query.length < 2) {
-                fountainSuggestions.style.display = 'none';
-                return;
+        // Function to select a fountain
+        function selectFountain(props, marker) {
+            // Reset previous selection
+            if (selectedMarker) {
+                selectedMarker.setStyle({
+                    fillColor: '#007bff',
+                    color: '#007bff',
+                    radius: 8
+                });
             }
             
-            const matches = fountains.filter(f => 
-                f.name.toLowerCase().includes(query) || 
-                f.id.toLowerCase().includes(query) ||
-                (f.neighborhood && f.neighborhood.toLowerCase().includes(query))
-            ).slice(0, 10);
+            // Highlight selected marker
+            marker.setStyle({
+                fillColor: '#28a745',
+                color: '#28a745',
+                radius: 12
+            });
             
-            if (matches.length > 0) {
-                fountainSuggestions.innerHTML = matches.map(f => `
-                    <div class="fountain-suggestion" data-id="${f.id}" data-name="${f.name}">
-                        <strong>${f.id}</strong> - ${f.name}
-                        ${f.neighborhood ? `<br><small class="text-muted">${f.neighborhood}</small>` : ''}
-                    </div>
-                `).join('');
-                fountainSuggestions.style.display = 'block';
-            } else {
-                fountainSuggestions.style.display = 'none';
-            }
-        });
-        
-        // Handle fountain selection
-        fountainSuggestions.addEventListener('click', function(e) {
-            const suggestion = e.target.closest('.fountain-suggestion');
-            if (suggestion) {
-                const id = suggestion.getAttribute('data-id');
-                const name = suggestion.getAttribute('data-name');
-                
-                fountainSearch.value = `${id} - ${name}`;
-                fountainId.value = id;
-                fountainName.value = name;
-                fountainSuggestions.style.display = 'none';
-            }
-        });
-        
-        // Hide suggestions when clicking outside
-        document.addEventListener('click', function(e) {
-            if (!e.target.closest('.fountain-search')) {
-                fountainSuggestions.style.display = 'none';
-            }
-        });
+            selectedMarker = marker;
+            
+            // Update form fields
+            document.getElementById('fountainId').value = props.id || '';
+            document.getElementById('fountainName').value = props.name || '';
+            
+            // Show selected fountain info
+            document.getElementById('selectedFountainId').textContent = props.id || 'N/A';
+            document.getElementById('selectedFountainName').textContent = props.name || 'Unnamed Fountain';
+            document.getElementById('selectedFountainLocation').textContent = props.location || props.address || 'N/A';
+            document.getElementById('selectedFountainNeighborhood').textContent = props.geo_local_area || 'N/A';
+            
+            document.getElementById('selectedFountainInfo').style.display = 'block';
+            
+            // Scroll to show the selection info
+            document.getElementById('selectedFountainInfo').scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'nearest' 
+            });
+        }
         
         // Set today's date as default
         document.getElementById('visitDate').value = new Date().toISOString().split('T')[0];
+        
+        // Initialize map when page loads
+        document.addEventListener('DOMContentLoaded', initMap);
         
         // Form submission
         document.getElementById('reviewForm').addEventListener('submit', async function(e) {
@@ -534,18 +581,28 @@
             }
             
             try {
-                // For now, we'll just show the data that would be submitted
-                console.log('Review data to submit:', data);
-                
-                // Generate a Python command that can be run
-                const pythonCommand = generatePythonCommand(data);
-                showAlert(`Review submitted successfully! Run this command to add to database:<br><br><code>${pythonCommand}</code>`, 'success', true);
+                // Submit to Supabase if configured, otherwise show Python command
+                if (SUPABASE_URL !== 'YOUR_SUPABASE_URL') {
+                    await submitToSupabase(data);
+                } else {
+                    // Fallback: Generate Python command
+                    const pythonCommand = generatePythonCommand(data);
+                    showAlert(`Review submitted successfully! Run this command to add to database:<br><br><code>${pythonCommand}</code>`, 'success', true);
+                }
                 
                 // Reset form
                 this.reset();
-                fountainId.value = '';
-                fountainName.value = '';
-                fountainSearch.value = '';
+                document.getElementById('fountainId').value = '';
+                document.getElementById('fountainName').value = '';
+                document.getElementById('selectedFountainInfo').style.display = 'none';
+                if (selectedMarker) {
+                    selectedMarker.setStyle({
+                        fillColor: '#007bff',
+                        color: '#007bff',
+                        radius: 8
+                    });
+                    selectedMarker = null;
+                }
                 document.getElementById('visitDate').value = new Date().toISOString().split('T')[0];
                 
             } catch (error) {
@@ -553,6 +610,61 @@
                 showAlert('Error submitting review. Please try again.', 'danger');
             }
         });
+        
+        // Submit review to Supabase
+        async function submitToSupabase(data) {
+            try {
+                // First, find the fountain UUID by original_mapid
+                const { data: fountainData, error: fountainError } = await supabaseClient
+                    .from('fountains')
+                    .select('id')
+                    .eq('original_mapid', data.fountainId)
+                    .single();
+                
+                if (fountainError) {
+                    throw new Error(`Fountain not found: ${fountainError.message}`);
+                }
+                
+                const fountainUuid = fountainData.id;
+                
+                // Prepare rating data for insertion
+                const ratingData = {
+                    fountain_id: fountainUuid,
+                    overall_rating: parseInt(data.overallRating),
+                    water_quality: data.waterQuality ? parseInt(data.waterQuality) : null,
+                    flow_pressure: data.flowPressure ? parseInt(data.flowPressure) : null,
+                    temperature: data.temperature ? parseInt(data.temperature) : null,
+                    drainage: data.cleanliness ? parseInt(data.cleanliness) : null, // Note: cleanliness maps to drainage
+                    accessibility: data.accessibility ? parseInt(data.accessibility) : null,
+                    notes: data.additionalNotes || null,
+                    visited: true,
+                    visit_date: data.visitDate,
+                    reviewer_name: data.reviewerName,
+                    reviewer_email: data.reviewerEmail || null,
+                    review_type: 'user_submission',
+                    review_status: 'pending', // Public reviews need moderation
+                    is_verified: false
+                };
+                
+                // Insert the rating
+                const { data: insertedRating, error: insertError } = await supabaseClient
+                    .from('ratings')
+                    .insert([ratingData])
+                    .select()
+                    .single();
+                
+                if (insertError) {
+                    throw new Error(`Failed to submit review: ${insertError.message}`);
+                }
+                
+                showAlert(`Review submitted successfully! Your review ID is ${insertedRating.id}. It will be reviewed by our team before being published.`, 'success');
+                
+            } catch (error) {
+                console.error('Supabase submission error:', error);
+                showAlert(`Failed to submit review: ${error.message}`, 'danger');
+                throw error;
+            }
+        }
         
         function generatePythonCommand(data) {
             const args = [

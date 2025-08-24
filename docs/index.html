@@ -64,10 +64,33 @@
       background: rgba(255,255,255,0.3);
     }
     
+    .nav-links-secondary {
+      margin-top: 0.5rem;
+      padding-top: 0.5rem;
+      border-top: 1px solid rgba(255,255,255,0.2);
+    }
+    
+    .nav-links-secondary a {
+      color: white;
+      text-decoration: none;
+      background: rgba(255,255,255,0.1);
+      padding: 0.4rem 0.8rem;
+      border-radius: 16px;
+      margin-right: 0.4rem;
+      margin-bottom: 0.3rem;
+      font-size: 0.8rem;
+      transition: background 0.2s;
+      display: inline-block;
+    }
+    
+    .nav-links-secondary a:hover {
+      background: rgba(255,255,255,0.2);
+    }
+    
 
     
     #map { 
-      height: calc(100vh - 120px); 
+      height: calc(100vh - 200px); 
     }
     
     .popup-content {
@@ -198,7 +221,15 @@
         font-size: 1.2rem;
       }
       
-
+      .footer-content {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .footer-section {
+        margin: 10px 0;
+        min-width: auto;
+      }
       
       /* Hide popups on mobile */
       .leaflet-popup {
@@ -283,21 +314,92 @@
     .review-notes {
       font-style: italic;
     }
+
+    /* Footer styles */
+    .footer {
+      background-color: #f8f9fa;
+      padding: 20px 0;
+      margin-top: 20px;
+      border-top: 1px solid #e9ecef;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .footer-section {
+      flex: 1;
+      min-width: 200px;
+      margin: 0 15px;
+    }
+
+    .footer-section h3 {
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    .footer-section a {
+      display: block;
+      color: #007bff;
+      text-decoration: none;
+      margin-bottom: 5px;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .footer-section a:hover {
+      color: #0056b3;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 15px;
+      border-top: 1px solid #e9ecef;
+      margin-top: 20px;
+      font-size: 0.8rem;
+      color: #6c757d;
+    }
   </style>
 </head>
 <body>
   <div class="header">
     <h1>🚰 YVR Water Fountains</h1>
-    <p>Find drinking fountains across Vancouver</p>
+    <p>Find drinking fountains across Vancouver & Burnaby</p>
     <div class="nav-links">
       <a href="table.html">📊 Table View</a>
+      <a href="public_review_form.html">⭐ Submit Review</a>
       <a href="#" id="locate-me">📍 My Location</a>
+      <a href="#" id="admin-access" style="font-size: 0.7rem; opacity: 0.6;">⚙️</a>
     </div>
   </div>
   
 
   
   <div id="map"></div>
+  
+     <!-- Footer with additional links -->
+   <div class="footer">
+     <div class="footer-content">
+       <div class="footer-section">
+         <h3>Quick Links</h3>
+         <a href="table.html">📊 Data Table</a>
+         <a href="public_review_form.html">⭐ Rate a Fountain</a>
+       </div>
+       <div class="footer-section">
+         <h3>About</h3>
+         <p style="font-size: 0.9rem; color: #6c757d; margin: 0;">Community-maintained map of water fountains across Vancouver & Burnaby</p>
+       </div>
+     </div>
+     <div class="footer-bottom">
+       <p>🚰 YVR Water Fountains - Find & Rate Drinking Fountains in Vancouver & Burnaby</p>
+     </div>
+   </div>
   
   <!-- Bottom sheet for mobile -->
   <div class="overlay" id="overlay"></div>
@@ -584,6 +686,38 @@
         }
       });
 
+      // Admin access functionality
+      document.getElementById('admin-access').addEventListener('click', (e) => {
+        e.preventDefault();
+        const password = prompt('Enter admin password:');
+        if (password === 'yvr2024admin') {
+          // Create admin panel
+          const adminPanel = document.createElement('div');
+          adminPanel.style.cssText = `
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            z-index: 3000;
+            text-align: center;
+          `;
+          adminPanel.innerHTML = `
+            <h3>🔧 Admin Panel</h3>
+            <div style="margin: 15px 0;">
+              <a href="admin_review_form.html" style="display: block; margin: 10px 0; padding: 10px; background: #007bff; color: white; text-decoration: none; border-radius: 5px;">📝 Admin Review Form</a>
+              <a href="moderation_dashboard.html" style="display: block; margin: 10px 0; padding: 10px; background: #007bff; color: white; text-decoration: none; border-radius: 5px;">🛡️ Moderation Dashboard</a>
+            </div>
+            <button onclick="this.parentElement.remove()" style="background: #dc3545; color: white; border: none; padding: 8px 16px; border-radius: 5px; cursor: pointer;">Close</button>
+          `;
+          document.body.appendChild(adminPanel);
+        } else if (password !== null) {
+          alert('Incorrect password');
+        }
+      });
 
   </script>
 </body>

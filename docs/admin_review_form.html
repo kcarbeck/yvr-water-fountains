@@ -165,13 +165,81 @@
         .fountain-suggestion:last-child {
             border-bottom: none;
         }
+        
+        /* Mobile responsive styles */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .header p {
+                font-size: 1rem;
+            }
+            
+            .main-container {
+                margin: 1rem;
+                border-radius: 10px;
+            }
+            
+            .form-container {
+                padding: 1rem;
+            }
+            
+            .form-section {
+                padding: 1rem;
+                margin-bottom: 1rem;
+            }
+            
+            .rating-scale {
+                flex-wrap: wrap;
+            }
+            
+            .rating-scale label {
+                width: 30px;
+                height: 30px;
+                font-size: 0.8rem;
+            }
+            
+            #fountainMap {
+                height: 300px;
+            }
+            
+            .fountain-suggestions {
+                font-size: 0.9rem;
+            }
+            
+            .fountain-suggestion {
+                padding: 8px 12px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .rating-input {
+                flex-direction: column;
+                gap: 0.5rem;
+                align-items: flex-start;
+            }
+            
+            .rating-input label {
+                min-width: auto;
+            }
+            
+            .rating-scale {
+                justify-content: center;
+                width: 100%;
+            }
+            
+            #fountainMap {
+                height: 250px;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="main-container">
         <div class="header">
             <h1><i class="fas fa-tint"></i> YVR Water Fountains</h1>
-            <p>Instagram Review Submission Form</p>
+            <p>Admin Instagram Review Form</p>
         </div>
         
         <div class="form-container">
@@ -179,7 +247,28 @@
                 <!-- Fountain Selection -->
                 <div class="form-section">
                     <h3><i class="fas fa-map-marker-alt"></i> Fountain Selection</h3>
-                    <p class="text-muted mb-3">Click on a fountain on the map below to select it for your review</p>
+                    <p class="text-muted mb-3">Click on a fountain on the map below or enter fountain ID to select it for your review</p>
+                    
+                    <!-- Fountain ID Input -->
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <div class="fountain-search">
+                                <label for="fountainIdInput" class="form-label">Search by Fountain ID</label>
+                                <input type="text" class="form-control" id="fountainIdInput" 
+                                       placeholder="e.g., DFPB0004, DFPB0113..." 
+                                       autocomplete="off">
+                                <div class="fountain-suggestions" id="fountainSuggestions"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">&nbsp;</label>
+                            <div>
+                                <button type="button" class="btn btn-outline-primary" id="clearSelectionBtn" style="display: none;">
+                                    <i class="fas fa-times"></i> Clear Selection
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                     
                     <!-- Map Container -->
                     <div id="fountainMap" style="height: 400px; border-radius: 10px; margin-bottom: 1rem;"></div>
@@ -501,7 +590,7 @@
                         // Add click handler for fountain selection
                         marker.on('click', () => selectFountain(props, marker));
                         
-                        // Add popup with fountain info
+                        // Add popup with fountain info and Instagram photo if available
                         marker.bindPopup(`
                             <strong>${props.name || 'Unnamed Fountain'}</strong><br>
                             <small>ID: ${props.id || 'N/A'}</small><br>
@@ -550,6 +639,11 @@
             
             document.getElementById('selectedFountainInfo').style.display = 'block';
             
+            // Update search input and show clear button
+            document.getElementById('fountainIdInput').value = props.id || '';
+            document.getElementById('clearSelectionBtn').style.display = 'inline-block';
+            document.getElementById('fountainSuggestions').style.display = 'none';
+            
             // Scroll to show the selection info
             document.getElementById('selectedFountainInfo').scrollIntoView({ 
                 behavior: 'smooth', 
@@ -557,14 +651,140 @@
             });
         }
         
+        // Handle fountain search input
+        function handleFountainSearch(e) {
+            const query = e.target.value.trim().toLowerCase();
+            const suggestionsDiv = document.getElementById('fountainSuggestions');
+            
+            if (query.length === 0) {
+                suggestionsDiv.style.display = 'none';
+                return;
+            }
+            
+            // Filter fountains by ID or name
+            const matches = fountains.filter(fountain => {
+                const id = (fountain.properties.id || '').toLowerCase();
+                const name = (fountain.properties.name || '').toLowerCase();
+                return id.includes(query) || name.includes(query);
+            }).slice(0, 8); // Limit to 8 results
+            
+            if (matches.length === 0) {
+                suggestionsDiv.innerHTML = '<div class="fountain-suggestion">No fountains found</div>';
+                suggestionsDiv.style.display = 'block';
+                return;
+            }
+            
+            suggestionsDiv.innerHTML = matches.map(fountain => {
+                const props = fountain.properties;
+                return `
+                    <div class="fountain-suggestion" data-fountain-id="${props.id}" onclick="selectFountainById('${props.id}')">
+                        <strong>${props.id}</strong> - ${props.name || 'Unnamed Fountain'}
+                        <br><small class="text-muted">${props.geo_local_area || ''}</small>
+                    </div>
+                `;
+            }).join('');
+            
+            suggestionsDiv.style.display = 'block';
+        }
+        
+        // Handle search keydown (Enter key)
+        function handleSearchKeydown(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                const suggestionsDiv = document.getElementById('fountainSuggestions');
+                const firstSuggestion = suggestionsDiv.querySelector('.fountain-suggestion');
+                if (firstSuggestion) {
+                    const fountainId = firstSuggestion.dataset.fountainId;
+                    selectFountainById(fountainId);
+                }
+            }
+        }
+        
+        // Select fountain by ID
+        function selectFountainById(fountainId) {
+            const fountain = fountains.find(f => f.properties.id === fountainId);
+            if (!fountain) return;
+            
+            // Find the corresponding marker
+            const [lng, lat] = fountain.geometry.coordinates;
+            const marker = allMarkers.find(m => {
+                const markerLatLng = m.getLatLng();
+                return Math.abs(markerLatLng.lat - lat) < 0.0001 && Math.abs(markerLatLng.lng - lng) < 0.0001;
+            });
+            
+            if (marker) {
+                // Center map on fountain
+                fountainMap.setView([lat, lng], 16);
+                
+                // Select the fountain
+                selectFountain(fountain.properties, marker);
+                
+                // Update input field and hide suggestions
+                document.getElementById('fountainIdInput').value = fountainId;
+                document.getElementById('fountainSuggestions').style.display = 'none';
+                document.getElementById('clearSelectionBtn').style.display = 'inline-block';
+            }
+        }
+        
+        // Clear fountain selection
+        function clearFountainSelection() {
+            // Reset marker style
+            if (selectedMarker) {
+                selectedMarker.setStyle({
+                    fillColor: '#007bff',
+                    color: '#007bff',
+                    radius: 8
+                });
+                selectedMarker = null;
+            }
+            
+            // Clear form fields
+            document.getElementById('fountainId').value = '';
+            document.getElementById('fountainName').value = '';
+            document.getElementById('fountainIdInput').value = '';
+            document.getElementById('selectedFountainInfo').style.display = 'none';
+            document.getElementById('clearSelectionBtn').style.display = 'none';
+            document.getElementById('fountainSuggestions').style.display = 'none';
+            
+            // Reset map view
+            fountainMap.setView([49.251, -123.060], 11);
+        }
+        
+        // Extract Instagram photo URL from post URL
+        function getInstagramPhotoUrl(postUrl) {
+            if (!postUrl || !postUrl.includes('instagram.com')) return null;
+            
+            // Extract post ID from Instagram URL (handles both /p/ and /reel/ formats)
+            const postIdMatch = postUrl.match(/\/(p|reel)\/([a-zA-Z0-9_-]+)/);
+            if (!postIdMatch) return null;
+            
+            const postId = postIdMatch[2];
+            // Use Instagram's media endpoint for getting the image
+            return `https://www.instagram.com/p/${postId}/media/?size=m`;
+        }
+        
+        
         // Set today's date as default
         document.getElementById('visitDate').value = new Date().toISOString().split('T')[0];
         
         // Initialize map when page loads
-        document.addEventListener('DOMContentLoaded', initMap);
-        
-        // Form submission
-        document.getElementById('reviewForm').addEventListener('submit', async function(e) {
+        document.addEventListener('DOMContentLoaded', function() {
+            initMap();
+            
+            // Initialize fountain search functionality
+            document.getElementById('fountainIdInput').addEventListener('input', handleFountainSearch);
+            document.getElementById('fountainIdInput').addEventListener('keydown', handleSearchKeydown);
+            document.getElementById('clearSelectionBtn').addEventListener('click', clearFountainSelection);
+            
+            // Close suggestions when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.fountain-search')) {
+                    document.getElementById('fountainSuggestions').style.display = 'none';
+                }
+            });
+            
+            // Form submission
+            document.getElementById('reviewForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const formData = new FormData(this);
@@ -617,6 +837,7 @@
                 console.error('Error submitting review:', error);
                 showAlert('Error submitting review. Please try again.', 'danger');
             }
+            });
         });
         
         // Submit review to Supabase (Admin reviews with Instagram)
@@ -740,8 +961,6 @@
                 .replace(/'/g, "&#039;");
         }
         
-        // Initialize
-        loadFountains();
     </script>
 </body>
 </html>

@@ -167,6 +167,79 @@
             color: #1976d2;
             margin-bottom: 0.5rem;
         }
+        
+        /* Mobile responsive styles */
+        @media (max-width: 768px) {
+            .dashboard-header {
+                padding: 1rem 0;
+                margin-bottom: 1rem;
+            }
+            
+            .dashboard-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .stats-card {
+                padding: 1rem;
+                margin-bottom: 0.5rem;
+            }
+            
+            .stats-number {
+                font-size: 2rem;
+            }
+            
+            .review-card {
+                padding: 1rem;
+                margin-bottom: 0.5rem;
+            }
+            
+            .rating-display {
+                gap: 0.5rem;
+            }
+            
+            .rating-item {
+                min-width: 60px;
+                padding: 0.3rem;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .action-buttons .btn {
+                width: 100%;
+            }
+            
+            .instagram-section .row {
+                flex-direction: column;
+            }
+            
+            .instagram-section img {
+                max-width: 120px;
+                margin: 0 auto;
+                display: block;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 10px;
+            }
+            
+            .rating-display {
+                flex-wrap: wrap;
+            }
+            
+            .review-meta {
+                font-size: 0.8rem;
+                line-height: 1.4;
+            }
+            
+            .fountain-info {
+                padding: 0.5rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -376,31 +449,31 @@
             
             try {
                 // Get counts from Supabase
-                const { data: pendingData } = await supabaseClient
+                const { count: pendingCount } = await supabaseClient
                     .from('ratings')
-                    .select('id', { count: 'exact' })
+                    .select('*', { count: 'exact', head: true })
                     .eq('review_status', 'pending');
                 
-                const { data: approvedData } = await supabaseClient
+                const { count: approvedCount } = await supabaseClient
                     .from('ratings')
-                    .select('id', { count: 'exact' })
+                    .select('*', { count: 'exact', head: true })
                     .eq('review_status', 'approved')
                     .gte('approved_at', new Date().toISOString().split('T')[0]);
                 
-                const { data: rejectedData } = await supabaseClient
+                const { count: rejectedCount } = await supabaseClient
                     .from('ratings')
-                    .select('id', { count: 'exact' })
+                    .select('*', { count: 'exact', head: true })
                     .eq('review_status', 'rejected')
                     .gte('approved_at', new Date().toISOString().split('T')[0]);
                 
-                const { data: totalData } = await supabaseClient
+                const { count: totalCount } = await supabaseClient
                     .from('ratings')
-                    .select('id', { count: 'exact' });
+                    .select('*', { count: 'exact', head: true });
                 
-                document.getElementById('pendingCount').textContent = pendingData?.length || 0;
-                document.getElementById('approvedCount').textContent = approvedData?.length || 0;
-                document.getElementById('rejectedCount').textContent = rejectedData?.length || 0;
-                document.getElementById('totalReviews').textContent = totalData?.length || 0;
+                document.getElementById('pendingCount').textContent = pendingCount || 0;
+                document.getElementById('approvedCount').textContent = approvedCount || 0;
+                document.getElementById('rejectedCount').textContent = rejectedCount || 0;
+                document.getElementById('totalReviews').textContent = totalCount || 0;
                 
             } catch (error) {
                 console.error('Error loading stats:', error);
@@ -481,6 +554,19 @@
             }
         }
         
+        // Extract Instagram photo URL from post URL
+        function getInstagramPhotoUrl(postUrl) {
+            if (!postUrl || !postUrl.includes('instagram.com')) return null;
+            
+            // Extract post ID from Instagram URL (handles both /p/ and /reel/ formats)
+            const postIdMatch = postUrl.match(/\/(p|reel)\/([a-zA-Z0-9_-]+)/);
+            if (!postIdMatch) return null;
+            
+            const postId = postIdMatch[2];
+            // Use Instagram's media endpoint for getting the image
+            return `https://www.instagram.com/p/${postId}/media/?size=m`;
+        }
+
         // Create review card HTML
         function createReviewCard(review, status) {
             const statusColor = {
@@ -492,6 +578,16 @@
             // Handle both mock data and Supabase data
             const fountainName = review.fountains?.name || review.fountain_name || 'Unknown Fountain';
             const fountainId = review.fountains?.original_mapid || review.fountain_id || 'N/A';
+            
+            // Instagram content only exists for admin reviews from YVR Water Fountains Instagram
+            const isAdminInstagramReview = review.review_type === 'instagram' || review.reviewer_name === 'YVR Water Fountains';
+            let instagramUrl = null;
+            let instagramPhotoUrl = null;
+            
+            if (isAdminInstagramReview) {
+                instagramUrl = review.instagram_url || review.instagram_post_url || review.ig_post_url;
+                instagramPhotoUrl = instagramUrl ? getInstagramPhotoUrl(instagramUrl) : null;
+            }
             
             return `
                 <div class="review-card" style="border-left-color: ${statusColor[status]}">
@@ -547,6 +643,29 @@
                     <div class="review-notes">
                         <strong>Review:</strong><br>
                         "${review.notes}"
+                    </div>` : ''}
+                    
+                    ${isAdminInstagramReview && instagramUrl ? `
+                    <div class="instagram-section" style="margin-top: 1rem; padding: 1rem; background: #f8f9fa; border-radius: 8px; border-left: 3px solid #e4405f;">
+                        <div class="row">
+                            ${instagramPhotoUrl ? `
+                            <div class="col-md-4">
+                                <img src="${instagramPhotoUrl}" alt="Instagram photo" 
+                                     style="width: 100%; max-width: 150px; border-radius: 8px; cursor: pointer;"
+                                     onclick="window.open('${instagramUrl}', '_blank')"
+                                     onerror="this.style.display='none'; this.parentElement.style.display='none';">
+                            </div>
+                            <div class="col-md-8">
+                            ` : '<div class="col-12">'}
+                                <div style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+                                    <i class="fab fa-instagram" style="color: #e4405f; margin-right: 0.5rem;"></i>
+                                    <strong>Admin Instagram Review</strong>
+                                </div>
+                                <a href="${instagramUrl}" target="_blank" style="color: #e4405f; text-decoration: none; font-size: 0.9rem;">
+                                    View Instagram Post <i class="fas fa-external-link-alt" style="font-size: 0.8rem;"></i>
+                                </a>
+                            </div>
+                        </div>
                     </div>` : ''}
                     
                     ${status === 'pending' ? `

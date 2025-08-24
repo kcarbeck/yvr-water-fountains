@@ -591,8 +591,11 @@
                         marker.on('click', () => selectFountain(props, marker));
                         
                         // Add popup with fountain info and Instagram photo if available
-                        const popupContent = createFountainPopup(props);
-                        marker.bindPopup(popupContent);
+                        marker.bindPopup(`
+                            <strong>${props.name || 'Unnamed Fountain'}</strong><br>
+                            <small>ID: ${props.id || 'N/A'}</small><br>
+                            <small>${props.geo_local_area || ''}</small>
+                        `);
                         
                         allMarkers.push(marker);
                     }
@@ -760,60 +763,28 @@
             return `https://www.instagram.com/p/${postId}/media/?size=m`;
         }
         
-        // Create fountain popup with Instagram photo
-        function createFountainPopup(props) {
-            let popupContent = `
-                <div style="min-width: 200px;">
-                    <strong>${props.name || 'Unnamed Fountain'}</strong><br>
-                    <small>ID: ${props.id || 'N/A'}</small><br>
-                    <small>${props.geo_local_area || ''}</small>
-            `;
-            
-            // Add Instagram photo if available
-            if (props.ig_post_url && props.ig_post_url.trim()) {
-                const photoUrl = getInstagramPhotoUrl(props.ig_post_url);
-                if (photoUrl) {
-                    popupContent += `
-                        <hr style="margin: 8px 0;">
-                        <div style="text-align: center;">
-                            <img src="${photoUrl}" alt="Instagram photo" 
-                                 style="max-width: 180px; max-height: 180px; border-radius: 8px; cursor: pointer;"
-                                 onclick="window.open('${props.ig_post_url}', '_blank')"
-                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                            <div style="display: none; color: #666; font-size: 12px; padding: 10px;">
-                                <a href="${props.ig_post_url}" target="_blank" style="color: #e4405f;">
-                                    <i class="fab fa-instagram"></i> View Instagram Post
-                                </a>
-                            </div>
-                        </div>
-                    `;
-                }
-            }
-            
-            popupContent += '</div>';
-            return popupContent;
-        }
         
         // Set today's date as default
         document.getElementById('visitDate').value = new Date().toISOString().split('T')[0];
         
         // Initialize map when page loads
-        document.addEventListener('DOMContentLoaded', initMap);
-        
-        // Initialize fountain search functionality
-        document.getElementById('fountainIdInput').addEventListener('input', handleFountainSearch);
-        document.getElementById('fountainIdInput').addEventListener('keydown', handleSearchKeydown);
-        document.getElementById('clearSelectionBtn').addEventListener('click', clearFountainSelection);
-        
-        // Close suggestions when clicking outside
-        document.addEventListener('click', function(e) {
-            if (!e.target.closest('.fountain-search')) {
-                document.getElementById('fountainSuggestions').style.display = 'none';
-            }
-        });
-        
-        // Form submission
-        document.getElementById('reviewForm').addEventListener('submit', async function(e) {
+        document.addEventListener('DOMContentLoaded', function() {
+            initMap();
+            
+            // Initialize fountain search functionality
+            document.getElementById('fountainIdInput').addEventListener('input', handleFountainSearch);
+            document.getElementById('fountainIdInput').addEventListener('keydown', handleSearchKeydown);
+            document.getElementById('clearSelectionBtn').addEventListener('click', clearFountainSelection);
+            
+            // Close suggestions when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.fountain-search')) {
+                    document.getElementById('fountainSuggestions').style.display = 'none';
+                }
+            });
+            
+            // Form submission
+            document.getElementById('reviewForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const formData = new FormData(this);
@@ -866,6 +837,7 @@
                 console.error('Error submitting review:', error);
                 showAlert('Error submitting review. Please try again.', 'danger');
             }
+            });
         });
         
         // Submit review to Supabase (Admin reviews with Instagram)

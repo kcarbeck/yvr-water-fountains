@@ -449,31 +449,31 @@
             
             try {
                 // Get counts from Supabase
-                const { data: pendingData } = await supabaseClient
+                const { count: pendingCount } = await supabaseClient
                     .from('ratings')
-                    .select('id', { count: 'exact' })
+                    .select('*', { count: 'exact', head: true })
                     .eq('review_status', 'pending');
                 
-                const { data: approvedData } = await supabaseClient
+                const { count: approvedCount } = await supabaseClient
                     .from('ratings')
-                    .select('id', { count: 'exact' })
+                    .select('*', { count: 'exact', head: true })
                     .eq('review_status', 'approved')
                     .gte('approved_at', new Date().toISOString().split('T')[0]);
                 
-                const { data: rejectedData } = await supabaseClient
+                const { count: rejectedCount } = await supabaseClient
                     .from('ratings')
-                    .select('id', { count: 'exact' })
+                    .select('*', { count: 'exact', head: true })
                     .eq('review_status', 'rejected')
                     .gte('approved_at', new Date().toISOString().split('T')[0]);
                 
-                const { data: totalData } = await supabaseClient
+                const { count: totalCount } = await supabaseClient
                     .from('ratings')
-                    .select('id', { count: 'exact' });
+                    .select('*', { count: 'exact', head: true });
                 
-                document.getElementById('pendingCount').textContent = pendingData?.length || 0;
-                document.getElementById('approvedCount').textContent = approvedData?.length || 0;
-                document.getElementById('rejectedCount').textContent = rejectedData?.length || 0;
-                document.getElementById('totalReviews').textContent = totalData?.length || 0;
+                document.getElementById('pendingCount').textContent = pendingCount || 0;
+                document.getElementById('approvedCount').textContent = approvedCount || 0;
+                document.getElementById('rejectedCount').textContent = rejectedCount || 0;
+                document.getElementById('totalReviews').textContent = totalCount || 0;
                 
             } catch (error) {
                 console.error('Error loading stats:', error);

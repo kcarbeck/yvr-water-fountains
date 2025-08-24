@@ -711,22 +711,23 @@
         document.getElementById('visitDate').value = new Date().toISOString().split('T')[0];
         
         // Initialize map when page loads
-        document.addEventListener('DOMContentLoaded', initMap);
-        
-        // Initialize fountain search functionality
-        document.getElementById('fountainIdInput').addEventListener('input', handleFountainSearch);
-        document.getElementById('fountainIdInput').addEventListener('keydown', handleSearchKeydown);
-        document.getElementById('clearSelectionBtn').addEventListener('click', clearFountainSelection);
-        
-        // Close suggestions when clicking outside
-        document.addEventListener('click', function(e) {
-            if (!e.target.closest('.fountain-search')) {
-                document.getElementById('fountainSuggestions').style.display = 'none';
-            }
-        });
-        
-        // Form submission
-        document.getElementById('reviewForm').addEventListener('submit', async function(e) {
+        document.addEventListener('DOMContentLoaded', function() {
+            initMap();
+            
+            // Initialize fountain search functionality
+            document.getElementById('fountainIdInput').addEventListener('input', handleFountainSearch);
+            document.getElementById('fountainIdInput').addEventListener('keydown', handleSearchKeydown);
+            document.getElementById('clearSelectionBtn').addEventListener('click', clearFountainSelection);
+            
+            // Close suggestions when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.fountain-search')) {
+                    document.getElementById('fountainSuggestions').style.display = 'none';
+                }
+            });
+            
+            // Form submission
+            document.getElementById('reviewForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const formData = new FormData(this);
@@ -779,6 +780,7 @@
                 console.error('Error submitting review:', error);
                 showAlert('Error submitting review. Please try again.', 'danger');
             }
+            });
         });
         
         // Submit review to Supabase

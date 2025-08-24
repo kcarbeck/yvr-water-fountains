@@ -463,14 +463,19 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="config.js"></script>
     <script>
-        // Configuration - Replace with your actual Supabase credentials
-        const SUPABASE_URL = 'YOUR_SUPABASE_URL';
-        const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+        // Use configuration from config.js
+        const SUPABASE_URL = window.APP_CONFIG.SUPABASE_URL;
+        const SUPABASE_ANON_KEY = window.APP_CONFIG.SUPABASE_ANON_KEY;
+        const ENABLE_SUPABASE = window.APP_CONFIG.ENABLE_SUPABASE;
         
-        // Initialize Supabase client
-        const { createClient } = supabase;
-        const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        // Initialize Supabase client only if credentials are available
+        let supabaseClient = null;
+        if (ENABLE_SUPABASE) {
+            const { createClient } = supabase;
+            supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        }
         
         let fountainMap;
         let fountains = [];
@@ -479,26 +484,32 @@
         
         // Initialize the map
         function initMap() {
+            console.log('Initializing fountain map...');
             fountainMap = L.map('fountainMap').setView([49.251, -123.060], 11);
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '© OpenStreetMap'
             }).addTo(fountainMap);
+            console.log('Map initialized, loading fountains...');
             
             loadFountainsOnMap();
         }
         
         // Load fountains on the map
         async function loadFountainsOnMap() {
+            console.log('Loading fountains on map...');
             try {
-                // Try to load from Supabase first, fallback to GeoJSON
                 let data;
-                if (SUPABASE_URL !== 'YOUR_SUPABASE_URL') {
+                
+                // Try to load from Supabase first if enabled, otherwise use GeoJSON
+                if (ENABLE_SUPABASE && supabaseClient) {
                     try {
+                        console.log('Attempting to load from Supabase...');
                         const { data: fountainData, error } = await supabaseClient
                             .from('fountains')
                             .select('*');
                         
-                        if (!error && fountainData) {
+                        if (!error && fountainData && fountainData.length > 0) {
+                            console.log('Successfully loaded from Supabase:', fountainData.length, 'fountains');
                             // Convert Supabase data to GeoJSON format
                             data = {
                                 type: "FeatureCollection",
@@ -511,22 +522,25 @@
                                     properties: {
                                         id: f.original_mapid || f.id,
                                         name: f.name,
-                                        location: f.location_note,
-                                        address: f.location_note,
-                                        geo_local_area: f.geo_local_area
+                                        location: f.location_description,
+                                        address: f.location_description,
+                                        neighborhood: f.neighborhood
                                     }
                                 }))
                             };
                         } else {
-                            throw new Error('Failed to load from Supabase');
+                            throw new Error('No data received from Supabase');
                         }
                     } catch (supabaseError) {
                         console.warn('Supabase load failed, falling back to GeoJSON:', supabaseError);
-                        const response = await fetch('data/fountains_processed.geojson');
+                        const response = await fetch(window.APP_CONFIG.GEOJSON_PATH);
+                        if (!response.ok) throw new Error('Failed to load GeoJSON');
                         data = await response.json();
                     }
                 } else {
-                    const response = await fetch('data/fountains_processed.geojson');
+                    console.log('Loading from static GeoJSON file...');
+                    const response = await fetch(window.APP_CONFIG.GEOJSON_PATH);
+                    if (!response.ok) throw new Error('Failed to load GeoJSON');
                     data = await response.json();
                 }
                 
@@ -559,7 +573,7 @@
                         marker.bindPopup(`
                             <strong>${props.name || 'Unnamed Fountain'}</strong><br>
                             <small>ID: ${props.id || 'N/A'}</small><br>
-                            <small>${props.geo_local_area || ''}</small>
+                            <small>${props.neighborhood || ''}</small>
                         `);
                         
                         allMarkers.push(marker);
@@ -600,7 +614,7 @@
             document.getElementById('selectedFountainId').textContent = props.id || 'N/A';
             document.getElementById('selectedFountainName').textContent = props.name || 'Unnamed Fountain';
             document.getElementById('selectedFountainLocation').textContent = props.location || props.address || 'N/A';
-            document.getElementById('selectedFountainNeighborhood').textContent = props.geo_local_area || 'N/A';
+            document.getElementById('selectedFountainNeighborhood').textContent = props.neighborhood || 'N/A';
             
             document.getElementById('selectedFountainInfo').style.display = 'block';
             
@@ -644,7 +658,7 @@
                 return `
                     <div class="fountain-suggestion" data-fountain-id="${props.id}" onclick="selectFountainById('${props.id}')">
                         <strong>${props.id}</strong> - ${props.name || 'Unnamed Fountain'}
-                        <br><small class="text-muted">${props.geo_local_area || ''}</small>
+                        <br><small class="text-muted">${props.neighborhood || ''}</small>
                     </div>
                 `;
             }).join('');
@@ -760,13 +774,13 @@
             }
             
             try {
-                // Submit to Supabase if configured, otherwise show Python command
-                if (SUPABASE_URL !== 'YOUR_SUPABASE_URL') {
+                // Submit to Supabase if enabled, otherwise show Python command
+                if (ENABLE_SUPABASE && supabaseClient) {
                     await submitToSupabase(data);
                 } else {
-                    // Fallback: Generate Python command
+                    // Fallback: Generate Python command for local database management
                     const pythonCommand = generatePythonCommand(data);
-                    showAlert(`Review submitted successfully! Run this command to add to database:<br><br><code>${pythonCommand}</code>`, 'success', true);
+                    showAlert(`Review submitted successfully! Since this is a static site, please run this command to add to the database:<br><br><code>${pythonCommand}</code><br><br>Copy this command and run it in your local development environment.`, 'info', true);
                 }
                 
                 // Reset form
@@ -791,8 +805,12 @@
             });
         });
         
-        // Submit review to Supabase
+                        // Submit review to Supabase
         async function submitToSupabase(data) {
+            if (!ENABLE_SUPABASE || !supabaseClient) {
+                throw new Error('Supabase is not available');
+            }
+            
             try {
                 // First, find the fountain UUID by original_mapid
                 const { data: fountainData, error: fountainError } = await supabaseClient

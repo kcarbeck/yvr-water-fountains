@@ -22,11 +22,10 @@ def generate_geojson_file():
     print("🔄 Generating GeoJSON for web app...")
     
     try:
-        # Get fountain data with coordinates from the fountain_details view
-        fountains_result = supabase.table("fountain_details").select("""
-            id, name, lat, lon, city_name, neighborhood, location_description, 
-            type, maintainer, operational_season, currently_operational, 
-            pet_friendly, avg_rating, rating_count, last_visited
+        # Get fountain data with coordinates from the fountains table
+        fountains_result = supabase.table("fountains").select("""
+            id, original_mapid, name, lat, lon, neighborhood, location_description, 
+            type, maintainer, operational_season, pet_friendly
         """).execute()
         fountains_data = {f['id']: f for f in fountains_result.data}
         
@@ -84,9 +83,9 @@ def generate_geojson_file():
                     "coordinates": [float(fountain['lon']), float(fountain['lat'])]
                 },
                 "properties": {
-                    "id": fountain_id,
+                    "id": fountain.get('original_mapid') or fountain_id,
                     "name": fountain.get('name') or 'Unnamed Fountain',
-                    "city": fountain.get('city_name'),
+                    "city": "Vancouver" if fountain.get('original_mapid', '').startswith('DFPB') else "Burnaby",
                     "neighborhood": fountain.get('neighborhood'),
                     "location": fountain.get('location_description'),
                     "type": fountain.get('type'),

@@ -675,8 +675,9 @@
   </div>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="config.js"></script>
   <script>
-    const map = L.map('map').setView([49.251, -123.060], 11);
+    const map = L.map('map').setView(window.APP_CONFIG.MAP_CENTER, window.APP_CONFIG.MAP_ZOOM);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© OpenStreetMap'
     }).addTo(map);
@@ -702,9 +703,9 @@
     // Responsive map initialization
     function setInitialMapView() {
       if (isMobile()) {
-        map.setView([49.251, -123.060], 10);
+        map.setView(window.APP_CONFIG.MAP_CENTER, window.APP_CONFIG.MAP_ZOOM - 1);
       } else {
-        map.setView([49.251, -123.060], 11);
+        map.setView(window.APP_CONFIG.MAP_CENTER, window.APP_CONFIG.MAP_ZOOM);
       }
     }
 
@@ -753,11 +754,11 @@
         </div>
         <div class="bottom-sheet-info">
           <span class="bottom-sheet-label">🏘️ Neighbourhood:</span>
-          <span class="bottom-sheet-value">${fountainData.geo_local_area || '—'}</span>
+          <span class="bottom-sheet-value">${fountainData.neighborhood || '—'}</span>
         </div>
         <div class="bottom-sheet-info">
           <span class="bottom-sheet-label">🏢 Operational:</span>
-          <span class="bottom-sheet-value">${formatOperational(fountainData.in_operation)}</span>
+          <span class="bottom-sheet-value">${formatOperational(fountainData.currently_operational)}</span>
         </div>
         <div class="bottom-sheet-info">
           <span class="bottom-sheet-label">🐕 Pet Friendly:</span>
@@ -863,15 +864,21 @@
 
     // Helper function to format pet friendly display
     function formatPetFriendly(value) {
-      if (!value || value.toLowerCase() === 'na' || value.toLowerCase() === 'unknown') return 'unknown';
-      if (value.toLowerCase().includes('yes') || value.toLowerCase().includes('y')) return 'y';
-      if (value.toLowerCase().includes('no') || value.toLowerCase().includes('n')) return 'n';
+      if (value === true) return 'Yes';
+      if (value === false) return 'No';
+      if (!value || (typeof value === 'string' && (value.toLowerCase() === 'na' || value.toLowerCase() === 'unknown'))) return 'unknown';
+      if (typeof value === 'string') {
+        if (value.toLowerCase().includes('yes') || value.toLowerCase().includes('y')) return 'Yes';
+        if (value.toLowerCase().includes('no') || value.toLowerCase().includes('n')) return 'No';
+      }
       return 'unknown';
     }
 
     // Helper function to format operational status
     function formatOperational(value) {
-      if (!value || value.toLowerCase() === 'na' || value.toLowerCase() === 'unknown') return 'unknown';
+      if (value === true) return 'Yes';
+      if (value === false) return 'No';
+      if (!value || (typeof value === 'string' && (value.toLowerCase() === 'na' || value.toLowerCase() === 'unknown'))) return 'unknown';
       return value;
     }
 
@@ -900,9 +907,16 @@
       // Could implement: window.open(`reviews.html?fountain=${fountainId}`, '_blank');
     }
 
-    fetch('data/fountains_processed.geojson')
-      .then(r => r.json())
+    fetch(window.APP_CONFIG.GEOJSON_PATH)
+      .then(r => {
+        if (!r.ok) {
+          throw new Error(`Failed to load fountain data: ${r.status} ${r.statusText}`);
+        }
+        return r.json();
+      })
       .then(gj => {
+        console.log('Loaded GeoJSON with', gj.features?.length || 0, 'fountains');
+        console.log('Sample fountain:', gj.features?.[0]?.properties);
         const markerById = {};
         
         const geoLayer = L.geoJSON(gj, {
@@ -930,11 +944,11 @@
                 </div>
                 <div class="popup-info">
                   <span class="popup-label">🏘️ Neighbourhood:</span>
-                  <span class="popup-value">${p.geo_local_area || '—'}</span>
+                  <span class="popup-value">${p.neighborhood || '—'}</span>
                 </div>
                 <div class="popup-info">
                   <span class="popup-label">🏢 Operational:</span>
-                  <span class="popup-value">${formatOperational(p.in_operation)}</span>
+                  <span class="popup-value">${formatOperational(p.currently_operational)}</span>
                 </div>
                 <div class="popup-info">
                   <span class="popup-label">🐕 Pet Friendly:</span>
@@ -1000,6 +1014,8 @@
             });
           }
         }).addTo(map);
+        
+        console.log('Added', gj.features?.length || 0, 'markers to map');
 
         // Locate me functionality
         document.getElementById('locate-me').addEventListener('click', () => {
@@ -1061,6 +1077,10 @@
         } else if (password !== null) {
           alert('Incorrect password');
         }
+      })
+      .catch(error => {
+        console.error('Error loading fountain data:', error);
+        alert('Failed to load fountain data. Check console for details.');
       });
 
       // Initialize responsive behavior

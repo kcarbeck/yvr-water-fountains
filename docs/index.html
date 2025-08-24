@@ -14,7 +14,7 @@
   <meta property="og:title" content="YVR Water Fountains Map">
   <meta property="og:description" content="Find and rate drinking fountains across Vancouver and Burnaby">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://kcarbeck.github.io/yvr-water-fountains">
+  <meta property="og:url" content="https://kcarbeck.github.io/yvr-water-fountains/index.html">
   
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="YVR Water Fountains Map">
@@ -205,6 +205,84 @@
         display: none !important;
       }
     }
+    
+    /* Instagram posts styling */
+    .instagram-posts-container {
+      margin-top: 10px;
+    }
+    
+    .instagram-post {
+      border: 1px solid #e1e8ed;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      padding: 10px;
+      background: #f8f9fa;
+    }
+    
+    .instagram-post-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    
+    .instagram-post-rating {
+      font-weight: bold;
+      color: #1da1f2;
+    }
+    
+    .instagram-post-date {
+      font-size: 0.8em;
+      color: #657786;
+    }
+    
+    .instagram-post-caption {
+      font-size: 0.9em;
+      line-height: 1.4;
+      margin-bottom: 8px;
+    }
+    
+    .instagram-post-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      color: #1da1f2;
+      text-decoration: none;
+      font-size: 0.9em;
+    }
+    
+    .instagram-post-link:hover {
+      text-decoration: underline;
+    }
+    
+    .reviews-section {
+      margin-top: 15px;
+      border-top: 1px solid #e9ecef;
+      padding-top: 15px;
+    }
+    
+    .review-item {
+      border-left: 3px solid #007bff;
+      padding-left: 10px;
+      margin-bottom: 10px;
+    }
+    
+    .review-header {
+      display: flex;
+      justify-content: space-between;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    
+    .review-details {
+      font-size: 0.9em;
+      color: #666;
+      margin-bottom: 5px;
+    }
+    
+    .review-notes {
+      font-style: italic;
+    }
   </style>
 </head>
 <body>
@@ -233,7 +311,7 @@
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script>
-    const map = L.map('map').setView([49.27, -123.12], 12);
+    const map = L.map('map').setView([49.251, -123.060], 11);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© OpenStreetMap'
     }).addTo(map);
@@ -271,9 +349,13 @@
           <span class="bottom-sheet-label">📅 Operation:</span>
           <span class="bottom-sheet-value">${fountainData.in_operation || '—'}</span>
         </div>
+        ${fountainData.avg_rating ? `<div class="bottom-sheet-info">
+          <span class="bottom-sheet-label">⭐ Avg Rating:</span>
+          <span class="bottom-sheet-value">${parseFloat(fountainData.avg_rating).toFixed(1)}/10 (${fountainData.rating_count} review${fountainData.rating_count !== 1 ? 's' : ''})</span>
+        </div>` : ''}
         ${fountainData.rating ? `<div class="bottom-sheet-info">
-          <span class="bottom-sheet-label">⭐ Rating:</span>
-          <span class="bottom-sheet-value">${fountainData.rating}/5</span>
+          <span class="bottom-sheet-label">🆕 Latest:</span>
+          <span class="bottom-sheet-value">${fountainData.rating}/10 by ${fountainData.latest_reviewer || 'Anonymous'}</span>
         </div>` : ''}
         ${fountainData.pet_friendly ? `<div class="bottom-sheet-info">
           <span class="bottom-sheet-label">🐕 Pet Friendly:</span>
@@ -304,8 +386,14 @@
           <span class="bottom-sheet-value">${fountainData.drainage}</span>
         </div>` : ''}
         ${fountainData.caption ? `<div class="bottom-sheet-info">
-          <span class="bottom-sheet-label">📝 Notes:</span>
+          <span class="bottom-sheet-label">📝 Latest Notes:</span>
           <span class="bottom-sheet-value">${fountainData.caption}</span>
+        </div>` : ''}
+        ${fountainData.has_instagram ? `<div class="bottom-sheet-info">
+          <span class="bottom-sheet-label">📸 Instagram Posts:</span>
+          <div class="instagram-posts-container" id="instagram-${fountainData.id}">
+            ${generateInstagramPosts(fountainData.instagram_posts)}
+          </div>
         </div>` : ''}
       `;
       
@@ -325,6 +413,44 @@
     // Event listeners for bottom sheet
     document.getElementById('bottom-sheet-close').addEventListener('click', hideBottomSheet);
     document.getElementById('overlay').addEventListener('click', hideBottomSheet);
+
+    // Function to generate Instagram posts HTML
+    function generateInstagramPosts(posts) {
+      if (!posts || posts.length === 0) return '';
+      
+      return posts.slice(0, 3).map(post => `
+        <div class="instagram-post">
+          <div class="instagram-post-header">
+            <span class="instagram-post-rating">⭐ ${post.rating}/10</span>
+            <span class="instagram-post-date">${formatDate(post.date_posted)}</span>
+          </div>
+          ${post.caption ? `<div class="instagram-post-caption">${post.caption}</div>` : ''}
+          <a href="${post.url}" target="_blank" class="instagram-post-link">
+            <i class="fab fa-instagram"></i> View on Instagram
+          </a>
+        </div>
+      `).join('') + (posts.length > 3 ? `<div style="text-align: center; margin-top: 10px;">
+        <small>+${posts.length - 3} more posts...</small>
+      </div>` : '');
+    }
+
+    // Function to show Instagram posts modal/popup
+    function showInstagramPosts(fountainId) {
+      // This would open a modal or expand the view
+      // For now, just console log
+      console.log('Show Instagram posts for fountain:', fountainId);
+    }
+
+    // Helper function to format dates
+    function formatDate(dateString) {
+      if (!dateString) return '';
+      const date = new Date(dateString);
+      return date.toLocaleDateString('en-US', { 
+        month: 'short', 
+        day: 'numeric', 
+        year: 'numeric' 
+      });
+    }
 
     fetch('data/fountains_processed.geojson')
       .then(r => r.json())
@@ -359,9 +485,13 @@
                   <span class="popup-label">📅 Operation:</span>
                   <span class="popup-value">${p.in_operation || '—'}</span>
                 </div>
+                ${p.avg_rating ? `<div class="popup-info">
+                  <span class="popup-label">⭐ Avg Rating:</span>
+                  <span class="popup-value">${parseFloat(p.avg_rating).toFixed(1)}/10 (${p.rating_count} review${p.rating_count !== 1 ? 's' : ''})</span>
+                </div>` : ''}
                 ${p.rating ? `<div class="popup-info">
-                  <span class="popup-label">⭐ Rating:</span>
-                  <span class="popup-value">${p.rating}/5</span>
+                  <span class="popup-label">🆕 Latest:</span>
+                  <span class="popup-value">${p.rating}/10 by ${p.latest_reviewer || 'Anonymous'}</span>
                 </div>` : ''}
                 ${p.pet_friendly ? `<div class="popup-info">
                   <span class="popup-label">🐕 Pet Friendly:</span>
@@ -392,8 +522,12 @@
                   <span class="popup-value">${p.drainage}</span>
                 </div>` : ''}
                 ${p.caption ? `<div class="popup-info">
-                  <span class="popup-label">📝 Notes:</span>
+                  <span class="popup-label">📝 Latest Notes:</span>
                   <span class="popup-value">${p.caption}</span>
+                </div>` : ''}
+                ${p.has_instagram ? `<div class="popup-info">
+                  <span class="popup-label">📸 Instagram:</span>
+                  <span class="popup-value">${p.instagram_count} post${p.instagram_count !== 1 ? 's' : ''} <a href="#" onclick="showInstagramPosts('${p.id}')">View all</a></span>
                 </div>` : ''}
               </div>
             `;

@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YVR Water Fountains - Admin Review Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .main-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin: 0;
+        }
+        
+        .form-container {
+            padding: 2rem;
+        }
+        
+        .form-section {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            border: 1px solid #e9ecef;
+            border-radius: 10px;
+            background: #f8f9fa;
+        }
+        
+        .form-section h3 {
+            color: #495057;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .rating-input {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .rating-input label {
+            min-width: 120px;
+            font-weight: 500;
+        }
+        
+        .rating-scale {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .rating-scale input[type="radio"] {
+            display: none;
+        }
+        
+        .rating-scale label {
+            min-width: auto;
+            width: 35px;
+            height: 35px;
+            border: 2px solid #ddd;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .rating-scale input[type="radio"]:checked + label {
+            background: #4facfe;
+            color: white;
+            border-color: #4facfe;
+        }
+        
+        .rating-scale label:hover {
+            border-color: #4facfe;
+            transform: scale(1.1);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(79, 172, 254, 0.3);
+        }
+        
+        .instagram-preview {
+            border: 1px solid #e9ecef;
+            border-radius: 10px;
+            padding: 1rem;
+            background: white;
+            margin-top: 1rem;
+        }
+        
+        .alert {
+            border-radius: 10px;
+            border: none;
+        }
+        
+        .fountain-search {
+            position: relative;
+        }
+        
+        .fountain-suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-radius: 0 0 10px 10px;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
+        }
+        
+        .fountain-suggestion {
+            padding: 10px 15px;
+            cursor: pointer;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .fountain-suggestion:hover {
+            background: #f8f9fa;
+        }
+        
+        .fountain-suggestion:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="header">
+            <h1><i class="fas fa-tint"></i> YVR Water Fountains</h1>
+            <p>Instagram Review Submission Form</p>
+        </div>
+        
+        <div class="form-container">
+            <form id="reviewForm">
+                <!-- Fountain Selection -->
+                <div class="form-section">
+                    <h3><i class="fas fa-map-marker-alt"></i> Fountain Information</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="fountainSearch" class="form-label">Fountain Search</label>
+                            <div class="fountain-search">
+                                <input type="text" class="form-control" id="fountainSearch" 
+                                       placeholder="Search by name or ID..." required>
+                                <div class="fountain-suggestions" id="fountainSuggestions"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="fountainId" class="form-label">Fountain ID</label>
+                            <input type="text" class="form-control" id="fountainId" 
+                                   placeholder="e.g., DFPB0113" required readonly>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <label for="fountainName" class="form-label">Fountain Name</label>
+                        <input type="text" class="form-control" id="fountainName" readonly>
+                    </div>
+                </div>
+                
+                <!-- Instagram Information -->
+                <div class="form-section">
+                    <h3><i class="fab fa-instagram"></i> Instagram Post</h3>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <label for="instagramUrl" class="form-label">Instagram Post URL</label>
+                            <input type="url" class="form-control" id="instagramUrl" 
+                                   placeholder="https://www.instagram.com/p/..." required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="visitDate" class="form-label">Visit Date</label>
+                            <input type="date" class="form-control" id="visitDate" required>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <label for="instagramCaption" class="form-label">Instagram Caption/Review Text</label>
+                        <textarea class="form-control" id="instagramCaption" rows="4" 
+                                  placeholder="Enter the review text from your Instagram post..."></textarea>
+                    </div>
+                </div>
+                
+                <!-- Ratings -->
+                <div class="form-section">
+                    <h3><i class="fas fa-star"></i> Ratings (1-10 scale)</h3>
+                    
+                    <div class="rating-input">
+                        <label>Overall Rating:</label>
+                        <div class="rating-scale">
+                            <input type="radio" id="overall1" name="overallRating" value="1">
+                            <label for="overall1">1</label>
+                            <input type="radio" id="overall2" name="overallRating" value="2">
+                            <label for="overall2">2</label>
+                            <input type="radio" id="overall3" name="overallRating" value="3">
+                            <label for="overall3">3</label>
+                            <input type="radio" id="overall4" name="overallRating" value="4">
+                            <label for="overall4">4</label>
+                            <input type="radio" id="overall5" name="overallRating" value="5">
+                            <label for="overall5">5</label>
+                            <input type="radio" id="overall6" name="overallRating" value="6">
+                            <label for="overall6">6</label>
+                            <input type="radio" id="overall7" name="overallRating" value="7">
+                            <label for="overall7">7</label>
+                            <input type="radio" id="overall8" name="overallRating" value="8">
+                            <label for="overall8">8</label>
+                            <input type="radio" id="overall9" name="overallRating" value="9">
+                            <label for="overall9">9</label>
+                            <input type="radio" id="overall10" name="overallRating" value="10">
+                            <label for="overall10">10</label>
+                        </div>
+                    </div>
+                    
+                    <div class="rating-input">
+                        <label>Water Quality:</label>
+                        <div class="rating-scale">
+                            <input type="radio" id="water1" name="waterQuality" value="1">
+                            <label for="water1">1</label>
+                            <input type="radio" id="water2" name="waterQuality" value="2">
+                            <label for="water2">2</label>
+                            <input type="radio" id="water3" name="waterQuality" value="3">
+                            <label for="water3">3</label>
+                            <input type="radio" id="water4" name="waterQuality" value="4">
+                            <label for="water4">4</label>
+                            <input type="radio" id="water5" name="waterQuality" value="5">
+                            <label for="water5">5</label>
+                            <input type="radio" id="water6" name="waterQuality" value="6">
+                            <label for="water6">6</label>
+                            <input type="radio" id="water7" name="waterQuality" value="7">
+                            <label for="water7">7</label>
+                            <input type="radio" id="water8" name="waterQuality" value="8">
+                            <label for="water8">8</label>
+                            <input type="radio" id="water9" name="waterQuality" value="9">
+                            <label for="water9">9</label>
+                            <input type="radio" id="water10" name="waterQuality" value="10">
+                            <label for="water10">10</label>
+                        </div>
+                    </div>
+                    
+                    <div class="rating-input">
+                        <label>Flow Pressure:</label>
+                        <div class="rating-scale">
+                            <input type="radio" id="flow1" name="flowPressure" value="1">
+                            <label for="flow1">1</label>
+                            <input type="radio" id="flow2" name="flowPressure" value="2">
+                            <label for="flow2">2</label>
+                            <input type="radio" id="flow3" name="flowPressure" value="3">
+                            <label for="flow3">3</label>
+                            <input type="radio" id="flow4" name="flowPressure" value="4">
+                            <label for="flow4">4</label>
+                            <input type="radio" id="flow5" name="flowPressure" value="5">
+                            <label for="flow5">5</label>
+                            <input type="radio" id="flow6" name="flowPressure" value="6">
+                            <label for="flow6">6</label>
+                            <input type="radio" id="flow7" name="flowPressure" value="7">
+                            <label for="flow7">7</label>
+                            <input type="radio" id="flow8" name="flowPressure" value="8">
+                            <label for="flow8">8</label>
+                            <input type="radio" id="flow9" name="flowPressure" value="9">
+                            <label for="flow9">9</label>
+                            <input type="radio" id="flow10" name="flowPressure" value="10">
+                            <label for="flow10">10</label>
+                        </div>
+                    </div>
+                    
+                    <div class="rating-input">
+                        <label>Temperature:</label>
+                        <div class="rating-scale">
+                            <input type="radio" id="temp1" name="temperature" value="1">
+                            <label for="temp1">1</label>
+                            <input type="radio" id="temp2" name="temperature" value="2">
+                            <label for="temp2">2</label>
+                            <input type="radio" id="temp3" name="temperature" value="3">
+                            <label for="temp3">3</label>
+                            <input type="radio" id="temp4" name="temperature" value="4">
+                            <label for="temp4">4</label>
+                            <input type="radio" id="temp5" name="temperature" value="5">
+                            <label for="temp5">5</label>
+                            <input type="radio" id="temp6" name="temperature" value="6">
+                            <label for="temp6">6</label>
+                            <input type="radio" id="temp7" name="temperature" value="7">
+                            <label for="temp7">7</label>
+                            <input type="radio" id="temp8" name="temperature" value="8">
+                            <label for="temp8">8</label>
+                            <input type="radio" id="temp9" name="temperature" value="9">
+                            <label for="temp9">9</label>
+                            <input type="radio" id="temp10" name="temperature" value="10">
+                            <label for="temp10">10</label>
+                        </div>
+                    </div>
+                    
+                    <div class="rating-input">
+                        <label>Drainage:</label>
+                        <div class="rating-scale">
+                            <input type="radio" id="drain1" name="drainage" value="1">
+                            <label for="drain1">1</label>
+                            <input type="radio" id="drain2" name="drainage" value="2">
+                            <label for="drain2">2</label>
+                            <input type="radio" id="drain3" name="drainage" value="3">
+                            <label for="drain3">3</label>
+                            <input type="radio" id="drain4" name="drainage" value="4">
+                            <label for="drain4">4</label>
+                            <input type="radio" id="drain5" name="drainage" value="5">
+                            <label for="drain5">5</label>
+                            <input type="radio" id="drain6" name="drainage" value="6">
+                            <label for="drain6">6</label>
+                            <input type="radio" id="drain7" name="drainage" value="7">
+                            <label for="drain7">7</label>
+                            <input type="radio" id="drain8" name="drainage" value="8">
+                            <label for="drain8">8</label>
+                            <input type="radio" id="drain9" name="drainage" value="9">
+                            <label for="drain9">9</label>
+                            <input type="radio" id="drain10" name="drainage" value="10">
+                            <label for="drain10">10</label>
+                        </div>
+                    </div>
+                    
+                    <div class="rating-input">
+                        <label>Accessibility:</label>
+                        <div class="rating-scale">
+                            <input type="radio" id="access1" name="accessibility" value="1">
+                            <label for="access1">1</label>
+                            <input type="radio" id="access2" name="accessibility" value="2">
+                            <label for="access2">2</label>
+                            <input type="radio" id="access3" name="accessibility" value="3">
+                            <label for="access3">3</label>
+                            <input type="radio" id="access4" name="accessibility" value="4">
+                            <label for="access4">4</label>
+                            <input type="radio" id="access5" name="accessibility" value="5">
+                            <label for="access5">5</label>
+                            <input type="radio" id="access6" name="accessibility" value="6">
+                            <label for="access6">6</label>
+                            <input type="radio" id="access7" name="accessibility" value="7">
+                            <label for="access7">7</label>
+                            <input type="radio" id="access8" name="accessibility" value="8">
+                            <label for="access8">8</label>
+                            <input type="radio" id="access9" name="accessibility" value="9">
+                            <label for="access9">9</label>
+                            <input type="radio" id="access10" name="accessibility" value="10">
+                            <label for="access10">10</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Additional Notes -->
+                <div class="form-section">
+                    <h3><i class="fas fa-sticky-note"></i> Additional Notes</h3>
+                    <textarea class="form-control" id="additionalNotes" rows="3" 
+                              placeholder="Any additional comments about this fountain..."></textarea>
+                </div>
+                
+                <!-- Submit Button -->
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary btn-lg">
+                        <i class="fas fa-paper-plane"></i> Submit Review
+                    </button>
+                </div>
+            </form>
+            
+            <!-- Success/Error Messages -->
+            <div id="alertContainer"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Configuration - you'll need to set these values
+        const SUPABASE_URL = 'YOUR_SUPABASE_URL';
+        const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+        
+        // Initialize Supabase client
+        // In a real implementation, you'd import from CDN or bundle
+        // const { createClient } = supabase;
+        // const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        
+        let fountains = [];
+        
+        // Load fountains for search
+        async function loadFountains() {
+            try {
+                // For now, we'll use the GeoJSON file - in production use Supabase
+                const response = await fetch('docs/data/fountains_processed.geojson');
+                const data = await response.json();
+                fountains = data.features.map(f => ({
+                    id: f.properties.original_mapid || f.properties.id,
+                    name: f.properties.name,
+                    neighborhood: f.properties.geo_local_area
+                }));
+            } catch (error) {
+                console.error('Error loading fountains:', error);
+                showAlert('Error loading fountain data', 'danger');
+            }
+        }
+        
+        // Fountain search functionality
+        const fountainSearch = document.getElementById('fountainSearch');
+        const fountainSuggestions = document.getElementById('fountainSuggestions');
+        const fountainId = document.getElementById('fountainId');
+        const fountainName = document.getElementById('fountainName');
+        
+        fountainSearch.addEventListener('input', function() {
+            const query = this.value.toLowerCase();
+            if (query.length < 2) {
+                fountainSuggestions.style.display = 'none';
+                return;
+            }
+            
+            const matches = fountains.filter(f => 
+                f.name.toLowerCase().includes(query) || 
+                f.id.toLowerCase().includes(query) ||
+                (f.neighborhood && f.neighborhood.toLowerCase().includes(query))
+            ).slice(0, 10);
+            
+            if (matches.length > 0) {
+                fountainSuggestions.innerHTML = matches.map(f => `
+                    <div class="fountain-suggestion" data-id="${f.id}" data-name="${f.name}">
+                        <strong>${f.id}</strong> - ${f.name}
+                        ${f.neighborhood ? `<br><small class="text-muted">${f.neighborhood}</small>` : ''}
+                    </div>
+                `).join('');
+                fountainSuggestions.style.display = 'block';
+            } else {
+                fountainSuggestions.style.display = 'none';
+            }
+        });
+        
+        // Handle fountain selection
+        fountainSuggestions.addEventListener('click', function(e) {
+            const suggestion = e.target.closest('.fountain-suggestion');
+            if (suggestion) {
+                const id = suggestion.getAttribute('data-id');
+                const name = suggestion.getAttribute('data-name');
+                
+                fountainSearch.value = `${id} - ${name}`;
+                fountainId.value = id;
+                fountainName.value = name;
+                fountainSuggestions.style.display = 'none';
+            }
+        });
+        
+        // Hide suggestions when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.fountain-search')) {
+                fountainSuggestions.style.display = 'none';
+            }
+        });
+        
+        // Set today's date as default
+        document.getElementById('visitDate').value = new Date().toISOString().split('T')[0];
+        
+        // Form submission
+        document.getElementById('reviewForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const data = {
+                fountainId: fountainId.value,
+                instagramUrl: formData.get('instagramUrl') || document.getElementById('instagramUrl').value,
+                visitDate: formData.get('visitDate') || document.getElementById('visitDate').value,
+                instagramCaption: document.getElementById('instagramCaption').value,
+                overallRating: formData.get('overallRating'),
+                waterQuality: formData.get('waterQuality'),
+                flowPressure: formData.get('flowPressure'),
+                temperature: formData.get('temperature'),
+                drainage: formData.get('drainage'),
+                accessibility: formData.get('accessibility'),
+                additionalNotes: document.getElementById('additionalNotes').value
+            };
+            
+            // Validate required fields
+            if (!data.fountainId || !data.instagramUrl || !data.visitDate || !data.overallRating) {
+                showAlert('Please fill in all required fields', 'danger');
+                return;
+            }
+            
+            try {
+                // In a real implementation, you would submit to your backend
+                // For now, we'll just show the data that would be submitted
+                console.log('Review data to submit:', data);
+                
+                // Generate a Python command that can be run
+                const pythonCommand = generatePythonCommand(data);
+                showAlert(`Review submitted successfully! Run this command to add to database:<br><br><code>${pythonCommand}</code>`, 'success', true);
+                
+                // Reset form
+                this.reset();
+                fountainId.value = '';
+                fountainName.value = '';
+                fountainSearch.value = '';
+                document.getElementById('visitDate').value = new Date().toISOString().split('T')[0];
+                
+            } catch (error) {
+                console.error('Error submitting review:', error);
+                showAlert('Error submitting review. Please try again.', 'danger');
+            }
+        });
+        
+        function generatePythonCommand(data) {
+            const args = [
+                `"${data.fountainId}"`,
+                data.overallRating,
+                data.waterQuality || 'None',
+                data.flowPressure || 'None',
+                data.temperature || 'None',
+                data.drainage || 'None',
+                data.accessibility || 'None',
+                `"${(data.instagramCaption || data.additionalNotes || '').replace(/"/g, '\\"')}"`,
+                'True',
+                `"${data.visitDate}"`,
+                `"${data.instagramUrl}"`,
+                `"${data.instagramCaption || ''}"`
+            ];
+            
+            return `python scripts/rating_helper.py add_full_rating ${args.join(' ')}`;
+        }
+        
+        function showAlert(message, type = 'info', allowHtml = false) {
+            const alertContainer = document.getElementById('alertContainer');
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type} alert-dismissible fade show mt-3`;
+            alertDiv.innerHTML = `
+                ${allowHtml ? message : escapeHtml(message)}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            alertContainer.appendChild(alertDiv);
+            
+            // Auto-remove after 10 seconds
+            setTimeout(() => {
+                if (alertDiv.parentNode) {
+                    alertDiv.remove();
+                }
+            }, 10000);
+        }
+        
+        function escapeHtml(unsafe) {
+            return unsafe
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+        
+        // Initialize
+        loadFountains();
+    </script>
+</body>
+</html>

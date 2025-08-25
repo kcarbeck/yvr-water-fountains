@@ -1046,13 +1046,65 @@
         }
       });
 
+      // Function to verify admin password with backend
+      async function verifyAdminPassword(password) {
+        try {
+          const apiEndpoint = window.APP_CONFIG.API_ENDPOINT || '/.netlify/functions/submit-review';
+          
+          // Make a test request with admin credentials to verify password
+          const response = await fetch(apiEndpoint, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              reviewType: 'admin',
+              reviewData: {
+                adminPassword: password,
+                // Minimal test data - this won't actually create a review
+                fountainId: 'test',
+                overallRating: 1,
+                waterQuality: 1,
+                flowPressure: 1,
+                temperature: 1,
+                drainage: 1,
+                accessibility: 1,
+                visitDate: '2024-01-01',
+                notes: 'password_verification_test'
+              }
+            })
+          });
+          
+          // If we get a fountain not found error, it means password was valid
+          // If we get invalid password error, password was wrong
+          if (response.status === 500) {
+            const result = await response.json();
+            if (result.message && result.message.includes('Fountain not found')) {
+              return true; // Password was valid, just couldn't find test fountain
+            }
+            if (result.message && result.message.includes('Invalid admin password')) {
+              return false; // Password was invalid
+            }
+          }
+          
+          return response.ok; // Any success response means password was valid
+        } catch (error) {
+          console.error('Password verification failed:', error);
+          return false;
+        }
+      }
+
       // Admin access functionality (secure)
-      document.getElementById('admin-access').addEventListener('click', (e) => {
+      document.getElementById('admin-access').addEventListener('click', async (e) => {
         e.preventDefault();
         const password = prompt('Enter admin password:');
-        const adminPassword = window.APP_CONFIG.ADMIN_PASSWORD || 'default_admin_pass';
         
-        if (password === adminPassword) {
+        if (!password) return;
+        
+        // Verify password with backend
+        const isValidPassword = await verifyAdminPassword(password);
+        
+        if (isValidPassword) {
           // Create admin panel
           const adminPanel = document.createElement('div');
           adminPanel.style.cssText = `

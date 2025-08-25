@@ -90,14 +90,16 @@ def generate_geojson_file():
         """).execute()
         fountains_data = {f['id']: f for f in fountains_result.data}
         
-        # Get all ratings for each fountain
-        ratings_result = supabase.table("ratings").select("*").execute()
+        # Get only APPROVED ratings for each fountain
+        ratings_result = supabase.table("ratings").select("*").eq("review_status", "approved").execute()
         ratings_by_fountain = {}
         for rating in ratings_result.data:
             fountain_id = rating['fountain_id']
             if fountain_id not in ratings_by_fountain:
                 ratings_by_fountain[fountain_id] = []
             ratings_by_fountain[fountain_id].append(rating)
+        
+        print(f"📊 Found {len(ratings_result.data)} approved ratings")
         
         # Get Instagram posts
         instagram_result = supabase.table("instagram_posts").select("*").execute()

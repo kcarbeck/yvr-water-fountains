@@ -14,8 +14,7 @@ window.APP_CONFIG = {
         }
     })(),
     
-    // Admin configuration (will be handled server-side)
-    ADMIN_PASSWORD: null, // Moved to server-side for security
+    // Admin configuration (handled server-side only for security)
     
     // GitHub configuration (for auto-deployment when reviews are approved)
     PERSONAL_ACCESS_TOKEN: null, // Personal access token for triggering deployments

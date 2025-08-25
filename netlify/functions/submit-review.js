@@ -2,6 +2,7 @@
 // Keeps database credentials on the server, not exposed to users
 
 const { createClient } = require('@supabase/supabase-js');
+const { triggerAutoDeployment } = require('./trigger-deployment.js');
 
 exports.handler = async (event, context) => {
     console.log('Function called with method:', event.httpMethod);
@@ -263,13 +264,18 @@ async function handleAdminReview(supabase, reviewData) {
         throw new Error(`Failed to submit admin review: ${insertError.message}`);
     }
 
-    // Trigger site regeneration (optional)
-    // You could add a webhook call here to regenerate your static files
+    // Trigger automatic site regeneration for admin reviews
+    const deploymentTriggered = await triggerAutoDeployment('Admin review submitted - auto regeneration');
+    
+    const message = deploymentTriggered 
+        ? 'Admin review submitted successfully! Site regeneration has been triggered automatically.'
+        : 'Admin review submitted successfully! Run `python scripts/generate_geojson_api.py` to make it live.';
 
     return {
         success: true,
-        message: 'Admin review submitted successfully! It is now live on the website.',
+        message: message,
         reviewId: insertedRating.id,
-        status: 'approved'
+        status: 'approved',
+        deploymentTriggered: deploymentTriggered
     };
 }

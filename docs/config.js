@@ -3,19 +3,18 @@
 // Default configuration for static deployment
 
 window.APP_CONFIG = {
-    // Supabase configuration (will be replaced during build if credentials available)
-    SUPABASE_URL: 'https://your-project.supabase.co',
-    SUPABASE_ANON_KEY: 'your-anon-key-here',
+    // API endpoint for secure form submissions (NO database keys exposed!)
+    API_ENDPOINT: '/api/submit-review', // Will be implemented as serverless function
     
-    // Admin configuration (set via environment variable - keep secure!)
-    ADMIN_PASSWORD: 'default_admin_pass',
+    // Admin configuration (will be handled server-side)
+    ADMIN_PASSWORD: null, // Moved to server-side for security
     
     // GitHub configuration (for auto-deployment when reviews are approved)
     PERSONAL_ACCESS_TOKEN: null, // Personal access token for triggering deployments
     REPO_NAME: null, // Repository in format 'username/repo-name'
     
     // Feature flags
-    ENABLE_SUPABASE: false, // Automatically set based on credential availability
+    ENABLE_API_SUBMISSION: true, // Uses secure API endpoint
     FALLBACK_TO_GEOJSON: true, // Always maintain static data fallback
     ENABLE_AUTO_DEPLOY: false, // Set to true when GitHub token is configured
     
@@ -29,14 +28,6 @@ window.APP_CONFIG = {
     DEPLOYMENT_TYPE: 'github-pages'
 };
 
-// Auto-detect if we have valid Supabase configuration
-if (window.APP_CONFIG.SUPABASE_URL && 
-    window.APP_CONFIG.SUPABASE_URL !== 'https://your-project.supabase.co' && 
-    window.APP_CONFIG.SUPABASE_ANON_KEY && 
-    window.APP_CONFIG.SUPABASE_ANON_KEY !== 'your-anon-key-here' &&
-    window.APP_CONFIG.SUPABASE_URL.includes('supabase.co')) {
-    window.APP_CONFIG.ENABLE_SUPABASE = true;
-    console.log('✅ Supabase integration enabled');
-} else {
-    console.log('📁 Using static data mode (Supabase not configured)');
-}
+// Security notice
+console.log('🔐 Using secure API endpoints for form submissions');
+console.log('✅ Database credentials are protected server-side');

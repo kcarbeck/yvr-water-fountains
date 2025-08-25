@@ -359,20 +359,10 @@
     <!-- External libraries -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <script>
-        // Configuration
-        const SUPABASE_URL = window.APP_CONFIG.SUPABASE_URL;
-        const SUPABASE_ANON_KEY = window.APP_CONFIG.SUPABASE_ANON_KEY;
-        let supabaseClient = null;
-        
-        // Initialize Supabase client only if credentials are available
-        if (SUPABASE_URL && SUPABASE_ANON_KEY && 
-            SUPABASE_URL !== 'your-supabase-url-here' && 
-            SUPABASE_ANON_KEY !== 'your-anon-key-here') {
-            supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-        }
+        // Configuration - using secure API endpoints only
+        console.log('🔐 Admin form configured for secure API submission');
         
         // Global variables
         let map;
@@ -382,6 +372,7 @@
         
         // Initialize the application
         document.addEventListener('DOMContentLoaded', function() {
+            // Initialize admin form (password check happens during submission for security)
             initializeMap();
             loadFountainData();
             setupEventListeners();
@@ -516,12 +507,12 @@
                 return;
             }
             
-            if (!supabaseClient) {
+            // Submit via secure API endpoint
+            if (window.APP_CONFIG.ENABLE_API_SUBMISSION) {
+                submitToAPI();
+            } else {
                 generatePythonCommand();
-                return;
             }
-            
-            submitToSupabase();
         }
         
         function generatePythonCommand() {
@@ -538,58 +529,53 @@
             `, 'info');
         }
         
-        // Submit review to Supabase (Admin reviews with Instagram)
-        async function submitToSupabase() {
+        // Submit admin review via secure API
+        async function submitToAPI() {
             const formData = getFormData();
+            const adminPassword = prompt('Enter admin password:');
+            
+            if (!adminPassword) {
+                showAlert('Admin password required', 'warning');
+                return;
+            }
             
             try {
-                // First, insert the rating
-                const { data: insertedRating, error: ratingError } = await supabaseClient
-                    .from('ratings')
-                    .insert({
-                        fountain_id: selectedFountain.properties.id,
-                        overall_rating: formData.overallRating,
-                        water_quality: formData.waterQuality,
-                        flow_pressure: formData.flowPressure,
-                        temperature: formData.temperature,
-                        drainage: formData.drainage,
-                        accessibility: formData.accessibility,
-                        notes: formData.notes,
-                        visit_date: formData.visitDate,
-                        reviewer_name: 'YVR Water Fountains',
-                        review_status: 'approved', // Admin reviews are auto-approved
-                        review_type: 'instagram',
-                        is_verified: true
+                const response = await fetch(window.APP_CONFIG.API_ENDPOINT || '/.netlify/functions/submit-review', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        reviewType: 'admin',
+                        reviewData: {
+                            fountainId: selectedFountain.properties.id,
+                            adminPassword: adminPassword,
+                            overallRating: formData.overallRating,
+                            waterQuality: formData.waterQuality,
+                            flowPressure: formData.flowPressure,
+                            temperature: formData.temperature,
+                            drainage: formData.drainage,
+                            accessibility: formData.accessibility,
+                            notes: formData.notes,
+                            visitDate: formData.visitDate,
+                            instagramUrl: formData.instagramUrl,
+                            instagramCaption: formData.instagramCaption
+                        }
                     })
-                    .select()
-                    .single();
-                
-                if (ratingError) throw ratingError;
-                
-                // If Instagram URL provided, insert Instagram post
-                if (formData.instagramUrl) {
-                    const postId = extractInstagramPostId(formData.instagramUrl);
-                    
-                    const { error: instagramError } = await supabaseClient
-                        .from('instagram_posts')
-                        .insert({
-                            fountain_id: selectedFountain.properties.id,
-                            rating_id: insertedRating.id,
-                            post_url: formData.instagramUrl,
-                            post_id: postId,
-                            caption: formData.instagramCaption,
-                            date_posted: formData.visitDate
-                        });
-                    
-                    if (instagramError) throw instagramError;
+                });
+
+                const result = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(result.error || 'Failed to submit admin review');
                 }
-                
-                showAlert(`Admin review submitted successfully! Review ID: ${insertedRating.id}. The review is now live.`, 'success');
+
+                showAlert(`🎉 ${result.message}`, 'success');
                 resetForm();
                 
             } catch (error) {
-                console.error('Error submitting review:', error);
-                showAlert('Failed to submit review. Please try again.', 'danger');
+                console.error('API submission error:', error);
+                showAlert(`Failed to submit admin review: ${error.message}`, 'danger');
             }
         }
         

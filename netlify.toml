@@ -5,6 +5,12 @@
   # Directory to publish (the docs folder contains our web app)
   publish = "docs"
   
+  # Functions directory for secure API endpoints
+  functions = "netlify/functions"
+
+[functions]
+  node_bundler = "esbuild"
+  
   # Environment for build
   [build.environment]
     PYTHON_VERSION = "3.9"
@@ -34,7 +40,13 @@
   [headers.values]
     Cache-Control = "public, max-age=86400"  # Cache for 1 day
 
-# Redirects (if needed)
+# API redirects for secure form submissions
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+# Other redirects (if needed)
 # [[redirects]]
 #   from = "/old-path"
 #   to = "/new-path"

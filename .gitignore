@@ -1,5 +1,6 @@
 # SECURITY: Environment variables and secrets - NEVER COMMIT THESE!
-.env*
+.env
+.env.*
 !env.example
 *.key
 *.pem
@@ -7,31 +8,35 @@
 *secret*
 *credential*
 *password*
+config.local.js
 
-# SECURITY: Admin functionality and sensitive documentation
-admin/
-*.md
-!README.md
-!LICENSE
-
-# SECURITY: Development and testing files
-venv/
-env/
-ENV/
-notebooks/
-tests/
+# Python development
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
 .Python
+venv/
+env/
+ENV/
+*.egg-info/
+.pytest_cache/
 
-# Development tools
+# Node.js (for Netlify functions)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+.yarn-integrity
+
+# Development tools and IDEs
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
+.cursor/
 
 # OS generated files
 .DS_Store
@@ -47,33 +52,49 @@ Thumbs.db
 logs/
 *.tmp
 *.temp
+*.pid
 
-# Database files
+# Database files (local development)
 *.db
 *.sqlite
 *.sqlite3
 
-# Cache and build
+# Build and cache directories
 .cache/
-node_modules/
 dist/
 build/
-*.egg-info/
+.netlify/
 
-# Jupyter notebooks (development only)
+# Jupyter notebooks (development only - keep for data exploration)
 .ipynb_checkpoints/
-*.ipynb
 
-# Backup files
+# Backup and temporary files
 *.bak
 *.backup
 *.old
+*~
 
-# Data files (except essential ones)
-data/raw/
-data/*.csv
-!data/fountains_processed.geojson
+# Test files and debugging
+test_*.html
+debug_*.html
+*_test.py
+coverage/
 
-# Scripts that might contain sensitive operations
-scripts/clean_and_reload.py
-scripts/etl_pipeline.py
+# Documentation that shouldn't be public
+PRIVATE_*.md
+*_INTERNAL.md
+*_CONFIDENTIAL.md
+
+# Admin directory - exclude sensitive files but allow general docs
+admin/*
+
+# Data files - keep source CSVs but exclude processed/temporary data
+data/temp/
+data/processed/
+data/output/
+data/*.tmp
+# Keep these essential files:
+# !data/raw/vancouver_fountains_raw.csv
+# !data/raw/burnaby_fountains_raw.csv
+# !data/ratings.csv
+# !docs/data/fountains_processed.geojson

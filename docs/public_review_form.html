@@ -462,20 +462,10 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
     <script src="config.js"></script>
     <script>
-        // Use configuration from config.js
-        const SUPABASE_URL = window.APP_CONFIG.SUPABASE_URL;
-        const SUPABASE_ANON_KEY = window.APP_CONFIG.SUPABASE_ANON_KEY;
-        const ENABLE_SUPABASE = window.APP_CONFIG.ENABLE_SUPABASE;
-        
-        // Initialize Supabase client only if credentials are available
-        let supabaseClient = null;
-        if (ENABLE_SUPABASE) {
-            const { createClient } = supabase;
-            supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-        }
+        // Configuration - using secure API endpoints only
+        console.log('🔐 Form configured for secure API submission');
         
         let fountainMap;
         let fountains = [];
@@ -500,49 +490,11 @@
             try {
                 let data;
                 
-                // Try to load from Supabase first if enabled, otherwise use GeoJSON
-                if (ENABLE_SUPABASE && supabaseClient) {
-                    try {
-                        console.log('Attempting to load from Supabase...');
-                        const { data: fountainData, error } = await supabaseClient
-                            .from('fountains')
-                            .select('*');
-                        
-                        if (!error && fountainData && fountainData.length > 0) {
-                            console.log('Successfully loaded from Supabase:', fountainData.length, 'fountains');
-                            // Convert Supabase data to GeoJSON format
-                            data = {
-                                type: "FeatureCollection",
-                                features: fountainData.map(f => ({
-                                    type: "Feature",
-                                    geometry: {
-                                        type: "Point",
-                                        coordinates: [f.lon, f.lat]
-                                    },
-                                    properties: {
-                                        id: f.original_mapid || f.id,
-                                        name: f.name,
-                                        location: f.location_description,
-                                        address: f.location_description,
-                                        neighborhood: f.neighborhood
-                                    }
-                                }))
-                            };
-                        } else {
-                            throw new Error('No data received from Supabase');
-                        }
-                    } catch (supabaseError) {
-                        console.warn('Supabase load failed, falling back to GeoJSON:', supabaseError);
-                        const response = await fetch(window.APP_CONFIG.GEOJSON_PATH);
-                        if (!response.ok) throw new Error('Failed to load GeoJSON');
-                        data = await response.json();
-                    }
-                } else {
-                    console.log('Loading from static GeoJSON file...');
-                    const response = await fetch(window.APP_CONFIG.GEOJSON_PATH);
-                    if (!response.ok) throw new Error('Failed to load GeoJSON');
-                    data = await response.json();
-                }
+                // Load fountain data from static GeoJSON file
+                console.log('Loading fountain data from GeoJSON...');
+                const response = await fetch(window.APP_CONFIG.GEOJSON_PATH);
+                if (!response.ok) throw new Error('Failed to load GeoJSON');
+                data = await response.json();
                 
                 fountains = data.features;
                 
@@ -774,11 +726,11 @@
             }
             
             try {
-                // Submit to Supabase if enabled, otherwise show proper message for static mode
-                if (ENABLE_SUPABASE && supabaseClient) {
-                    await submitToSupabase(data);
+                // Submit via secure API endpoint (no database keys exposed!)
+                if (window.APP_CONFIG.ENABLE_API_SUBMISSION) {
+                    await submitToAPI(data);
                 } else {
-                    // Show success message for static mode without manual command
+                    // Fallback message for static mode
                     showAlert(`Review submitted successfully! Your review has been recorded and will be processed by our team. Thank you for your feedback!`, 'success');
                 }
                 
@@ -804,60 +756,42 @@
             });
         });
         
-                        // Submit review to Supabase
-        async function submitToSupabase(data) {
-            if (!ENABLE_SUPABASE || !supabaseClient) {
-                throw new Error('Supabase is not available');
-            }
-            
+                        // Submit review via secure API
+        async function submitToAPI(data) {
             try {
-                // First, find the fountain UUID by original_mapid
-                const { data: fountainData, error: fountainError } = await supabaseClient
-                    .from('fountains')
-                    .select('id')
-                    .eq('original_mapid', data.fountainId)
-                    .single();
-                
-                if (fountainError) {
-                    throw new Error(`Fountain not found: ${fountainError.message}`);
+                const response = await fetch(window.APP_CONFIG.API_ENDPOINT || '/.netlify/functions/submit-review', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        reviewType: 'public',
+                        reviewData: {
+                            fountainId: data.fountainId,
+                            reviewerName: data.reviewerName,
+                            reviewerEmail: data.reviewerEmail,
+                            visitDate: data.visitDate,
+                            overallRating: data.overallRating,
+                            waterQuality: data.waterQuality,
+                            flowPressure: data.flowPressure,
+                            temperature: data.temperature,
+                            cleanliness: data.cleanliness, // Maps to drainage server-side
+                            accessibility: data.accessibility,
+                            additionalNotes: data.additionalNotes
+                        }
+                    })
+                });
+
+                const result = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(result.error || 'Failed to submit review');
                 }
-                
-                const fountainUuid = fountainData.id;
-                
-                // Prepare rating data for insertion
-                const ratingData = {
-                    fountain_id: fountainUuid,
-                    overall_rating: parseInt(data.overallRating),
-                    water_quality: data.waterQuality ? parseInt(data.waterQuality) : null,
-                    flow_pressure: data.flowPressure ? parseInt(data.flowPressure) : null,
-                    temperature: data.temperature ? parseInt(data.temperature) : null,
-                    drainage: data.cleanliness ? parseInt(data.cleanliness) : null, // Note: cleanliness maps to drainage
-                    accessibility: data.accessibility ? parseInt(data.accessibility) : null,
-                    notes: data.additionalNotes || null,
-                    visited: true,
-                    visit_date: data.visitDate,
-                    reviewer_name: data.reviewerName,
-                    reviewer_email: data.reviewerEmail || null,
-                    review_type: 'user_submission',
-                    review_status: 'pending', // Public reviews need moderation
-                    is_verified: false
-                };
-                
-                // Insert the rating
-                const { data: insertedRating, error: insertError } = await supabaseClient
-                    .from('ratings')
-                    .insert([ratingData])
-                    .select()
-                    .single();
-                
-                if (insertError) {
-                    throw new Error(`Failed to submit review: ${insertError.message}`);
-                }
-                
-                showAlert(`Review submitted successfully! Your review ID is ${insertedRating.id}. It will be reviewed by our team before being published.`, 'success');
+
+                showAlert(result.message, 'success');
                 
             } catch (error) {
-                console.error('Supabase submission error:', error);
+                console.error('API submission error:', error);
                 showAlert(`Failed to submit review: ${error.message}`, 'danger');
                 throw error;
             }

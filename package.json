@@ -1,0 +1,18 @@
+{
+  "name": "yvr-water-fountains",
+  "version": "1.0.0",
+  "description": "YVR Water Fountains - Secure form submission with Netlify Functions",
+  "scripts": {
+    "build": "echo 'No build step required for static site'",
+    "dev": "netlify dev"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.38.0"
+  },
+  "devDependencies": {
+    "netlify-cli": "^17.0.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

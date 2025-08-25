@@ -91,8 +91,7 @@ class UnifiedReviewETL:
                 # Admin review settings
                 "review_type": "admin_instagram",
                 "review_status": "approved",  # Admin Instagram reviews auto-approved
-                "user_name": "yvrwaterfountains",  # Key identifier for admin reviews
-                "is_verified": True
+                "user_name": "yvrwaterfountains"  # Key identifier for admin reviews
             }
             
             try:

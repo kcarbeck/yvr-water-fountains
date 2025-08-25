@@ -74,8 +74,7 @@ class RatingManager:
             "reviewer_name": reviewer_name,
             "reviewer_email": reviewer_email,
             "review_type": review_type,
-            "review_status": "approved",  # Admin reviews are auto-approved
-            "is_verified": True
+            "review_status": "approved"  # Admin reviews are auto-approved
         }
         
         try:

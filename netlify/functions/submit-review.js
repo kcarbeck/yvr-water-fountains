@@ -165,8 +165,7 @@ async function handlePublicReview(supabase, reviewData) {
         review_type: 'public_submission',
         review_status: 'pending', // Requires admin approval
         ig_post_url: null, // No Instagram for public
-        instagram_caption: null,
-        is_verified: false
+        instagram_caption: null
     };
 
     // Insert the rating
@@ -241,9 +240,7 @@ async function handleAdminReview(supabase, reviewData) {
         
         // Instagram data stored directly in ratings table
         ig_post_url: reviewData.instagramUrl || null,
-        instagram_caption: reviewData.instagramCaption || null,
-        
-        is_verified: true
+        instagram_caption: reviewData.instagramCaption || null
     };
 
     // Insert the rating

@@ -782,10 +782,17 @@
                     })
                 });
 
-                const result = await response.json();
+                let result;
+                try {
+                    result = await response.json();
+                } catch (jsonError) {
+                    console.error('Failed to parse response as JSON:', jsonError);
+                    // Note: can't read response.text() after trying to parse JSON
+                    throw new Error('Server returned invalid response format. This may indicate a configuration issue.');
+                }
 
                 if (!response.ok) {
-                    throw new Error(result.error || 'Failed to submit review');
+                    throw new Error(result.error || result.message || 'Failed to submit review');
                 }
 
                 showAlert(result.message, 'success');

@@ -564,10 +564,16 @@
                     })
                 });
 
-                const result = await response.json();
+                let result;
+                try {
+                    result = await response.json();
+                } catch (jsonError) {
+                    console.error('Failed to parse response as JSON:', jsonError);
+                    throw new Error('Server returned invalid response format. This may indicate a configuration issue.');
+                }
 
                 if (!response.ok) {
-                    throw new Error(result.error || 'Failed to submit admin review');
+                    throw new Error(result.error || result.message || 'Failed to submit admin review');
                 }
 
                 showAlert(`🎉 ${result.message}`, 'success');

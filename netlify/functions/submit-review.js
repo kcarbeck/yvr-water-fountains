@@ -4,29 +4,61 @@
 const { createClient } = require('@supabase/supabase-js');
 
 exports.handler = async (event, context) => {
-    // Only allow POST requests
-    if (event.httpMethod !== 'POST') {
-        return {
-            statusCode: 405,
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Headers': 'Content-Type',
-                'Access-Control-Allow-Methods': 'POST'
-            },
-            body: JSON.stringify({ error: 'Method not allowed' })
-        };
-    }
-
     // CORS headers for all responses
     const headers = {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Headers': 'Content-Type',
-        'Access-Control-Allow-Methods': 'POST'
+        'Access-Control-Allow-Methods': 'POST, OPTIONS'
     };
 
+    // Handle preflight OPTIONS request
+    if (event.httpMethod === 'OPTIONS') {
+        return {
+            statusCode: 200,
+            headers,
+            body: ''
+        };
+    }
+
+    // Only allow POST requests
+    if (event.httpMethod !== 'POST') {
+        return {
+            statusCode: 405,
+            headers,
+            body: JSON.stringify({ error: 'Method not allowed' })
+        };
+    }
+
     try {
+        // Check for required environment variables
+        if (!process.env.SUPABASE_URL || !process.env.SUPABASE_KEY) {
+            console.error('Missing required environment variables: SUPABASE_URL or SUPABASE_KEY');
+            return {
+                statusCode: 500,
+                headers,
+                body: JSON.stringify({ 
+                    error: 'Server configuration error',
+                    message: 'Required environment variables are not configured' 
+                })
+            };
+        }
+
         // Parse request body
-        const { reviewData, reviewType } = JSON.parse(event.body);
+        let requestBody;
+        try {
+            requestBody = JSON.parse(event.body || '{}');
+        } catch (parseError) {
+            return {
+                statusCode: 400,
+                headers,
+                body: JSON.stringify({ 
+                    error: 'Invalid JSON in request body',
+                    message: parseError.message 
+                })
+            };
+        }
+
+        const { reviewData, reviewType } = requestBody;
         
         // Validate required fields
         if (!reviewData || !reviewType) {
@@ -38,10 +70,23 @@ exports.handler = async (event, context) => {
         }
 
         // Initialize Supabase with server-side credentials (secure!)
-        const supabase = createClient(
-            process.env.SUPABASE_URL,
-            process.env.SUPABASE_KEY // Service role key (server-side only)
-        );
+        let supabase;
+        try {
+            supabase = createClient(
+                process.env.SUPABASE_URL,
+                process.env.SUPABASE_KEY // Service role key (server-side only)
+            );
+        } catch (supabaseError) {
+            console.error('Failed to initialize Supabase client:', supabaseError);
+            return {
+                statusCode: 500,
+                headers,
+                body: JSON.stringify({ 
+                    error: 'Database connection error',
+                    message: 'Failed to connect to database service' 
+                })
+            };
+        }
 
         let response;
 
@@ -127,8 +172,13 @@ async function handlePublicReview(supabase, reviewData) {
 }
 
 async function handleAdminReview(supabase, reviewData) {
+    // Check if admin password is configured
+    if (!process.env.ADMIN_PASSWORD) {
+        throw new Error('Admin functionality is not configured on this server');
+    }
+    
     // Verify admin password
-    if (reviewData.adminPassword !== process.env.ADMIN_PASSWORD) {
+    if (!reviewData.adminPassword || reviewData.adminPassword !== process.env.ADMIN_PASSWORD) {
         throw new Error('Invalid admin password');
     }
 

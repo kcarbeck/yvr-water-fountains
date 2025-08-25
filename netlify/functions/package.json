@@ -1,0 +1,11 @@
+{
+  "name": "yvr-water-fountains-functions",
+  "version": "1.0.0",
+  "description": "Netlify Functions for YVR Water Fountains",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.38.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

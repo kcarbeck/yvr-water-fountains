@@ -34,15 +34,24 @@ exports.handler = async (event, context) => {
     }
 
     try {
-        // Check for required environment variables
+        // Check for required environment variables with detailed logging
+        console.log('Environment check - SUPABASE_URL present:', !!process.env.SUPABASE_URL);
+        console.log('Environment check - SUPABASE_KEY present:', !!process.env.SUPABASE_KEY);
+        
         if (!process.env.SUPABASE_URL || !process.env.SUPABASE_KEY) {
             console.error('Missing required environment variables: SUPABASE_URL or SUPABASE_KEY');
+            console.error('SUPABASE_URL length:', process.env.SUPABASE_URL ? process.env.SUPABASE_URL.length : 'undefined');
+            console.error('SUPABASE_KEY length:', process.env.SUPABASE_KEY ? process.env.SUPABASE_KEY.length : 'undefined');
             return {
                 statusCode: 500,
                 headers,
                 body: JSON.stringify({ 
                     error: 'Server configuration error',
-                    message: 'Required environment variables are not configured' 
+                    message: 'Required environment variables are not configured',
+                    details: {
+                        hasSupabaseUrl: !!process.env.SUPABASE_URL,
+                        hasSupabaseKey: !!process.env.SUPABASE_KEY
+                    }
                 })
             };
         }
@@ -110,12 +119,16 @@ exports.handler = async (event, context) => {
 
     } catch (error) {
         console.error('Function error:', error);
+        console.error('Error stack:', error.stack);
+        console.error('Error name:', error.name);
         return {
             statusCode: 500,
             headers,
             body: JSON.stringify({ 
                 error: 'Internal server error',
-                message: error.message 
+                message: error.message,
+                errorName: error.name,
+                stack: error.stack
             })
         };
     }

@@ -4,7 +4,7 @@
 
 window.APP_CONFIG = {
     // API endpoint for secure form submissions (NO database keys exposed!)
-    API_ENDPOINT: '/api/submit-review', // Will be implemented as serverless function
+    API_ENDPOINT: '/.netlify/functions/submit-review', // Netlify serverless function
     
     // Admin configuration (will be handled server-side)
     ADMIN_PASSWORD: null, // Moved to server-side for security

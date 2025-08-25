@@ -46,6 +46,12 @@
   to = "/.netlify/functions/:splat"
   status = 200
 
+# Direct function access (backup)
+[[redirects]]
+  from = "/submit-review"
+  to = "/.netlify/functions/submit-review"
+  status = 200
+
 # Other redirects (if needed)
 # [[redirects]]
 #   from = "/old-path"

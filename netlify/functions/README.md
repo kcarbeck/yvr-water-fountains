@@ -15,9 +15,11 @@ To fix the JSON parsing error when submitting reviews, you need to configure the
 - Copy the "service_role" key (NOT the anon key)
 - Add this as `SUPABASE_KEY` in Netlify
 
-### 3. ADMIN_PASSWORD (Optional)
-- Choose a secure password for admin functionality
-- Add this as `ADMIN_PASSWORD` in Netlify
+### 3. ADMIN_PASSWORD (Required for Admin Reviews)
+- Choose a secure password for admin review functionality
+- Add this as `ADMIN_PASSWORD` in Netlify environment variables
+- **IMPORTANT**: This must be set in Netlify dashboard, NOT in a .env file
+- This is different from the frontend admin access password
 
 ## How to Set Environment Variables in Netlify
 
@@ -41,6 +43,25 @@ This means the SUPABASE_URL or SUPABASE_KEY environment variables are not set.
 
 ### "Database connection error"
 This indicates an issue with the Supabase client initialization.
+
+### "Invalid admin password"
+This means the admin password you entered doesn't match the `ADMIN_PASSWORD` environment variable set in Netlify.
+
+### "Admin functionality is not configured on this server"
+This means the `ADMIN_PASSWORD` environment variable is not set in Netlify.
+
+## Two Admin Password Systems
+
+There are TWO separate admin password systems:
+
+1. **Frontend Admin Access** (for accessing admin panel from map):
+   - Uses `APP_CONFIG.ADMIN_PASSWORD` in config.js (currently set to null for security)
+   - This is for basic frontend access to admin forms
+
+2. **Backend Admin Review Submission** (for actually submitting admin reviews):
+   - Uses `ADMIN_PASSWORD` environment variable in Netlify
+   - This is for secure server-side validation of admin review submissions
+   - **This is what you need to set in Netlify dashboard**
 
 ## Testing
 

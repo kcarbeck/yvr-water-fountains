@@ -759,7 +759,10 @@
                         // Submit review via secure API
         async function submitToAPI(data) {
             try {
-                const response = await fetch(window.APP_CONFIG.API_ENDPOINT || '/.netlify/functions/submit-review', {
+                const apiEndpoint = window.APP_CONFIG.API_ENDPOINT || '/.netlify/functions/submit-review';
+                console.log('Using API endpoint:', apiEndpoint);
+                
+                const response = await fetch(apiEndpoint, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -783,12 +786,19 @@
                 });
 
                 let result;
+                let responseText;
                 try {
+                    // Try to get the response text first for debugging
+                    responseText = await response.clone().text();
+                    console.log('Raw response:', responseText);
+                    console.log('Response status:', response.status);
+                    console.log('Response headers:', Object.fromEntries(response.headers.entries()));
+                    
                     result = await response.json();
                 } catch (jsonError) {
                     console.error('Failed to parse response as JSON:', jsonError);
-                    // Note: can't read response.text() after trying to parse JSON
-                    throw new Error('Server returned invalid response format. This may indicate a configuration issue.');
+                    console.error('Response text was:', responseText);
+                    throw new Error(`Server returned invalid response format. Response was: ${responseText?.substring(0, 200)}...`);
                 }
 
                 if (!response.ok) {

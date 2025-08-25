@@ -4,6 +4,10 @@
 const { createClient } = require('@supabase/supabase-js');
 
 exports.handler = async (event, context) => {
+    console.log('Function called with method:', event.httpMethod);
+    console.log('Function path:', event.path);
+    console.log('Event body present:', !!event.body);
+    
     // CORS headers for all responses
     const headers = {
         'Access-Control-Allow-Origin': '*',
@@ -172,15 +176,26 @@ async function handlePublicReview(supabase, reviewData) {
 }
 
 async function handleAdminReview(supabase, reviewData) {
+    console.log('Admin review attempt - password provided:', !!reviewData.adminPassword);
+    console.log('Admin password configured on server:', !!process.env.ADMIN_PASSWORD);
+    
     // Check if admin password is configured
     if (!process.env.ADMIN_PASSWORD) {
-        throw new Error('Admin functionality is not configured on this server');
+        console.error('ADMIN_PASSWORD environment variable not set');
+        throw new Error('Admin functionality is not configured on this server. Please set ADMIN_PASSWORD in Netlify environment variables.');
     }
     
     // Verify admin password
-    if (!reviewData.adminPassword || reviewData.adminPassword !== process.env.ADMIN_PASSWORD) {
+    if (!reviewData.adminPassword) {
+        throw new Error('Admin password is required');
+    }
+    
+    if (reviewData.adminPassword !== process.env.ADMIN_PASSWORD) {
+        console.error('Admin password mismatch');
         throw new Error('Invalid admin password');
     }
+    
+    console.log('Admin password verified successfully');
 
     // Find fountain by original_mapid
     const { data: fountainData, error: fountainError } = await supabase

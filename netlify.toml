@@ -1,6 +1,6 @@
 [build]
-  # Build command - generate API data from stable Supabase fountain data
-  command = "python scripts/generate_geojson_api.py"
+  # Build command - generate API data with fallback to static data
+  command = "python scripts/netlify_build.py"
   
   # Directory to publish (the docs folder contains our web app)
   publish = "docs"
@@ -60,12 +60,12 @@
 
 [context.production]
   # Production-specific settings
-  command = "python scripts/generate_geojson_api.py"
+  command = "python scripts/netlify_build.py"
 
 [context.deploy-preview]
   # Settings for deploy previews (PR builds)
-  command = "python scripts/generate_geojson_api.py"
+  command = "python scripts/netlify_build.py"
 
 [context.branch-deploy]
   # Settings for branch deployments
-  command = "python scripts/generate_geojson_api.py"
+  command = "python scripts/netlify_build.py"

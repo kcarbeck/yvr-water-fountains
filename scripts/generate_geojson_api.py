@@ -12,12 +12,73 @@ from pathlib import Path
 
 load_dotenv()
 
+def fallback_to_static_data():
+    """Use existing static data when Supabase credentials are not available"""
+    docs_dir = Path(__file__).parent.parent / "docs"
+    data_dir = docs_dir / "data"
+    
+    # Check if we have existing processed data
+    processed_file = data_dir / "fountains_processed.geojson"
+    compact_file = data_dir / "fountains.geojson"
+    
+    if processed_file.exists():
+        print(f"✅ Using existing processed data: {processed_file}")
+        
+        # Copy to the compact version if it doesn't exist
+        if not compact_file.exists():
+            try:
+                import json
+                with open(processed_file, 'r') as f:
+                    data = json.load(f)
+                with open(compact_file, 'w') as f:
+                    json.dump(data, f, separators=(',', ':'), default=str)
+                print(f"📁 Created compact version: {compact_file}")
+            except Exception as e:
+                print(f"⚠️  Warning: Could not create compact version: {e}")
+        
+        return True
+    
+    # Check if we have any GeoJSON file to use
+    geojson_files = list(data_dir.glob("*.geojson"))
+    if geojson_files:
+        source_file = geojson_files[0]  # Use the first available
+        print(f"✅ Using available data: {source_file}")
+        
+        # Copy to our expected output files
+        try:
+            import json
+            with open(source_file, 'r') as f:
+                data = json.load(f)
+            
+            # Create both processed and compact versions
+            with open(processed_file, 'w') as f:
+                json.dump(data, f, indent=2, default=str)
+            with open(compact_file, 'w') as f:
+                json.dump(data, f, separators=(',', ':'), default=str)
+            
+            print(f"📁 Created processed version: {processed_file}")
+            print(f"📁 Created compact version: {compact_file}")
+            return True
+            
+        except Exception as e:
+            print(f"❌ Error processing static data: {e}")
+            return False
+    
+    print("❌ No static data found. Cannot proceed without Supabase credentials.")
+    return False
+
 def generate_geojson_file():
     """Generate a static GeoJSON file for the web app"""
-    supabase: Client = create_client(
-        os.getenv("SUPABASE_URL"), 
-        os.getenv("SUPABASE_KEY")
-    )
+    supabase_url = os.getenv("SUPABASE_URL")
+    supabase_key = os.getenv("SUPABASE_KEY")
+    
+    # Check if Supabase credentials are available
+    if not supabase_url or not supabase_key:
+        print("⚠️  Supabase credentials not found in environment variables")
+        print("📁 Checking for existing static data...")
+        return fallback_to_static_data()
+    
+    supabase: Client = create_client(supabase_url, supabase_key)
     
     print("🔄 Generating GeoJSON for web app...")
     
@@ -204,15 +265,25 @@ if __name__ == "__main__":
     success = generate_geojson_file()
     
     if success:
-        create_simple_api_server()
-        print("\n🎉 Ready to test your web app!")
-        print("\nNext steps:")
-        print("1. Run the schema update in Supabase dashboard:")
-        print("   supabase/schema_v2_updated.sql")
-        print("2. Re-run ETL if needed:")
-        print("   python scripts/etl_pipeline.py")
-        print("3. Start local server:")
-        print("   python scripts/serve_docs.py")
-        print("4. Open: http://localhost:8000")
+        supabase_url = os.getenv("SUPABASE_URL")
+        supabase_key = os.getenv("SUPABASE_KEY")
+        
+        if supabase_url and supabase_key:
+            # Full setup with Supabase
+            create_simple_api_server()
+            print("\n🎉 Ready to test your web app!")
+            print("\nNext steps:")
+            print("1. Run the schema update in Supabase dashboard:")
+            print("   supabase/schema_v2_updated.sql")
+            print("2. Re-run ETL if needed:")
+            print("   python scripts/etl_pipeline.py")
+            print("3. Start local server:")
+            print("   python scripts/serve_docs.py")
+            print("4. Open: http://localhost:8000")
+        else:
+            # Static data mode
+            print("\n🎉 Static data ready for deployment!")
+            print("\nDeployment mode: Using existing fountain data")
+            print("✅ Your web app will work with the current static data")
     else:
-        print("\n❌ Failed to generate GeoJSON. Check your database connection.")
+        print("\n❌ Failed to generate GeoJSON. Check your database connection or static data files.")

@@ -159,7 +159,6 @@ async function handlePublicReview(supabase, reviewData) {
         visited: true,
         visit_date: reviewData.visitDate,
         user_name: reviewData.reviewerName,
-        reviewer_email: reviewData.reviewerEmail || null,
         
         // Public review settings (unified approach)
         review_type: 'public_submission',
@@ -202,8 +201,18 @@ async function handleAdminReview(supabase, reviewData) {
         throw new Error('Admin password is required');
     }
     
-    if (reviewData.adminPassword !== process.env.ADMIN_PASSWORD) {
+    // Trim whitespace from both passwords to prevent issues
+    const providedPassword = reviewData.adminPassword.trim();
+    const expectedPassword = process.env.ADMIN_PASSWORD.trim();
+    
+    if (providedPassword !== expectedPassword) {
         console.error('Admin password mismatch');
+        console.error('Provided password length (trimmed):', providedPassword.length);
+        console.error('Expected password length (trimmed):', expectedPassword.length);
+        console.error('Provided password (first 3 chars):', providedPassword.substring(0, 3));
+        console.error('Expected password (first 3 chars):', expectedPassword.substring(0, 3));
+        console.error('Raw provided length:', reviewData.adminPassword.length);
+        console.error('Raw expected length:', process.env.ADMIN_PASSWORD.length);
         throw new Error('Invalid admin password');
     }
     

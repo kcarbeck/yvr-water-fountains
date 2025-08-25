@@ -2,7 +2,10 @@
 
 An interactive web application mapping 429+ public drinking fountains across Vancouver and Burnaby, featuring Instagram-integrated reviews, community ratings, and comprehensive moderation system.
 
-**🌐 [View Live Application →](https://kcarbeck.github.io/yvr-water-fountains/map.html)**
+**🌐 [View Live Application →](https://yvr-water-fountains.netlify.app)**
+
+> 💡 **Full functionality** (including review submissions) available on Netlify deployment  
+> 📱 **Read-only version** also available on [GitHub Pages](https://kcarbeck.github.io/yvr-water-fountains/map.html)
 
 ![Water Fountains Map](docs/images/map-preview.png)
 

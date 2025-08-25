@@ -6,5 +6,5 @@
 / /map.html 200
 /table /table.html 200
 
-# Force HTTPS (optional)
-http://yvr-water-fountains.netlify.app/* https://yvr-water-fountains.netlify.app/:splat 301!
+# Force HTTPS (will auto-update when site name changes)
+# http://your-site-name.netlify.app/* https://your-site-name.netlify.app/:splat 301!

@@ -4,7 +4,15 @@
 
 window.APP_CONFIG = {
     // API endpoint for secure form submissions (NO database keys exposed!)
-    API_ENDPOINT: '/.netlify/functions/submit-review', // Netlify serverless function
+    // Auto-detect deployment platform
+    API_ENDPOINT: (function() {
+        if (window.location.hostname.includes('netlify.app') || 
+            window.location.hostname.includes('netlify.com')) {
+            return '/.netlify/functions/submit-review'; // Netlify serverless function
+        } else {
+            return null; // GitHub Pages - no serverless functions available
+        }
+    })(),
     
     // Admin configuration (will be handled server-side)
     ADMIN_PASSWORD: null, // Moved to server-side for security
@@ -14,7 +22,11 @@ window.APP_CONFIG = {
     REPO_NAME: null, // Repository in format 'username/repo-name'
     
     // Feature flags
-    ENABLE_API_SUBMISSION: true, // Uses secure API endpoint
+    ENABLE_API_SUBMISSION: (function() {
+        // Only enable API submission on Netlify where functions are available
+        return window.location.hostname.includes('netlify.app') || 
+               window.location.hostname.includes('netlify.com');
+    })(), // Uses secure API endpoint only on Netlify
     FALLBACK_TO_GEOJSON: true, // Always maintain static data fallback
     ENABLE_AUTO_DEPLOY: false, // Set to true when GitHub token is configured
     
@@ -25,9 +37,24 @@ window.APP_CONFIG = {
     
     // App metadata
     VERSION: '1.0.0',
-    DEPLOYMENT_TYPE: 'github-pages'
+    DEPLOYMENT_TYPE: (function() {
+        if (window.location.hostname.includes('netlify.app') || 
+            window.location.hostname.includes('netlify.com')) {
+            return 'netlify';
+        } else if (window.location.hostname.includes('github.io')) {
+            return 'github-pages';
+        } else {
+            return 'custom';
+        }
+    })()
 };
 
-// Security notice
-console.log('🔐 Using secure API endpoints for form submissions');
-console.log('✅ Database credentials are protected server-side');
+// Deployment info
+console.log(`🌐 Deployment: ${window.APP_CONFIG.DEPLOYMENT_TYPE}`);
+if (window.APP_CONFIG.ENABLE_API_SUBMISSION) {
+    console.log('🔐 API submission enabled - using secure serverless functions');
+    console.log('✅ Database credentials are protected server-side');
+} else {
+    console.log('📁 Static mode - review submissions disabled on this platform');
+    console.log('💡 For review functionality, use the Netlify deployment');
+}

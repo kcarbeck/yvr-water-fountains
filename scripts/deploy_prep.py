@@ -86,7 +86,6 @@ def validate_deployment():
     # Check required files exist
     required_files = [
         docs_dir / "map.html",
-        docs_dir / "table.html", 
         docs_dir / "data" / "fountains_processed.geojson"
     ]
     
@@ -195,11 +194,6 @@ def create_sitemap():
     <loc>https://yvr-water-fountains.netlify.app/</loc>
     <lastmod>2025-01-01</lastmod>
     <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://yvr-water-fountains.netlify.app/table.html</loc>
-    <lastmod>2025-01-01</lastmod>
-    <priority>0.8</priority>
   </url>
 </urlset>
 """

@@ -4,7 +4,6 @@
 # Default redirects for clean URLs
 /map /map.html 200
 / /map.html 200
-/table /table.html 200
 
 # Force HTTPS (will auto-update when site name changes)
 # http://your-site-name.netlify.app/* https://your-site-name.netlify.app/:splat 301!

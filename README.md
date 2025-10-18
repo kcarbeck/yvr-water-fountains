@@ -25,6 +25,7 @@ An interactive web application mapping 429+ public drinking fountains across Van
 - **Framework**: Vanilla JavaScript with Leaflet.js for mapping
 - **Design**: Mobile-first responsive CSS with modern UI patterns
 - **UX**: Conditional popups (desktop) vs bottom sheets (mobile)
+- **Script organization**: Map behavior now lives in [`docs/js/map.js`](docs/js/map.js) so the HTML remains simple and the logic is easy to review.
 
 ### Backend & Data Pipeline
 - **Database**: Supabase (PostgreSQL + PostGIS) for spatial data
@@ -42,6 +43,20 @@ An interactive web application mapping 429+ public drinking fountains across Van
 5. **Multi-Review Architecture**: Support for multiple reviews per fountain with rating aggregation
 6. **Spatial Optimization**: Implemented efficient rendering of 429+ map markers
 7. **Mobile Performance**: Custom bottom sheet UI with Instagram post previews
+
+## 🧭 Editing the Map Code
+
+- The map logic now lives in [`docs/js/map.js`](docs/js/map.js), which keeps the HTML file light and makes maintenance easier.
+- The script uses plain JavaScript with lots of inline explanations, so you can scroll from top to bottom and follow what each helper does.
+- Functions that need to be callable from the HTML (for example the links inside popups) are attached to `window` so they stay available without extra setup.
+- Error handling is centralized, so if the GeoJSON file fails to load you will see one clear alert instead of partial failures.
+
+### How to Test Changes Manually
+
+1. Open `docs/map.html` in a browser (double-clicking the file works) and make sure the map pins load.
+2. Click a fountain marker on desktop to confirm the popup still shows ratings, Instagram previews, and review text.
+3. Shrink the browser window below 768px and click a pin to confirm the bottom sheet opens and can be dismissed.
+4. Use the "My Location" button to check geolocation permissions, and try the admin gear icon to make sure the password prompt still appears.
 
 ## 📊 Project Impact & Results
 

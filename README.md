@@ -4,8 +4,10 @@ An interactive web application mapping 429+ public drinking fountains across Van
 
 **🌐 [View Live Application →](https://yvr-water-fountains.netlify.app)**
 
-> 💡 **Full functionality** (including review submissions) available on Netlify deployment  
+> 💡 **Full functionality** (including review submissions) available on Netlify deployment
 > 📱 **Read-only version** also available on [GitHub Pages](https://kcarbeck.github.io/yvr-water-fountains/map.html)
+
+This readme now contains the key context for contributors, including testing steps and architecture notes.
 
 ![Water Fountains Map](docs/images/map-preview.png)
 
@@ -25,6 +27,7 @@ An interactive web application mapping 429+ public drinking fountains across Van
 - **Framework**: Vanilla JavaScript with Leaflet.js for mapping
 - **Design**: Mobile-first responsive CSS with modern UI patterns
 - **UX**: Conditional popups (desktop) vs bottom sheets (mobile)
+- **Script organization**: Map behavior now lives in [`docs/js/map.js`](docs/js/map.js) so the HTML remains simple and the logic is easy to review.
 
 ### Backend & Data Pipeline
 - **Database**: Supabase (PostgreSQL + PostGIS) for spatial data
@@ -34,6 +37,13 @@ An interactive web application mapping 429+ public drinking fountains across Van
 - **Review System**: Multi-criteria rating system with moderation workflows
 - **Validation**: Automated coordinate bounds checking and duplicate detection
 
+### Database schema & supabase setup
+- **core schema**: `supabase/migrations/20241015120000_core_schema.sql` defines `cities`, `sources`, `fountains`, `reviews`, the supporting `admins` table, and the SQL views (`fountain_ratings_view`, `fountain_latest_review_view`, `fountain_overview_view`). run this migration once through the supabase sql editor or `supabase db push` so every environment shares the same structure.
+- **row level security**: policies allow the public role to read fountains and approved reviews, create pending reviews, and require that admins exist in the `admins` table before they can moderate data. this keeps public submissions safe even when the anon key is embedded in the client.
+- **backfill**: after applying the schema, seed production data by running `SUPABASE_URL=... SUPABASE_SERVICE_ROLE_KEY=... node scripts/backfill_supabase.mjs`. the script reads `data/fountains_processed.geojson` and `data/ratings.csv`, creates missing cities and sources, and imports historical @yvrwaterfountains reviews as approved admin entries.
+- **runtime config**: set `window.__ENV = { SUPABASE_URL: 'https://your-project.supabase.co', SUPABASE_ANON_KEY: 'public-anon-key' };` before loading `docs/config.js` (netlify can inject this with an inline script). when those values are present the map and forms use live data; otherwise they gracefully fall back to static geojson.
+- **admin workflow**: `docs/admin_review_form.html` and `docs/moderation_dashboard.html` now prompt for supabase email/password. only users listed in the `admins` table can approve, reject, or publish reviews. successful logins immediately update the map because the client reads from `fountain_overview_view`.
+
 ### Key Technical Challenges Solved
 1. **Coordinate Transformation**: Converted UTM Zone 10N municipal data to web-standard WGS84
 2. **Data Normalization**: Unified disparate CSV formats into consistent schema
@@ -42,6 +52,26 @@ An interactive web application mapping 429+ public drinking fountains across Van
 5. **Multi-Review Architecture**: Support for multiple reviews per fountain with rating aggregation
 6. **Spatial Optimization**: Implemented efficient rendering of 429+ map markers
 7. **Mobile Performance**: Custom bottom sheet UI with Instagram post previews
+
+## 🧭 Editing the Map Code
+
+- The map logic now lives in [`docs/js/map.js`](docs/js/map.js), which keeps the HTML file light and makes maintenance easier.
+- The script uses plain JavaScript with lots of inline explanations, so you can scroll from top to bottom and follow what each helper does.
+- Functions that need to be callable from the HTML (for example the links inside popups) are attached to `window` so they stay available without extra setup.
+- Error handling is centralized, so if the GeoJSON file fails to load you will see one clear alert instead of partial failures.
+
+### How to Test Changes Manually
+
+1. Open `docs/map.html` in a browser (double-clicking the file works) and make sure the map pins load.
+2. Click a fountain marker on desktop to confirm the popup still shows ratings, Instagram previews, and review text.
+3. Shrink the browser window below 768px and click a pin to confirm the bottom sheet opens and can be dismissed.
+4. Use the "My Location" button to check geolocation permissions, and click the admin gear icon to confirm the new supabase login panel opens with links to the admin tools.
+
+### Admin testing quickstart
+
+1. Visit `docs/admin_review_form.html`, sign in with a supabase admin account, and ensure the loading spinner is replaced with the review form and the map highlights the selected fountain.
+2. Submit a test review with a unique instagram url. Because admin reviews are auto-approved you should see the new entry when you refresh `docs/map.html`.
+3. Open `docs/moderation_dashboard.html`, sign in with the same account, and approve or reject a pending review. The counters at the top should update immediately after each action.
 
 ## 📊 Project Impact & Results
 

@@ -258,7 +258,7 @@
                                 <input type="text" id="fountainIdInput" class="form-control" placeholder="Search fountain by ID or name...">
                             </div>
                             <div class="col-auto">
-                                <button class="btn btn-outline-primary" onclick="searchFountain()">
+                                <button class="btn btn-outline-primary" id="searchButton">
                                     <i class="fas fa-search"></i>
                                 </button>
                             </div>
@@ -267,7 +267,26 @@
                     <div id="map"></div>
                 </div>
                 
-                <div class="form-section">
+        <div class="form-section">
+            <div id="authPanel" class="alert alert-warning" role="alert">
+                <h5 class="mb-3">admin sign in</h5>
+                <form id="loginForm" class="row g-3">
+                    <div class="col-12">
+                        <label for="adminEmail" class="form-label">email</label>
+                        <input type="email" class="form-control" id="adminEmail" required>
+                    </div>
+                    <div class="col-12">
+                        <label for="adminPassword" class="form-label">password</label>
+                        <input type="password" class="form-control" id="adminPassword" required>
+                    </div>
+                    <div class="col-12 d-flex align-items-center gap-2">
+                        <button type="submit" class="btn btn-primary">sign in</button>
+                        <button type="button" class="btn btn-outline-secondary" id="logoutButton" style="display: none;">sign out</button>
+                    </div>
+                    <div class="col-12" id="authAlert"></div>
+                </form>
+            </div>
+            <div id="adminFormContent" style="display: none;">
                     <div id="loadingMessage" class="loading">
                         <div class="spinner"></div>
                         <p>Loading fountain data...</p>
@@ -350,299 +369,18 @@
                     </div>
                 </div>
             </div>
+            </div>
         </div>
     </div>
 
     <!-- Load configuration -->
-    <script src="config.js"></script>
     
-    <!-- External libraries -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
-    <script>
-        // Configuration - using secure API endpoints only
-        console.log('🔐 Admin form configured for secure API submission');
-        
-        // Global variables
-        let map;
-        let fountainsData = [];
-        let markers = [];
-        let selectedFountain = null;
-        
-        // Initialize the application
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize admin form (password check happens during submission for security)
-            initializeMap();
-            loadFountainData();
-            setupEventListeners();
-            setDefaultDate();
-        });
-        
-        function initializeMap() {
-            // Initialize map centered on Vancouver
-            map = L.map('map').setView([49.251, -123.060], 11);
-            
-            // Add tile layer
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '© OpenStreetMap contributors'
-            }).addTo(map);
-        }
-        
-        function loadFountainData() {
-            // Load fountain data from GeoJSON
-            fetch(window.APP_CONFIG.GEOJSON_PATH)
-                .then(response => response.json())
-                .then(data => {
-                    fountainsData = data.features;
-                    addFountainsToMap();
-                    document.getElementById('loadingMessage').style.display = 'none';
-                    document.getElementById('reviewForm').style.display = 'block';
-                })
-                .catch(error => {
-                    console.error('Error loading fountain data:', error);
-                    showAlert('Failed to load fountain data. Please refresh the page and try again.', 'danger');
-                    document.getElementById('loadingMessage').innerHTML = 
-                        '<p class="text-danger">Failed to load fountain data</p>';
-                });
-        }
-        
-        function addFountainsToMap() {
-            fountainsData.forEach(fountain => {
-                const coords = fountain.geometry.coordinates;
-                const props = fountain.properties;
-                
-                const marker = L.marker([coords[1], coords[0]])
-                    .addTo(map)
-                    .bindPopup(`
-                        <div style="min-width: 200px;">
-                            <h6><strong>${props.name}</strong></h6>
-                            <p><strong>ID:</strong> ${props.id}</p>
-                            <p><strong>Location:</strong> ${props.city}, ${props.neighborhood}</p>
-                            <button class="btn btn-primary btn-sm" onclick="selectFountain('${props.id}')">
-                                Select This Fountain
-                            </button>
-                        </div>
-                    `);
-                
-                marker.fountainId = props.id;
-                markers.push(marker);
-            });
-        }
-        
-        function searchFountain() {
-            const searchTerm = document.getElementById('fountainIdInput').value.toLowerCase();
-            if (!searchTerm) return;
-            
-            const fountain = fountainsData.find(f => 
-                f.properties.id.toLowerCase().includes(searchTerm) ||
-                f.properties.name.toLowerCase().includes(searchTerm)
-            );
-            
-            if (fountain) {
-                const coords = fountain.geometry.coordinates;
-                map.setView([coords[1], coords[0]], 16);
-                
-                const marker = markers.find(m => m.fountainId === fountain.properties.id);
-                if (marker) {
-                    marker.openPopup();
-                }
-            } else {
-                showAlert('Fountain not found. Try searching by ID or name.', 'warning');
-            }
-        }
-        
-        function selectFountain(fountainId) {
-            const fountain = fountainsData.find(f => f.properties.id === fountainId);
-            if (!fountain) return;
-            
-            selectedFountain = fountain;
-            
-            // Update fountain info display
-            const fountainInfo = document.getElementById('fountainInfo');
-            const fountainDetails = document.getElementById('fountainDetails');
-            
-            fountainDetails.innerHTML = `
-                <p><strong>ID:</strong> ${fountain.properties.id}</p>
-                <p><strong>Name:</strong> ${fountain.properties.name}</p>
-                <p><strong>Location:</strong> ${fountain.properties.city}, ${fountain.properties.neighborhood}</p>
-                <p><strong>Type:</strong> ${fountain.properties.type}</p>
-                <p><strong>Maintainer:</strong> ${fountain.properties.maintainer}</p>
-            `;
-            
-            fountainInfo.style.display = 'block';
-            
-            // Close popup
-            map.closePopup();
-            
-            showAlert('Fountain selected! Fill out the review form below.', 'success');
-        }
-        
-        function setupEventListeners() {
-            // Form submission
-            document.getElementById('adminReviewForm').addEventListener('submit', handleFormSubmit);
-            
-            // Search input
-            document.getElementById('fountainIdInput').addEventListener('keydown', handleSearchKeydown);
-        }
-        
-        // Handle search keydown (Enter key)
-        function handleSearchKeydown(e) {
-            if (e.key === 'Enter') {
-                searchFountain();
-            }
-        }
-        
-        function setDefaultDate() {
-            // Set default visit date to today
-            const today = new Date().toISOString().split('T')[0];
-            document.getElementById('visitDate').value = today;
-        }
-        
-        function handleFormSubmit(e) {
-            e.preventDefault();
-            
-            if (!selectedFountain) {
-                showAlert('Please select a fountain from the map first.', 'warning');
-                return;
-            }
-            
-            // Submit via secure API endpoint
-            if (window.APP_CONFIG.ENABLE_API_SUBMISSION) {
-                submitToAPI();
-            } else {
-                generatePythonCommand();
-            }
-        }
-        
-        function generatePythonCommand() {
-            const formData = getFormData();
-            
-            const command = `python scripts/rating_helper.py add_full_rating "${selectedFountain.properties.id}" ${formData.overallRating} ${formData.waterQuality} ${formData.flowPressure} ${formData.temperature} ${formData.drainage} ${formData.accessibility} "${formData.notes}" False "${formData.visitDate}" "${formData.instagramUrl}" "YVR Water Fountains"`;
-            
-            showAlert(`
-                <strong>Static Mode:</strong> Copy and run this command in your local environment:<br><br>
-                <code style="background: #f8f9fa; padding: 10px; border-radius: 5px; display: block; margin: 10px 0; word-break: break-all;">
-                    ${command}
-                </code>
-                <br>Then regenerate the data with: <code>python scripts/generate_geojson_api.py</code>
-            `, 'info');
-        }
-        
-        // Submit admin review via secure API
-        async function submitToAPI() {
-            const formData = getFormData();
-            const adminPassword = prompt('Enter admin password:');
-            
-            if (!adminPassword) {
-                showAlert('Admin password required', 'warning');
-                return;
-            }
-            
-            try {
-                const apiEndpoint = window.APP_CONFIG.API_ENDPOINT || '/.netlify/functions/submit-review';
-                console.log('Using API endpoint:', apiEndpoint);
-                
-                const response = await fetch(apiEndpoint, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        reviewType: 'admin',
-                        reviewData: {
-                            fountainId: selectedFountain.properties.id,
-                            adminPassword: adminPassword,
-                            overallRating: formData.overallRating,
-                            waterQuality: formData.waterQuality,
-                            flowPressure: formData.flowPressure,
-                            temperature: formData.temperature,
-                            drainage: formData.drainage,
-                            accessibility: formData.accessibility,
-                            notes: formData.notes,
-                            visitDate: formData.visitDate,
-                            instagramUrl: formData.instagramUrl,
-                            instagramCaption: formData.instagramCaption
-                        }
-                    })
-                });
-
-                let result;
-                let responseText;
-                try {
-                    // Try to get the response text first for debugging
-                    responseText = await response.clone().text();
-                    console.log('Raw response:', responseText);
-                    console.log('Response status:', response.status);
-                    console.log('Response headers:', Object.fromEntries(response.headers.entries()));
-                    
-                    result = await response.json();
-                } catch (jsonError) {
-                    console.error('Failed to parse response as JSON:', jsonError);
-                    console.error('Response text was:', responseText);
-                    throw new Error(`Server returned invalid response format. Response was: ${responseText?.substring(0, 200)}...`);
-                }
-
-                if (!response.ok) {
-                    throw new Error(result.error || result.message || 'Failed to submit admin review');
-                }
-
-                showAlert(`🎉 ${result.message}`, 'success');
-                resetForm();
-                
-            } catch (error) {
-                console.error('API submission error:', error);
-                showAlert(`Failed to submit admin review: ${error.message}`, 'danger');
-            }
-        }
-        
-        function getFormData() {
-            return {
-                overallRating: parseInt(document.getElementById('overallRating').value),
-                waterQuality: parseInt(document.getElementById('waterQuality').value),
-                flowPressure: parseInt(document.getElementById('flowPressure').value),
-                temperature: parseInt(document.getElementById('temperature').value),
-                drainage: parseInt(document.getElementById('drainage').value),
-                accessibility: parseInt(document.getElementById('accessibility').value),
-                notes: document.getElementById('reviewNotes').value,
-                visitDate: document.getElementById('visitDate').value,
-                instagramUrl: document.getElementById('instagramUrl').value,
-                instagramCaption: document.getElementById('instagramCaption').value
-            };
-        }
-        
-        function extractInstagramPostId(url) {
-            const match = url.match(/\/p\/([A-Za-z0-9_-]+)/);
-            return match ? match[1] : null;
-        }
-        
-        function resetForm() {
-            document.getElementById('adminReviewForm').reset();
-            document.getElementById('fountainInfo').style.display = 'none';
-            selectedFountain = null;
-            setDefaultDate();
-        }
-        
-        function showAlert(message, type) {
-            const alertContainer = document.getElementById('alertContainer');
-            const alert = document.createElement('div');
-            alert.className = `alert alert-${type} alert-dismissible fade show`;
-            alert.innerHTML = `
-                ${message}
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-            `;
-            alertContainer.appendChild(alert);
-            
-            // Auto-dismiss success alerts after 5 seconds
-            if (type === 'success') {
-                setTimeout(() => {
-                    alert.remove();
-                }, 5000);
-            }
-        }
-        
-        // Make selectFountain globally available
-        window.selectFountain = selectFountain;
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.43.1/dist/umd/supabase.min.js"></script>
+    <script src="config.js"></script>
+    <script src="js/supabase.js"></script>
+    <script src="js/fountain-data.js"></script>
+    <script src="js/admin-review-form.js"></script>
 </body>
 </html>

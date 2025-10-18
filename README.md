@@ -4,8 +4,10 @@ An interactive web application mapping 429+ public drinking fountains across Van
 
 **🌐 [View Live Application →](https://yvr-water-fountains.netlify.app)**
 
-> 💡 **Full functionality** (including review submissions) available on Netlify deployment  
+> 💡 **Full functionality** (including review submissions) available on Netlify deployment
 > 📱 **Read-only version** also available on [GitHub Pages](https://kcarbeck.github.io/yvr-water-fountains/map.html)
+
+This readme now contains the key context for contributors, including testing steps and architecture notes.
 
 ![Water Fountains Map](docs/images/map-preview.png)
 

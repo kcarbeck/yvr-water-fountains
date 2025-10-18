@@ -3,682 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YVR Water Fountains - Moderation Dashboard</title>
+    <title>Review Moderation - YVR Water Fountains</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+            background: #f5f7fb;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
-        .dashboard-header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 1rem 0;
-            margin-bottom: 2rem;
+        .page-container {
+            max-width: 960px;
+            margin: 40px auto;
         }
-        
-        .dashboard-title {
-            color: #333;
-            font-weight: 300;
-            margin: 0;
+        .card-header {
+            background: linear-gradient(135deg, #007bff, #00c6ff);
+            color: #fff;
         }
-        
-        .stats-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-        
-        .stat-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 1.5rem;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: transform 0.3s ease;
-        }
-        
-        .stat-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #2196F3;
-            margin-bottom: 0.5rem;
-        }
-        
-        .stat-label {
-            color: #666;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .main-content {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 2rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
         .review-card {
-            background: white;
-            border-radius: 10px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            border-left: 4px solid #ffc107;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
+            border: 1px solid #e3e6ef;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+            background: #fff;
+            box-shadow: 0 2px 6px rgba(15, 34, 58, 0.08);
         }
-        
-        .review-card:hover {
-            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        .review-meta {
+            font-size: 0.9rem;
+            color: #5b6472;
         }
-        
-        .review-card.approved {
-            border-left-color: #28a745;
-        }
-        
-        .review-card.rejected {
-            border-left-color: #dc3545;
-        }
-        
-        .fountain-info {
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 1rem;
-            margin-bottom: 1rem;
-        }
-        
-        .rating-display {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-            gap: 1rem;
-            margin: 1rem 0;
-        }
-        
-        .rating-item {
-            text-align: center;
-            padding: 0.5rem;
-            background: #f8f9fa;
-            border-radius: 8px;
-        }
-        
-        .rating-value {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #2196F3;
-        }
-        
-        .rating-label {
-            font-size: 0.8rem;
-            color: #666;
-            text-transform: uppercase;
-        }
-        
-        .action-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: flex-end;
-            margin-top: 1rem;
-        }
-        
-        .btn {
-            border-radius: 8px;
-            font-weight: 600;
-            padding: 0.5rem 1.5rem;
-        }
-        
-        .btn-approve {
-            background: #28a745;
-            border-color: #28a745;
-            color: white;
-        }
-        
-        .btn-reject {
-            background: #dc3545;
-            border-color: #dc3545;
-            color: white;
-        }
-        
-        .empty-state {
-            text-align: center;
-            padding: 3rem;
-            color: #666;
-        }
-        
-        .empty-state i {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            opacity: 0.3;
-        }
-        
-        .loading {
-            text-align: center;
-            padding: 2rem;
-        }
-        
-        .spinner {
+        .status-badge {
             display: inline-block;
-            width: 40px;
-            height: 40px;
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #2196F3;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
+            padding: 0.25rem 0.6rem;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
         }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        .instagram-content {
-            background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
-            color: white;
-            border-radius: 8px;
-            padding: 1rem;
-            margin: 1rem 0;
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-        }
-        
-        .nav-links a {
-            color: #333;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-        
-        .nav-links a:hover {
-            color: #2196F3;
+        #adminControls {
+            display: none;
         }
     </style>
 </head>
 <body>
-    <div class="dashboard-header">
-        <div class="container">
-            <div class="d-flex justify-content-between align-items-center">
-                <h1 class="dashboard-title">
-                    <i class="fas fa-shield-alt"></i> Moderation Dashboard
-                </h1>
-                <div class="nav-links">
-                    <a href="map.html"><i class="fas fa-map"></i> Map</a>
-                    <a href="admin_review_form.html" class="btn btn-outline-light btn-sm">
-                        <i class="fas fa-user-shield"></i> Admin Review
-                    </a>
+<div class="page-container">
+    <div class="card shadow-sm mb-4">
+        <div class="card-header py-3">
+            <h1 class="h4 mb-0">Review moderation</h1>
+            <p class="mb-0" style="font-size: 0.9rem;">approve community submissions so they appear on the public map.</p>
+        </div>
+        <div class="card-body">
+            <div id="authPanel" class="alert alert-warning" role="alert">
+                <h5 class="alert-heading">admin sign in</h5>
+                <p class="mb-3" id="authMessage">enter your supabase email and password to load pending reviews.</p>
+                <form id="loginForm" class="row g-3">
+                    <div class="col-md-5">
+                        <label for="moderatorEmail" class="form-label">email</label>
+                        <input type="email" id="moderatorEmail" class="form-control" required>
+                    </div>
+                    <div class="col-md-5">
+                        <label for="moderatorPassword" class="form-label">password</label>
+                        <input type="password" id="moderatorPassword" class="form-control" required>
+                    </div>
+                    <div class="col-md-2 d-flex align-items-end">
+                        <button type="submit" class="btn btn-primary w-100">sign in</button>
+                    </div>
+                </form>
+                <div class="d-flex align-items-center mt-3" id="logoutRow" style="display: none;">
+                    <span class="me-3" id="signedInAs"></span>
+                    <button class="btn btn-outline-secondary btn-sm" id="logoutButton">sign out</button>
                 </div>
+            </div>
+            <div id="adminControls">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                        <span class="status-badge bg-warning text-dark" id="pendingCount">0 pending</span>
+                        <span class="status-badge bg-success text-light" id="approvedCount">0 approved today</span>
+                    </div>
+                    <button class="btn btn-outline-primary btn-sm" id="refreshButton">refresh</button>
+                </div>
+                <div id="pendingContainer"></div>
+                <div id="emptyState" class="alert alert-success" style="display: none;">no pending reviews. enjoy a break! 🎉</div>
             </div>
         </div>
     </div>
-    
-    <div class="container">
-        <div class="stats-cards">
-            <div class="stat-card">
-                <div class="stat-number" id="pendingCount">-</div>
-                <div class="stat-label">Pending Reviews</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number" id="approvedCount">-</div>
-                <div class="stat-label">Approved Today</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number" id="totalReviews">-</div>
-                <div class="stat-label">Total Reviews</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number" id="fountainCount">-</div>
-                <div class="stat-label">Total Fountains</div>
-            </div>
-        </div>
-        
-        <div class="main-content">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h3><i class="fas fa-clock"></i> Pending Reviews</h3>
-                <button class="btn btn-outline-primary" onclick="refreshData()">
-                    <i class="fas fa-sync-alt"></i> Refresh
-                </button>
-            </div>
-            
-            <div id="loadingIndicator" class="loading">
-                <div class="spinner"></div>
-                <p>Loading pending reviews...</p>
-            </div>
-            
-            <div id="reviewsContainer"></div>
-        </div>
-    </div>
+</div>
 
-    <!-- Load configuration -->
-    <script src="config.js"></script>
-    
-    <!-- External libraries -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-    <script>
-        // Configuration - Replace with your actual Supabase credentials
-        const SUPABASE_URL = window.APP_CONFIG.SUPABASE_URL;
-        const SUPABASE_ANON_KEY = window.APP_CONFIG.SUPABASE_ANON_KEY;
-        let supabaseClient = null;
-        
-        // Initialize Supabase client only if credentials are available
-        if (SUPABASE_URL && SUPABASE_ANON_KEY && 
-            SUPABASE_URL !== 'your-supabase-url-here' && 
-            SUPABASE_ANON_KEY !== 'your-anon-key-here') {
-            supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-        }
-        
-        let pendingReviews = [];
-        let fountainsData = {};
-        
-        // Initialize dashboard
-        document.addEventListener('DOMContentLoaded', function() {
-            if (!supabaseClient) {
-                showStaticModeMessage();
-                return;
-            }
-            
-            loadDashboardData();
-        });
-        
-        function showStaticModeMessage() {
-            document.getElementById('loadingIndicator').innerHTML = `
-                <div class="empty-state">
-                    <i class="fas fa-database"></i>
-                    <h4>Static Mode</h4>
-                    <p>Moderation dashboard requires database connectivity.</p>
-                    <p>Configure Supabase credentials to enable live moderation features.</p>
-                </div>
-            `;
-        }
-        
-        async function loadDashboardData() {
-            try {
-                await Promise.all([
-                    loadPendingReviews(),
-                    loadStatistics(),
-                    loadFountainsData()
-                ]);
-                
-                renderReviews();
-                document.getElementById('loadingIndicator').style.display = 'none';
-                
-            } catch (error) {
-                console.error('Error loading dashboard data:', error);
-                document.getElementById('loadingIndicator').innerHTML = `
-                    <div class="empty-state">
-                        <i class="fas fa-exclamation-triangle"></i>
-                        <h4>Error Loading Data</h4>
-                        <p>Failed to connect to the database. Please check your connection and try again.</p>
-                    </div>
-                `;
-            }
-        }
-        
-        async function loadPendingReviews() {
-            const { data, error } = await supabaseClient
-                .from('ratings')
-                .select(`
-                    *,
-                    fountains (
-                        id,
-                        name,
-                        neighborhood,
-                        city
-                    ),
-                    instagram_posts (
-                        post_url,
-                        post_id,
-                        caption
-                    )
-                `)
-                .eq('review_status', 'pending')
-                .order('created_at', { ascending: false });
-            
-            if (error) throw error;
-            
-            pendingReviews = data || [];
-            document.getElementById('pendingCount').textContent = pendingReviews.length;
-        }
-        
-        async function loadStatistics() {
-            // Get approved reviews from today
-            const today = new Date().toISOString().split('T')[0];
-            const { data: approvedToday, error: approvedError } = await supabaseClient
-                .from('ratings')
-                .select('id')
-                .eq('review_status', 'approved')
-                .gte('approved_at', today);
-            
-            if (approvedError) throw approvedError;
-            
-            // Get total reviews
-            const { count: totalCount, error: totalError } = await supabaseClient
-                .from('ratings')
-                .select('*', { count: 'exact', head: true });
-            
-            if (totalError) throw totalError;
-            
-            // Get fountain count
-            const { count: fountainCount, error: fountainError } = await supabaseClient
-                .from('fountains')
-                .select('*', { count: 'exact', head: true });
-            
-            if (fountainError) throw fountainError;
-            
-            document.getElementById('approvedCount').textContent = approvedToday?.length || 0;
-            document.getElementById('totalReviews').textContent = totalCount || 0;
-            document.getElementById('fountainCount').textContent = fountainCount || 0;
-        }
-        
-        async function loadFountainsData() {
-            const { data, error } = await supabaseClient
-                .from('fountains')
-                .select('*');
-            
-            if (error) throw error;
-            
-            fountainsData = {};
-            data.forEach(fountain => {
-                fountainsData[fountain.id] = fountain;
-            });
-        }
-        
-        function renderReviews() {
-            const container = document.getElementById('reviewsContainer');
-            
-            if (pendingReviews.length === 0) {
-                container.innerHTML = `
-                    <div class="empty-state">
-                        <i class="fas fa-check-circle"></i>
-                        <h4>All Caught Up!</h4>
-                        <p>No pending reviews to moderate at this time.</p>
-                    </div>
-                `;
-                return;
-            }
-            
-            container.innerHTML = pendingReviews.map(review => {
-                const fountain = review.fountains;
-                const instagramPosts = review.instagram_posts || [];
-                
-                // Check if this is an Instagram review
-                const isAdminInstagramReview = review.review_type === 'instagram' || review.reviewer_name === 'YVR Water Fountains';
-                
-                return `
-                    <div class="review-card" data-review-id="${review.id}">
-                        <div class="fountain-info">
-                            <h5><i class="fas fa-map-marker-alt"></i> ${fountain.name}</h5>
-                            <p><strong>ID:</strong> ${fountain.id} | <strong>Location:</strong> ${fountain.city}, ${fountain.neighborhood}</p>
-                        </div>
-                        
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h6><i class="fas fa-user"></i> Review Details</h6>
-                                <p><strong>Reviewer:</strong> ${review.reviewer_name || 'Anonymous'}</p>
-                                <p><strong>Email:</strong> ${review.reviewer_email || 'Not provided'}</p>
-                                <p><strong>Visit Date:</strong> ${review.visit_date}</p>
-                                <p><strong>Review Type:</strong> ${review.review_type || 'user_submission'}</p>
-                                
-                                ${review.notes ? `
-                                    <div class="mt-3">
-                                        <h6>Notes:</h6>
-                                        <p class="bg-light p-2 rounded">${review.notes}</p>
-                                    </div>
-                                ` : ''}
-                            </div>
-                            
-                            <div class="col-md-6">
-                                <h6><i class="fas fa-star"></i> Ratings</h6>
-                                <div class="rating-display">
-                                    <div class="rating-item">
-                                        <div class="rating-value">${review.overall_rating}</div>
-                                        <div class="rating-label">Overall</div>
-                                    </div>
-                                    <div class="rating-item">
-                                        <div class="rating-value">${review.water_quality}</div>
-                                        <div class="rating-label">Quality</div>
-                                    </div>
-                                    <div class="rating-item">
-                                        <div class="rating-value">${review.flow_pressure}</div>
-                                        <div class="rating-label">Flow</div>
-                                    </div>
-                                    <div class="rating-item">
-                                        <div class="rating-value">${review.temperature}</div>
-                                        <div class="rating-label">Temp</div>
-                                    </div>
-                                    <div class="rating-item">
-                                        <div class="rating-value">${review.drainage}</div>
-                                        <div class="rating-label">Drainage</div>
-                                    </div>
-                                    <div class="rating-item">
-                                        <div class="rating-value">${review.accessibility}</div>
-                                        <div class="rating-label">Access</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        ${isAdminInstagramReview && instagramPosts.length > 0 ? `
-                            <div class="instagram-content">
-                                <h6><i class="fab fa-instagram"></i> Instagram Content</h6>
-                                ${instagramPosts.map(post => `
-                                    <p><strong>Post URL:</strong> <a href="${post.post_url}" target="_blank" class="text-white">${post.post_url}</a></p>
-                                    ${post.caption ? `<p><strong>Caption:</strong> ${post.caption}</p>` : ''}
-                                `).join('')}
-                            </div>
-                        ` : ''}
-                        
-                        ${isAdminInstagramReview ? `
-                            <div class="alert alert-info">
-                                <i class="fas fa-shield-alt"></i>
-                                <strong>Admin Instagram Review</strong> - This review was submitted through the admin form with Instagram integration.
-                            </div>
-                        ` : ''}
-                        
-                        <div class="action-buttons">
-                            <button class="btn btn-reject" onclick="rejectReview('${review.id}')">
-                                <i class="fas fa-times"></i> Reject
-                            </button>
-                            <button class="btn btn-approve" onclick="approveReview('${review.id}')">
-                                <i class="fas fa-check"></i> Approve
-                            </button>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-        }
-        
-        async function approveReview(reviewId) {
-            try {
-                const { error } = await supabaseClient
-                    .from('ratings')
-                    .update({
-                        review_status: 'approved',
-                        approved_at: new Date().toISOString(),
-                        approved_by: 'admin'
-                    })
-                    .eq('id', reviewId);
-                
-                if (error) throw error;
-                
-                // Remove from pending list
-                pendingReviews = pendingReviews.filter(review => review.id !== reviewId);
-                
-                // Update UI
-                const reviewCard = document.querySelector(`[data-review-id="${reviewId}"]`);
-                reviewCard.classList.add('approved');
-                reviewCard.innerHTML = `
-                    <div class="alert alert-success">
-                        <i class="fas fa-check-circle"></i> Review approved successfully!
-                    </div>
-                `;
-                
-                setTimeout(() => {
-                    reviewCard.remove();
-                    updateStatistics();
-                }, 2000);
-                
-                // Update review moderation action in database
-                await supabaseClient
-                    .from('moderation_actions')
-                    .insert({
-                        review_id: reviewId,
-                        action: 'approved',
-                        approved_by_user: 'admin'
-                    });
-                
-                // Trigger auto-deployment for live site update
-                await triggerAutoDeployment();
-                
-            } catch (error) {
-                console.error('Error approving review:', error);
-                alert('Failed to approve review. Please try again.');
-            }
-        }
-        
-        async function rejectReview(reviewId) {
-            const reason = prompt('Please provide a reason for rejection:');
-            if (!reason) return;
-            
-            try {
-                const { error } = await supabaseClient
-                    .from('ratings')
-                    .update({
-                        review_status: 'rejected',
-                        moderation_notes: reason,
-                        rejected_at: new Date().toISOString(),
-                        rejected_by: 'admin'
-                    })
-                    .eq('id', reviewId);
-                
-                if (error) throw error;
-                
-                // Remove from pending list
-                pendingReviews = pendingReviews.filter(review => review.id !== reviewId);
-                
-                // Update UI
-                const reviewCard = document.querySelector(`[data-review-id="${reviewId}"]`);
-                reviewCard.classList.add('rejected');
-                reviewCard.innerHTML = `
-                    <div class="alert alert-danger">
-                        <i class="fas fa-times-circle"></i> Review rejected: ${reason}
-                    </div>
-                `;
-                
-                setTimeout(() => {
-                    reviewCard.remove();
-                    updateStatistics();
-                }, 2000);
-                
-                // Log moderation action
-                await supabaseClient
-                    .from('moderation_actions')
-                    .insert({
-                        review_id: reviewId,
-                        action: 'rejected',
-                        reason: reason,
-                        rejected_by_user: 'admin'
-                    });
-                
-            } catch (error) {
-                console.error('Error rejecting review:', error);
-                alert('Failed to reject review. Please try again.');
-            }
-        }
-        
-        function updateStatistics() {
-            document.getElementById('pendingCount').textContent = pendingReviews.length;
-            
-            if (pendingReviews.length === 0) {
-                renderReviews();
-            }
-        }
-        
-        function refreshData() {
-            document.getElementById('loadingIndicator').style.display = 'block';
-            document.getElementById('reviewsContainer').innerHTML = '';
-            loadDashboardData();
-        }
-        
-        async function triggerAutoDeployment() {
-            try {
-                // Try to trigger GitHub Actions deployment via API
-                const githubToken = window.APP_CONFIG.PERSONAL_ACCESS_TOKEN;
-                const githubRepo = window.APP_CONFIG.REPO_NAME;
-                
-                if (githubToken && githubRepo) {
-                    // Trigger GitHub Actions workflow
-                    const response = await fetch(`https://api.github.com/repos/${githubRepo}/actions/workflows/deploy.yml/dispatches`, {
-                        method: 'POST',
-                        headers: {
-                            'Authorization': `token ${githubToken}`,
-                            'Accept': 'application/vnd.github.v3+json',
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            ref: 'main',
-                            inputs: {
-                                reason: 'Review approved - auto-deployment triggered'
-                            }
-                        })
-                    });
-                    
-                    if (response.status === 204) {
-                        console.log('✅ GitHub Actions deployment triggered successfully');
-                        showAlert('Review approved and site deployment triggered! Check GitHub Actions for progress.', 'success');
-                    } else {
-                        console.warn('⚠️ GitHub deployment trigger failed, but review was approved');
-                        showAlert('Review approved! Deployment may take a few minutes.', 'info');
-                    }
-                } else {
-                    console.log('📝 Auto-deployment not configured (no GitHub token/repo)');
-                    showAlert('Review approved! Site will be updated in the next scheduled deployment.', 'info');
-                }
-            } catch (error) {
-                console.error('Error triggering auto-deployment:', error);
-                // Don't fail the approval process if deployment trigger fails
-                console.log('⚠️ Deployment trigger failed, but review was approved');
-                showAlert('Review approved! Deployment may take a few minutes.', 'info');
-            }
-        }
-        
-        function showAlert(message, type = 'info') {
-            // Create a simple alert system for the dashboard
-            const alertContainer = document.createElement('div');
-            alertContainer.className = `alert alert-${type} alert-dismissible fade show`;
-            alertContainer.style.position = 'fixed';
-            alertContainer.style.top = '20px';
-            alertContainer.style.right = '20px';
-            alertContainer.style.zIndex = '9999';
-            alertContainer.style.minWidth = '300px';
-            alertContainer.innerHTML = `
-                ${message}
-                <button type="button" class="btn-close" onclick="this.parentElement.remove()"></button>
-            `;
-            document.body.appendChild(alertContainer);
-            
-            // Auto-remove after 5 seconds
-            setTimeout(() => {
-                if (alertContainer.parentNode) {
-                    alertContainer.remove();
-                }
-            }, 5000);
-        }
-    </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.43.1/dist/umd/supabase.min.js"></script>
+<script src="config.js"></script>
+<script src="js/supabase.js"></script>
+<script src="js/fountain-data.js"></script>
+<script src="js/moderation-dashboard.js"></script>
 </body>
 </html>

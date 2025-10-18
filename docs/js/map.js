@@ -9,7 +9,6 @@
     currentFountain: null
   };
 
-
   const dom = {
     bottomSheet: null,
     bottomSheetContent: null,
@@ -38,7 +37,7 @@
     registerAdminAccess();
 
     try {
-      const data = await FountainData.fetchGeoData();
+      const data = await loadFountainData(config.GEOJSON_PATH);
       state.fountains = data.features || [];
       placeFountainsOnMap(data);
       focusFromHash();
@@ -184,15 +183,32 @@
       return;
     }
 
-    dom.adminButton.addEventListener('click', (event) => {
+    dom.adminButton.addEventListener('click', async (event) => {
       event.preventDefault();
-      if (!window.hasSupabaseCredentials || !window.hasSupabaseCredentials()) {
-        alert('configure supabase url and anon key in config.js to open the admin tools.');
+      const password = prompt('Enter admin password:');
+
+      if (!password) {
         return;
       }
 
-      showAdminPanel();
+      const isValid = await verifyAdminPassword(password);
+      if (isValid) {
+        showAdminPanel();
+      } else if (password !== null) {
+        alert('Incorrect password');
+      }
     });
+  }
+
+  /**
+   * loads fountain data from the geojson file.
+   */
+  async function loadFountainData(path) {
+    const response = await fetch(path);
+    if (!response.ok) {
+      throw new Error(`failed to load fountain data: ${response.status} ${response.statusText}`);
+    }
+    return response.json();
   }
 
   /**
@@ -217,7 +233,7 @@
   function attachFountainBehavior(feature, layer) {
     const properties = feature.properties || {};
     const latestInstagramPost = pickLatestInstagramPost(properties);
-    const latestPhotoUrl = latestInstagramPost ? getInstagramPhotoUrl(latestInstagramPost) : null;
+    const latestPhotoUrl = latestInstagramPost ? getInstagramPhotoUrl(latestInstagramPost.url) : null;
     const adminReview = isAdminReview(properties);
 
     if (isMobile()) {
@@ -255,7 +271,7 @@
       if (fountain) {
         const properties = fountain.properties || {};
         const latestInstagramPost = pickLatestInstagramPost(properties);
-        const latestPhotoUrl = latestInstagramPost ? getInstagramPhotoUrl(latestInstagramPost) : null;
+        const latestPhotoUrl = latestInstagramPost ? getInstagramPhotoUrl(latestInstagramPost.url) : null;
         const adminReview = isAdminReview(properties);
         showBottomSheet(properties, latestInstagramPost, latestPhotoUrl, adminReview);
       }
@@ -291,7 +307,6 @@
 
     panel.innerHTML = [
       '<h3>🔧 Admin Panel</h3>',
-      '<p style="margin: 10px 0; font-size: 0.9rem;">sign in with your supabase admin email to continue.</p>',
       '<div style="margin: 15px 0;">',
       '<a href="admin_review_form.html" style="display: block; margin: 10px 0; padding: 10px; background: #007bff; color: white; text-decoration: none; border-radius: 5px;">📝 Admin Review Form</a>',
       '<a href="moderation_dashboard.html" style="display: block; margin: 10px 0; padding: 10px; background: #007bff; color: white; text-decoration: none; border-radius: 5px;">🛡️ Moderation Dashboard</a>',
@@ -304,6 +319,51 @@
     });
 
     document.body.appendChild(panel);
+  }
+
+  /**
+   * checks the supplied admin password by delegating to the serverless function.
+   */
+  async function verifyAdminPassword(password) {
+    const endpoint = config.API_ENDPOINT || '/.netlify/functions/submit-review';
+    try {
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          reviewType: 'admin',
+          reviewData: {
+            adminPassword: password,
+            fountainId: 'password_check',
+            overallRating: 1,
+            waterQuality: 1,
+            flowPressure: 1,
+            temperature: 1,
+            drainage: 1,
+            accessibility: 1,
+            visitDate: '2024-01-01',
+            notes: 'password verification test'
+          }
+        })
+      });
+
+      if (response.status === 500) {
+        const result = await response.json();
+        if (result.message && result.message.includes('Fountain not found')) {
+          return true;
+        }
+        if (result.message && result.message.includes('Invalid admin password')) {
+          return false;
+        }
+      }
+
+      return response.ok;
+    } catch (error) {
+      console.error('password verification failed', error);
+      return false;
+    }
   }
 
   /**
@@ -587,14 +647,7 @@
   /**
    * derives instagram media urls from post links.
    */
-  function getInstagramPhotoUrl(post) {
-    if (!post) {
-      return null;
-    }
-    if (post.photo_url) {
-      return post.photo_url;
-    }
-    const instagramUrl = post.url;
+  function getInstagramPhotoUrl(instagramUrl) {
     if (!instagramUrl) {
       return null;
     }
@@ -610,9 +663,6 @@
    * detects whether the latest review came from the admin account.
    */
   function isAdminReview(fountain) {
-    if (fountain.latest_review_author_type) {
-      return fountain.latest_review_author_type === 'admin';
-    }
     const reviewer = fountain.latest_reviewer;
     if (!reviewer) {
       return false;

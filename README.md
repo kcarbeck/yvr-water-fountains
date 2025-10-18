@@ -72,6 +72,7 @@ This readme now contains the key context for contributors, including testing ste
 1. Visit `docs/admin_review_form.html`, sign in with a supabase admin account, and ensure the loading spinner is replaced with the review form and the map highlights the selected fountain.
 2. Submit a test review with a unique instagram url. Because admin reviews are auto-approved you should see the new entry when you refresh `docs/map.html`.
 3. Open `docs/moderation_dashboard.html`, sign in with the same account, and approve or reject a pending review. The counters at the top should update immediately after each action.
+4. Use the "My Location" button to check geolocation permissions, and try the admin gear icon to make sure the password prompt still appears.
 
 ## 📊 Project Impact & Results
 

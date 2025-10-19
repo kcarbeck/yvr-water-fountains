@@ -2,6 +2,7 @@
 
 (function () {
   const config = window.APP_CONFIG || {};
+  const api = window.AppApi || {};
   const cache = {
     geojson: null
   };
@@ -14,7 +15,7 @@
       return clone(cache.geojson);
     }
 
-    const supabaseClient = window.createSupabaseClient ? window.createSupabaseClient() : null;
+    const supabaseClient = typeof api.getClient === 'function' ? api.getClient() : null;
 
     if (supabaseClient) {
       try {
@@ -55,16 +56,12 @@
   }
 
   async function loadFromSupabase(client) {
-    const { data, error } = await client
-      .from('fountain_overview_view')
-      .select('*')
-      .order('name', { ascending: true });
-
-    if (error) {
-      throw error;
+    if (!api.fetchFountainOverview) {
+      throw new Error('supabase api helpers are not available');
     }
 
-    return transformRecordsToGeojson(data || []);
+    const records = await api.fetchFountainOverview(client);
+    return transformRecordsToGeojson(records || []);
   }
 
   async function loadFromGeojson(path) {

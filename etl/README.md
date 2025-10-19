@@ -31,12 +31,6 @@ What happens:
 ## Re-running the import safely
 Need to tweak the CSV and run it again? Just repeat the same command. The script compares each row by `external_id` and `source_id`, so existing fountains are updated instead of duplicated. Skipped rows will be listed with an explanation (for example, missing coordinates).
 
-### When to run the importer
-
-- **First-time verification**: run it once right after updating the Supabase schema to make sure new columns and views accept data from the pipeline.
-- **New municipal refresh**: rerun it only when you receive updated data from a city. Because the script performs idempotent upserts, you can point it at the same CSV without worrying about duplicates.
-- **No routine rebuilds needed**: after you are happy with the seeded dataset, you do **not** need to re-extract the CSV or rebuild the database for everyday development. Leave the data in place so the website continues to work against the same records.
-
 ## Common issues and fixes
 | Problem | What it means | How to fix |
 |---------|---------------|------------|

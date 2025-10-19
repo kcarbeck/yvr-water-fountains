@@ -7,7 +7,9 @@
     "dev": "netlify dev"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.38.0"
+    "@supabase/supabase-js": "^2.38.0",
+    "dotenv": "^16.4.5",
+    "papaparse": "^5.4.1"
   },
   "devDependencies": {
     "netlify-cli": "^17.0.0"

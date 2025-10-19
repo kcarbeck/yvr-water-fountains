@@ -2,6 +2,8 @@
 
 (function () {
   const config = window.APP_CONFIG || {};
+  const api = window.AppApi || {};
+  const ui = window.AppUI || {};
   const state = {
     supabaseClient: null,
     fountains: [],
@@ -22,14 +24,14 @@
     hideAdminContent();
     setDefaultVisitDate();
 
-    if (!window.hasSupabaseCredentials || !window.hasSupabaseCredentials()) {
+    if (!api.hasCredentials || !api.hasCredentials()) {
       showAuthMessage('supabase configuration missing. add your project url and anon key to config.js.');
       disableLoginForm();
       return;
     }
 
-    state.supabaseClient = typeof window.createSupabaseClient === 'function'
-      ? window.createSupabaseClient()
+    state.supabaseClient = typeof api.getClient === 'function'
+      ? api.getClient()
       : null;
 
     if (!state.supabaseClient) {
@@ -243,24 +245,20 @@
 
   async function verifyAdminAccess(user) {
     try {
-      const { data, error } = await state.supabaseClient
-        .from('admins')
-        .select('user_id, display_name')
-        .eq('user_id', user.id)
-        .maybeSingle();
-
-      if (error) {
-        throw error;
+      if (!api.fetchAdminProfile) {
+        throw new Error('admin profile helper is not available');
       }
 
-      if (!data) {
+      const profile = await api.fetchAdminProfile(user.id, state.supabaseClient);
+
+      if (!profile) {
         showAuthMessage('your account is signed in but not yet authorized. ask the owner to add you to the admins table.');
         hideAdminContent();
         return;
       }
 
       state.isAdmin = true;
-      showAuthMessage(`signed in as ${escapeHtml(data.display_name || user.email)}.`);
+      showAuthMessage(`signed in as ${escapeHtml(profile.display_name || user.email)}.`);
       const authPanel = document.getElementById('authPanel');
       if (authPanel) {
         authPanel.classList.remove('alert-warning');
@@ -433,12 +431,13 @@
       reviewed_at: data.visitDate ? `${data.visitDate}T12:00:00Z` : new Date().toISOString()
     };
 
-    const { error } = await state.supabaseClient
-      .from('reviews')
-      .insert(payload);
+    if (!api.insertAdminReview) {
+      throw new Error('supabase api helpers are not available');
+    }
 
-    if (error) {
-      throw error;
+    await api.insertAdminReview(payload, state.supabaseClient);
+    if (typeof ui.toast === 'function') {
+      ui.toast('admin review published to the map.', 'success');
     }
   }
 

@@ -74,6 +74,12 @@ This readme now contains the key context for contributors, including testing ste
 3. Open `docs/moderation_dashboard.html`, sign in with the same account, and approve or reject a pending review. The counters at the top should update immediately after each action.
 4. Use the "My Location" button to check geolocation permissions, and try the admin gear icon to make sure the password prompt still appears.
 
+### Shared helpers sanity check
+
+1. Load `docs/public_review_form.html` locally and submit a sample review (use fake data if needed). A green toast in the corner should confirm the pending submission in addition to the inline alert.
+2. While still on the public form, clear your selection to verify the helper utilities reset the hidden supabase id fields and re-center the map.
+3. Open `docs/moderation_dashboard.html` and approve or reject a review; watch for the toast notification that now confirms the action and double-check the counts update without a full reload.
+
 ## 📊 Project Impact & Results
 
 ### Data Successfully Processed

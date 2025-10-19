@@ -40,7 +40,8 @@ This readme now contains the key context for contributors, including testing ste
 ### Database schema & supabase setup
 - **core schema**: `supabase/migrations/20241015120000_core_schema.sql` defines `cities`, `sources`, `fountains`, `reviews`, the supporting `admins` table, and the SQL views (`fountain_ratings_view`, `fountain_latest_review_view`, `fountain_overview_view`). run this migration once through the supabase sql editor or `supabase db push` so every environment shares the same structure.
 - **row level security**: policies allow the public role to read fountains and approved reviews, create pending reviews, and require that admins exist in the `admins` table before they can moderate data. this keeps public submissions safe even when the anon key is embedded in the client.
-- **backfill**: after applying the schema, seed production data by running `SUPABASE_URL=... SUPABASE_SERVICE_ROLE_KEY=... node scripts/backfill_supabase.mjs`. the script reads `data/fountains_processed.geojson` and `data/ratings.csv`, creates missing cities and sources, and imports historical @yvrwaterfountains reviews as approved admin entries.
+- **initial backfill (one time)**: after applying the schema the very first time, seed production data by running `SUPABASE_URL=... SUPABASE_SERVICE_ROLE_KEY=... node scripts/backfill_supabase.mjs`. the script reads `data/fountains_processed.geojson` and `data/ratings.csv`, creates missing cities and sources, and imports historical @yvrwaterfountains reviews as approved admin entries. once this succeeds you do **not** need to run it again unless you are rebuilding a brand-new supabase project from scratch.
+- **incremental updates**: to load new municipal data without rebuilding the database, run `node etl/import-fountains.js --csv <file> --city <name> ...`. the importer performs idempotent upserts so you can test the pipeline with real data and only new or changed fountains will be written. see [`etl/README.md`](etl/README.md) for the exact workflow.
 - **runtime config**: set `window.__ENV = { SUPABASE_URL: 'https://your-project.supabase.co', SUPABASE_ANON_KEY: 'public-anon-key' };` before loading `docs/config.js` (netlify can inject this with an inline script). when those values are present the map and forms use live data; otherwise they gracefully fall back to static geojson.
 - **admin workflow**: `docs/admin_review_form.html` and `docs/moderation_dashboard.html` now prompt for supabase email/password. only users listed in the `admins` table can approve, reject, or publish reviews. successful logins immediately update the map because the client reads from `fountain_overview_view`.
 
@@ -73,6 +74,12 @@ This readme now contains the key context for contributors, including testing ste
 2. Submit a test review with a unique instagram url. Because admin reviews are auto-approved you should see the new entry when you refresh `docs/map.html`.
 3. Open `docs/moderation_dashboard.html`, sign in with the same account, and approve or reject a pending review. The counters at the top should update immediately after each action.
 4. Use the "My Location" button to check geolocation permissions, and try the admin gear icon to make sure the password prompt still appears.
+
+### Shared helpers sanity check
+
+1. Load `docs/public_review_form.html` locally and submit a sample review (use fake data if needed). A green toast in the corner should confirm the pending submission in addition to the inline alert.
+2. While still on the public form, clear your selection to verify the helper utilities reset the hidden supabase id fields and re-center the map.
+3. Open `docs/moderation_dashboard.html` and approve or reject a review; watch for the toast notification that now confirms the action and double-check the counts update without a full reload.
 
 ## 📊 Project Impact & Results
 

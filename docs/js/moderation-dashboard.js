@@ -1,6 +1,8 @@
 'use strict';
 
 (function () {
+  const api = window.AppApi || {};
+  const ui = window.AppUI || {};
   const state = {
     supabaseClient: null,
     isAdmin: false,
@@ -10,14 +12,14 @@
   document.addEventListener('DOMContentLoaded', init);
 
   async function init() {
-    if (!window.hasSupabaseCredentials || !window.hasSupabaseCredentials()) {
+    if (!api.hasCredentials || !api.hasCredentials()) {
       setAuthMessage('supabase configuration missing. add your project url and anon key to config.js.');
       disableLogin();
       return;
     }
 
-    state.supabaseClient = typeof window.createSupabaseClient === 'function'
-      ? window.createSupabaseClient()
+    state.supabaseClient = typeof api.getClient === 'function'
+      ? api.getClient()
       : null;
 
     if (!state.supabaseClient) {
@@ -135,17 +137,13 @@
 
   async function verifyAdmin(user) {
     try {
-      const { data, error } = await state.supabaseClient
-        .from('admins')
-        .select('user_id, display_name')
-        .eq('user_id', user.id)
-        .maybeSingle();
-
-      if (error) {
-        throw error;
+      if (!api.fetchAdminProfile) {
+        throw new Error('admin profile helper is not available');
       }
 
-      if (!data) {
+      const profile = await api.fetchAdminProfile(user.id, state.supabaseClient);
+
+      if (!profile) {
         setAuthMessage('this account is not authorized yet. ask the owner to add you to the admins table.');
         const adminControls = document.getElementById('adminControls');
         if (adminControls) {
@@ -160,7 +158,7 @@
         authPanel.classList.remove('alert-warning');
         authPanel.classList.add('alert-success');
       }
-      setAuthMessage(`welcome ${data.display_name || user.email}.`);
+      setAuthMessage(`welcome ${profile.display_name || user.email}.`);
       await loadDashboard();
     } catch (error) {
       console.error('admin verification error', error);
@@ -192,35 +190,24 @@
     const pendingLabel = document.getElementById('pendingCount');
     const approvedLabel = document.getElementById('approvedCount');
 
-    const pendingPromise = state.supabaseClient
-      .from('reviews')
-      .select('id', { count: 'exact', head: true })
-      .eq('status', 'pending');
+    if (!api.countReviewsByStatus) {
+      throw new Error('review counting helper is not available');
+    }
 
     const todayStart = new Date();
     todayStart.setHours(0, 0, 0, 0);
     const todayIso = todayStart.toISOString();
 
-    const approvedPromise = state.supabaseClient
-      .from('reviews')
-      .select('id', { count: 'exact', head: true })
-      .eq('status', 'approved')
-      .gte('reviewed_at', todayIso);
-
-    const [pendingResult, approvedResult] = await Promise.all([pendingPromise, approvedPromise]);
-
-    if (pendingResult.error) {
-      throw pendingResult.error;
-    }
-    if (approvedResult.error) {
-      throw approvedResult.error;
-    }
+    const [pendingCount, approvedCount] = await Promise.all([
+      api.countReviewsByStatus('pending', {}, state.supabaseClient),
+      api.countReviewsByStatus('approved', { since: todayIso }, state.supabaseClient)
+    ]);
 
     if (pendingLabel) {
-      pendingLabel.textContent = `${pendingResult.count || 0} pending`;
+      pendingLabel.textContent = `${pendingCount} pending`;
     }
     if (approvedLabel) {
-      approvedLabel.textContent = `${approvedResult.count || 0} approved today`;
+      approvedLabel.textContent = `${approvedCount} approved today`;
     }
   }
 
@@ -234,13 +221,15 @@
 
     container.innerHTML = '<div class="text-muted">loading pending reviews...</div>';
 
-    const { data, error } = await state.supabaseClient
-      .from('reviews')
-      .select('id, fountain_id, reviewer_name, reviewer_email, rating, water_quality, flow_pressure, temperature, cleanliness, accessibility, review_text, instagram_url, visit_date, created_at, author_type')
-      .eq('status', 'pending')
-      .order('created_at', { ascending: true });
+    if (!api.fetchReviewsByStatus) {
+      container.innerHTML = '<div class="text-danger">review helpers are unavailable.</div>';
+      return;
+    }
 
-    if (error) {
+    let data = [];
+    try {
+      data = await api.fetchReviewsByStatus('pending', state.supabaseClient);
+    } catch (error) {
       console.error('failed to load pending reviews', error);
       container.innerHTML = '<div class="text-danger">failed to load pending reviews. try refreshing.</div>';
       return;
@@ -328,25 +317,35 @@
       button.textContent = status === 'approved' ? 'approving...' : 'rejecting...';
     }
 
-    const payload = { status };
-    if (status === 'approved') {
-      payload.reviewed_at = new Date().toISOString();
+    if (!api.updateReviewStatus) {
+      throw new Error('review update helper is not available');
     }
 
-    const { error } = await state.supabaseClient
-      .from('reviews')
-      .update(payload)
-      .eq('id', reviewId);
+    const payload = status === 'approved'
+      ? { reviewed_at: new Date().toISOString() }
+      : {};
+
+    try {
+      await api.updateReviewStatus(reviewId, status, payload, state.supabaseClient);
+    } catch (error) {
+      if (button) {
+        button.disabled = false;
+        button.textContent = status === 'approved' ? 'approve' : 'reject';
+      }
+      console.error('failed to update review status', error);
+      alert(`failed to update review: ${error.message}`);
+      return;
+    }
 
     if (button) {
       button.disabled = false;
       button.textContent = status === 'approved' ? 'approve' : 'reject';
     }
 
-    if (error) {
-      console.error('failed to update review status', error);
-      alert(`failed to update review: ${error.message}`);
-      return;
+    if (typeof ui.toast === 'function') {
+      const message = status === 'approved' ? 'review approved and published.' : 'review rejected.';
+      const toastType = status === 'approved' ? 'success' : 'warning';
+      ui.toast(message, toastType);
     }
 
     await loadDashboard();

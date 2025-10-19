@@ -2,6 +2,8 @@
 
 (function () {
   const config = window.APP_CONFIG || {};
+  const api = window.AppApi || {};
+  const ui = window.AppUI || {};
   const state = {
     map: null,
     fountains: [],
@@ -17,8 +19,8 @@
    * bootstraps the map, data loading, and form handling once the page is ready.
    */
   async function init() {
-    if (typeof window.createSupabaseClient === 'function') {
-      state.supabaseClient = window.createSupabaseClient();
+    if (typeof api.getClient === 'function') {
+      state.supabaseClient = api.getClient();
     }
 
     setDefaultVisitDate();
@@ -87,13 +89,13 @@
         return;
       }
 
-      if (!window.hasSupabaseCredentials || !window.hasSupabaseCredentials()) {
+      if (!api.hasCredentials || !api.hasCredentials()) {
         showAlert('supabase is not configured. update config.js with your supabase url and anon key to enable submissions.', 'danger');
         return;
       }
 
-      if (!state.supabaseClient) {
-        state.supabaseClient = window.createSupabaseClient ? window.createSupabaseClient() : null;
+      if (!state.supabaseClient && typeof api.getClient === 'function') {
+        state.supabaseClient = api.getClient();
       }
 
       if (!state.supabaseClient) {
@@ -104,6 +106,9 @@
       try {
         await submitReview(data);
         showAlert('thanks for sharing a review! it will appear on the map after moderation.', 'success');
+        if (typeof ui.toast === 'function') {
+          ui.toast('thanks for sharing a review! pending approval.', 'success');
+        }
         resetForm();
       } catch (error) {
         console.error('supabase insert failed', error);
@@ -376,13 +381,11 @@
       review_text: data.additionalNotes || null
     };
 
-    const { error } = await state.supabaseClient
-      .from('reviews')
-      .insert(payload);
-
-    if (error) {
-      throw error;
+    if (!api.insertPublicReview) {
+      throw new Error('supabase api helpers are not available');
     }
+
+    await api.insertPublicReview(payload, state.supabaseClient);
   }
 
   function resetForm() {

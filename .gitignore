@@ -10,25 +10,22 @@
 *password*
 config.local.js
 
-# Python development
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-venv/
-env/
-ENV/
-*.egg-info/
-.pytest_cache/
-
-# Node.js (for Netlify functions)
+# Node.js
 node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .npm
 .yarn-integrity
+
+# Python (legacy - all Python scripts removed)
+__pycache__/
+*.py[cod]
+venv/
+env/
+ENV/
+*.egg-info/
+.pytest_cache/
 
 # Development tools and IDEs
 .vscode/
@@ -54,30 +51,20 @@ logs/
 *.temp
 *.pid
 
-# Database files (local development)
-*.db
-*.sqlite
-*.sqlite3
-
 # Build and cache directories
 .cache/
 dist/
 build/
 .netlify/
 
-# Jupyter notebooks (development only - keep for data exploration)
-.ipynb_checkpoints/
-
 # Backup and temporary files
 *.bak
 *.backup
 *.old
-*~
 
 # Test files and debugging
 test_*.html
 debug_*.html
-*_test.py
 coverage/
 
 # Documentation that shouldn't be public
@@ -85,16 +72,7 @@ PRIVATE_*.md
 *_INTERNAL.md
 *_CONFIDENTIAL.md
 
-# Admin directory - exclude sensitive files but allow general docs
-admin/*
-
-# Data files - keep source CSVs but exclude processed/temporary data
+# Data files - exclude processed/temporary data
 data/temp/
 data/processed/
 data/output/
-data/*.tmp
-# Keep these essential files:
-# !data/raw/vancouver_fountains_raw.csv
-# !data/raw/burnaby_fountains_raw.csv
-# !data/ratings.csv
-# !docs/data/fountains_processed.geojson

@@ -3,8 +3,6 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
   workflow_dispatch:
 
 permissions:
@@ -19,86 +17,47 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     steps:
     - name: Checkout
       uses: actions/checkout@v4
-      
-    - name: Setup Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.9'
-        
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-        
-    - name: Generate fountain data
+
+    - name: Configure Supabase credentials
       env:
         SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-        SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+        SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
       run: |
-        # Only run data generation if Supabase credentials are available
-        if [ -n "$SUPABASE_URL" ] && [ -n "$SUPABASE_KEY" ]; then
-          echo "Generating fresh data from Supabase..."
-          python scripts/generate_geojson_api.py
-        else
-          echo "Using existing static data (no Supabase credentials provided)"
-        fi
-        
-    - name: Configure app for GitHub Pages
-      env:
-        SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-        SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
-        ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
-        PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-        REPO_NAME: ${{ secrets.REPO_NAME }}
-      run: |
-        # Update config.js with actual values if available
-        if [ -n "$SUPABASE_URL" ] && [ -n "$SUPABASE_KEY" ]; then
-          echo "Configuring with Supabase credentials..."
-          cat > docs/config.js << EOF
-        // Configuration for GitHub Pages deployment
+        # Only inject the anon key (safe for frontend) — never secrets
+        if [ -n "$SUPABASE_URL" ] && [ -n "$SUPABASE_ANON_KEY" ]; then
+          echo "Configuring Supabase credentials for frontend..."
+          cat > docs/config.js << 'CONFIGEOF'
         window.APP_CONFIG = {
             SUPABASE_URL: '$SUPABASE_URL',
-            SUPABASE_ANON_KEY: '$SUPABASE_KEY',
-            ADMIN_PASSWORD: '${ADMIN_PASSWORD:-default_admin_pass}',
-            PERSONAL_ACCESS_TOKEN: '${PERSONAL_ACCESS_TOKEN:-null}',
-            REPO_NAME: '${REPO_NAME:-null}',
+            SUPABASE_ANON_KEY: '$SUPABASE_ANON_KEY',
             ENABLE_SUPABASE: true,
             FALLBACK_TO_GEOJSON: true,
-            ENABLE_AUTO_DEPLOY: ${PERSONAL_ACCESS_TOKEN:+true},
             MAP_CENTER: [49.251, -123.060],
             MAP_ZOOM: 11,
             GEOJSON_PATH: 'data/fountains_processed.geojson',
-            VERSION: '1.0.0',
+            VERSION: '2.0.0',
             DEPLOYMENT_TYPE: 'github-pages'
         };
-        
-        // Auto-detect Supabase configuration
-        if (window.APP_CONFIG.SUPABASE_URL && window.APP_CONFIG.SUPABASE_ANON_KEY) {
-            console.log('✅ Supabase integration enabled');
-        } else {
-            console.log('📁 Using static data mode');
-        }
-        EOF
+        CONFIGEOF
+          # Replace placeholder values with actual env vars
+          sed -i "s|\$SUPABASE_URL|$SUPABASE_URL|g" docs/config.js
+          sed -i "s|\$SUPABASE_ANON_KEY|$SUPABASE_ANON_KEY|g" docs/config.js
         else
-          echo "Using default configuration (static data only)..."
-          # Update just the admin password if provided
-          if [ -n "$ADMIN_PASSWORD" ]; then
-            sed -i "s/ADMIN_PASSWORD: 'default_admin_pass'/ADMIN_PASSWORD: '$ADMIN_PASSWORD'/" docs/config.js
-          fi
+          echo "No Supabase credentials — using default config (static data only)"
         fi
-        
+
     - name: Setup Pages
       uses: actions/configure-pages@v4
-      
+
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v3
       with:
         path: ./docs
-        
+
   deploy:
     environment:
       name: github-pages
@@ -106,7 +65,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     if: github.ref == 'refs/heads/main'
-    
+
     steps:
     - name: Deploy to GitHub Pages
       id: deployment

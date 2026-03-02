@@ -1,15 +1,14 @@
 'use strict';
 
 (function () {
-  var config = window.APP_CONFIG || {};
-  var api = window.AppApi || {};
-  var ui = window.AppUI || {};
+  const config = window.APP_CONFIG || {};
+  const api = window.AppApi || {};
+  const ui = window.AppUI || {};
 
-  var state = {
+  const state = {
     supabaseClient: null,
     isAdmin: false,
     fountains: [],
-    fountainList: [],
     posts: [],
     currentIndex: 0,
     linked: 0,
@@ -35,8 +34,8 @@
   // ── Auth ──────────────────────────────────────────
 
   function setupAuth() {
-    var signInBtn = document.getElementById('authSignIn');
-    var signOutBtn = document.getElementById('authSignOut');
+    const signInBtn = document.getElementById('authSignIn');
+    const signOutBtn = document.getElementById('authSignOut');
 
     if (!api.hasCredentials || !api.hasCredentials()) {
       setAuthStatus('Supabase not configured. Check config.js.');
@@ -50,11 +49,11 @@
     }
 
     signInBtn.addEventListener('click', async function () {
-      var email = document.getElementById('authEmail').value.trim();
-      var password = document.getElementById('authPassword').value;
+      const email = document.getElementById('authEmail').value.trim();
+      const password = document.getElementById('authPassword').value;
       if (!email || !password) return;
       try {
-        var result = await state.supabaseClient.auth.signInWithPassword({ email: email, password: password });
+        const result = await state.supabaseClient.auth.signInWithPassword({ email: email, password: password });
         if (result.error) {
           setAuthStatus('Sign in failed: ' + result.error.message);
         }
@@ -69,21 +68,21 @@
     });
 
     state.supabaseClient.auth.onAuthStateChange(function (_event, session) {
-      applySession(session);
+      applySession(session).catch(function (e) { console.error('session apply failed', e); });
     });
 
     state.supabaseClient.auth.getSession().then(function (result) {
-      var session = result.data && result.data.session ? result.data.session : null;
+      const session = result.data && result.data.session ? result.data.session : null;
       applySession(session);
     });
   }
 
   async function applySession(session) {
-    var signInBtn = document.getElementById('authSignIn');
-    var signOutBtn = document.getElementById('authSignOut');
-    var emailInput = document.getElementById('authEmail');
-    var passwordInput = document.getElementById('authPassword');
-    var mainContent = document.getElementById('mainContent');
+    const signInBtn = document.getElementById('authSignIn');
+    const signOutBtn = document.getElementById('authSignOut');
+    const emailInput = document.getElementById('authEmail');
+    const passwordInput = document.getElementById('authPassword');
+    const mainContent = document.getElementById('mainContent');
 
     state.isAdmin = false;
 
@@ -98,7 +97,7 @@
     }
 
     try {
-      var profile = await api.fetchAdminProfile(session.user.id, state.supabaseClient);
+      const profile = await api.fetchAdminProfile(session.user.id, state.supabaseClient);
       if (!profile) {
         setAuthStatus('Signed in but not an admin. Ask the owner to add you.');
         mainContent.style.display = 'none';
@@ -118,15 +117,15 @@
   }
 
   function setAuthStatus(msg) {
-    var el = document.getElementById('authStatus');
+    const el = document.getElementById('authStatus');
     if (el) el.textContent = msg;
   }
 
   // ── File Upload & Parsing ────────────────────────
 
   function setupFileUpload() {
-    var dropZone = document.getElementById('dropZone');
-    var fileInput = document.getElementById('fileInput');
+    const dropZone = document.getElementById('dropZone');
+    const fileInput = document.getElementById('fileInput');
 
     dropZone.addEventListener('click', function () { fileInput.click(); });
     dropZone.addEventListener('dragover', function (e) {
@@ -148,8 +147,8 @@
 
   async function handleFile(file) {
     try {
-      var text = await file.text();
-      var json = JSON.parse(text);
+      const text = await file.text();
+      const json = JSON.parse(text);
       state.posts = parseInstagramExport(json);
       if (state.posts.length === 0) {
         ui.toast('No posts found in this file. Check the format.', 'warning');
@@ -164,7 +163,7 @@
   }
 
   function parseInstagramExport(json) {
-    var rawPosts = [];
+    let rawPosts = [];
 
     if (Array.isArray(json)) {
       json.forEach(function (item) {
@@ -175,8 +174,8 @@
         }
       });
     } else if (typeof json === 'object' && json !== null) {
-      var candidates = ['ig_media', 'posts', 'media', 'photos_and_videos'];
-      for (var i = 0; i < candidates.length; i++) {
+      const candidates = ['ig_media', 'posts', 'media', 'photos_and_videos'];
+      for (let i = 0; i < candidates.length; i++) {
         if (Array.isArray(json[candidates[i]])) {
           rawPosts = json[candidates[i]];
           break;
@@ -192,14 +191,14 @@
     }
 
     return rawPosts.map(function (post) {
-      var caption = post.title || post.caption || post.text || '';
+      let caption = post.title || post.caption || post.text || '';
       if (typeof caption === 'object' && caption.text) caption = caption.text;
 
-      var timestamp = post.creation_timestamp || post.taken_at || post.timestamp;
-      var date = timestamp ? new Date(timestamp * 1000) : null;
+      const timestamp = post.creation_timestamp || post.taken_at || post.timestamp;
+      const date = timestamp ? new Date(timestamp * 1000) : null;
 
-      var uri = post.uri || post.media_url || post.url || '';
-      var permalink = post.permalink || post.link || '';
+      const uri = post.uri || post.media_url || post.url || '';
+      const permalink = post.permalink || post.link || '';
 
       return {
         caption: caption,
@@ -221,25 +220,25 @@
   // ── Fuzzy Matching ───────────────────────────────
 
   function fuzzyMatchFountains(caption, fountainFeatures) {
-    var words = caption.toLowerCase()
+    const words = caption.toLowerCase()
       .replace(/[^a-z0-9\s]/g, ' ')
       .split(/\s+/)
       .filter(function (w) { return w.length > 2; });
 
-    var uniqueWords = [];
-    var seen = {};
+    const uniqueWords = [];
+    const seen = {};
     words.forEach(function (w) {
       if (!seen[w]) { seen[w] = true; uniqueWords.push(w); }
     });
 
-    var scored = fountainFeatures.map(function (feature) {
-      var props = feature.properties || {};
-      var name = (props.name || '').toLowerCase();
-      var neighbourhood = (props.neighborhood || '').toLowerCase();
-      var location = (props.location || '').toLowerCase();
-      var target = name + ' ' + neighbourhood + ' ' + location;
+    const scored = fountainFeatures.map(function (feature) {
+      const props = feature.properties || {};
+      const name = (props.name || '').toLowerCase();
+      const neighbourhood = (props.neighborhood || '').toLowerCase();
+      const location = (props.location || '').toLowerCase();
+      const target = name + ' ' + neighbourhood + ' ' + location;
 
-      var score = 0;
+      let score = 0;
       uniqueWords.forEach(function (word) {
         if (target.includes(word)) {
           if (name.includes(word)) score += 3;
@@ -247,9 +246,8 @@
         }
       });
 
-      var nameWords = name.split(/\s+/);
-      for (var i = 0; i < uniqueWords.length - 1; i++) {
-        var bigram = uniqueWords[i] + ' ' + uniqueWords[i + 1];
+      for (let i = 0; i < uniqueWords.length - 1; i++) {
+        const bigram = uniqueWords[i] + ' ' + uniqueWords[i + 1];
         if (name.includes(bigram)) score += 5;
       }
 
@@ -264,26 +262,26 @@
   function extractRating(caption) {
     if (!caption) return null;
 
-    var rangeMatch = caption.match(/(\d+\.?\d*)\s*-\s*(\d+\.?\d*)\s*\/\s*10/);
+    const rangeMatch = caption.match(/(\d+\.?\d*)\s*-\s*(\d+\.?\d*)\s*\/\s*10/);
     if (rangeMatch) {
-      var low = parseFloat(rangeMatch[1]);
-      var high = parseFloat(rangeMatch[2]);
+      const low = parseFloat(rangeMatch[1]);
+      const high = parseFloat(rangeMatch[2]);
       if (low >= 0 && low <= 10 && high >= 0 && high <= 10) {
         return Math.round(((low + high) / 2) * 10) / 10;
       }
     }
 
-    var patterns = [
+    const patterns = [
       /(\d+\.?\d*)\s*\/\s*10/,
       /(\d+\.?\d*)\s*out\s*of\s*10/i,
       /rating[:\s]*(\d+\.?\d*)/i,
       /score[:\s]*(\d+\.?\d*)/i
     ];
 
-    for (var i = 0; i < patterns.length; i++) {
-      var match = caption.match(patterns[i]);
+    for (let i = 0; i < patterns.length; i++) {
+      const match = caption.match(patterns[i]);
       if (match) {
-        var num = parseFloat(match[1]);
+        const num = parseFloat(match[1]);
         if (num >= 0 && num <= 10) return num;
       }
     }
@@ -329,20 +327,19 @@
   }
 
   async function loadFountains() {
-    var geojson = await FountainData.fetchGeoData();
+    const geojson = await FountainData.fetchGeoData();
     state.fountains = Array.isArray(geojson.features) ? geojson.features : [];
-    state.fountainList = FountainData.getPlainList(geojson);
 
     state.markerById.clear();
     state.markers.forEach(function (m) { m.remove(); });
     state.markers = [];
 
     state.fountains.forEach(function (feature) {
-      var props = feature.properties || {};
-      var coords = feature.geometry && feature.geometry.coordinates;
+      const props = feature.properties || {};
+      const coords = feature.geometry && feature.geometry.coordinates;
       if (!coords || coords.length < 2) return;
 
-      var marker = L.circleMarker([coords[1], coords[0]], {
+      const marker = L.circleMarker([coords[1], coords[0]], {
         radius: 7,
         color: '#6b7280',
         fillColor: '#9ca3af',
@@ -372,28 +369,31 @@
       return;
     }
 
-    var post = state.posts[state.currentIndex];
+    const post = state.posts[state.currentIndex];
     updateProgress();
     clearSelection();
 
-    var card = document.getElementById('postCard');
+    const card = document.getElementById('postCard');
+    const permalinkHtml = (post.permalink && isSafeUrl(post.permalink))
+      ? ' &middot; <a href="' + escapeHtml(post.permalink) + '" target="_blank">View on IG</a>'
+      : '';
     card.innerHTML =
       '<div class="meta"><strong>Post ' + (state.currentIndex + 1) + ' of ' + state.posts.length + '</strong>' +
       (post.dateStr ? ' &middot; ' + escapeHtml(post.dateStr) : '') +
-      (post.permalink ? ' &middot; <a href="' + escapeHtml(post.permalink) + '" target="_blank">View on IG</a>' : '') +
+      permalinkHtml +
       '</div>' +
       '<div class="caption mt-2">' + escapeHtml(post.caption) + '</div>';
 
-    var rating = extractRating(post.caption);
-    var ratingInput = document.getElementById('ratingInput');
+    const rating = extractRating(post.caption);
+    const ratingInput = document.getElementById('ratingInput');
     ratingInput.value = rating !== null ? rating : '';
 
-    var matches = fuzzyMatchFountains(post.caption, state.fountains);
-    var matchInfo = document.getElementById('matchInfo');
+    const matches = fuzzyMatchFountains(post.caption, state.fountains);
+    const matchInfo = document.getElementById('matchInfo');
 
     if (matches.length > 0) {
-      var best = matches[0];
-      var props = best.feature.properties || {};
+      const best = matches[0];
+      const props = best.feature.properties || {};
       matchInfo.innerHTML =
         '<h6><i class="fas fa-magic"></i> Best match (score: ' + best.score + ')</h6>' +
         '<strong>' + escapeHtml(props.name || 'Unnamed') + '</strong>' +
@@ -401,7 +401,7 @@
         (matches.length > 1 ? '<br><small class="text-muted">' + (matches.length - 1) + ' other possible matches</small>' : '');
       matchInfo.className = 'match-info';
 
-      var marker = state.markerById.get(props.supabase_id || props.id);
+      const marker = state.markerById.get(props.supabase_id || props.id);
       if (marker) {
         selectFountain(props, marker);
         state.map.setView(marker.getLatLng(), 15);
@@ -427,7 +427,7 @@
     state.selectedFountain = props;
     document.getElementById('confirmBtn').disabled = false;
 
-    var matchInfo = document.getElementById('matchInfo');
+    const matchInfo = document.getElementById('matchInfo');
     matchInfo.innerHTML =
       '<h6><i class="fas fa-check-circle text-success"></i> Selected</h6>' +
       '<strong>' + escapeHtml(props.name || 'Unnamed') + '</strong>' +
@@ -459,18 +459,18 @@
     document.getElementById('saveNewFountain').addEventListener('click', saveNewFountain);
     document.getElementById('cancelNewFountain').addEventListener('click', cancelNewFountain);
 
-    var searchInput = document.getElementById('fountainSearch');
+    const searchInput = document.getElementById('fountainSearch');
     searchInput.addEventListener('input', function () {
-      var query = searchInput.value.trim().toLowerCase();
+      const query = searchInput.value.trim().toLowerCase();
       if (query.length < 2) return;
-      var match = state.fountains.find(function (f) {
-        var p = f.properties || {};
+      const match = state.fountains.find(function (f) {
+        const p = f.properties || {};
         return (p.name || '').toLowerCase().includes(query) ||
                (p.neighborhood || '').toLowerCase().includes(query);
       });
       if (match) {
-        var props = match.properties || {};
-        var marker = state.markerById.get(props.supabase_id || props.id);
+        const props = match.properties || {};
+        const marker = state.markerById.get(props.supabase_id || props.id);
         if (marker) {
           state.map.setView(marker.getLatLng(), 15);
           marker.openPopup();
@@ -482,22 +482,53 @@
   async function confirmAndNext() {
     if (!state.selectedFountain || !state.isAdmin) return;
 
-    var post = state.posts[state.currentIndex];
-    var ratingInput = document.getElementById('ratingInput');
-    var rating = parseFloat(ratingInput.value);
+    const confirmBtn = document.getElementById('confirmBtn');
+    confirmBtn.disabled = true;
 
-    if (!rating || rating < 0 || rating > 10) {
-      ui.toast('Enter a valid rating (0-10).', 'warning');
+    const post = state.posts[state.currentIndex];
+    const ratingInput = document.getElementById('ratingInput');
+    const rating = parseFloat(ratingInput.value);
+
+    if (!rating || rating < 1 || rating > 10) {
+      ui.toast('Enter a valid rating (1-10).', 'warning');
+      confirmBtn.disabled = false;
       return;
     }
 
-    var fountainId = state.selectedFountain.supabase_id;
+    const fountainId = state.selectedFountain.supabase_id;
     if (!fountainId) {
       ui.toast('No Supabase ID for this fountain. Cannot save.', 'error');
+      confirmBtn.disabled = false;
       return;
     }
 
-    var payload = {
+    if (!api.insertAdminReview) {
+      ui.toast('Supabase API helpers are not available.', 'error');
+      confirmBtn.disabled = false;
+      return;
+    }
+
+    // Check for duplicate (same fountain + same instagram URL)
+    if (post.permalink) {
+      try {
+        const { data: existing } = await state.supabaseClient
+          .from('reviews')
+          .select('id')
+          .eq('fountain_id', fountainId)
+          .eq('instagram_url', post.permalink)
+          .maybeSingle();
+
+        if (existing) {
+          ui.toast('This post is already linked to this fountain.', 'warning');
+          confirmBtn.disabled = false;
+          return;
+        }
+      } catch (e) {
+        console.warn('duplicate check failed, proceeding anyway', e);
+      }
+    }
+
+    const payload = {
       fountain_id: fountainId,
       author_type: 'admin',
       status: 'approved',
@@ -518,6 +549,7 @@
     } catch (e) {
       ui.toast('Save failed: ' + e.message, 'error');
       console.error(e);
+      confirmBtn.disabled = false;
     }
   }
 
@@ -548,23 +580,23 @@
   }
 
   async function saveNewFountain() {
-    var name = document.getElementById('newFountainName').value.trim();
+    const name = document.getElementById('newFountainName').value.trim();
     if (!name) { ui.toast('Enter a fountain name.', 'warning'); return; }
     if (!state.newFountainLatLng) { ui.toast('Click the map to set location.', 'warning'); return; }
 
-    var nearest = findNearestFountain(state.newFountainLatLng.lat, state.newFountainLatLng.lng);
-    var neighbourhood = nearest ? (nearest.properties || {}).neighborhood : null;
+    const nearest = findNearestFountain(state.newFountainLatLng.lat, state.newFountainLatLng.lng);
+    const neighbourhood = nearest ? (nearest.properties || {}).neighborhood : null;
 
     try {
-      var cityResult = await state.supabaseClient
+      const cityResult = await state.supabaseClient
         .from('cities')
         .select('id')
         .eq('slug', 'vancouver')
         .maybeSingle();
 
-      var cityId = cityResult.data ? cityResult.data.id : null;
+      const cityId = cityResult.data ? cityResult.data.id : null;
 
-      var insertResult = await state.supabaseClient
+      const insertResult = await state.supabaseClient
         .from('fountains')
         .insert({
           name: name,
@@ -580,15 +612,15 @@
 
       if (insertResult.error) throw insertResult.error;
 
-      var newFountain = insertResult.data;
+      const newFountain = insertResult.data;
       ui.toast('Fountain "' + name + '" created!', 'success');
 
-      var marker = L.circleMarker(
+      const marker = L.circleMarker(
         [newFountain.latitude, newFountain.longitude],
         { radius: 11, color: '#198754', fillColor: '#198754', fillOpacity: 0.7, weight: 2 }
       ).addTo(state.map);
 
-      var props = {
+      const props = {
         supabase_id: newFountain.id,
         name: newFountain.name,
         neighborhood: newFountain.neighbourhood
@@ -607,12 +639,12 @@
   }
 
   function findNearestFountain(lat, lng) {
-    var nearest = null;
-    var minDist = Infinity;
+    let nearest = null;
+    let minDist = Infinity;
     state.fountains.forEach(function (f) {
-      var coords = f.geometry && f.geometry.coordinates;
+      const coords = f.geometry && f.geometry.coordinates;
       if (!coords) return;
-      var d = Math.pow(coords[1] - lat, 2) + Math.pow(coords[0] - lng, 2);
+      const d = Math.pow(coords[1] - lat, 2) + Math.pow(coords[0] - lng, 2);
       if (d < minDist) { minDist = d; nearest = f; }
     });
     return nearest;
@@ -621,8 +653,8 @@
   // ── Progress & Finish ────────────────────────────
 
   function updateProgress() {
-    var total = state.posts.length;
-    var done = state.linked + state.skipped;
+    const total = state.posts.length;
+    const done = state.linked + state.skipped;
     document.getElementById('progressText').textContent = done + ' / ' + total + ' processed (' + state.linked + ' linked)';
   }
 
@@ -634,6 +666,16 @@
   }
 
   // ── Utilities ────────────────────────────────────
+
+  function isSafeUrl(url) {
+    if (!url) return false;
+    try {
+      const parsed = new URL(url);
+      return parsed.protocol === 'http:' || parsed.protocol === 'https:';
+    } catch (e) {
+      return false;
+    }
+  }
 
   function escapeHtml(value) {
     if (value === null || value === undefined) return '';

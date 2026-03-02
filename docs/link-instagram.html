@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YVR Water Fountains - Link Instagram Posts</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px 0;
+        }
+        .main-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .header {
+            background: linear-gradient(45deg, #2196F3, #21CBF3);
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header h1 { margin: 0; font-size: 1.5rem; font-weight: 300; }
+        .progress-badge {
+            background: rgba(255,255,255,0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 70vh;
+        }
+        .post-section { padding: 24px; overflow-y: auto; max-height: 80vh; }
+        .map-section { position: relative; }
+        #map { height: 100%; min-height: 500px; width: 100%; }
+        .search-overlay {
+            position: absolute; top: 10px; left: 10px; right: 10px;
+            z-index: 1000; background: white; border-radius: 8px;
+            padding: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        .post-card {
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+        .post-card .caption {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            white-space: pre-wrap;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        .post-card .meta { color: #666; font-size: 0.85rem; margin-top: 8px; }
+        .match-info {
+            background: #f0f9ff;
+            border: 2px solid #2196F3;
+            border-radius: 10px;
+            padding: 16px;
+            margin: 12px 0;
+        }
+        .match-info.confirmed {
+            border-color: #198754;
+            background: #f0fdf4;
+        }
+        .rating-input-lg {
+            width: 80px; height: 80px;
+            border: 3px solid #e0e0e0; border-radius: 50%;
+            font-size: 24px; font-weight: bold; text-align: center;
+        }
+        .rating-input-lg:focus {
+            border-color: #2196F3;
+            box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+        }
+        .drop-zone {
+            border: 3px dashed #ccc; border-radius: 15px;
+            padding: 60px 40px; text-align: center; cursor: pointer;
+            transition: all 0.3s;
+        }
+        .drop-zone:hover, .drop-zone.dragover {
+            border-color: #2196F3; background: #f0f9ff;
+        }
+        .fountain-item {
+            padding: 8px 12px; cursor: pointer; border-radius: 6px;
+            border: 1px solid transparent;
+        }
+        .fountain-item:hover { background: #f0f9ff; border-color: #2196F3; }
+        .fountain-item.selected { background: #e8f5e9; border-color: #198754; }
+        .btn-action {
+            border-radius: 10px; padding: 12px 24px;
+            font-size: 16px; font-weight: 600;
+        }
+        #newFountainPanel {
+            background: #fffbeb; border: 2px solid #f59e0b;
+            border-radius: 10px; padding: 16px; margin: 12px 0;
+        }
+        .auth-section { padding: 20px 30px; background: #fff3cd; }
+        @media (max-width: 768px) {
+            .content-wrapper { grid-template-columns: 1fr; }
+            .map-section { height: 350px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-card">
+        <div id="authSection" class="auth-section">
+            <div class="d-flex align-items-center gap-3">
+                <span id="authStatus">Sign in to start linking posts.</span>
+                <input type="email" id="authEmail" class="form-control form-control-sm" style="max-width:200px" placeholder="Email">
+                <input type="password" id="authPassword" class="form-control form-control-sm" style="max-width:200px" placeholder="Password">
+                <button id="authSignIn" class="btn btn-sm btn-primary">Sign In</button>
+                <button id="authSignOut" class="btn btn-sm btn-outline-secondary" style="display:none">Sign Out</button>
+            </div>
+        </div>
+
+        <div class="header">
+            <h1><i class="fab fa-instagram"></i> Link Instagram Posts</h1>
+            <div id="progressBadge" class="progress-badge" style="display:none">
+                <span id="progressText">0 / 0 linked</span>
+            </div>
+        </div>
+
+        <div id="mainContent" style="display:none">
+            <div id="uploadPhase" class="p-4">
+                <div class="drop-zone" id="dropZone">
+                    <i class="fas fa-cloud-upload-alt fa-3x mb-3" style="color:#aaa"></i>
+                    <h4>Drop your Instagram export JSON here</h4>
+                    <p class="text-muted">Or click to browse. Look for <code>content/posts_1.json</code> in your export ZIP.</p>
+                    <input type="file" id="fileInput" accept=".json" style="display:none">
+                </div>
+            </div>
+
+            <div id="linkingPhase" style="display:none">
+                <div class="content-wrapper">
+                    <div class="post-section">
+                        <div id="postCard" class="post-card"></div>
+                        <div id="matchInfo" class="match-info"></div>
+                        <div id="newFountainPanel" style="display:none">
+                            <h6><i class="fas fa-plus-circle"></i> Add New Fountain</h6>
+                            <div class="mb-2">
+                                <input type="text" id="newFountainName" class="form-control form-control-sm" placeholder="Fountain name">
+                            </div>
+                            <div class="mb-2">
+                                <small class="text-muted">Tap the map to set location. <span id="newFountainCoords"></span></small>
+                            </div>
+                            <button id="saveNewFountain" class="btn btn-sm btn-warning">Create Fountain</button>
+                            <button id="cancelNewFountain" class="btn btn-sm btn-outline-secondary">Cancel</button>
+                        </div>
+                        <div class="d-flex align-items-center gap-3 mt-3">
+                            <div class="text-center">
+                                <label class="form-label mb-1" style="font-size:0.8rem">Rating</label>
+                                <input type="number" id="ratingInput" class="rating-input-lg" min="1" max="10" step="0.5">
+                            </div>
+                            <div class="flex-grow-1 d-flex flex-column gap-2">
+                                <button id="confirmBtn" class="btn btn-success btn-action" disabled>
+                                    <i class="fas fa-check"></i> Confirm &amp; Next
+                                </button>
+                                <div class="d-flex gap-2">
+                                    <button id="skipBtn" class="btn btn-outline-secondary btn-sm flex-grow-1">Skip</button>
+                                    <button id="addFountainBtn" class="btn btn-outline-warning btn-sm flex-grow-1">
+                                        <i class="fas fa-plus"></i> New Fountain
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="map-section">
+                        <div class="search-overlay">
+                            <input type="text" id="fountainSearch" class="form-control form-control-sm" placeholder="Search fountains by name...">
+                        </div>
+                        <div id="map"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="donePhase" style="display:none" class="p-5 text-center">
+                <i class="fas fa-check-circle fa-4x text-success mb-3"></i>
+                <h3>All done!</h3>
+                <p id="doneSummary" class="text-muted"></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.43.1/dist/umd/supabase.min.js"></script>
+    <script src="config.js"></script>
+    <script src="../src/api.js"></script>
+    <script src="../src/ui.js"></script>
+    <script src="js/fountain-data.js"></script>
+    <script src="js/link-instagram.js"></script>
+</body>
+</html>

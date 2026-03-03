@@ -37,7 +37,7 @@
     registerAdminAccess();
 
     try {
-      const data = await loadFountainData(config.GEOJSON_PATH);
+      const data = await FountainData.fetchGeoData();
       state.fountains = data.features || [];
       placeFountainsOnMap(data);
       focusFromHash();
@@ -201,14 +201,33 @@
   }
 
   /**
-   * loads fountain data from the geojson file.
+   * returns marker styling based on review status.
+   * green = admin reviewed, orange = community reviewed, blue = unreviewed.
    */
-  async function loadFountainData(path) {
-    const response = await fetch(path);
-    if (!response.ok) {
-      throw new Error(`failed to load fountain data: ${response.status} ${response.statusText}`);
+  function markerStyle(props) {
+    const adminCount = props.admin_review_count || 0;
+    const totalCount = props.rating_count || 0;
+    let color;
+    let radius;
+
+    if (adminCount > 0) {
+      color = '#198754';
+      radius = 9;
+    } else if (totalCount > 0) {
+      color = '#fd7e14';
+      radius = 9;
+    } else {
+      color = '#007bff';
+      radius = 7;
     }
-    return response.json();
+
+    return {
+      radius,
+      color,
+      fillColor: color,
+      fillOpacity: 0.7,
+      weight: 2
+    };
   }
 
   /**
@@ -216,13 +235,11 @@
    */
   function placeFountainsOnMap(geojson) {
     L.geoJSON(geojson, {
-      pointToLayer: (feature, latlng) => L.circleMarker(latlng, {
-        radius: 8,
-        color: '#007bff',
-        fillColor: '#007bff',
-        fillOpacity: 0.7,
-        weight: 2
-      }),
+      pointToLayer: (feature, latlng) => {
+        const props = feature.properties || {};
+        const style = markerStyle(props);
+        return L.circleMarker(latlng, style);
+      },
       onEachFeature: (feature, layer) => attachFountainBehavior(feature, layer)
     }).addTo(state.map);
   }

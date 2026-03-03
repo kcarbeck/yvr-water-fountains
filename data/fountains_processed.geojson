@@ -2929,8 +2929,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -123.117008,
-          49.238962
+          -123.118074,
+          49.240567
         ]
       },
       "properties": {
@@ -2958,7 +2958,8 @@
         "caption": "",
         "visited": "",
         "visit_date": "",
-        "photo_url": ""
+        "photo_url": "",
+        "city": "Vancouver"
       }
     },
     {
@@ -7591,8 +7592,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -123.106969,
-          49.245663
+          -123.10644,
+          49.244512
         ]
       },
       "properties": {

@@ -4066,8 +4066,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -123.106969,
-          49.2456626
+          -123.10644,
+          49.244512
         ]
       },
       "properties": {
@@ -5698,14 +5698,14 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -123.117008,
-          49.238962
+          -123.118074,
+          49.240567
         ]
       },
       "properties": {
         "id": "DFENG0047",
         "name": "4963 Cambie St",
-        "city": "Burnaby",
+        "city": "Vancouver",
         "neighborhood": "South Cambie",
         "location": "4963 Cambie St",
         "type": "Fountain location",

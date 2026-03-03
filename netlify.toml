@@ -1,7 +1,7 @@
 [build]
   # No build step needed — the map reads live from Supabase.
   # Netlify just serves the static HTML/JS/CSS from docs/.
-  command = "echo 'No build step required'"
+  command = "cd netlify/functions && npm install && cd ../.."
   publish = "docs"
   functions = "netlify/functions"
 

@@ -46,7 +46,10 @@
 
     const captionField = document.getElementById('instagramCaption');
     if (captionField) {
+      let matchDebounce = null;
+
       captionField.addEventListener('input', function () {
+        // Rating auto-extraction
         const rating = extractRating(captionField.value);
         if (rating !== null) {
           const ratingField = document.getElementById('overallRating');
@@ -54,6 +57,29 @@
             ratingField.value = rating;
           }
         }
+
+        // Fountain auto-matching (debounced)
+        clearTimeout(matchDebounce);
+        matchDebounce = setTimeout(function () {
+          const caption = captionField.value.trim();
+          if (caption.length < 5 || state.fountains.length === 0) return;
+
+          const matches = fuzzyMatchFountains(caption, state.fountains);
+          if (matches.length > 0 && matches[0].score >= 3) {
+            const best = matches[0];
+            const props = best.feature.properties || {};
+            const marker = state.markerById.get(props.id);
+            if (marker) {
+              state.map.setView(marker.getLatLng(), 16);
+              selectFountain(props, marker);
+              showFormAlert(
+                'Auto-matched: ' + escapeHtml(props.name || 'Unnamed') +
+                (matches.length > 1 ? ' (' + (matches.length - 1) + ' other possible matches)' : ''),
+                'info'
+              );
+            }
+          }
+        }, 500);
       });
 
       const ratingField = document.getElementById('overallRating');
@@ -424,6 +450,45 @@
     }
 
     return null;
+  }
+
+  function fuzzyMatchFountains(caption, fountainFeatures) {
+    const words = caption.toLowerCase()
+      .replace(/[^a-z0-9\s]/g, ' ')
+      .split(/\s+/)
+      .filter(function (w) { return w.length > 2; });
+
+    const uniqueWords = [];
+    const seen = {};
+    words.forEach(function (w) {
+      if (!seen[w]) { seen[w] = true; uniqueWords.push(w); }
+    });
+
+    const scored = fountainFeatures.map(function (feature) {
+      const props = feature.properties || {};
+      const name = (props.name || '').toLowerCase();
+      const neighbourhood = (props.neighborhood || '').toLowerCase();
+      const location = (props.location || '').toLowerCase();
+      const target = name + ' ' + neighbourhood + ' ' + location;
+
+      let score = 0;
+      uniqueWords.forEach(function (word) {
+        if (target.includes(word)) {
+          score += name.includes(word) ? 3 : 1;
+        }
+      });
+
+      for (let i = 0; i < uniqueWords.length - 1; i++) {
+        const bigram = uniqueWords[i] + ' ' + uniqueWords[i + 1];
+        if (name.includes(bigram)) score += 5;
+      }
+
+      return { feature: feature, score: score };
+    });
+
+    return scored
+      .filter(function (s) { return s.score > 0; })
+      .sort(function (a, b) { return b.score - a.score; });
   }
 
   function collectFormData() {

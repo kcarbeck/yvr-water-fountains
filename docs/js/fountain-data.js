@@ -20,8 +20,11 @@
     if (supabaseClient) {
       try {
         const geojson = await loadFromSupabase(supabaseClient);
-        cache.geojson = geojson;
-        return clone(geojson);
+        if (geojson && geojson.features && geojson.features.length > 0) {
+          cache.geojson = geojson;
+          return clone(geojson);
+        }
+        console.warn('supabase returned 0 fountains, falling back to geojson');
       } catch (error) {
         console.warn('supabase fountain fetch failed, falling back to geojson', error);
       }

@@ -174,11 +174,17 @@
         }
       });
     } else if (typeof json === 'object' && json !== null) {
-      const candidates = ['ig_media', 'posts', 'media', 'photos_and_videos'];
+      const candidates = ['ig_media', 'ig_reels_media', 'posts', 'media', 'photos_and_videos'];
       for (let i = 0; i < candidates.length; i++) {
         if (Array.isArray(json[candidates[i]])) {
-          rawPosts = json[candidates[i]];
-          break;
+          json[candidates[i]].forEach(function (item) {
+            if (item.media && Array.isArray(item.media)) {
+              item.media.forEach(function (m) { rawPosts.push(m); });
+            } else if (item.creation_timestamp || item.taken_at) {
+              rawPosts.push(item);
+            }
+          });
+          if (rawPosts.length > 0) break;
         }
       }
       if (rawPosts.length === 0 && json.content && Array.isArray(json.content)) {
@@ -489,8 +495,8 @@
     const ratingInput = document.getElementById('ratingInput');
     const rating = parseFloat(ratingInput.value);
 
-    if (!rating || rating < 1 || rating > 10) {
-      ui.toast('Enter a valid rating (1-10).', 'warning');
+    if (rating === null || isNaN(rating) || rating < 0 || rating > 10) {
+      ui.toast('Enter a valid rating (0-10).', 'warning');
       confirmBtn.disabled = false;
       return;
     }

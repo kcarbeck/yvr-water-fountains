@@ -9,6 +9,8 @@
 *credential*
 *password*
 config.local.js
+env.local.js
+docs/env.local.js
 
 # Node.js
 node_modules/

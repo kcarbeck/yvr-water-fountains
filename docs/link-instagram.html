@@ -161,7 +161,7 @@
                         <div class="d-flex align-items-center gap-3 mt-3">
                             <div class="text-center">
                                 <label class="form-label mb-1" style="font-size:0.8rem">Rating</label>
-                                <input type="number" id="ratingInput" class="rating-input-lg" min="1" max="10" step="0.5">
+                                <input type="number" id="ratingInput" class="rating-input-lg" min="0" max="10" step="0.5">
                             </div>
                             <div class="flex-grow-1 d-flex flex-column gap-2">
                                 <button id="confirmBtn" class="btn btn-success btn-action" disabled>
@@ -196,6 +196,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.43.1/dist/umd/supabase.min.js"></script>
+    <script src="env.local.js" onerror="/* no local env */"></script>
     <script src="config.js"></script>
     <script src="../src/api.js"></script>
     <script src="../src/ui.js"></script>

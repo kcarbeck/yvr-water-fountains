@@ -400,45 +400,49 @@
    * renders the popup markup for desktop visitors.
    */
   function buildPopupContent(fountain, latestInstagramPost, latestPhotoUrl, adminReview) {
-    let html = '<div class="popup-content">';
+    const isReviewed = (fountain.admin_review_count || 0) > 0;
+    const isCommunity = !isReviewed && (fountain.rating_count || 0) > 0;
+    const typeClass = isReviewed ? ' reviewed' : isCommunity ? ' community-reviewed' : '';
+
+    let html = '<div class="popup-content' + typeClass + '">';
+
+    // Title with optional photo
+    if (latestPhotoUrl) {
+      html += '<img src="' + latestPhotoUrl + '" alt="Photo" style="width:80px;height:80px;border-radius:10px;float:right;margin-left:10px;object-fit:cover;" onerror="this.style.display=\'none\'">';
+    }
     html += '<div class="popup-title">';
-    html += `<a href="#" class="popup-title-link" onclick="showFountainDetails('${fountain.id || ''}')">${fountain.name || 'Unnamed Fountain'}</a>`;
+    html += '<a href="#" class="popup-title-link" onclick="showFountainDetails(\'' + (fountain.id || '') + '\')">' + (fountain.name || 'Unnamed Fountain') + '</a>';
     html += '</div>';
-    html += buildInfoRow('popup', '📍 Location:', fountain.location || fountain.address || '—');
-    html += buildInfoRow('popup', '🏘️ Neighbourhood:', fountain.neighborhood || '—');
-    html += buildInfoRow('popup', '🏢 Operational:', formatOperational(fountain.currently_operational));
-    html += buildInfoRow('popup', '🐕 Pet Friendly:', formatPetFriendly(fountain.pet_friendly));
+
+    // Info section
+    html += '<div class="info-section">';
+    html += buildInfoRow('popup', 'Location', fountain.location || fountain.address || '\u2014');
+    html += buildInfoRow('popup', 'Neighbourhood', fountain.neighborhood || '\u2014');
 
     if (fountain.avg_rating) {
-      const reviewsLabel = `${fountain.rating_count} review${fountain.rating_count !== 1 ? 's' : ''}`;
-      const average = `${Number.parseFloat(fountain.avg_rating).toFixed(1)}/10`;
-      const ratingLink = `<a href="#" class="popup-clickable" onclick="showAllReviews('${fountain.id || ''}')">${average}</a> (${reviewsLabel})`;
-      html += buildInfoRow('popup', '⭐ Avg Rating:', ratingLink);
+      const count = fountain.rating_count || 0;
+      const avg = Number.parseFloat(fountain.avg_rating).toFixed(1);
+      html += buildInfoRow('popup', 'Rating', '<span class="rating-badge">' + avg + '/10</span> (' + count + ' review' + (count !== 1 ? 's' : '') + ')');
     }
 
-    if (fountain.rating) {
-      const reviewer = fountain.latest_reviewer || 'Anonymous';
-      const ratingDisplay = adminReview && latestInstagramPost
-        ? `<a href="${latestInstagramPost.url}" target="_blank" class="popup-clickable">${fountain.rating}/10 by ${reviewer}</a>`
-        : `${fountain.rating}/10 by ${reviewer}`;
-      html += buildInfoRow('popup', '📝 Latest Review:', ratingDisplay);
+    html += buildInfoRow('popup', 'Operational', formatOperational(fountain.currently_operational));
+    html += buildInfoRow('popup', 'Pet Friendly', formatPetFriendly(fountain.pet_friendly));
+    html += '</div>';
+
+    // Caption
+    if (fountain.caption) {
+      const truncated = fountain.caption.length > 200 ? fountain.caption.slice(0, 200) + '...' : fountain.caption;
+      html += '<div class="caption-box">' + truncated + '</div>';
     }
 
-    if (fountain.wheelchair_accessible) {
-      html += buildInfoRow('popup', '♿ Wheelchair:', fountain.wheelchair_accessible);
-    }
-
-    if (fountain.bottle_filler) {
-      html += buildInfoRow('popup', '💧 Bottle Filler:', fountain.bottle_filler);
-    }
-
+    // Instagram link
     if (latestInstagramPost) {
-      const instagramBlock = buildInstagramPreview(latestInstagramPost, latestPhotoUrl);
-      html += buildInfoRow('popup', '📸 Latest Instagram:', instagramBlock);
+      html += '<a href="' + latestInstagramPost.url + '" target="_blank" class="ig-link">@yvrwaterfountains post \u2192</a>';
     }
 
-    if (fountain.caption && !adminReview) {
-      html += buildInfoRow('popup', '📝 Notes:', fountain.caption);
+    // CTA for unreviewed
+    if (!fountain.rating) {
+      html += '<a href="public_review_form.html" class="cta-btn">Be the first to review!</a>';
     }
 
     html += '</div>';
@@ -449,53 +453,63 @@
    * renders the bottom sheet markup for mobile visitors.
    */
   function buildBottomSheetContent(fountain, latestInstagramPost, latestPhotoUrl, adminReview) {
-    let html = '<div class="bottom-sheet-title">';
-    html += `<a href="#" class="popup-title-link" onclick="showFountainDetails('${fountain.id || ''}')">${fountain.name || 'Unnamed Fountain'}</a>`;
+    let html = '';
+
+    // Header with optional photo
+    if (latestPhotoUrl) {
+      html += '<div class="sheet-header">';
+      html += '<img src="' + latestPhotoUrl + '" alt="Photo" class="sheet-photo" onerror="this.style.display=\'none\'">';
+      html += '<div class="sheet-header-text">';
+    } else {
+      html += '<div style="margin-bottom:1rem;">';
+    }
+
+    html += '<div class="bottom-sheet-title">';
+    html += '<a href="#" class="popup-title-link" onclick="showFountainDetails(\'' + (fountain.id || '') + '\')">' + (fountain.name || 'Unnamed Fountain') + '</a>';
     html += '</div>';
-    html += buildInfoRow('bottom-sheet', '📍 Location:', fountain.location || fountain.address || '—');
-    html += buildInfoRow('bottom-sheet', '🏘️ Neighbourhood:', fountain.neighborhood || '—');
-    html += buildInfoRow('bottom-sheet', '🏢 Operational:', formatOperational(fountain.currently_operational));
-    html += buildInfoRow('bottom-sheet', '🐕 Pet Friendly:', formatPetFriendly(fountain.pet_friendly));
+    html += '<div class="sheet-subtitle">' + (fountain.neighborhood || '') + (fountain.location ? ' \u00B7 ' + fountain.location : '') + '</div>';
 
     if (fountain.avg_rating) {
-      const reviewsLabel = `${fountain.rating_count} review${fountain.rating_count !== 1 ? 's' : ''}`;
-      const average = `${Number.parseFloat(fountain.avg_rating).toFixed(1)}/10`;
-      const ratingLink = `<a href="#" class="popup-clickable" onclick="showAllReviews('${fountain.id || ''}')">${average}</a> (${reviewsLabel})`;
-      html += buildInfoRow('bottom-sheet', '⭐ Avg Rating:', ratingLink);
+      html += '<span class="rating-badge" style="margin-top:0.25rem;display:inline-block;">' + Number.parseFloat(fountain.avg_rating).toFixed(1) + '/10</span>';
     }
+
+    if (latestPhotoUrl) {
+      html += '</div></div>';
+    } else {
+      html += '</div>';
+    }
+
+    // Details section
+    html += '<div class="sheet-details">';
+    html += buildInfoRow('bottom-sheet', 'Operational', formatOperational(fountain.currently_operational));
+    html += buildInfoRow('bottom-sheet', 'Pet Friendly', formatPetFriendly(fountain.pet_friendly));
 
     if (fountain.rating) {
       const reviewer = fountain.latest_reviewer || 'Anonymous';
-      const ratingDisplay = adminReview && latestInstagramPost
-        ? `<a href="${latestInstagramPost.url}" target="_blank" class="popup-clickable">${fountain.rating}/10 by ${reviewer}</a>`
-        : `${fountain.rating}/10 by ${reviewer}`;
-      html += buildInfoRow('bottom-sheet', '📝 Latest Review:', ratingDisplay);
+      html += buildInfoRow('bottom-sheet', 'Reviewed by', reviewer);
     }
 
-    if (fountain.wheelchair_accessible) {
-      html += buildInfoRow('bottom-sheet', '♿ Wheelchair:', fountain.wheelchair_accessible);
+    if (fountain.wheelchair_accessible && fountain.wheelchair_accessible !== 'unknown') {
+      html += buildInfoRow('bottom-sheet', 'Wheelchair', fountain.wheelchair_accessible);
+    }
+    html += '</div>';
+
+    // Caption
+    if (fountain.caption) {
+      html += '<div class="sheet-caption">' + fountain.caption + '</div>';
     }
 
-    if (fountain.bottle_filler) {
-      html += buildInfoRow('bottom-sheet', '💧 Bottle Filler:', fountain.bottle_filler);
-    }
-
+    // Action buttons
+    html += '<div class="sheet-actions">';
     if (latestInstagramPost) {
-      const instagramBlock = buildInstagramPreview(latestInstagramPost, latestPhotoUrl);
-      html += buildInfoRow('bottom-sheet', '📸 Latest Instagram:', instagramBlock);
+      html += '<a href="' + latestInstagramPost.url + '" target="_blank" class="sheet-action-btn primary">View on Instagram</a>';
     }
-
-    if (fountain.caption && !adminReview) {
-      html += buildInfoRow('bottom-sheet', '📝 Notes:', fountain.caption);
+    if (fountain.rating) {
+      html += '<a href="public_review_form.html" class="sheet-action-btn secondary">Submit Review</a>';
+    } else {
+      html += '<a href="public_review_form.html" class="sheet-action-btn primary" style="background:var(--color-primary);color:var(--color-dark);">Be the first to review!</a>';
     }
-
-    if (fountain.has_instagram && fountain.instagram_posts && fountain.instagram_posts.length > 1) {
-      const remainingPosts = fountain.instagram_posts.slice(1);
-      const postsHtml = generateInstagramPosts(remainingPosts);
-      if (postsHtml) {
-        html += buildInfoRow('bottom-sheet', '📸 All Instagram Posts:', `<div class="instagram-posts-container" id="instagram-${fountain.id}">${postsHtml}</div>`);
-      }
-    }
+    html += '</div>';
 
     return html;
   }
@@ -524,12 +538,7 @@
    */
   function buildInfoRow(context, label, value) {
     const baseClass = context === 'popup' ? 'popup' : 'bottom-sheet';
-    return [
-      `<div class="${baseClass}-info">`,
-      `<span class="${baseClass}-label">${label}</span>`,
-      `<span class="${baseClass}-value">${value}</span>`,
-      '</div>'
-    ].join('');
+    return '<div class="' + baseClass + '-info"><span class="' + baseClass + '-label">' + label + '</span><span class="' + baseClass + '-value">' + value + '</span></div>';
   }
 
   /**
@@ -541,6 +550,18 @@
     }
 
     state.currentFountain = fountain;
+
+    // Set color bar based on review type
+    const colorBar = document.getElementById('sheet-color-bar');
+    if (colorBar) {
+      colorBar.className = 'sheet-color-bar';
+      if ((fountain.admin_review_count || 0) > 0) {
+        colorBar.classList.add('reviewed');
+      } else if ((fountain.rating_count || 0) > 0) {
+        colorBar.classList.add('community-reviewed');
+      }
+    }
+
     dom.bottomSheetContent.innerHTML = buildBottomSheetContent(fountain, latestInstagramPost, latestPhotoUrl, adminReview);
     dom.bottomSheet.classList.add('active');
     dom.overlay.classList.add('active');

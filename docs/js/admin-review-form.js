@@ -381,11 +381,6 @@
       instagramUrl: document.getElementById('instagramUrl').value.trim(),
       instagramCaption: document.getElementById('instagramCaption').value.trim(),
       overallRating: document.getElementById('overallRating').value,
-      waterQuality: document.getElementById('waterQuality').value,
-      flowPressure: document.getElementById('flowPressure').value,
-      temperature: document.getElementById('temperature').value,
-      drainage: document.getElementById('drainage').value,
-      accessibility: document.getElementById('accessibility').value,
       reviewNotes: document.getElementById('reviewNotes').value.trim(),
       visitDate: document.getElementById('visitDate').value
     };
@@ -395,11 +390,8 @@
     if (!data.instagramUrl) {
       return 'add the instagram post url so visitors can see the source.';
     }
-    if (!data.overallRating) {
-      return 'provide an overall rating on the 1-10 scale.';
-    }
-    if (!data.waterQuality || !data.flowPressure || !data.temperature || !data.drainage || !data.accessibility) {
-      return 'fill in all rating categories before publishing the review.';
+    if (!data.overallRating && data.overallRating !== 0) {
+      return 'provide a rating on the 0-10 scale.';
     }
     if (!data.visitDate) {
       return 'include the visit date for proper context.';
@@ -418,17 +410,11 @@
       author_type: 'admin',
       status: 'approved',
       rating: toNumeric(data.overallRating),
-      water_quality: toNumeric(data.waterQuality),
-      flow_pressure: toNumeric(data.flowPressure),
-      temperature: toNumeric(data.temperature),
-      cleanliness: toNumeric(data.drainage),
-      accessibility: toNumeric(data.accessibility),
       review_text: data.reviewNotes || null,
       instagram_url: data.instagramUrl,
       instagram_caption: data.instagramCaption || null,
       instagram_image_url: buildInstagramImageUrl(data.instagramUrl),
-      visit_date: data.visitDate || null,
-      reviewed_at: data.visitDate ? `${data.visitDate}T12:00:00Z` : new Date().toISOString()
+      visit_date: data.visitDate || null
     };
 
     if (!api.insertAdminReview) {

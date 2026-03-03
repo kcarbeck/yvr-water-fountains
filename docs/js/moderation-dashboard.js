@@ -263,16 +263,8 @@
     rows.push(`<div class="review-meta mb-2">${escapeHtml(fountain.id || '')} • ${escapeHtml(fountain.neighborhood || 'unknown area')}</div>`);
     rows.push(`<p class="mb-2">${escapeHtml(review.review_text || 'no additional notes provided.')}</p>`);
 
-    const ratingPieces = [];
-    if (review.rating !== null) { ratingPieces.push(`overall ${formatScore(review.rating)}`); }
-    if (review.water_quality !== null) { ratingPieces.push(`water ${formatScore(review.water_quality)}`); }
-    if (review.flow_pressure !== null) { ratingPieces.push(`flow ${formatScore(review.flow_pressure)}`); }
-    if (review.temperature !== null) { ratingPieces.push(`temp ${formatScore(review.temperature)}`); }
-    if (review.cleanliness !== null) { ratingPieces.push(`drainage ${formatScore(review.cleanliness)}`); }
-    if (review.accessibility !== null) { ratingPieces.push(`access ${formatScore(review.accessibility)}`); }
-
-    if (ratingPieces.length > 0) {
-      rows.push(`<div class="mb-2"><strong>scores:</strong> ${ratingPieces.join(' • ')}</div>`);
+    if (review.rating !== null) {
+      rows.push(`<div class="mb-2"><strong>rating:</strong> ${formatScore(review.rating)}</div>`);
     }
 
     const submitted = new Date(review.created_at).toLocaleString();

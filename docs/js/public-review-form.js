@@ -335,11 +335,6 @@
       reviewerEmail: document.getElementById('reviewerEmail').value.trim(),
       visitDate: document.getElementById('visitDate').value,
       overallRating: formData.get('overallRating'),
-      waterQuality: formData.get('waterQuality'),
-      flowPressure: formData.get('flowPressure'),
-      temperature: formData.get('temperature'),
-      cleanliness: formData.get('cleanliness'),
-      accessibility: formData.get('accessibility'),
       additionalNotes: document.getElementById('additionalNotes').value.trim()
     };
   }
@@ -373,11 +368,6 @@
       reviewer_email: data.reviewerEmail || null,
       visit_date: data.visitDate || null,
       rating: toNumeric(data.overallRating),
-      water_quality: toNumeric(data.waterQuality),
-      flow_pressure: toNumeric(data.flowPressure),
-      temperature: toNumeric(data.temperature),
-      cleanliness: toNumeric(data.cleanliness),
-      accessibility: toNumeric(data.accessibility),
       review_text: data.additionalNotes || null
     };
 

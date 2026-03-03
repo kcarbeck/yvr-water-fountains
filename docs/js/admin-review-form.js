@@ -44,6 +44,26 @@
     setupSearchInteractions();
     setupReviewForm();
 
+    const captionField = document.getElementById('instagramCaption');
+    if (captionField) {
+      captionField.addEventListener('input', function () {
+        const rating = extractRating(captionField.value);
+        if (rating !== null) {
+          const ratingField = document.getElementById('overallRating');
+          if (ratingField && !ratingField.dataset.manuallyEdited) {
+            ratingField.value = rating;
+          }
+        }
+      });
+
+      const ratingField = document.getElementById('overallRating');
+      if (ratingField) {
+        ratingField.addEventListener('input', function () {
+          ratingField.dataset.manuallyEdited = 'true';
+        });
+      }
+    }
+
     try {
       await setupMap();
       await loadFountains();
@@ -376,6 +396,36 @@
     details.innerHTML = rows.map((row) => `<p>${row}</p>`).join('');
   }
 
+  function extractRating(caption) {
+    if (!caption) return null;
+
+    const rangeMatch = caption.match(/(\d+\.?\d*)\s*-\s*(\d+\.?\d*)\s*\/\s*10/);
+    if (rangeMatch) {
+      const low = parseFloat(rangeMatch[1]);
+      const high = parseFloat(rangeMatch[2]);
+      if (low >= 0 && low <= 10 && high >= 0 && high <= 10) {
+        return Math.round(((low + high) / 2) * 10) / 10;
+      }
+    }
+
+    const patterns = [
+      /(\d+\.?\d*)\s*\/\s*10/,
+      /(\d+\.?\d*)\s*out\s*of\s*10/i,
+      /rating[:\s]*(\d+\.?\d*)/i,
+      /score[:\s]*(\d+\.?\d*)/i
+    ];
+
+    for (const pattern of patterns) {
+      const match = caption.match(pattern);
+      if (match) {
+        const num = parseFloat(match[1]);
+        if (num >= 0 && num <= 10) return num;
+      }
+    }
+
+    return null;
+  }
+
   function collectFormData() {
     return {
       instagramUrl: document.getElementById('instagramUrl').value.trim(),
@@ -431,6 +481,10 @@
     const form = document.getElementById('adminReviewForm');
     if (form) {
       form.reset();
+    }
+    const ratingField = document.getElementById('overallRating');
+    if (ratingField) {
+      delete ratingField.dataset.manuallyEdited;
     }
     state.selectedFountain = null;
     if (state.selectedMarker) {

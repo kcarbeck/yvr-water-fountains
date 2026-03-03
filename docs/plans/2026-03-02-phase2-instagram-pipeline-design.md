@@ -1,10 +1,10 @@
 # Phase 2: Instagram → Map Pipeline — Design Doc
 
-**Goal:** When a new Instagram reel is posted on @yvrwaterfountains, the system detects it daily, extracts the rating, matches it to a fountain, and emails you a one-tap confirm link. You tap confirm on your phone and it's live on the map. A separate one-time backfill fixes the 42 existing reviews that are missing Instagram URLs and photos.
+**Goal:** Make it dead simple to add Instagram reviews to the map: paste a URL + caption, confirm the fountain match, done. Also backfill the 42 existing reviews with their missing Instagram URLs, and set up a weekly email reminder so new posts don't slip through the cracks.
 
-**Architecture:** Netlify Scheduled Function polls Instagram Graph API once daily. New posts become pending admin reviews. Resend sends email notifications with signed approve/reject links handled by a second Netlify Function. Supabase remains the database. No changes to the frontend map — it already reads from Supabase.
+**Architecture:** No external APIs required. The admin review form is enhanced with auto-extraction (rating from caption, fuzzy fountain matching). A backfill tool helps paste URLs for existing reviews. A weekly Resend email nudges you to check for new posts. Everything runs on the existing stack — Supabase, Netlify, vanilla JS.
 
-**Tech Stack:** Netlify Scheduled Functions, Instagram Graph API, Resend (email), Supabase (Postgres + service role key), JWT for signed email links.
+**Tech Stack:** Vanilla JS (browser), Netlify Functions (Node.js 18), Resend (email), Supabase (Postgres)
 
 ---
 
@@ -12,167 +12,100 @@
 
 | Step | What | Time |
 |------|------|------|
-| 1 | Switch @yvrwaterfountains to Business or Creator account (free, in Instagram settings) | ~2 min |
-| 2 | Register a Meta Developer App, add Instagram Graph API product, generate a long-lived access token | ~30 min |
-| 3 | Sign up for Resend at resend.com, get API key | ~5 min |
-| 4 | Add environment variables to Netlify (see below) | ~5 min |
+| 1 | Sign up for Resend at resend.com, get API key | ~5 min |
+| 2 | Add environment variables to Netlify (see below) | ~5 min |
+
+No Facebook, no Instagram API, no Meta developer account needed.
 
 ### Netlify Environment Variables
 
 | Variable | Description |
 |----------|-------------|
-| `INSTAGRAM_ACCESS_TOKEN` | Long-lived Instagram Graph API token (60-day expiry, auto-refreshed) |
-| `INSTAGRAM_USER_ID` | Your Instagram Business account numeric ID |
 | `RESEND_API_KEY` | Resend email service API key |
-| `SUPABASE_URL` | Supabase project URL |
+| `SUPABASE_URL` | Supabase project URL (already set if Netlify functions were used before) |
 | `SUPABASE_SERVICE_ROLE_KEY` | Supabase service role key (server-side only, bypasses RLS) |
-| `REVIEW_ACTION_SECRET` | Random secret string for signing email action links (JWT) |
-| `ADMIN_EMAIL` | Email address to receive notifications (yvrwaterfountains@gmail.com) |
+| `ADMIN_EMAIL` | Email address to receive reminders (yvrwaterfountains@gmail.com) |
 
 ---
 
-## Database Changes
+## Component 1: Polished Admin Review Form
 
-Two new columns on the existing `reviews` table:
+The existing admin review form (`docs/admin_review_form.html` + `docs/js/admin-review-form.js`) already works. Enhancements:
 
-```sql
-ALTER TABLE public.reviews ADD COLUMN IF NOT EXISTS instagram_media_id text;
-ALTER TABLE public.reviews ADD COLUMN IF NOT EXISTS flag_reason text;
-```
+### New workflow (paste-and-confirm)
 
-- `instagram_media_id` — Instagram's unique media ID for each post. Used to dedup: the daily poll skips posts whose media ID already exists in the reviews table.
-- `flag_reason` — Why a review was held for manual review (e.g., "no fountain match found", "no rating in caption"). Nullable; null means no issues.
+1. Admin pastes an Instagram post URL into the URL field
+2. Admin pastes the caption into the caption field
+3. **System auto-extracts** the rating from the caption (e.g., "7.5/10" → 7.5)
+4. **System auto-matches** the fountain from caption text using fuzzy matching
+5. Map zooms to the matched fountain, highlights it
+6. Admin confirms or picks a different fountain
+7. One click to submit — review is approved and live on the map
 
-No new tables needed.
+### What changes in the code
 
----
-
-## Netlify Functions
-
-### 1. `poll-instagram.js` (Scheduled — daily)
-
-**Trigger:** Netlify Scheduled Function, cron `0 16 * * *` (8am Pacific / 4pm UTC).
-
-**Flow:**
-
-1. Check token health: if the access token expires within 7 days, auto-refresh it via `GET /oauth/access_token?grant_type=ig_refresh_token&access_token={token}`. If refresh fails, send a warning email and stop.
-2. Call `GET /{user-id}/media?fields=id,caption,media_url,permalink,timestamp&limit=10` to fetch recent posts.
-3. Query Supabase for existing `instagram_media_id` values to find which posts are already in the DB.
-4. For each new (unseen) post:
-   a. **Extract rating** from caption using regex: `(\d+\.?\d*)\s*/\s*10`. If no match, flag as "no rating in caption".
-   b. **Fuzzy-match fountain** by searching caption text against fountain names in the `fountains` table. Use simple substring/word matching (same approach as Phase 0.5 backfill tool). If no match, flag as "no fountain match found".
-   c. **Insert review** into Supabase:
-      - `fountain_id`: matched fountain's UUID (or null if no match)
-      - `author_type`: `'admin'`
-      - `status`: `'pending'`
-      - `rating`: extracted rating (or null)
-      - `instagram_url`: post permalink
-      - `instagram_image_url`: post media_url
-      - `instagram_caption`: post caption
-      - `instagram_media_id`: post media ID
-      - `reviewer_name`: `'yvrwaterfountains'`
-      - `visit_date`: post timestamp date
-      - `flag_reason`: null if clean, or reason string if flagged
-   d. **Send email** via Resend (see Email Format below).
-5. Log summary: "Processed X new posts, Y matched, Z flagged."
-
-### 2. `confirm-review.js` (HTTP endpoint)
-
-**Trigger:** GET request from email link.
-
-**URL format:** `/.netlify/functions/confirm-review?token={jwt}&action={approve|reject|dashboard}`
-
-**Flow:**
-
-1. Decode and verify the JWT token using `REVIEW_ACTION_SECRET`. Token payload contains `reviewId` and `exp` (48-hour expiry).
-2. If `action=approve`: update review `status = 'approved'`, `reviewed_at = now()`. Return a simple HTML page: "Review approved! It's now live on the map."
-3. If `action=reject`: update review `status = 'rejected'`. Return: "Review rejected."
-4. If `action=dashboard`: redirect to the moderation dashboard URL.
-5. If token is expired or invalid: return "This link has expired. Please use the moderation dashboard."
+- **Auto-extract rating**: When caption text changes, run `extractRating()` (already exists in `link-instagram.js`) and pre-fill the rating field
+- **Auto-match fountain**: When caption text changes, run `fuzzyMatchFountains()` (already exists in `link-instagram.js`) against loaded fountain data, auto-select the best match on the map
+- The existing form fields (Instagram URL, caption, rating, visit date, notes) stay the same — we just auto-fill more of them
 
 ---
 
-## Email Format
+## Component 2: Backfill Tool
 
-### New post detected (good match)
+A simple admin page that lists the 42 reviews with missing `instagram_url`, shows each review's caption, and provides an input field to paste the matching Instagram post URL.
 
-```
-Subject: New IG post → [Fountain Name] — [rating]/10
+### Page: `docs/backfill-instagram.html`
 
-New Instagram post detected
-━━━━━━━━━━━━━━━━━━━━━━━━━
+- Admin signs in (same Supabase auth as other admin pages)
+- Page loads all reviews where `instagram_url IS NULL` and `author_type = 'admin'`
+- Each review displayed as a card: caption text, rating, visit date, fountain name
+- Each card has an input field for pasting the Instagram URL
+- "Save" button updates `instagram_url` in Supabase
+- Progress counter: "12 of 42 updated"
 
-Fountain: [Fountain Name] ([external_id])
-Rating: [X]/10
-Caption: "[First 150 chars of caption...]"
-Posted: [date]
-
-[ Confirm & Publish ]  [ Review Manually ]
-```
-
-### New post detected (needs attention)
-
-```
-Subject: New IG post needs review — [flag reason]
-
-New Instagram post needs your attention
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-Issue: [flag_reason — e.g., "no fountain match found"]
-Caption: "[First 150 chars...]"
-Posted: [date]
-
-[ Open Dashboard ]
-```
-
-### Token expiry warning
-
-```
-Subject: Instagram token expires in [N] days
-
-Your Instagram access token expires on [date].
-Refresh it at: [Meta developer dashboard URL]
-```
+This is a one-time tool. Once all 42 URLs are filled in, the page shows "All done!"
 
 ---
 
-## One-Time Backfill (separate from daily polling)
+## Component 3: Weekly Reminder Email
 
-A standalone script or single-use Netlify function that runs once to fix the 42 existing reviews:
+A Netlify Scheduled Function sends a weekly email: "Have you posted any new reels this week? Add them to the map!"
 
-1. Fetch all posts from the Graph API (paginated — `?limit=50` with cursor pagination until all posts are retrieved).
-2. For each post, match to an existing review by comparing caption text (same fuzzy logic as Phase 0.5).
-3. Update matched reviews with: `instagram_url` (permalink), `instagram_image_url` (media_url), `instagram_media_id` (media ID).
-4. Log results: "Updated X of 42 reviews. Y unmatched."
+### Function: `netlify/functions/weekly-reminder.js`
 
-This runs once and is done. The daily polling handles all new posts going forward.
+**Schedule:** Mondays at 10am Pacific (6pm UTC) — `0 18 * * 1`
 
----
+**Email content:**
+```
+Subject: Weekly reminder — any new fountain reviews?
 
-## Admin Form Polish (minor)
+Hey! Quick check: have you or your friend posted any new
+@yvrwaterfountains reels this week?
 
-The existing admin review form (`admin-review-form.js`) already works. Minor improvements:
+If so, add them to the map:
+[Open Admin Form] → paste URL + caption, confirm fountain, done!
 
-- When an Instagram URL is pasted, show an image preview using the Meta oEmbed API (`GET https://graph.facebook.com/v18.0/instagram_oembed?url={url}&access_token={token}`).
-- Pre-fill the caption field if the IG URL is recognized from a pending review created by the daily poll.
+Currently on the map: [X] reviewed fountains out of [Y] total.
+
+— YVR Water Fountains Bot
+```
+
+The function queries Supabase for the current review/fountain counts to include in the email.
 
 ---
 
 ## What's NOT in this phase
 
+- Instagram Graph API / auto-detection (requires Facebook)
 - Public review form / community submissions
 - Auto-screening / profanity filter / spam detection
-- "Request a review" form
-- "Suggest a fountain" form
-- Moderation dashboard redesign (existing dashboard still works for edge cases)
-
-These are deferred to a future phase focused on community features.
+- "Request a review" and "Suggest a fountain" forms
+- Moderation dashboard redesign
 
 ---
 
 ## Security Notes
 
 - `SUPABASE_SERVICE_ROLE_KEY` is only used server-side in Netlify Functions, never exposed to the browser.
-- Email action links use JWT tokens signed with `REVIEW_ACTION_SECRET`, expiring after 48 hours.
-- Instagram access token is stored in Netlify env vars, never in client code.
-- The daily function uses the service role key to bypass RLS for inserting admin reviews and updating instagram fields.
+- Admin pages use Supabase auth (email + password) — same as current setup.
+- The weekly reminder function uses the service role key to query counts.

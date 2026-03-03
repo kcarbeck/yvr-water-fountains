@@ -2,11 +2,11 @@
 
 > **For Claude:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.
 
-**Goal:** Auto-detect new Instagram posts daily, email a one-tap confirm link, and publish reviews to the map — plus backfill the 42 existing reviews with their missing Instagram URLs and photos.
+**Goal:** Make it dead simple to add Instagram reviews to the map (paste URL + caption, auto-fill, confirm), backfill the 42 existing reviews with missing Instagram URLs, and send a weekly email reminder to check for new posts.
 
-**Architecture:** Netlify Scheduled Function polls Instagram Graph API daily. New posts become pending admin reviews in Supabase. Resend sends email notifications with JWT-signed approve/reject links, handled by a second Netlify Function. A one-time backfill script fixes existing reviews. No frontend framework — vanilla JS, IIFE modules.
+**Architecture:** Enhance the existing admin review form with auto-extraction (rating from caption, fuzzy fountain matching). Build a backfill tool page for pasting missing URLs. Add a weekly Netlify Scheduled Function for email reminders via Resend. No external APIs, no Facebook.
 
-**Tech Stack:** Node.js 18+ (Netlify Functions), Instagram Graph API, Resend (email), Supabase (Postgres via service role key), jsonwebtoken (JWT for signed links), esbuild (Netlify bundler)
+**Tech Stack:** Vanilla JS (IIFE modules, no bundler), Leaflet maps, Supabase (Postgres + anon key for browser, service role key for functions), Netlify Scheduled Functions, Resend (email), Bootstrap 5
 
 **Design doc:** `docs/plans/2026-03-02-phase2-instagram-pipeline-design.md`
 
@@ -16,150 +16,55 @@
 
 ### Project structure
 
-All served files live under `docs/` (Netlify publish dir). Netlify functions live in `netlify/functions/`. The functions have their own `package.json` at `netlify/functions/package.json`. The root `package.json` is for dev tooling. esbuild bundles functions automatically (configured in `netlify.toml`).
+- All served files live under `docs/` (Netlify publish dir)
+- Netlify functions live in `netlify/functions/` with their own `package.json`
+- Browser JS uses IIFE modules attached to `window` (e.g., `window.AppApi`)
+- No build step, no bundler — esbuild only bundles Netlify functions
+- Script load order: Supabase CDN → env.local.js → config.js → api.js → ui.js → fountain-data.js → page JS
+- Local dev: `cd docs && python3 -m http.server 8000`
 
-### Key existing files you'll reference
+### Key files you'll reference
 
-- `netlify/functions/package.json` — functions dependencies (currently only `@supabase/supabase-js`)
-- `netlify/functions/submit-review.js` — **BROKEN**, references old table `ratings` and old columns. Will be deleted.
-- `netlify/functions/manage-rating.js` — **BROKEN**, same issue. Will be deleted.
-- `netlify/functions/trigger-deployment.js` — auto-deployment trigger (still works but not needed; we read live from Supabase now)
-- `netlify.toml` — build config, function config, headers, redirects
-- `docs/js/link-instagram.js` — contains `extractRating()` (line 268-296) and `fuzzyMatchFountains()` (line 228-266) that we'll port to Node.js
-- `docs/js/api.js` — Supabase client helpers (browser-side, not used by functions)
-- `supabase/migrations/20241015120000_core_schema.sql` — original DB schema
+- `docs/js/admin-review-form.js` — current admin form logic (auth, map, form submission)
+- `docs/admin_review_form.html` — admin form HTML
+- `docs/js/link-instagram.js:228-296` — `fuzzyMatchFountains()` and `extractRating()` to reuse
+- `docs/js/api.js` — Supabase client helpers (browser-side)
+- `docs/js/fountain-data.js` — loads fountain GeoJSON data
+- `netlify/functions/package.json` — function dependencies
+- `netlify.toml` — build config, function config
 
-### Supabase credentials
+### Supabase details
 
-Functions use `SUPABASE_SERVICE_ROLE_KEY` (env var, bypasses RLS) — NOT the anon key. The anon key in `docs/config.js` is for browser-side reads only.
+- **Anon key**: in `docs/config.js` (safe, RLS protects writes)
+- **Service role key**: Netlify env var only (bypasses RLS, for functions)
+- **Reviews table columns** (after Phase 1): `id, fountain_id, author_type, status, rating, review_text, reviewer_name, reviewer_email, instagram_url, instagram_image_url, instagram_caption, visit_date, reviewed_at, approved_by, created_at, updated_at`
+- **RLS**: anon can SELECT approved reviews and INSERT pending public reviews. Authenticated admins can do everything.
 
-### Current reviews table columns (after Phase 1)
+### Codebase conventions
 
-`id, fountain_id, author_type, status, rating, review_text, reviewer_name, reviewer_email, instagram_url, instagram_image_url, instagram_caption, visit_date, reviewed_at, approved_by, created_at, updated_at`
-
-Status values: `pending`, `approved`, `rejected`
-
----
-
-## Task 1: Database migration — add instagram_media_id and flag_reason columns
-
-**Files:**
-- Create: `supabase/migrations/20260302_add_instagram_media_id.sql`
-
-**Step 1: Write the migration SQL**
-
-Create file `supabase/migrations/20260302_add_instagram_media_id.sql`:
-
-```sql
--- Phase 2: Add columns for Instagram Graph API integration
--- instagram_media_id: dedup key for daily polling (Instagram's unique media ID per post)
--- flag_reason: why a review was held for manual review (null = no issues)
-
-ALTER TABLE public.reviews ADD COLUMN IF NOT EXISTS instagram_media_id text;
-ALTER TABLE public.reviews ADD COLUMN IF NOT EXISTS flag_reason text;
-
--- Index for fast dedup lookups during daily polling
-CREATE INDEX IF NOT EXISTS idx_reviews_instagram_media_id
-  ON public.reviews(instagram_media_id)
-  WHERE instagram_media_id IS NOT NULL;
-```
-
-**Step 2: Apply the migration to Supabase**
-
-Run this SQL in the Supabase SQL Editor (Dashboard → SQL Editor → New Query → paste → Run). Alternatively, use curl:
-
-```bash
-curl -X POST "https://hnyktzfyquvmpthfwpvd.supabase.co/rest/v1/rpc" \
-  -H "apikey: $SUPABASE_SERVICE_ROLE_KEY" \
-  -H "Authorization: Bearer $SUPABASE_SERVICE_ROLE_KEY" \
-  -H "Content-Type: application/json" \
-  --data-raw '...'
-```
-
-Since we can't run raw DDL via REST, use the Supabase Dashboard SQL Editor. Verify by running:
-
-```sql
-SELECT column_name, data_type FROM information_schema.columns
-WHERE table_name = 'reviews' AND column_name IN ('instagram_media_id', 'flag_reason');
-```
-
-Expected: 2 rows, both `text` type.
-
-**Step 3: Commit**
-
-```bash
-git add supabase/migrations/20260302_add_instagram_media_id.sql
-git commit -m "feat: add instagram_media_id and flag_reason columns to reviews"
-```
+- Use `const`/`let` (NOT `var`)
+- IIFE modules attached to `window`
+- Function declarations preferred over arrow functions in module-level code
+- `escapeHtml()` is duplicated across files (acceptable for now)
 
 ---
 
-## Task 2: Update dependencies — add resend and jsonwebtoken
+## Task 1: Enhance admin form — auto-extract rating from caption
+
+When the admin types or pastes a caption, the rating field auto-fills with the extracted rating.
 
 **Files:**
-- Modify: `netlify/functions/package.json`
+- Modify: `docs/js/admin-review-form.js`
 
-**Step 1: Add dependencies**
+**Step 1: Add the `extractRating` function**
 
-Update `netlify/functions/package.json` to:
-
-```json
-{
-  "name": "yvr-water-fountains-functions",
-  "version": "1.0.0",
-  "description": "Netlify Functions for YVR Water Fountains",
-  "dependencies": {
-    "@supabase/supabase-js": "^2.38.0",
-    "resend": "^3.2.0",
-    "jsonwebtoken": "^9.0.2"
-  },
-  "engines": {
-    "node": ">=18"
-  }
-}
-```
-
-**Step 2: Install dependencies**
-
-```bash
-cd netlify/functions && npm install
-```
-
-Verify `node_modules/resend` and `node_modules/jsonwebtoken` exist.
-
-**Step 3: Commit**
-
-```bash
-git add netlify/functions/package.json netlify/functions/package-lock.json
-git commit -m "chore: add resend and jsonwebtoken dependencies for Phase 2"
-```
-
----
-
-## Task 3: Shared Instagram utilities for Netlify functions
-
-Port `extractRating()` and `fuzzyMatchFountain()` from `docs/js/link-instagram.js` into a Node.js module that functions can `require()`.
-
-**Files:**
-- Create: `netlify/functions/lib/instagram-utils.js`
-
-**Step 1: Create the shared utilities module**
+Add this function inside the IIFE (before `collectFormData`), ported from `docs/js/link-instagram.js:268-296`:
 
 ```js
-'use strict';
-
-/**
- * Extracts a rating (0-10) from an Instagram caption.
- * Ported from docs/js/link-instagram.js:268-296.
- *
- * Handles: "7/10", "7.5/10", "6-8/10" (averaged), "rating: 7", "score: 8"
- * Returns null if no rating found.
- */
 function extractRating(caption) {
   if (!caption) return null;
 
-  // Range pattern: "6-8/10" → average to 7
-  const rangeMatch = caption.match(/(\d+\.?\d*)\s*-\s*(\d+\.?\d*)\s*\/\s*10/);
+  var rangeMatch = caption.match(/(\d+\.?\d*)\s*-\s*(\d+\.?\d*)\s*\/\s*10/);
   if (rangeMatch) {
     const low = parseFloat(rangeMatch[1]);
     const high = parseFloat(rangeMatch[2]);
@@ -185,953 +90,734 @@ function extractRating(caption) {
 
   return null;
 }
+```
 
-/**
- * Fuzzy-matches a caption against an array of fountain rows from Supabase.
- * Ported from docs/js/link-instagram.js:228-266.
- *
- * Each fountain row should have: { id, name, neighbourhood }
- * Returns array of { fountain, score } sorted by score descending. Empty if no matches.
- */
-function fuzzyMatchFountains(caption, fountainRows) {
+**Step 2: Wire up the auto-extraction**
+
+In the `init()` function, after the existing `setupReviewForm()` call, add a listener on the caption textarea:
+
+```js
+const captionField = document.getElementById('instagramCaption');
+if (captionField) {
+  captionField.addEventListener('input', function () {
+    const rating = extractRating(captionField.value);
+    if (rating !== null) {
+      const ratingField = document.getElementById('overallRating');
+      if (ratingField && !ratingField.dataset.manuallyEdited) {
+        ratingField.value = rating;
+      }
+    }
+  });
+
+  const ratingField = document.getElementById('overallRating');
+  if (ratingField) {
+    ratingField.addEventListener('input', function () {
+      ratingField.dataset.manuallyEdited = 'true';
+    });
+  }
+}
+```
+
+The `manuallyEdited` flag prevents overwriting a rating the admin has intentionally changed.
+
+**Step 3: Test manually**
+
+1. Start local dev server: `cd docs && python3 -m http.server 8000`
+2. Open `http://localhost:8000/admin_review_form.html`
+3. Sign in with admin credentials
+4. In the caption field, type: `Great fountain at Stanley Park! 7.5/10 would come again`
+5. Verify the rating field auto-fills with `7.5`
+6. Manually change the rating to `8`
+7. Type more in the caption — verify the rating stays at `8` (manual override respected)
+
+**Step 4: Commit**
+
+```bash
+git add docs/js/admin-review-form.js
+git commit -m "feat: auto-extract rating from caption in admin review form"
+```
+
+---
+
+## Task 2: Enhance admin form — auto-match fountain from caption
+
+When the admin types or pastes a caption, the system fuzzy-matches a fountain and auto-selects it on the map.
+
+**Files:**
+- Modify: `docs/js/admin-review-form.js`
+
+**Step 1: Add the `fuzzyMatchFountains` function**
+
+Add this function inside the IIFE (after `extractRating`), ported from `docs/js/link-instagram.js:228-266`:
+
+```js
+function fuzzyMatchFountains(caption, fountainFeatures) {
   const words = caption.toLowerCase()
     .replace(/[^a-z0-9\s]/g, ' ')
     .split(/\s+/)
-    .filter(w => w.length > 2);
+    .filter(function (w) { return w.length > 2; });
 
-  const uniqueWords = [...new Set(words)];
+  const uniqueWords = [];
+  const seen = {};
+  words.forEach(function (w) {
+    if (!seen[w]) { seen[w] = true; uniqueWords.push(w); }
+  });
 
-  const scored = fountainRows.map(fountain => {
-    const name = (fountain.name || '').toLowerCase();
-    const neighbourhood = (fountain.neighbourhood || '').toLowerCase();
-    const target = name + ' ' + neighbourhood;
+  const scored = fountainFeatures.map(function (feature) {
+    const props = feature.properties || {};
+    const name = (props.name || '').toLowerCase();
+    const neighbourhood = (props.neighborhood || '').toLowerCase();
+    const location = (props.location || '').toLowerCase();
+    const target = name + ' ' + neighbourhood + ' ' + location;
 
     let score = 0;
-    for (const word of uniqueWords) {
+    uniqueWords.forEach(function (word) {
       if (target.includes(word)) {
         score += name.includes(word) ? 3 : 1;
       }
-    }
+    });
 
-    // Bigram bonus: consecutive words that appear together in the name
     for (let i = 0; i < uniqueWords.length - 1; i++) {
       const bigram = uniqueWords[i] + ' ' + uniqueWords[i + 1];
       if (name.includes(bigram)) score += 5;
     }
 
-    return { fountain, score };
+    return { feature: feature, score: score };
   });
 
   return scored
-    .filter(s => s.score > 0)
-    .sort((a, b) => b.score - a.score);
+    .filter(function (s) { return s.score > 0; })
+    .sort(function (a, b) { return b.score - a.score; });
 }
-
-module.exports = { extractRating, fuzzyMatchFountains };
 ```
 
-**Step 2: Verify the module loads**
+**Step 2: Wire up auto-matching on caption change**
+
+Extend the caption `input` listener added in Task 1. After the rating extraction, add fountain matching. Use a debounce to avoid thrashing the map on every keystroke:
+
+```js
+let matchDebounce = null;
+
+captionField.addEventListener('input', function () {
+  // Rating auto-extraction (from Task 1)
+  const rating = extractRating(captionField.value);
+  if (rating !== null) {
+    const ratingField = document.getElementById('overallRating');
+    if (ratingField && !ratingField.dataset.manuallyEdited) {
+      ratingField.value = rating;
+    }
+  }
+
+  // Fountain auto-matching (debounced)
+  clearTimeout(matchDebounce);
+  matchDebounce = setTimeout(function () {
+    const caption = captionField.value.trim();
+    if (caption.length < 5 || state.fountains.length === 0) return;
+
+    const matches = fuzzyMatchFountains(caption, state.fountains);
+    if (matches.length > 0 && matches[0].score >= 3) {
+      const best = matches[0];
+      const props = best.feature.properties || {};
+      const marker = state.markerById.get(props.id);
+      if (marker) {
+        state.map.setView(marker.getLatLng(), 16);
+        selectFountain(props, marker);
+        showFormAlert(
+          'Auto-matched: ' + escapeHtml(props.name || 'Unnamed') +
+          (matches.length > 1 ? ' (' + (matches.length - 1) + ' other possible matches)' : ''),
+          'info'
+        );
+      }
+    }
+  }, 500);
+});
+```
+
+Note: `state.fountains` contains the GeoJSON features loaded in `loadFountains()`. The `selectFountain()` and `state.markerById` already exist in the current code.
+
+**Step 3: Test manually**
+
+1. Open admin form, sign in
+2. In the caption field, paste a known caption like: `Hillcrest Park fountain review! Clean water, good pressure. 8/10`
+3. Verify: rating auto-fills with `8`, map zooms to Hillcrest area, fountain is selected
+4. Verify: info alert shows "Auto-matched: Hillcrest Park (...)"
+5. Click a different fountain on the map — verify the selection changes (manual override works)
+
+**Step 4: Commit**
 
 ```bash
-cd netlify/functions && node -e "const u = require('./lib/instagram-utils'); console.log('extractRating:', u.extractRating('Great fountain 7.5/10')); console.log('fuzzyMatch type:', typeof u.fuzzyMatchFountains);"
-```
-
-Expected output:
-```
-extractRating: 7.5
-fuzzyMatch type: function
-```
-
-**Step 3: Commit**
-
-```bash
-git add netlify/functions/lib/instagram-utils.js
-git commit -m "feat: add shared Instagram utilities (rating extraction, fuzzy matching)"
+git add docs/js/admin-review-form.js
+git commit -m "feat: auto-match fountain from caption in admin review form"
 ```
 
 ---
 
-## Task 4: JWT token helper for signed email links
+## Task 3: Build the backfill tool page — HTML
+
+A simple admin page for pasting Instagram URLs into existing reviews that are missing them.
 
 **Files:**
-- Create: `netlify/functions/lib/tokens.js`
+- Create: `docs/backfill_instagram.html`
 
-**Step 1: Create the token module**
+**Step 1: Create the HTML page**
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backfill Instagram URLs - YVR Water Fountains</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #f5f7fb;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .page-container {
+            max-width: 800px;
+            margin: 40px auto;
+        }
+        .card-header {
+            background: linear-gradient(135deg, #007bff, #00c6ff);
+            color: #fff;
+        }
+        .review-card {
+            border: 1px solid #e3e6ef;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+            background: #fff;
+            box-shadow: 0 2px 6px rgba(15, 34, 58, 0.08);
+        }
+        .review-card.saved {
+            border-color: #198754;
+            background: #f0fdf4;
+        }
+        .caption-text {
+            font-size: 0.9rem;
+            color: #495057;
+            white-space: pre-wrap;
+            max-height: 100px;
+            overflow-y: auto;
+            margin-bottom: 12px;
+            padding: 8px;
+            background: #f8f9fa;
+            border-radius: 6px;
+        }
+        .meta {
+            font-size: 0.85rem;
+            color: #6c757d;
+        }
+        #adminControls { display: none; }
+    </style>
+</head>
+<body>
+<div class="page-container">
+    <div class="card shadow-sm mb-4">
+        <div class="card-header py-3">
+            <h1 class="h4 mb-0">Backfill Instagram URLs</h1>
+            <p class="mb-0" style="font-size: 0.9rem;">Paste the Instagram post URL for each review below.</p>
+        </div>
+        <div class="card-body">
+            <div id="authPanel" class="alert alert-warning" role="alert">
+                <h5 class="alert-heading">Admin sign in</h5>
+                <p id="authMessage">Sign in to load reviews missing Instagram URLs.</p>
+                <form id="loginForm" class="row g-3">
+                    <div class="col-md-5">
+                        <label for="adminEmail" class="form-label">Email</label>
+                        <input type="email" id="adminEmail" class="form-control" required>
+                    </div>
+                    <div class="col-md-5">
+                        <label for="adminPassword" class="form-label">Password</label>
+                        <input type="password" id="adminPassword" class="form-control" required>
+                    </div>
+                    <div class="col-md-2 d-flex align-items-end">
+                        <button type="submit" class="btn btn-primary w-100">Sign in</button>
+                    </div>
+                </form>
+                <div class="d-flex align-items-center mt-3" id="logoutRow" style="display: none;">
+                    <span class="me-3" id="signedInAs"></span>
+                    <button class="btn btn-outline-secondary btn-sm" id="logoutButton">Sign out</button>
+                </div>
+            </div>
+            <div id="adminControls">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="badge bg-primary" id="progressBadge">0 / 0 updated</span>
+                    <a href="https://www.instagram.com/yvrwaterfountains/" target="_blank" class="btn btn-outline-secondary btn-sm">
+                        Open @yvrwaterfountains
+                    </a>
+                </div>
+                <div id="reviewsContainer"></div>
+                <div id="allDone" class="alert alert-success" style="display: none;">
+                    All reviews have Instagram URLs. Nothing to backfill!
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.43.1/dist/umd/supabase.min.js"></script>
+<script src="config.js"></script>
+<script src="js/api.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/backfill-instagram.js"></script>
+</body>
+</html>
+```
+
+**Step 2: Commit**
+
+```bash
+git add docs/backfill_instagram.html
+git commit -m "feat: add backfill Instagram URLs page (HTML)"
+```
+
+---
+
+## Task 4: Build the backfill tool — JavaScript
+
+**Files:**
+- Create: `docs/js/backfill-instagram.js`
+
+**Step 1: Create the JS module**
 
 ```js
 'use strict';
 
-const jwt = require('jsonwebtoken');
+(function () {
+  const api = window.AppApi || {};
+  const ui = window.AppUI || {};
+  const state = {
+    supabaseClient: null,
+    isAdmin: false,
+    reviews: [],
+    savedCount: 0
+  };
 
-const SECRET = process.env.REVIEW_ACTION_SECRET;
-const EXPIRY = '48h';
+  document.addEventListener('DOMContentLoaded', init);
 
-/**
- * Creates a signed JWT for an email action link.
- * Payload: { reviewId, action }
- * Expires in 48 hours.
- */
-function signActionToken(reviewId, action) {
-  if (!SECRET) {
-    throw new Error('REVIEW_ACTION_SECRET environment variable is not set');
+  async function init() {
+    if (!api.hasCredentials || !api.hasCredentials()) {
+      setAuthMessage('Supabase not configured. Check config.js.');
+      return;
+    }
+
+    state.supabaseClient = typeof api.getClient === 'function' ? api.getClient() : null;
+    if (!state.supabaseClient) {
+      setAuthMessage('Supabase client failed to initialize.');
+      return;
+    }
+
+    setupAuth();
+
+    const { data } = await state.supabaseClient.auth.getSession();
+    applySession(data && data.session ? data.session : null);
   }
-  return jwt.sign({ reviewId, action }, SECRET, { expiresIn: EXPIRY });
-}
 
-/**
- * Verifies and decodes a signed JWT.
- * Returns { reviewId, action } or throws if expired/invalid.
- */
-function verifyActionToken(token) {
-  if (!SECRET) {
-    throw new Error('REVIEW_ACTION_SECRET environment variable is not set');
+  function setupAuth() {
+    const loginForm = document.getElementById('loginForm');
+    const logoutButton = document.getElementById('logoutButton');
+
+    if (loginForm) {
+      loginForm.addEventListener('submit', async function (event) {
+        event.preventDefault();
+        const email = document.getElementById('adminEmail').value.trim();
+        const password = document.getElementById('adminPassword').value;
+        if (!email || !password) {
+          setAuthMessage('Enter both email and password.');
+          return;
+        }
+        try {
+          const { error } = await state.supabaseClient.auth.signInWithPassword({ email, password });
+          if (error) {
+            setAuthMessage('Sign in failed: ' + error.message);
+          }
+        } catch (error) {
+          setAuthMessage('Sign in failed due to a network issue.');
+        }
+      });
+    }
+
+    if (logoutButton) {
+      logoutButton.addEventListener('click', function () {
+        state.supabaseClient.auth.signOut();
+      });
+    }
+
+    state.supabaseClient.auth.onAuthStateChange(function (_event, session) {
+      applySession(session);
+    });
   }
-  return jwt.verify(token, SECRET);
-}
 
-module.exports = { signActionToken, verifyActionToken };
+  async function applySession(session) {
+    const loginForm = document.getElementById('loginForm');
+    const logoutRow = document.getElementById('logoutRow');
+    const signedInAs = document.getElementById('signedInAs');
+    const adminControls = document.getElementById('adminControls');
+
+    state.isAdmin = false;
+
+    if (!session) {
+      setAuthMessage('Sign in to load reviews.');
+      if (loginForm) loginForm.style.display = 'block';
+      if (logoutRow) logoutRow.style.display = 'none';
+      if (adminControls) adminControls.style.display = 'none';
+      return;
+    }
+
+    if (loginForm) loginForm.style.display = 'none';
+    if (logoutRow) logoutRow.style.display = 'flex';
+    if (signedInAs) signedInAs.textContent = 'Signed in as ' + session.user.email;
+
+    try {
+      const profile = await api.fetchAdminProfile(session.user.id, state.supabaseClient);
+      if (!profile) {
+        setAuthMessage('Not authorized. Ask the owner to add you to the admins table.');
+        return;
+      }
+      state.isAdmin = true;
+      setAuthMessage('Signed in as ' + (profile.display_name || session.user.email));
+      const authPanel = document.getElementById('authPanel');
+      if (authPanel) {
+        authPanel.classList.remove('alert-warning');
+        authPanel.classList.add('alert-success');
+      }
+      if (adminControls) adminControls.style.display = 'block';
+      await loadReviews();
+    } catch (error) {
+      setAuthMessage('Could not verify admin access.');
+    }
+  }
+
+  async function loadReviews() {
+    const container = document.getElementById('reviewsContainer');
+    const allDone = document.getElementById('allDone');
+    if (!container) return;
+
+    container.innerHTML = '<p class="text-muted">Loading reviews...</p>';
+
+    const { data, error } = await state.supabaseClient
+      .from('reviews')
+      .select('id, fountain_id, instagram_caption, instagram_url, rating, visit_date, reviewer_name, fountains(name, external_id, neighbourhood)')
+      .eq('author_type', 'admin')
+      .eq('status', 'approved')
+      .is('instagram_url', null)
+      .order('visit_date', { ascending: true });
+
+    if (error) {
+      container.innerHTML = '<p class="text-danger">Failed to load reviews: ' + escapeHtml(error.message) + '</p>';
+      return;
+    }
+
+    state.reviews = data || [];
+    state.savedCount = 0;
+
+    if (state.reviews.length === 0) {
+      container.innerHTML = '';
+      if (allDone) allDone.style.display = 'block';
+      updateProgress();
+      return;
+    }
+
+    if (allDone) allDone.style.display = 'none';
+    container.innerHTML = '';
+
+    state.reviews.forEach(function (review, index) {
+      container.appendChild(buildCard(review, index));
+    });
+
+    updateProgress();
+  }
+
+  function buildCard(review, index) {
+    const fountain = review.fountains || {};
+    const card = document.createElement('div');
+    card.className = 'review-card';
+    card.id = 'review-card-' + index;
+
+    const caption = review.instagram_caption || '(no caption stored)';
+    const truncated = caption.length > 300 ? caption.slice(0, 300) + '...' : caption;
+
+    card.innerHTML =
+      '<div class="d-flex justify-content-between align-items-start mb-2">' +
+        '<div>' +
+          '<strong>' + escapeHtml(fountain.name || 'Unknown fountain') + '</strong>' +
+          '<span class="meta ms-2">' + escapeHtml(fountain.external_id || '') + '</span>' +
+        '</div>' +
+        '<span class="badge bg-secondary">' + (review.rating !== null ? review.rating + '/10' : 'no rating') + '</span>' +
+      '</div>' +
+      '<div class="caption-text">' + escapeHtml(truncated) + '</div>' +
+      '<div class="meta mb-2">Visited: ' + escapeHtml(review.visit_date || 'unknown') + '</div>' +
+      '<div class="input-group">' +
+        '<input type="url" class="form-control" id="url-input-' + index + '" ' +
+          'placeholder="Paste Instagram URL here...">' +
+        '<button class="btn btn-outline-success" id="save-btn-' + index + '">Save</button>' +
+      '</div>' +
+      '<div id="save-status-' + index + '" class="mt-2"></div>';
+
+    const saveBtn = card.querySelector('#save-btn-' + index);
+    saveBtn.addEventListener('click', function () {
+      saveUrl(review, index);
+    });
+
+    const urlInput = card.querySelector('#url-input-' + index);
+    urlInput.addEventListener('keydown', function (event) {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        saveUrl(review, index);
+      }
+    });
+
+    return card;
+  }
+
+  async function saveUrl(review, index) {
+    const input = document.getElementById('url-input-' + index);
+    const btn = document.getElementById('save-btn-' + index);
+    const status = document.getElementById('save-status-' + index);
+    const card = document.getElementById('review-card-' + index);
+    const url = input ? input.value.trim() : '';
+
+    if (!url) {
+      if (status) status.innerHTML = '<small class="text-danger">Enter a URL first.</small>';
+      return;
+    }
+
+    if (!url.includes('instagram.com/')) {
+      if (status) status.innerHTML = '<small class="text-danger">Not a valid Instagram URL.</small>';
+      return;
+    }
+
+    if (btn) { btn.disabled = true; btn.textContent = 'Saving...'; }
+
+    const { error } = await state.supabaseClient
+      .from('reviews')
+      .update({ instagram_url: url })
+      .eq('id', review.id);
+
+    if (error) {
+      if (status) status.innerHTML = '<small class="text-danger">Save failed: ' + escapeHtml(error.message) + '</small>';
+      if (btn) { btn.disabled = false; btn.textContent = 'Save'; }
+      return;
+    }
+
+    state.savedCount++;
+    if (card) card.classList.add('saved');
+    if (input) { input.disabled = true; input.value = url; }
+    if (btn) { btn.disabled = true; btn.textContent = 'Saved'; btn.classList.replace('btn-outline-success', 'btn-success'); }
+    if (status) status.innerHTML = '<small class="text-success">Saved!</small>';
+
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const badge = document.getElementById('progressBadge');
+    if (badge) {
+      badge.textContent = state.savedCount + ' / ' + state.reviews.length + ' updated';
+    }
+  }
+
+  function setAuthMessage(message) {
+    const el = document.getElementById('authMessage');
+    if (el) el.textContent = message;
+  }
+
+  function escapeHtml(value) {
+    if (value === null || value === undefined) return '';
+    return String(value)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+})();
 ```
 
-**Step 2: Verify the module loads**
+**Step 2: Test manually**
 
-```bash
-cd netlify/functions && REVIEW_ACTION_SECRET=test123 node -e "
-const t = require('./lib/tokens');
-const token = t.signActionToken('abc-123', 'approve');
-console.log('token created:', token.length > 0);
-const decoded = t.verifyActionToken(token);
-console.log('decoded:', decoded.reviewId, decoded.action);
-"
-```
-
-Expected:
-```
-token created: true
-decoded: abc-123 approve
-```
+1. Open `http://localhost:8000/backfill_instagram.html`
+2. Sign in with admin credentials
+3. Verify: reviews with missing URLs are listed with captions, ratings, fountain names
+4. Open `https://www.instagram.com/yvrwaterfountains/` in another tab
+5. Find a matching post, copy its URL
+6. Paste into the input field, click Save
+7. Verify: card turns green, "Saved!" appears, progress counter updates
 
 **Step 3: Commit**
 
 ```bash
-git add netlify/functions/lib/tokens.js
-git commit -m "feat: add JWT token helper for signed email action links"
+git add docs/js/backfill-instagram.js
+git commit -m "feat: add backfill Instagram URLs tool (JavaScript)"
 ```
 
 ---
 
-## Task 5: Resend email helper
+## Task 5: Add Resend dependency + weekly reminder function
 
 **Files:**
-- Create: `netlify/functions/lib/email.js`
+- Modify: `netlify/functions/package.json`
+- Create: `netlify/functions/weekly-reminder.js`
+- Modify: `netlify.toml`
 
-**Step 1: Create the email module**
+**Step 1: Add Resend dependency**
 
-```js
-'use strict';
+Update `netlify/functions/package.json`:
 
-const { Resend } = require('resend');
-
-function getResendClient() {
-  const apiKey = process.env.RESEND_API_KEY;
-  if (!apiKey) {
-    throw new Error('RESEND_API_KEY environment variable is not set');
+```json
+{
+  "name": "yvr-water-fountains-functions",
+  "version": "1.0.0",
+  "description": "Netlify Functions for YVR Water Fountains",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.38.0",
+    "resend": "^3.2.0"
+  },
+  "engines": {
+    "node": ">=18"
   }
-  return new Resend(apiKey);
 }
-
-const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'yvrwaterfountains@gmail.com';
-const FROM_EMAIL = 'YVR Water Fountains <onboarding@resend.dev>';
-// Note: Replace FROM_EMAIL with your verified domain once set up in Resend,
-// e.g., 'notifications@yourdomain.com'. The onboarding@resend.dev address
-// works for testing but can only send to the account owner's email.
-
-/**
- * Sends a "new IG post detected" email with confirm/review links.
- *
- * @param {object} opts
- * @param {string} opts.fountainName - matched fountain name (or "No match found")
- * @param {string} opts.externalId - fountain external_id (e.g., "DFPB0004")
- * @param {number|null} opts.rating - extracted rating or null
- * @param {string} opts.caption - Instagram caption (first 200 chars)
- * @param {string} opts.postDate - post date string
- * @param {string} opts.permalink - Instagram post URL
- * @param {string|null} opts.flagReason - why it needs attention, or null
- * @param {string} opts.confirmUrl - signed URL to approve
- * @param {string} opts.rejectUrl - signed URL to reject
- * @param {string} opts.dashboardUrl - URL to moderation dashboard
- */
-async function sendNewPostEmail(opts) {
-  const resend = getResendClient();
-
-  const isFlagged = Boolean(opts.flagReason);
-  const subject = isFlagged
-    ? `New IG post needs review — ${opts.flagReason}`
-    : `New IG post → ${opts.fountainName} — ${opts.rating}/10`;
-
-  const truncatedCaption = opts.caption && opts.caption.length > 200
-    ? opts.caption.slice(0, 200) + '...'
-    : opts.caption || '(no caption)';
-
-  const html = isFlagged
-    ? buildFlaggedEmailHtml(opts, truncatedCaption)
-    : buildCleanEmailHtml(opts, truncatedCaption);
-
-  await resend.emails.send({
-    from: FROM_EMAIL,
-    to: [ADMIN_EMAIL],
-    subject,
-    html
-  });
-}
-
-function buildCleanEmailHtml(opts, truncatedCaption) {
-  return `
-<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 500px; margin: 0 auto;">
-  <h2 style="color: #198754;">New Instagram Post Detected</h2>
-  <div style="background: #f8f9fa; border-radius: 8px; padding: 16px; margin: 16px 0;">
-    <p style="margin: 0 0 8px;"><strong>Fountain:</strong> ${escapeHtml(opts.fountainName)} (${escapeHtml(opts.externalId || 'N/A')})</p>
-    <p style="margin: 0 0 8px;"><strong>Rating:</strong> ${opts.rating !== null ? opts.rating + '/10' : 'not detected'}</p>
-    <p style="margin: 0 0 8px;"><strong>Posted:</strong> ${escapeHtml(opts.postDate || 'unknown')}</p>
-    <p style="margin: 0; color: #6c757d; font-size: 14px;">"${escapeHtml(truncatedCaption)}"</p>
-  </div>
-  ${opts.permalink ? `<p><a href="${escapeHtml(opts.permalink)}">View on Instagram</a></p>` : ''}
-  <div style="margin: 24px 0;">
-    <a href="${escapeHtml(opts.confirmUrl)}" style="display: inline-block; background: #198754; color: white; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: 600; margin-right: 12px;">Confirm &amp; Publish</a>
-    <a href="${escapeHtml(opts.rejectUrl)}" style="display: inline-block; background: #dc3545; color: white; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: 600; margin-right: 12px;">Reject</a>
-    <a href="${escapeHtml(opts.dashboardUrl)}" style="display: inline-block; color: #0d6efd; padding: 12px 0; text-decoration: underline;">Open Dashboard</a>
-  </div>
-  <p style="color: #adb5bd; font-size: 12px;">Links expire in 48 hours.</p>
-</div>`;
-}
-
-function buildFlaggedEmailHtml(opts, truncatedCaption) {
-  return `
-<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 500px; margin: 0 auto;">
-  <h2 style="color: #fd7e14;">New Instagram Post Needs Review</h2>
-  <div style="background: #fff3cd; border-radius: 8px; padding: 16px; margin: 16px 0;">
-    <p style="margin: 0 0 8px;"><strong>Issue:</strong> ${escapeHtml(opts.flagReason)}</p>
-    <p style="margin: 0 0 8px;"><strong>Posted:</strong> ${escapeHtml(opts.postDate || 'unknown')}</p>
-    <p style="margin: 0; color: #6c757d; font-size: 14px;">"${escapeHtml(truncatedCaption)}"</p>
-  </div>
-  ${opts.permalink ? `<p><a href="${escapeHtml(opts.permalink)}">View on Instagram</a></p>` : ''}
-  <div style="margin: 24px 0;">
-    <a href="${escapeHtml(opts.dashboardUrl)}" style="display: inline-block; background: #0d6efd; color: white; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: 600;">Open Dashboard</a>
-  </div>
-  <p style="color: #adb5bd; font-size: 12px;">This post could not be auto-matched. Use the dashboard to link it manually.</p>
-</div>`;
-}
-
-/**
- * Sends a warning email when the Instagram token is about to expire.
- */
-async function sendTokenExpiryWarning(daysRemaining) {
-  const resend = getResendClient();
-
-  await resend.emails.send({
-    from: FROM_EMAIL,
-    to: [ADMIN_EMAIL],
-    subject: `Instagram token expires in ${daysRemaining} days`,
-    html: `
-<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 500px; margin: 0 auto;">
-  <h2 style="color: #fd7e14;">Instagram Token Expiring Soon</h2>
-  <p>Your Instagram access token expires in <strong>${daysRemaining} days</strong>.</p>
-  <p>Refresh it at the <a href="https://developers.facebook.com/tools/explorer/">Meta Graph API Explorer</a> or regenerate a long-lived token.</p>
-  <p>Until refreshed, new Instagram posts won't be detected.</p>
-</div>`
-  });
-}
-
-function escapeHtml(value) {
-  if (value === null || value === undefined) return '';
-  return String(value)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#039;');
-}
-
-module.exports = { sendNewPostEmail, sendTokenExpiryWarning };
 ```
 
-**Step 2: Verify the module loads**
+Install:
 
 ```bash
-cd netlify/functions && node -e "const e = require('./lib/email'); console.log('exports:', Object.keys(e));"
+cd netlify/functions && npm install
 ```
 
-Expected: `exports: [ 'sendNewPostEmail', 'sendTokenExpiryWarning' ]`
+**Step 2: Create the weekly reminder function**
 
-**Step 3: Commit**
-
-```bash
-git add netlify/functions/lib/email.js
-git commit -m "feat: add Resend email helper for Instagram notifications"
-```
-
----
-
-## Task 6: Build poll-instagram.js — the daily scheduled function
-
-This is the core function. It runs daily, polls the Instagram Graph API, creates pending reviews, and sends notification emails.
-
-**Files:**
-- Create: `netlify/functions/poll-instagram.js`
-
-**Step 1: Create the scheduled function**
+Create `netlify/functions/weekly-reminder.js`:
 
 ```js
 'use strict';
 
 const { createClient } = require('@supabase/supabase-js');
-const { extractRating, fuzzyMatchFountains } = require('./lib/instagram-utils');
-const { signActionToken } = require('./lib/tokens');
-const { sendNewPostEmail, sendTokenExpiryWarning } = require('./lib/email');
+const { Resend } = require('resend');
 
-// Netlify Scheduled Function — runs daily via cron in netlify.toml
-exports.handler = async function (event, context) {
-  console.log('poll-instagram: starting daily check');
+// Netlify Scheduled Function — runs weekly (configured in netlify.toml)
+exports.handler = async function () {
+  console.log('weekly-reminder: starting');
+
+  const missing = [];
+  if (!process.env.SUPABASE_URL) missing.push('SUPABASE_URL');
+  if (!process.env.SUPABASE_SERVICE_ROLE_KEY) missing.push('SUPABASE_SERVICE_ROLE_KEY');
+  if (!process.env.RESEND_API_KEY) missing.push('RESEND_API_KEY');
+
+  if (missing.length > 0) {
+    console.error('weekly-reminder: missing env vars:', missing.join(', '));
+    return { statusCode: 500, body: JSON.stringify({ error: 'Missing env vars: ' + missing.join(', ') }) };
+  }
+
+  const adminEmail = process.env.ADMIN_EMAIL || 'yvrwaterfountains@gmail.com';
 
   try {
-    validateEnv();
     const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY);
 
-    // Step 1: Check token health
-    await checkTokenHealth();
+    // Get counts for the email
+    const [fountainResult, reviewedResult, recentResult] = await Promise.all([
+      supabase.from('fountains').select('id', { count: 'exact', head: true }),
+      supabase.from('reviews').select('id', { count: 'exact', head: true }).eq('status', 'approved'),
+      supabase.from('reviews').select('id', { count: 'exact', head: true }).eq('status', 'approved').gte('created_at', sevenDaysAgo())
+    ]);
 
-    // Step 2: Fetch recent posts from Instagram Graph API
-    const posts = await fetchRecentPosts();
-    console.log(`poll-instagram: fetched ${posts.length} recent posts`);
+    const totalFountains = fountainResult.count || 0;
+    const totalReviews = reviewedResult.count || 0;
+    const recentReviews = recentResult.count || 0;
 
-    if (posts.length === 0) {
-      return { statusCode: 200, body: JSON.stringify({ message: 'No posts found' }) };
-    }
+    const siteUrl = process.env.URL || 'https://yvr-water-fountains.netlify.app';
 
-    // Step 3: Find which posts are already in the DB
-    const mediaIds = posts.map(p => p.id);
-    const { data: existing } = await supabase
-      .from('reviews')
-      .select('instagram_media_id')
-      .in('instagram_media_id', mediaIds);
+    const resend = new Resend(process.env.RESEND_API_KEY);
 
-    const existingIds = new Set((existing || []).map(r => r.instagram_media_id));
-    const newPosts = posts.filter(p => !existingIds.has(p.id));
-    console.log(`poll-instagram: ${newPosts.length} new posts to process`);
+    await resend.emails.send({
+      from: 'YVR Water Fountains <onboarding@resend.dev>',
+      to: [adminEmail],
+      subject: 'Weekly reminder — any new fountain reviews?',
+      html: buildEmailHtml(totalFountains, totalReviews, recentReviews, siteUrl)
+    });
 
-    if (newPosts.length === 0) {
-      return { statusCode: 200, body: JSON.stringify({ message: 'No new posts' }) };
-    }
-
-    // Step 4: Load all fountains for fuzzy matching
-    const { data: fountains } = await supabase
-      .from('fountains')
-      .select('id, external_id, name, neighbourhood');
-
-    // Step 5: Process each new post
-    let processed = 0;
-    let flagged = 0;
-
-    for (const post of newPosts) {
-      const result = await processPost(post, fountains, supabase);
-      processed++;
-      if (result.flagReason) flagged++;
-    }
-
-    const summary = `Processed ${processed} new posts (${flagged} flagged)`;
-    console.log(`poll-instagram: ${summary}`);
-
-    return { statusCode: 200, body: JSON.stringify({ message: summary }) };
+    console.log('weekly-reminder: email sent to', adminEmail);
+    return { statusCode: 200, body: JSON.stringify({ message: 'Reminder sent' }) };
 
   } catch (error) {
-    console.error('poll-instagram: fatal error', error);
+    console.error('weekly-reminder: error', error);
     return { statusCode: 500, body: JSON.stringify({ error: error.message }) };
   }
 };
 
-function validateEnv() {
-  const required = [
-    'SUPABASE_URL',
-    'SUPABASE_SERVICE_ROLE_KEY',
-    'INSTAGRAM_ACCESS_TOKEN',
-    'INSTAGRAM_USER_ID',
-    'RESEND_API_KEY',
-    'REVIEW_ACTION_SECRET'
-  ];
-  const missing = required.filter(k => !process.env[k]);
-  if (missing.length > 0) {
-    throw new Error(`Missing env vars: ${missing.join(', ')}`);
-  }
+function sevenDaysAgo() {
+  const date = new Date();
+  date.setDate(date.getDate() - 7);
+  return date.toISOString();
 }
 
-async function checkTokenHealth() {
-  // Instagram long-lived tokens last 60 days.
-  // The /me endpoint returns an error if the token is expired.
-  // We attempt a token refresh if it works, to extend its life.
-  // If it fails, we send a warning email.
-  try {
-    const url = `https://graph.instagram.com/me?fields=id,username&access_token=${process.env.INSTAGRAM_ACCESS_TOKEN}`;
-    const resp = await fetch(url);
-
-    if (!resp.ok) {
-      const body = await resp.json().catch(() => ({}));
-      console.error('poll-instagram: token check failed', body);
-      await sendTokenExpiryWarning(0);
-      throw new Error('Instagram access token is invalid or expired');
-    }
-
-    // Try to refresh the token to extend its lifetime
-    const refreshUrl = `https://graph.instagram.com/refresh_access_token?grant_type=ig_refresh_token&access_token=${process.env.INSTAGRAM_ACCESS_TOKEN}`;
-    const refreshResp = await fetch(refreshUrl);
-    if (refreshResp.ok) {
-      const refreshData = await refreshResp.json();
-      // Note: The refreshed token is in refreshData.access_token.
-      // You'd need to manually update it in Netlify env vars if it changes.
-      // For now, just log the expiry info.
-      const daysRemaining = refreshData.expires_in
-        ? Math.floor(refreshData.expires_in / 86400)
-        : null;
-      console.log(`poll-instagram: token refreshed, expires in ${daysRemaining} days`);
-
-      if (daysRemaining !== null && daysRemaining <= 7) {
-        await sendTokenExpiryWarning(daysRemaining);
-      }
-    }
-  } catch (error) {
-    if (error.message.includes('invalid or expired')) throw error;
-    console.warn('poll-instagram: token health check error (non-fatal)', error.message);
-  }
-}
-
-async function fetchRecentPosts() {
-  const userId = process.env.INSTAGRAM_USER_ID;
-  const token = process.env.INSTAGRAM_ACCESS_TOKEN;
-  const url = `https://graph.instagram.com/${userId}/media?fields=id,caption,media_url,permalink,timestamp&limit=10&access_token=${token}`;
-
-  const resp = await fetch(url);
-  if (!resp.ok) {
-    const body = await resp.text();
-    throw new Error(`Instagram API error ${resp.status}: ${body}`);
-  }
-
-  const data = await resp.json();
-  return data.data || [];
-}
-
-async function processPost(post, fountains, supabase) {
-  const caption = post.caption || '';
-  const rating = extractRating(caption);
-  const matches = fuzzyMatchFountains(caption, fountains);
-  const bestMatch = matches.length > 0 ? matches[0] : null;
-
-  // Determine flag reason (if any)
-  let flagReason = null;
-  if (!bestMatch) {
-    flagReason = 'no fountain match found';
-  } else if (rating === null) {
-    flagReason = 'no rating in caption';
-  }
-
-  const fountainId = bestMatch ? bestMatch.fountain.id : null;
-  const postDate = post.timestamp ? post.timestamp.split('T')[0] : null;
-
-  // Insert review
-  const payload = {
-    fountain_id: fountainId,
-    author_type: 'admin',
-    status: 'pending',
-    rating: rating,
-    review_text: caption || null,
-    instagram_url: post.permalink || null,
-    instagram_image_url: post.media_url || null,
-    instagram_caption: caption || null,
-    instagram_media_id: post.id,
-    reviewer_name: 'yvrwaterfountains',
-    visit_date: postDate,
-    flag_reason: flagReason
-  };
-
-  const { data: inserted, error } = await supabase
-    .from('reviews')
-    .insert(payload)
-    .select('id')
-    .single();
-
-  if (error) {
-    console.error(`poll-instagram: failed to insert review for post ${post.id}`, error);
-    return { flagReason };
-  }
-
-  // Build email action URLs
-  const siteUrl = process.env.URL || 'https://yvr-water-fountains.netlify.app';
-  const confirmToken = signActionToken(inserted.id, 'approve');
-  const rejectToken = signActionToken(inserted.id, 'reject');
-
-  const confirmUrl = `${siteUrl}/.netlify/functions/confirm-review?token=${encodeURIComponent(confirmToken)}`;
-  const rejectUrl = `${siteUrl}/.netlify/functions/confirm-review?token=${encodeURIComponent(rejectToken)}`;
-  const dashboardUrl = `${siteUrl}/moderation_dashboard.html`;
-
-  // Send email
-  try {
-    await sendNewPostEmail({
-      fountainName: bestMatch ? bestMatch.fountain.name : 'No match found',
-      externalId: bestMatch ? bestMatch.fountain.external_id : null,
-      rating,
-      caption,
-      postDate,
-      permalink: post.permalink,
-      flagReason,
-      confirmUrl,
-      rejectUrl,
-      dashboardUrl
-    });
-  } catch (emailError) {
-    console.error(`poll-instagram: email failed for post ${post.id}`, emailError);
-    // Don't throw — the review is already saved, email is best-effort
-  }
-
-  return { flagReason };
-}
-```
-
-**Step 2: Verify the module loads (syntax check)**
-
-```bash
-cd netlify/functions && node -e "require('./poll-instagram'); console.log('poll-instagram: loads ok');"
-```
-
-Expected: `poll-instagram: loads ok` (it won't run the handler, just verify no syntax errors).
-
-**Step 3: Commit**
-
-```bash
-git add netlify/functions/poll-instagram.js
-git commit -m "feat: add daily Instagram polling function (Graph API + Resend email)"
-```
-
----
-
-## Task 7: Build confirm-review.js — email action handler
-
-**Files:**
-- Create: `netlify/functions/confirm-review.js`
-
-**Step 1: Create the function**
-
-```js
-'use strict';
-
-const { createClient } = require('@supabase/supabase-js');
-const { verifyActionToken } = require('./lib/tokens');
-
-exports.handler = async function (event) {
-  // Only GET (email links are clicked, not POSTed)
-  if (event.httpMethod === 'OPTIONS') {
-    return { statusCode: 200, headers: corsHeaders(), body: '' };
-  }
-
-  const token = event.queryStringParameters && event.queryStringParameters.token;
-  if (!token) {
-    return htmlResponse(400, 'Missing token', 'This link is incomplete. Use the moderation dashboard instead.');
-  }
-
-  if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY || !process.env.REVIEW_ACTION_SECRET) {
-    return htmlResponse(500, 'Server Error', 'Server is not configured. Contact the site admin.');
-  }
-
-  let payload;
-  try {
-    payload = verifyActionToken(token);
-  } catch (error) {
-    if (error.name === 'TokenExpiredError') {
-      return htmlResponse(410, 'Link Expired', 'This link has expired (48-hour limit). Use the moderation dashboard to take action.');
-    }
-    return htmlResponse(400, 'Invalid Link', 'This link is invalid. Use the moderation dashboard instead.');
-  }
-
-  const { reviewId, action } = payload;
-  if (!reviewId || !['approve', 'reject'].includes(action)) {
-    return htmlResponse(400, 'Invalid Action', 'Unrecognized action. Use the moderation dashboard.');
-  }
-
-  const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY);
-
-  // Check current review status to avoid double-actions
-  const { data: review, error: fetchError } = await supabase
-    .from('reviews')
-    .select('id, status')
-    .eq('id', reviewId)
-    .maybeSingle();
-
-  if (fetchError || !review) {
-    return htmlResponse(404, 'Not Found', 'This review no longer exists.');
-  }
-
-  if (review.status === 'approved' && action === 'approve') {
-    return htmlResponse(200, 'Already Approved', 'This review was already approved and is live on the map.');
-  }
-
-  if (review.status === 'rejected' && action === 'reject') {
-    return htmlResponse(200, 'Already Rejected', 'This review was already rejected.');
-  }
-
-  // Perform the action
-  const newStatus = action === 'approve' ? 'approved' : 'rejected';
-  const updatePayload = { status: newStatus };
-  if (action === 'approve') {
-    updatePayload.reviewed_at = new Date().toISOString();
-  }
-
-  const { error: updateError } = await supabase
-    .from('reviews')
-    .update(updatePayload)
-    .eq('id', reviewId);
-
-  if (updateError) {
-    console.error('confirm-review: update failed', updateError);
-    return htmlResponse(500, 'Update Failed', 'Could not update the review. Try the moderation dashboard.');
-  }
-
-  if (action === 'approve') {
-    return htmlResponse(200, 'Review Approved', 'The review is now live on the map. You can close this tab.');
-  } else {
-    return htmlResponse(200, 'Review Rejected', 'The review has been rejected. You can close this tab.');
-  }
-};
-
-function htmlResponse(statusCode, title, message) {
-  const color = statusCode === 200 ? '#198754' : '#dc3545';
-  const html = `<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${escapeHtml(title)} — YVR Water Fountains</title>
-  <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; background: #f8f9fa; }
-    .card { background: white; border-radius: 12px; padding: 40px; text-align: center; max-width: 400px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-    h1 { color: ${color}; font-size: 1.5rem; margin: 0 0 12px; }
-    p { color: #495057; margin: 0; }
-    a { color: #0d6efd; }
-  </style>
-</head>
-<body>
-  <div class="card">
-    <h1>${escapeHtml(title)}</h1>
-    <p>${escapeHtml(message)}</p>
-    <p style="margin-top: 16px;"><a href="/map.html">View the map</a></p>
+function buildEmailHtml(totalFountains, totalReviews, recentReviews, siteUrl) {
+  return `
+<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 500px; margin: 0 auto;">
+  <h2 style="color: #198754;">Weekly Fountain Check-In</h2>
+  <p>Have you or your friend posted any new <strong>@yvrwaterfountains</strong> reels this week?</p>
+  <p>If so, add them to the map — it only takes 30 seconds:</p>
+  <div style="margin: 20px 0;">
+    <a href="${siteUrl}/admin_review_form.html" style="display: inline-block; background: #198754; color: white; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: 600;">Open Admin Form</a>
   </div>
-</body>
-</html>`;
-
-  return {
-    statusCode,
-    headers: { 'Content-Type': 'text/html; charset=utf-8' },
-    body: html
-  };
-}
-
-function corsHeaders() {
-  return {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': 'Content-Type',
-    'Access-Control-Allow-Methods': 'GET, OPTIONS'
-  };
-}
-
-function escapeHtml(value) {
-  if (value === null || value === undefined) return '';
-  return String(value)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#039;');
+  <p style="font-size: 14px; color: #6c757d;">Paste the IG URL + caption, and the form auto-fills the rating and fountain match. One click to publish.</p>
+  <hr style="border: none; border-top: 1px solid #e9ecef; margin: 24px 0;">
+  <div style="font-size: 14px; color: #6c757d;">
+    <p style="margin: 4px 0;"><strong>${totalReviews}</strong> reviews on the map</p>
+    <p style="margin: 4px 0;"><strong>${totalFountains}</strong> fountains tracked</p>
+    <p style="margin: 4px 0;"><strong>${recentReviews}</strong> reviews added this week</p>
+  </div>
+  <p style="color: #adb5bd; font-size: 12px; margin-top: 20px;">
+    <a href="${siteUrl}/map.html" style="color: #adb5bd;">View the map</a>
+  </p>
+</div>`;
 }
 ```
 
-**Step 2: Verify it loads**
+**Step 3: Add schedule to netlify.toml**
 
-```bash
-cd netlify/functions && node -e "require('./confirm-review'); console.log('confirm-review: loads ok');"
-```
-
-**Step 3: Commit**
-
-```bash
-git add netlify/functions/confirm-review.js
-git commit -m "feat: add confirm-review function for email action links"
-```
-
----
-
-## Task 8: One-time backfill script
-
-This runs once to update the 42 existing reviews with Instagram URLs and photos from the Graph API.
-
-**Files:**
-- Create: `scripts/backfill-instagram-urls.js`
-
-**Step 1: Create the backfill script**
-
-```js
-#!/usr/bin/env node
-'use strict';
-
-/**
- * One-time backfill script: fetches all posts from Instagram Graph API,
- * matches them to existing reviews by caption, and updates instagram_url,
- * instagram_image_url, and instagram_media_id.
- *
- * Usage:
- *   INSTAGRAM_ACCESS_TOKEN=xxx INSTAGRAM_USER_ID=yyy \
- *   SUPABASE_URL=zzz SUPABASE_SERVICE_ROLE_KEY=www \
- *   node scripts/backfill-instagram-urls.js [--dry-run]
- *
- * --dry-run: prints what would be updated without writing to the database.
- */
-
-const { createClient } = require('@supabase/supabase-js');
-
-const DRY_RUN = process.argv.includes('--dry-run');
-
-async function main() {
-  validateEnv();
-
-  const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY);
-
-  console.log('Fetching all Instagram posts via Graph API...');
-  const posts = await fetchAllPosts();
-  console.log(`Fetched ${posts.length} posts total.`);
-
-  console.log('Loading existing reviews from Supabase...');
-  const { data: reviews, error } = await supabase
-    .from('reviews')
-    .select('id, instagram_caption, instagram_url, instagram_media_id')
-    .eq('author_type', 'admin')
-    .eq('status', 'approved');
-
-  if (error) throw error;
-  console.log(`Found ${reviews.length} admin reviews.`);
-
-  // Match posts to reviews by caption similarity
-  let updated = 0;
-  let skipped = 0;
-  let noMatch = 0;
-
-  for (const review of reviews) {
-    // Skip if already has instagram_media_id (already backfilled)
-    if (review.instagram_media_id) {
-      skipped++;
-      continue;
-    }
-
-    const caption = review.instagram_caption || '';
-    if (!caption) {
-      console.log(`  SKIP review ${review.id}: no caption stored`);
-      skipped++;
-      continue;
-    }
-
-    // Find matching post by caption similarity
-    const match = findBestCaptionMatch(caption, posts);
-    if (!match) {
-      console.log(`  NO MATCH for review ${review.id}: "${caption.slice(0, 60)}..."`);
-      noMatch++;
-      continue;
-    }
-
-    console.log(`  MATCH review ${review.id} → post ${match.id} (score: ${match.score})`);
-    console.log(`    permalink: ${match.permalink}`);
-
-    if (!DRY_RUN) {
-      const { error: updateError } = await supabase
-        .from('reviews')
-        .update({
-          instagram_url: match.permalink || null,
-          instagram_image_url: match.media_url || null,
-          instagram_media_id: match.id
-        })
-        .eq('id', review.id);
-
-      if (updateError) {
-        console.error(`    UPDATE FAILED: ${updateError.message}`);
-      } else {
-        updated++;
-      }
-    } else {
-      updated++;
-    }
-  }
-
-  console.log(`\nDone${DRY_RUN ? ' (DRY RUN)' : ''}. Updated: ${updated}, Skipped: ${skipped}, No match: ${noMatch}`);
-}
-
-function validateEnv() {
-  const required = ['SUPABASE_URL', 'SUPABASE_SERVICE_ROLE_KEY', 'INSTAGRAM_ACCESS_TOKEN', 'INSTAGRAM_USER_ID'];
-  const missing = required.filter(k => !process.env[k]);
-  if (missing.length > 0) {
-    console.error(`Missing env vars: ${missing.join(', ')}`);
-    process.exit(1);
-  }
-}
-
-async function fetchAllPosts() {
-  const userId = process.env.INSTAGRAM_USER_ID;
-  const token = process.env.INSTAGRAM_ACCESS_TOKEN;
-  let url = `https://graph.instagram.com/${userId}/media?fields=id,caption,media_url,permalink,timestamp&limit=50&access_token=${token}`;
-
-  const allPosts = [];
-  while (url) {
-    const resp = await fetch(url);
-    if (!resp.ok) {
-      const body = await resp.text();
-      throw new Error(`Instagram API error ${resp.status}: ${body}`);
-    }
-    const data = await resp.json();
-    allPosts.push(...(data.data || []));
-    url = data.paging && data.paging.next ? data.paging.next : null;
-  }
-
-  return allPosts;
-}
-
-/**
- * Simple caption matching: normalize both captions and compare.
- * Returns the best matching post with a similarity score, or null.
- */
-function findBestCaptionMatch(reviewCaption, posts) {
-  const normalizedReview = normalize(reviewCaption);
-
-  let bestPost = null;
-  let bestScore = 0;
-
-  for (const post of posts) {
-    const normalizedPost = normalize(post.caption || '');
-    if (!normalizedPost) continue;
-
-    // Try exact match first (after normalization)
-    if (normalizedReview === normalizedPost) {
-      return { ...post, score: 100 };
-    }
-
-    // Word overlap score
-    const reviewWords = new Set(normalizedReview.split(/\s+/));
-    const postWords = normalizedPost.split(/\s+/);
-    let overlap = 0;
-    for (const word of postWords) {
-      if (reviewWords.has(word)) overlap++;
-    }
-
-    // Score = overlap / max(lengths) to normalize
-    const score = overlap / Math.max(reviewWords.size, postWords.length);
-    if (score > bestScore && score > 0.5) {
-      bestScore = score;
-      bestPost = { ...post, score: Math.round(score * 100) };
-    }
-  }
-
-  return bestPost;
-}
-
-function normalize(text) {
-  return text.toLowerCase().replace(/[^a-z0-9\s]/g, ' ').replace(/\s+/g, ' ').trim();
-}
-
-main().catch(err => {
-  console.error('Backfill failed:', err);
-  process.exit(1);
-});
-```
-
-**Step 2: Verify it loads**
-
-```bash
-node -e "console.log('syntax check'); require('./scripts/backfill-instagram-urls.js');" 2>&1 || echo "Expected: fails on missing env vars (that's OK — syntax is fine if the error is about env vars)"
-```
-
-It should fail with "Missing env vars" — that confirms the syntax is correct.
-
-**Step 3: Commit**
-
-```bash
-git add scripts/backfill-instagram-urls.js
-git commit -m "feat: add one-time backfill script for Instagram URLs via Graph API"
-```
-
----
-
-## Task 9: Update netlify.toml — scheduled function config
-
-**Files:**
-- Modify: `netlify.toml`
-
-**Step 1: Add scheduled function configuration**
-
-Add the following to the end of `netlify.toml` (before any trailing newline):
+Add to the end of `netlify.toml`:
 
 ```toml
-# Scheduled function: poll Instagram daily at 8am Pacific (4pm UTC)
-[functions."poll-instagram"]
-  schedule = "0 16 * * *"
+# Weekly reminder email — Mondays 10am Pacific (6pm UTC)
+[functions."weekly-reminder"]
+  schedule = "0 18 * * 1"
 ```
 
-Also add a redirect for the confirm-review function:
-
-```toml
-[[redirects]]
-  from = "/confirm-review"
-  to = "/.netlify/functions/confirm-review"
-  status = 200
-```
-
-**Step 2: Verify the TOML is valid**
+**Step 4: Verify function loads**
 
 ```bash
-node -e "
-const fs = require('fs');
-const content = fs.readFileSync('netlify.toml', 'utf8');
-console.log('netlify.toml length:', content.length, 'bytes');
-// Just check it's not empty and has the new sections
-console.log('has schedule:', content.includes('schedule'));
-console.log('has confirm-review redirect:', content.includes('confirm-review'));
-"
+cd netlify/functions && node -e "require('./weekly-reminder'); console.log('weekly-reminder: loads ok');"
 ```
 
-**Step 3: Commit**
+**Step 5: Commit**
 
 ```bash
-git add netlify.toml
-git commit -m "feat: configure daily Instagram polling schedule and confirm-review redirect"
+git add netlify/functions/package.json netlify/functions/package-lock.json netlify/functions/weekly-reminder.js netlify.toml
+git commit -m "feat: add weekly email reminder via Resend scheduled function"
 ```
 
 ---
 
-## Task 10: Clean up old broken Netlify functions
+## Task 6: Clean up old broken Netlify functions
 
-The old `submit-review.js` and `manage-rating.js` reference the old `ratings` table and old columns. They are not called by anything in the current codebase. Delete them, and also delete `trigger-deployment.js` since we no longer use a build pipeline.
+The old functions reference the deleted `ratings` table and old columns. Nothing calls them.
 
 **Files:**
 - Delete: `netlify/functions/submit-review.js`
 - Delete: `netlify/functions/manage-rating.js`
 - Delete: `netlify/functions/trigger-deployment.js`
+- Modify: `netlify.toml` (remove old submit-review redirect)
 
-**Step 1: Delete the files**
+**Step 1: Delete old functions**
 
 ```bash
 git rm netlify/functions/submit-review.js netlify/functions/manage-rating.js netlify/functions/trigger-deployment.js
 ```
 
-**Step 2: Verify no remaining references**
-
-Search for any imports of these files:
-
-```bash
-grep -r "trigger-deployment\|submit-review\|manage-rating" netlify/functions/ --include="*.js" || echo "No references found — clean."
-```
-
-Also check `netlify.toml` for the old submit-review redirect (line 39-40). Remove it if present — it will be replaced by the new function later in a community-forms phase.
-
-**Step 3: Remove the old submit-review redirect from netlify.toml**
+**Step 2: Remove old redirect from netlify.toml**
 
 Remove these lines from `netlify.toml`:
 
@@ -1142,78 +828,47 @@ Remove these lines from `netlify.toml`:
   status = 200
 ```
 
-**Step 4: Commit**
+**Step 3: Commit**
 
 ```bash
-git add -A netlify/functions/ netlify.toml
-git commit -m "chore: remove broken Phase 0 Netlify functions (submit-review, manage-rating, trigger-deployment)"
+git add -A netlify/ netlify.toml
+git commit -m "chore: remove broken legacy Netlify functions and old redirect"
 ```
 
 ---
 
-## Task 11: End-to-end testing checklist
+## Task 7: End-to-end testing
 
-This is a manual verification task. No new code, just confirming everything works together.
+Manual verification checklist — no new code.
 
-**Prerequisites before testing:**
-- [ ] Instagram account switched to Business/Creator
-- [ ] Meta Developer App registered, access token generated
-- [ ] Resend account created, API key obtained
-- [ ] All env vars set in Netlify (see Task 1 in design doc)
-- [ ] Database migration applied (Task 1 of this plan)
+**Prerequisites:**
+- [ ] Resend account created at resend.com, API key obtained
+- [ ] Netlify env vars set: `RESEND_API_KEY`, `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `ADMIN_EMAIL`
 
-**Test 1: Verify poll-instagram function locally**
+**Test 1: Admin form auto-extraction**
+1. Open admin form locally, sign in
+2. Paste a caption with a rating → verify rating auto-fills
+3. Paste a caption with a fountain name → verify map zooms and selects it
+4. Submit a review → verify it appears in Supabase
 
+**Test 2: Backfill tool**
+1. Open backfill page, sign in
+2. Verify reviews with missing URLs are listed
+3. Paste an Instagram URL, save → verify it updates in Supabase
+4. Refresh → verify the saved review no longer appears
+
+**Test 3: Weekly reminder (local)**
 ```bash
 cd /path/to/repo && npx netlify dev
 ```
-
 Then in another terminal:
-
 ```bash
-curl http://localhost:8888/.netlify/functions/poll-instagram
+curl http://localhost:8888/.netlify/functions/weekly-reminder
 ```
+Check your email for the weekly reminder.
 
-Check the Netlify dev server logs for output. It should fetch posts, match fountains, and attempt to send emails.
-
-**Test 2: Verify confirm-review function locally**
-
-Generate a test token:
-
-```bash
-cd netlify/functions && REVIEW_ACTION_SECRET=your-secret node -e "
-const t = require('./lib/tokens');
-// Use a real review ID from your DB for a proper test
-const token = t.signActionToken('some-review-uuid', 'approve');
-console.log('Test URL: http://localhost:8888/.netlify/functions/confirm-review?token=' + encodeURIComponent(token));
-"
-```
-
-Open the URL in a browser. It should show "Review Approved" (or a review-not-found error if the UUID is fake).
-
-**Test 3: Run backfill with --dry-run**
-
-```bash
-INSTAGRAM_ACCESS_TOKEN=xxx INSTAGRAM_USER_ID=yyy \
-SUPABASE_URL=https://hnyktzfyquvmpthfwpvd.supabase.co \
-SUPABASE_SERVICE_ROLE_KEY=zzz \
-node scripts/backfill-instagram-urls.js --dry-run
-```
-
-Check the output: should show matches for the 42 reviews.
-
-**Test 4: Run backfill for real**
-
-```bash
-# Same as above, without --dry-run
-node scripts/backfill-instagram-urls.js
-```
-
-Verify in Supabase that `instagram_url` and `instagram_image_url` are now populated for the 42 reviews.
-
-**Test 5: Deploy to Netlify and verify scheduled function**
-
-Push to main, then check Netlify dashboard → Functions → poll-instagram. It should show the schedule. You can trigger it manually from the Netlify dashboard to test.
+**Test 4: Deploy and verify**
+Push to main → check Netlify dashboard → Functions → weekly-reminder should show the Monday schedule.
 
 ---
 
@@ -1221,15 +876,12 @@ Push to main, then check Netlify dashboard → Functions → poll-instagram. It 
 
 | Action | File | Purpose |
 |--------|------|---------|
-| Create | `supabase/migrations/20260302_add_instagram_media_id.sql` | DB migration |
-| Modify | `netlify/functions/package.json` | Add resend, jsonwebtoken deps |
-| Create | `netlify/functions/lib/instagram-utils.js` | Shared rating extraction + fuzzy matching |
-| Create | `netlify/functions/lib/tokens.js` | JWT sign/verify for email links |
-| Create | `netlify/functions/lib/email.js` | Resend email templates |
-| Create | `netlify/functions/poll-instagram.js` | Daily scheduled Instagram polling |
-| Create | `netlify/functions/confirm-review.js` | Email action link handler |
-| Create | `scripts/backfill-instagram-urls.js` | One-time URL backfill |
-| Modify | `netlify.toml` | Schedule config + redirect |
+| Modify | `docs/js/admin-review-form.js` | Auto-extract rating + fuzzy-match fountain from caption |
+| Create | `docs/backfill_instagram.html` | Backfill tool page (HTML) |
+| Create | `docs/js/backfill-instagram.js` | Backfill tool logic (JS) |
+| Modify | `netlify/functions/package.json` | Add Resend dependency |
+| Create | `netlify/functions/weekly-reminder.js` | Weekly email reminder function |
+| Modify | `netlify.toml` | Add schedule config, remove old redirect |
 | Delete | `netlify/functions/submit-review.js` | Old broken function |
 | Delete | `netlify/functions/manage-rating.js` | Old broken function |
 | Delete | `netlify/functions/trigger-deployment.js` | Old broken function |

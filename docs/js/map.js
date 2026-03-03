@@ -208,25 +208,21 @@
     const adminCount = props.admin_review_count || 0;
     const totalCount = props.rating_count || 0;
     let color;
-    let radius;
 
     if (adminCount > 0) {
-      color = '#198754';
-      radius = 9;
+      color = '#c8ff00';
     } else if (totalCount > 0) {
-      color = '#fd7e14';
-      radius = 9;
+      color = '#ff69b4';
     } else {
-      color = '#007bff';
-      radius = 7;
+      color = '#7eb6ff';
     }
 
     return {
-      radius,
-      color,
+      radius: 6,
+      color: '#1a1a2e',
       fillColor: color,
-      fillOpacity: 0.7,
-      weight: 2
+      fillOpacity: 0.85,
+      weight: 1.5
     };
   }
 
@@ -234,7 +230,7 @@
    * draws markers using the geojson payload.
    */
   function placeFountainsOnMap(geojson) {
-    L.geoJSON(geojson, {
+    const geoLayer = L.geoJSON(geojson, {
       pointToLayer: (feature, latlng) => {
         const props = feature.properties || {};
         const style = markerStyle(props);
@@ -242,6 +238,23 @@
       },
       onEachFeature: (feature, layer) => attachFountainBehavior(feature, layer)
     }).addTo(state.map);
+
+    registerZoomScaling(geoLayer);
+  }
+
+  function registerZoomScaling(geoLayer) {
+    function updateRadii() {
+      const zoom = state.map.getZoom();
+      const baseRadius = Math.max(3, Math.min(10, zoom - 7));
+      geoLayer.eachLayer(function (layer) {
+        if (typeof layer.setRadius === 'function') {
+          layer.setRadius(baseRadius);
+        }
+      });
+    }
+
+    state.map.on('zoomend', updateRadii);
+    updateRadii();
   }
 
   /**

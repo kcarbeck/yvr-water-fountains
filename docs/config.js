@@ -19,8 +19,8 @@
     MAP_CENTER: [49.251, -123.060],
     MAP_ZOOM: 11,
     GEOJSON_PATH: 'data/fountains_processed.geojson',
-    SUPABASE_URL: env.SUPABASE_URL || window.SUPABASE_URL || null,
-    SUPABASE_ANON_KEY: env.SUPABASE_ANON_KEY || window.SUPABASE_ANON_KEY || null,
+    SUPABASE_URL: env.SUPABASE_URL || window.SUPABASE_URL || 'https://hnyktzfyquvmpthfwpvd.supabase.co',
+    SUPABASE_ANON_KEY: env.SUPABASE_ANON_KEY || window.SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhueWt0emZ5cXV2bXB0aGZ3cHZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI0OTM2MzIsImV4cCI6MjA4ODA2OTYzMn0.OJJNyTz0LglcJgfGiNNOcy6tmayagXnpSkYnqg6_M6A',
     VERSION: '1.0.0',
     DEPLOYMENT_TYPE: isNetlify ? 'netlify' : (isGitHubPages ? 'github-pages' : 'custom')
   };

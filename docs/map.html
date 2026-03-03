@@ -8,7 +8,7 @@
   <meta name="keywords" content="water fountains, Vancouver, Burnaby, drinking water, public fountains, hydration stations">
   
   <!-- Favicon -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚰</text></svg>">
+  <link rel="icon" type="image/png" href="images/logo.png">
   
   <!-- Social media meta tags -->
   <meta property="og:title" content="YVR Water Fountains Map">
@@ -20,624 +20,429 @@
   <meta name="twitter:title" content="YVR Water Fountains Map">
   <meta name="twitter:description" content="Find and rate drinking fountains across Vancouver and Burnaby">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="css/theme.css">
   <style>
-    body { 
-      margin: 0; 
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
-    }
-    
-    .header {
-      background: linear-gradient(135deg, #008cba, #005f7f);
-      color: white;
-      padding: 1rem;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    
-    .header h1 {
-      margin: 0;
-      font-size: 1.5rem;
-      font-weight: 600;
-    }
-    
-    .header p {
-      margin: 0.5rem 0 0 0;
-      opacity: 0.9;
-      font-size: 0.9rem;
-    }
-    
-    .nav-links {
-      margin-top: 1rem;
-    }
-    
-    .nav-links a {
-      color: white;
-      text-decoration: none;
-      background: rgba(255,255,255,0.2);
-      padding: 0.5rem 1rem;
-      border-radius: 20px;
-      margin-right: 0.5rem;
-      font-size: 0.9rem;
-      transition: background 0.2s;
-    }
-    
-    .nav-links a:hover {
-      background: rgba(255,255,255,0.3);
-    }
-    
-    .nav-links-secondary {
-      margin-top: 0.5rem;
-      padding-top: 0.5rem;
-      border-top: 1px solid rgba(255,255,255,0.2);
-    }
-    
-    .nav-links-secondary a {
-      color: white;
-      text-decoration: none;
-      background: rgba(255,255,255,0.1);
-      padding: 0.4rem 0.8rem;
-      border-radius: 16px;
-      margin-right: 0.4rem;
-      margin-bottom: 0.3rem;
-      font-size: 0.8rem;
-      transition: background 0.2s;
-      display: inline-block;
-    }
-    
-    .nav-links-secondary a:hover {
-      background: rgba(255,255,255,0.2);
-    }
-    
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--color-dark);
+}
 
-    
-    #map { 
-      height: calc(100vh - 200px); 
-    }
-    
-    .popup-content {
-      max-width: 300px;
-      font-size: 0.9rem;
-    }
-    
-    .popup-title {
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-      color: #333;
-    }
-    
-    .popup-info {
-      margin-bottom: 0.5rem;
-    }
-    
-    .popup-label {
-      font-weight: 500;
-      color: #666;
-    }
-    
-    .popup-value {
-      color: #333;
-    }
+/* ── Header ── */
+.header {
+  background: var(--color-primary);
+  padding: 0.75rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
 
-    .popup-title-link {
-      color: #007bff;
-      text-decoration: none;
-      font-weight: 600;
-      transition: color 0.2s;
-    }
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
 
-    .popup-title-link:hover {
-      color: #0056b3;
-      text-decoration: underline;
-    }
+.header-logo {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  object-fit: cover;
+}
 
-    .popup-clickable {
-      color: #007bff;
-      cursor: pointer;
-      text-decoration: none;
-      transition: color 0.2s;
-    }
+.header h1 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: var(--color-dark);
+  text-transform: uppercase;
+  line-height: 1.1;
+}
 
-    .popup-clickable:hover {
-      color: #0056b3;
-      text-decoration: underline;
-    }
+.header .tagline {
+  font-family: var(--font-subtitle);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-dark);
+  opacity: 0.6;
+  letter-spacing: 0.03em;
+}
 
-    .instagram-photo-preview {
-      max-width: 120px;
-      max-height: 120px;
-      border-radius: 8px;
-      margin-top: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
+.nav-pills {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
 
-    .instagram-photo-preview:hover {
-      transform: scale(1.05);
-    }
+.nav-pill {
+  background: var(--color-dark);
+  color: var(--color-primary);
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s;
+  border: 2px solid var(--color-dark);
+}
 
-    .instagram-preview-container {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      margin-top: 8px;
-    }
+.nav-pill:hover {
+  background: transparent;
+  color: var(--color-dark);
+}
 
-    .instagram-preview-text {
-      flex: 1;
-    }
-    
+.nav-pill.outline {
+  background: transparent;
+  color: var(--color-dark);
+  border-color: var(--color-dark);
+}
 
-    
-    /* Bottom sheet styles */
-    .bottom-sheet {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: white;
-      border-radius: 20px 20px 0 0;
-      box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
-      transform: translateY(100%);
-      transition: transform 0.3s ease-out;
-      z-index: 2000;
-      max-height: 80vh;
-      overflow-y: auto;
-      padding: 0;
-    }
-    
-    .bottom-sheet.active {
-      transform: translateY(0);
-    }
-    
-    .bottom-sheet-handle {
-      width: 40px;
-      height: 4px;
-      background: #ddd;
-      border-radius: 2px;
-      margin: 12px auto;
-    }
-    
-    .bottom-sheet-content {
-      padding: 0 20px 20px 20px;
-    }
-    
-    .bottom-sheet-title {
-      font-size: 1.2rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
-      color: #333;
-    }
-    
-    .bottom-sheet-info {
-      margin-bottom: 0.8rem;
-      display: flex;
-      align-items: flex-start;
-    }
-    
-    .bottom-sheet-label {
-      font-weight: 500;
-      color: #666;
-      min-width: 100px;
-      flex-shrink: 0;
-    }
-    
-    .bottom-sheet-value {
-      color: #333;
-      flex: 1;
-    }
-    
-    .bottom-sheet-close {
-      position: absolute;
-      top: 15px;
-      right: 20px;
-      background: none;
-      border: none;
-      font-size: 1.5rem;
-      color: #666;
-      cursor: pointer;
-      padding: 0;
-      width: 30px;
-      height: 30px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    
-    .bottom-sheet-close:hover {
-      color: #333;
-    }
-    
-    .overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0,0,0,0.5);
-      z-index: 1999;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.3s ease-out;
-    }
-    
-    .overlay.active {
-      opacity: 1;
-      visibility: visible;
-    }
-    
-    /* Tablet responsiveness */
-    @media (max-width: 1024px) {
-      .header {
-        padding: 0.8rem;
-      }
-      
-      .nav-links a {
-        padding: 0.4rem 0.8rem;
-        margin-right: 0.3rem;
-        margin-bottom: 0.3rem;
-        display: inline-block;
-      }
-      
-      #map {
-        height: calc(100vh - 180px);
-      }
-    }
+.nav-pill.outline:hover {
+  background: var(--color-dark);
+  color: var(--color-primary);
+}
 
-    /* Mobile responsiveness */
-    @media (max-width: 768px) {
-      .header {
-        padding: 0.75rem;
-      }
-      
-      .header h1 {
-        font-size: 1.2rem;
-        margin-bottom: 0.3rem;
-      }
-      
-      .header p {
-        font-size: 0.8rem;
-        margin: 0.3rem 0 0.5rem 0;
-      }
-      
-      .nav-links {
-        margin-top: 0.75rem;
-      }
-      
-      .nav-links a {
-        font-size: 0.8rem;
-        padding: 0.4rem 0.7rem;
-        margin-right: 0.3rem;
-        margin-bottom: 0.3rem;
-        display: inline-block;
-      }
-      
-      .nav-links-secondary a {
-        font-size: 0.7rem;
-        padding: 0.3rem 0.6rem;
-      }
-      
-      #map {
-        height: calc(100vh - 160px);
-      }
-      
-      .footer-content {
-        flex-direction: column;
-        text-align: center;
-        padding: 0 15px;
-      }
-      
-      .footer-section {
-        margin: 10px 0;
-        min-width: auto;
-      }
-      
-      .footer-section h3 {
-        font-size: 1rem;
-        margin-bottom: 8px;
-      }
-      
-      .footer-section a {
-        font-size: 0.85rem;
-        margin-bottom: 4px;
-      }
-      
-      .footer-bottom {
-        font-size: 0.75rem;
-        padding-top: 12px;
-      }
-      
-      /* Hide popups on mobile */
-      .leaflet-popup {
-        display: none !important;
-      }
-      
-      /* Bottom sheet mobile optimizations */
-      .bottom-sheet {
-        max-height: 85vh;
-      }
-      
-      .bottom-sheet-content {
-        padding: 0 15px 15px 15px;
-      }
-      
-      .bottom-sheet-title {
-        font-size: 1.1rem;
-        margin-bottom: 0.8rem;
-        padding-right: 30px;
-      }
-      
-      .bottom-sheet-info {
-        margin-bottom: 0.6rem;
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      
-      .bottom-sheet-label {
-        min-width: auto;
-        margin-bottom: 2px;
-        font-size: 0.9rem;
-      }
-      
-      .bottom-sheet-value {
-        font-size: 0.9rem;
-      }
+/* ── Map ── */
+#map {
+  height: calc(100vh - 120px);
+}
 
-      .bottom-sheet-title .popup-title-link {
-        font-size: 1.1rem;
-        display: block;
-        padding: 5px 0;
-      }
-      
-      .instagram-post {
-        padding: 8px;
-        margin-bottom: 8px;
-      }
-      
-      .instagram-post-header {
-        font-size: 0.85rem;
-      }
-      
-      .instagram-post-caption {
-        font-size: 0.8rem;
-      }
-      
-      .instagram-post-link {
-        font-size: 0.8rem;
-      }
+/* ── Leaflet popup override ── */
+.leaflet-popup-content-wrapper {
+  border-radius: 14px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  padding: 0;
+}
 
-      .instagram-photo-preview {
-        max-width: 100px;
-        max-height: 100px;
-      }
+.leaflet-popup-content {
+  margin: 0;
+  font-family: var(--font-body);
+}
 
-      .instagram-preview-container {
-        flex-direction: column;
-        gap: 8px;
-      }
-    }
+/* ── Popup card ── */
+.popup-content {
+  max-width: 300px;
+  padding: 16px;
+  border-top: 4px solid var(--color-tertiary);
+}
 
-    /* Small mobile devices */
-    @media (max-width: 480px) {
-      .header {
-        padding: 0.5rem;
-      }
-      
-      .header h1 {
-        font-size: 1.1rem;
-      }
-      
-      .header p {
-        font-size: 0.75rem;
-      }
-      
-      .nav-links a {
-        font-size: 0.75rem;
-        padding: 0.3rem 0.5rem;
-        margin-right: 0.2rem;
-        margin-bottom: 0.2rem;
-      }
-      
-      #map {
-        height: calc(100vh - 140px);
-      }
-      
-      .bottom-sheet-title {
-        font-size: 1rem;
-        line-height: 1.2;
-      }
-      
-      .bottom-sheet-label,
-      .bottom-sheet-value {
-        font-size: 0.85rem;
-      }
-      
-      .footer-section h3 {
-        font-size: 0.9rem;
-      }
-      
-      .footer-section a {
-        font-size: 0.8rem;
-      }
-      
-      .footer-section p {
-        font-size: 0.8rem !important;
-      }
+.popup-content.reviewed {
+  border-top-color: var(--color-primary);
+}
 
-      .bottom-sheet-title .popup-title-link {
-        font-size: 1rem;
-        padding: 8px 0;
-        line-height: 1.2;
-      }
+.popup-content.community-reviewed {
+  border-top-color: var(--color-secondary);
+}
 
-      .popup-clickable {
-        min-height: 44px;
-        display: inline-flex;
-        align-items: center;
-        padding: 5px 0;
-      }
+.popup-title {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  margin-bottom: 0.6rem;
+}
 
-      .instagram-photo-preview {
-        max-width: 80px;
-        max-height: 80px;
-        min-height: 44px;
-        min-width: 44px;
-      }
-    }
+.popup-title-link {
+  color: var(--color-dark);
+  text-decoration: none;
+}
 
-    /* Large desktop screens */
-    @media (min-width: 1200px) {
-      .header {
-        padding: 1.2rem 2rem;
-      }
-      
-      .footer-content {
-        padding: 0 2rem;
-      }
-      
-      .popup-content {
-        max-width: 350px;
-        font-size: 0.95rem;
-      }
-    }
-    
-    /* Instagram posts styling */
-    .instagram-posts-container {
-      margin-top: 10px;
-    }
-    
-    .instagram-post {
-      border: 1px solid #e1e8ed;
-      border-radius: 8px;
-      margin-bottom: 10px;
-      padding: 10px;
-      background: #f8f9fa;
-    }
-    
-    .instagram-post-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 8px;
-    }
-    
-    .instagram-post-rating {
-      font-weight: bold;
-      color: #1da1f2;
-    }
-    
-    .instagram-post-date {
-      font-size: 0.8em;
-      color: #657786;
-    }
-    
-    .instagram-post-caption {
-      font-size: 0.9em;
-      line-height: 1.4;
-      margin-bottom: 8px;
-    }
-    
-    .instagram-post-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      color: #1da1f2;
-      text-decoration: none;
-      font-size: 0.9em;
-    }
-    
-    .instagram-post-link:hover {
-      text-decoration: underline;
-    }
-    
-    .reviews-section {
-      margin-top: 15px;
-      border-top: 1px solid #e9ecef;
-      padding-top: 15px;
-    }
-    
-    .review-item {
-      border-left: 3px solid #007bff;
-      padding-left: 10px;
-      margin-bottom: 10px;
-    }
-    
-    .review-header {
-      display: flex;
-      justify-content: space-between;
-      font-weight: bold;
-      margin-bottom: 5px;
-    }
-    
-    .review-details {
-      font-size: 0.9em;
-      color: #666;
-      margin-bottom: 5px;
-    }
-    
-    .review-notes {
-      font-style: italic;
-    }
+.popup-title-link:hover {
+  color: var(--color-secondary);
+}
 
-    /* Footer styles */
-    .footer {
-      background-color: #f8f9fa;
-      padding: 20px 0;
-      margin-top: 20px;
-      border-top: 1px solid #e9ecef;
-    }
+.popup-info {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.3rem 0;
+  font-size: 0.82rem;
+  border-bottom: 1px solid #f0edf5;
+}
 
-    .footer-content {
-      display: flex;
-      justify-content: space-around;
-      flex-wrap: wrap;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
+.popup-info:last-of-type {
+  border-bottom: none;
+}
 
-    .footer-section {
-      flex: 1;
-      min-width: 200px;
-      margin: 0 15px;
-    }
+.popup-label {
+  color: #888;
+  font-weight: 500;
+}
 
-    .footer-section h3 {
-      font-size: 1.1rem;
-      margin-bottom: 10px;
-      color: #333;
-    }
+.popup-value {
+  color: var(--color-dark);
+  font-weight: 600;
+}
 
-    .footer-section a {
-      display: block;
-      color: #007bff;
-      text-decoration: none;
-      margin-bottom: 5px;
-      font-size: 0.9rem;
-      transition: color 0.2s;
-    }
+.popup-clickable {
+  color: var(--color-secondary);
+  cursor: pointer;
+  text-decoration: none;
+}
 
-    .footer-section a:hover {
-      color: #0056b3;
-    }
+.popup-clickable:hover {
+  text-decoration: underline;
+}
 
-    .footer-bottom {
-      text-align: center;
-      padding-top: 15px;
-      border-top: 1px solid #e9ecef;
-      margin-top: 20px;
-      font-size: 0.8rem;
-      color: #6c757d;
-    }
+/* ── Bottom sheet ── */
+.bottom-sheet {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  border-radius: 20px 20px 0 0;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
+  transform: translateY(100%);
+  transition: transform 0.3s ease-out;
+  z-index: 2000;
+  max-height: 80vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.bottom-sheet.active {
+  transform: translateY(0);
+}
+
+.sheet-color-bar {
+  height: 4px;
+  background: var(--color-tertiary);
+}
+
+.sheet-color-bar.reviewed {
+  background: var(--color-primary);
+}
+
+.sheet-color-bar.community-reviewed {
+  background: var(--color-secondary);
+}
+
+.bottom-sheet-handle {
+  width: 40px;
+  height: 4px;
+  background: #ddd;
+  border-radius: 2px;
+  margin: 12px auto;
+}
+
+.bottom-sheet-content {
+  padding: 0 20px 20px;
+}
+
+.sheet-header {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 1rem;
+}
+
+.sheet-photo {
+  width: 70px;
+  height: 70px;
+  border-radius: 10px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.sheet-header-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.bottom-sheet-title {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  color: var(--color-dark);
+  margin-bottom: 0.2rem;
+}
+
+.sheet-subtitle {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+.sheet-details {
+  background: var(--color-info-bg);
+  border-radius: 10px;
+  padding: 12px;
+  margin-bottom: 12px;
+  border-left: 3px solid var(--color-accent);
+}
+
+.sheet-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.3rem 0;
+  font-size: 0.85rem;
+  border-bottom: 1px solid #f0edf5;
+}
+
+.sheet-row:last-child {
+  border-bottom: none;
+}
+
+.bottom-sheet-label {
+  color: #888;
+  font-weight: 500;
+}
+
+.bottom-sheet-value {
+  color: var(--color-dark);
+  font-weight: 600;
+}
+
+.sheet-caption {
+  font-size: 0.8rem;
+  color: #555;
+  font-style: italic;
+  line-height: 1.4;
+  padding: 10px 12px;
+  background: var(--color-light);
+  border-radius: 8px;
+  margin-bottom: 12px;
+  max-height: 100px;
+  overflow-y: auto;
+}
+
+.sheet-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.sheet-action-btn {
+  flex: 1;
+  text-align: center;
+  padding: 0.5rem;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.sheet-action-btn.primary {
+  background: var(--color-secondary);
+  color: #fff;
+}
+
+.sheet-action-btn.secondary {
+  background: var(--color-light);
+  color: var(--color-dark);
+}
+
+.bottom-sheet-close {
+  position: absolute;
+  top: 10px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #999;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 1999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-out;
+}
+
+.overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ── Footer ── */
+.footer {
+  background: var(--color-dark);
+  color: var(--color-accent);
+  padding: 1rem 1.5rem;
+  text-align: center;
+  font-size: 0.85rem;
+}
+
+.footer a {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.footer a:hover {
+  color: var(--color-secondary);
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.footer-divider {
+  border: none;
+  border-top: 1px solid rgba(197,163,255,0.2);
+  margin: 0.5rem 0;
+}
+
+.footer-credit {
+  font-size: 0.75rem;
+  color: rgba(197,163,255,0.6);
+}
+
+.footer .admin-link {
+  color: rgba(197,163,255,0.4);
+  font-weight: 400;
+}
+
+/* ── Mobile: hide popups, show bottom sheet ── */
+@media (max-width: 768px) {
+  .header h1 { font-size: 1.1rem; }
+  .header .tagline { font-size: 0.7rem; }
+  .header-logo { width: 36px; height: 36px; }
+  .nav-pill { font-size: 0.75rem; padding: 0.35rem 0.7rem; }
+  #map { height: calc(100vh - 100px); }
+  .leaflet-popup { display: none !important; }
+  .bottom-sheet { max-height: 85vh; }
+  .bottom-sheet-content { padding: 0 15px 15px; }
+  .sheet-photo { width: 60px; height: 60px; }
+  .footer { padding: 0.75rem 1rem; }
+  .footer-links { gap: 1rem; }
+}
+
+@media (max-width: 480px) {
+  .header { padding: 0.5rem 0.75rem; }
+  .header h1 { font-size: 0.95rem; }
+  .nav-pill { font-size: 0.7rem; padding: 0.3rem 0.5rem; }
+  #map { height: calc(100vh - 90px); }
+}
+
+@media (min-width: 1200px) {
+  .header { padding: 0.75rem 2rem; }
+  .popup-content { max-width: 340px; }
+}
   </style>
 </head>
 <body>
   <div class="header">
-    <h1>🚰 YVR Water Fountains</h1>
-    <p>Find drinking fountains across Vancouver & Burnaby</p>
-    <div class="nav-links">
-      <a href="public_review_form.html">⭐ Submit Review</a>
-      <a href="#" id="locate-me">📍 My Location</a>
-      <a href="#" id="admin-access" style="font-size: 0.7rem; opacity: 0.6;">⚙️</a>
+    <div class="header-left">
+      <img src="images/logo.png" alt="YVR Water Fountains" class="header-logo">
+      <div>
+        <h1>YVR Water Fountains</h1>
+        <span class="tagline">where to hydrate in Vancouver</span>
+      </div>
+    </div>
+    <div class="nav-pills">
+      <a href="public_review_form.html" class="nav-pill">Submit Review</a>
+      <a href="#" id="locate-me" class="nav-pill">My Location</a>
+      <a href="https://www.instagram.com/yvrwaterfountains/" target="_blank" class="nav-pill outline">@yvrwaterfountains</a>
     </div>
   </div>
   
@@ -645,31 +450,26 @@
   
   <div id="map"></div>
   
-     <!-- Footer with additional links -->
-   <div class="footer">
-     <div class="footer-content">
-       <div class="footer-section">
-         <h3>Quick Links</h3>
-         <a href="public_review_form.html">⭐ Rate a Fountain</a>
-       </div>
-       <div class="footer-section">
-         <h3>About</h3>
-         <p style="font-size: 0.9rem; color: #6c757d; margin: 0;">Community-maintained map of water fountains across Vancouver & Burnaby</p>
-       </div>
-     </div>
-     <div class="footer-bottom">
-       <p>🚰 YVR Water Fountains - Find & Rate Drinking Fountains in Vancouver & Burnaby</p>
-     </div>
-   </div>
+  <div class="footer">
+    <div class="footer-links">
+      <a href="https://www.instagram.com/yvrwaterfountains/" target="_blank">@yvrwaterfountains</a>
+      <a href="public_review_form.html">Submit a Review</a>
+      <a href="https://github.com/kcarbeck/yvr-water-fountains" target="_blank">GitHub</a>
+      <a href="#" id="admin-access" class="admin-link">Admin</a>
+    </div>
+    <hr class="footer-divider">
+    <div class="footer-credit">
+      Community-maintained fountain ratings across Vancouver &amp; Burnaby
+      <br>Built by <a href="https://github.com/kcarbeck" target="_blank">kcarbeck</a>
+    </div>
+  </div>
   
-  <!-- Bottom sheet for mobile -->
   <div class="overlay" id="overlay"></div>
   <div class="bottom-sheet" id="bottom-sheet">
+    <div class="sheet-color-bar" id="sheet-color-bar"></div>
     <div class="bottom-sheet-handle"></div>
     <button class="bottom-sheet-close" id="bottom-sheet-close">&times;</button>
-    <div class="bottom-sheet-content" id="bottom-sheet-content">
-      <!-- content will be populated by javascript -->
-    </div>
+    <div class="bottom-sheet-content" id="bottom-sheet-content"></div>
   </div>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>

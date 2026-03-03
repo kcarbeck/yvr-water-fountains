@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Netlify Functions for YVR Water Fountains",
   "dependencies": {
-    "@supabase/supabase-js": "^2.38.0"
+    "@supabase/supabase-js": "^2.38.0",
+    "resend": "^3.2.0"
   },
   "engines": {
     "node": ">=18"

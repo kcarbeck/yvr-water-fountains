@@ -38,3 +38,7 @@
   from = "/submit-review"
   to = "/.netlify/functions/submit-review"
   status = 200
+
+# Weekly reminder email — Mondays 10am Pacific (6pm UTC)
+[functions."weekly-reminder"]
+  schedule = "0 18 * * 1"

@@ -77,8 +77,10 @@
    * applies the base tile layer to the map.
    */
   function applyBaseLayer() {
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '© OpenStreetMap'
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+      attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> © <a href="https://carto.com/">CARTO</a>',
+      subdomains: 'abcd',
+      maxZoom: 20
     }).addTo(state.map);
   }
 
@@ -214,7 +216,7 @@
     } else if (totalCount > 0) {
       color = '#ff69b4';
     } else {
-      color = '#7eb6ff';
+      color = '#c5a3ff';
     }
 
     return {

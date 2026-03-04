@@ -42,73 +42,74 @@ body {
 .header-left {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.4rem;
 }
 
 .header-logo {
-  width: 52px;
-  height: 52px;
-  border-radius: 10px;
-  object-fit: cover;
+  width: 100px;
+  height: auto;
+  border-radius: 16px;
 }
 
 .header h1 {
   margin: 0;
-  font-family: var(--font-display);
-  font-size: 1.8rem;
-  color: var(--color-dark);
-  text-transform: uppercase;
-  line-height: 1.1;
-  letter-spacing: 0.02em;
+  line-height: 0;
+}
+
+.header-title-img {
+  height: 130px;
+  max-width: 100%;
+  width: auto;
+  display: block;
+  object-fit: contain;
 }
 
 .header .tagline {
   font-family: var(--font-subtitle);
-  font-size: 0.9rem;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.1rem;
   font-weight: 600;
   color: var(--color-dark);
   opacity: 0.7;
   letter-spacing: 0.03em;
 }
 
-.nav-pills {
+.nav-links {
   display: flex;
-  gap: 0.4rem;
+  gap: 1.2rem;
+  align-items: center;
   flex-wrap: wrap;
+  width: 100%;
 }
 
-.nav-pill {
-  background: var(--color-dark);
-  color: var(--color-primary);
-  padding: 0.4rem 0.9rem;
-  border-radius: 999px;
-  font-size: 0.8rem;
-  font-weight: 600;
+.nav-link {
+  color: var(--color-secondary);
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+  font-weight: 700;
   text-decoration: none;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  border-bottom: 2px dotted var(--color-secondary);
+  padding-bottom: 1px;
   transition: all 0.2s;
-  border: 2px solid var(--color-dark);
 }
 
-.nav-pill:hover {
-  background: transparent;
+.nav-link:hover {
   color: var(--color-dark);
-}
-
-.nav-pill.outline {
-  background: transparent;
-  color: var(--color-dark);
-  border-color: var(--color-dark);
-}
-
-.nav-pill.outline:hover {
-  background: var(--color-dark);
-  color: var(--color-primary);
+  border-bottom-style: solid;
 }
 
 /* ── Map ── */
 #map {
   height: calc(100vh - 120px);
 }
+
+/* ── Tile filter (preview — remove after choosing) ── */
+.leaflet-tile-pane {
+  filter: saturate(0.6) brightness(1.08);
+}
+
 
 /* ── Leaflet popup override ── */
 .leaflet-popup-content-wrapper {
@@ -405,10 +406,10 @@ body {
 
 /* ── Mobile: hide popups, show bottom sheet ── */
 @media (max-width: 768px) {
-  .header h1 { font-size: 1.3rem; }
-  .header .tagline { font-size: 0.8rem; }
-  .header-logo { width: 42px; height: 42px; }
-  .nav-pill { font-size: 0.75rem; padding: 0.35rem 0.7rem; }
+  .header-title-img { height: 65px; }
+  .header-logo { width: 50px; }
+  .nav-links { justify-content: center; }
+  .nav-link { font-size: 0.7rem; }
   #map { height: calc(100vh - 100px); }
   .leaflet-popup { display: none !important; }
   .bottom-sheet { max-height: 85vh; }
@@ -420,8 +421,8 @@ body {
 
 @media (max-width: 480px) {
   .header { padding: 0.5rem 0.75rem; }
-  .header h1 { font-size: 1.1rem; }
-  .nav-pill { font-size: 0.7rem; padding: 0.3rem 0.5rem; }
+  .header-title-img { height: 50px; }
+  .nav-link { font-size: 0.6rem; }
   #map { height: calc(100vh - 90px); }
 }
 
@@ -436,14 +437,14 @@ body {
     <div class="header-left">
       <img src="images/logo.png" alt="YVR Water Fountains" class="header-logo">
       <div>
-        <h1>YVR Water Fountains</h1>
-        <span class="tagline">where to hydrate in Vancouver</span>
+        <h1><img src="images/header.png" alt="YVR Water Fountains" class="header-title-img"></h1>
+
       </div>
     </div>
-    <div class="nav-pills">
-      <a href="public_review_form.html" class="nav-pill">Submit Review</a>
-      <a href="#" id="locate-me" class="nav-pill">My Location</a>
-      <a href="https://www.instagram.com/yvrwaterfountains/" target="_blank" class="nav-pill outline">@yvrwaterfountains</a>
+    <div class="nav-links">
+      <a href="public_review_form.html" class="nav-link">Submit Review</a>
+      <a href="#" id="locate-me" class="nav-link">My Location</a>
+      <a href="https://www.instagram.com/yvrwaterfountains/" target="_blank" class="nav-link">@yvrwaterfountains</a>
     </div>
   </div>
   

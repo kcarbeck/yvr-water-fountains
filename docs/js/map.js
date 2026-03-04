@@ -77,10 +77,8 @@
    * applies the base tile layer to the map.
    */
   function applyBaseLayer() {
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-      attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> © <a href="https://carto.com/">CARTO</a>',
-      subdomains: 'abcd',
-      maxZoom: 20
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap'
     }).addTo(state.map);
   }
 
@@ -220,7 +218,7 @@
     }
 
     return {
-      radius: 6,
+      radius: 5,
       color: '#1a1a2e',
       fillColor: color,
       fillOpacity: 0.85,
@@ -232,7 +230,7 @@
    * draws markers using the geojson payload.
    */
   function placeFountainsOnMap(geojson) {
-    const geoLayer = L.geoJSON(geojson, {
+    L.geoJSON(geojson, {
       pointToLayer: (feature, latlng) => {
         const props = feature.properties || {};
         const style = markerStyle(props);
@@ -240,23 +238,6 @@
       },
       onEachFeature: (feature, layer) => attachFountainBehavior(feature, layer)
     }).addTo(state.map);
-
-    registerZoomScaling(geoLayer);
-  }
-
-  function registerZoomScaling(geoLayer) {
-    function updateRadii() {
-      const zoom = state.map.getZoom();
-      const baseRadius = Math.max(3, Math.min(10, zoom - 7));
-      geoLayer.eachLayer(function (layer) {
-        if (typeof layer.setRadius === 'function') {
-          layer.setRadius(baseRadius);
-        }
-      });
-    }
-
-    state.map.on('zoomend', updateRadii);
-    updateRadii();
   }
 
   /**

@@ -218,7 +218,7 @@
     }
 
     return {
-      radius: 5,
+      radius: isMobile() ? 8 : 5,
       color: '#1a1a2e',
       fillColor: color,
       fillOpacity: 0.85,

@@ -87,7 +87,7 @@
    */
   function applyInitialView() {
     if (isMobile()) {
-      state.map.setView(config.MAP_CENTER, (config.MAP_ZOOM || 0) - 1);
+      state.map.setView([config.MAP_CENTER[0] + 0.01, config.MAP_CENTER[1]], config.MAP_ZOOM);
     } else {
       state.map.setView(config.MAP_CENTER, config.MAP_ZOOM);
     }

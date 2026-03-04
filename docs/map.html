@@ -79,13 +79,14 @@ body {
   gap: 1.2rem;
   align-items: center;
   flex-wrap: wrap;
+  justify-content: flex-end;
   width: 100%;
 }
 
 .nav-link {
   color: var(--color-secondary);
   font-family: 'Courier New', monospace;
-  font-size: 0.9rem;
+  font-size: 1.05rem;
   font-weight: 700;
   text-decoration: none;
   text-transform: lowercase;
@@ -408,7 +409,7 @@ body {
 @media (max-width: 768px) {
   .header-title-img { height: 65px; }
   .header-logo { width: 50px; }
-  .nav-links { justify-content: center; }
+  .nav-links { justify-content: center; margin-left: 0; }
   .nav-link { font-size: 0.7rem; }
   #map { height: calc(100vh - 100px); }
   .leaflet-popup { display: none !important; }

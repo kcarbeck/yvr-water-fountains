@@ -25,11 +25,11 @@ Things we found along the way:
 - All 151 Burnaby fountains are labelled city "Vancouver" and source "Vancouver Open Data" in our database. That one is our mistake, not the cities'. The airport fountain, which is in Richmond, is filed under Kerrisdale.
 - The 8 fountains we added have no source recorded yet, and nothing in the database marks which ones are indoors or not open to the public.
 
-Fixes for the duplicate ID, the city and source labels, and the indoor and not-public labels are written and tested on a copy of the database, but not applied (see In progress). The stacked fountains stay where the City put them until one of us walks over and drops a real pin.
+Fixes for the duplicate ID, the city and source labels, and the indoor and not-public labels are written and tested on a copy of the database, but not applied yet. They are in [one data-fix script](supabase/data_fixes/2026-10-06_review_link_fixes.sql), which explains each change in a comment above it. The stacked fountains stay where the City put them until one of us walks over and drops a real pin.
 
 ## How changes are made
 
-For the October 2026 changes we took a full backup of the live database, rebuilt it as a local copy, and checked that the copy matched production table by table. Each change was run on the copy first, along with its rollback, and we compared row counts and what the public map can see before and after. Schema changes are numbered files in [`supabase/migrations/`](supabase/migrations/). One-off corrections to the data are kept as separate scripts, each with a rollback (on the `oct-fixes` branch for now).
+For the October 2026 changes we took a full backup of the live database, rebuilt it as a local copy, and checked that the copy matched production table by table. Each change was run on the copy first, along with its rollback, and we compared row counts and what the public map can see before and after. Schema changes are numbered files in [`supabase/migrations/`](supabase/migrations/). One-off corrections to the data are separate scripts in `supabase/data_fixes/`, each with a matching file in `supabase/rollbacks/`. Reusable checks live in `queries/`. For example, [`queries/03_qc_review_links.sql`](queries/03_qc_review_links.sql) looks for one Instagram post linked to two reviews. It currently finds one: the Hinge Park review uses the Charleson Park post.
 
 The security fix and the form pause reached the live database on 2026-10-21. Afterwards the public map view still returned 436 fountains, 42 of them rated, the same as before.
 
@@ -49,9 +49,10 @@ The public review form is switched off at the database for now. The button on th
 
 ## In progress
 
-This section is under construction, in the 1999 sense. None of it is on `main` yet.
+This section is under construction, in the 1999 sense.
 
-- On the `oct-fixes` branch: the security and form-pause migrations already applied above; a PostGIS migration adding `nearest_fountains()` (not applied); the data fixes for the problems listed earlier, including three reviews linked to the wrong fountain, the missing Empire Field fountain and the Burnaby labels (not applied); four SQL queries for coverage by neighbourhood, Park Board versus street fountains, review-link checks and possible duplicates; an R script that snapshots the database to CSV; and the tests and rollbacks for all of it.
+- Written and tested, but not yet run on the live database: a PostGIS migration adding `nearest_fountains()`; the data fixes for the problems listed earlier, including three reviews linked to the wrong fountain, the missing Empire Field fountain and the Burnaby labels; and a repair for four captions with garbled emoji. One of the four queries in `queries/` needs PostGIS, so it waits for that migration.
+- [`scripts/snapshot_database.R`](scripts/snapshot_database.R) saves the fountains and published reviews to CSV in `data/snapshot/`. A GitHub Actions workflow to run it twice a day is written but not installed yet.
 - The Instagram importer is decided but not written. It will use the official Instagram API. Each post is imported once, tracked by its Instagram media ID. A post goes on the map by itself only if its caption has exactly one fountain code and one clean rating. Anything else waits in a queue for us to confirm.
 
 ## Running it locally

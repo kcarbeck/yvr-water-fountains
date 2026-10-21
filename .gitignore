@@ -78,3 +78,6 @@ PRIVATE_*.md
 data/temp/
 data/processed/
 data/output/
+
+# Database backups (contain reviewer details) - never commit
+backups/

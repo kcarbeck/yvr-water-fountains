@@ -170,6 +170,10 @@
     }
     if (typeof value === 'string') {
       const normalized = value.toLowerCase();
+      // check "unknown" first — it contains the letters "no"
+      if (normalized === 'unknown') {
+        return 'unknown';
+      }
       if (normalized.includes('yes')) {
         return 'Yes';
       }

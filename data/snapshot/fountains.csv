@@ -1,0 +1,437 @@
+"id","external_id","name","neighbourhood","location_description","city_name","source_name","latitude","longitude","operational_status","season_note","pet_friendly","has_bottle_filler","is_wheelchair_accessible","last_verified_at","average_rating","approved_review_count","admin_review_count"
+"008fe356-2e33-472a-ade1-5c703bdc472f","545485","BURNABY FRASER FORESHORE PARK","","","Vancouver","Vancouver Open Data",49.1879846825669,-122.994230109899,"unknown",,"unknown",,,,,0,0
+"0105e112-2cf0-4331-8537-703af0adcf85","DFPB0023","Coal Harbour Park","Downtown","Coal Harbour Park","Vancouver","Vancouver Open Data",49.2899773556504,-123.125370054719,"unknown",,"unknown",,,,,0,0
+"02d599de-2fe0-465a-bbb5-644fce6b7824","DFPB0037","Ebisu Park","Marpole","Ebisu Park","Vancouver","Vancouver Open Data",49.2055105907272,-123.132834326183,"unknown",,"unknown",,,,,0,0
+"03a765fe-c8db-4821-a123-3b165600ad3d","DFENG0053","Gilford St & Haro St","West End","Gilford St & Haro St","Vancouver","Vancouver Open Data",49.291825,-123.138092,"unknown",,"unknown",,,,,0,0
+"03eae63b-ee6d-4935-bc56-4eb2c85851b9",,"Empire Fields - Between two fields","Hastings-Sunrise",,"Vancouver",,49.2826710909691,-123.033281564713,"unknown",,"unknown",,,,0,1,1
+"04206a01-528f-4c5e-a449-561833900de1","545564","LYNDHURST PARK","","","Vancouver","Vancouver Open Data",49.2574228947941,-122.897090183066,"unknown",,"unknown",,,,,0,0
+"0453b103-d409-4827-9e7c-e876bcb154ed","DFPB0063","Hastings Community Park - South of wading pool","Hastings-Sunrise","Hastings Community Park - South of wading pool","Vancouver","Vancouver Open Data",49.2804851895953,-123.038205521983,"unknown",,"unknown",,,,,0,0
+"0692ae57-bc19-48ae-b07e-6e41e449a418","DFENG0607","ICBC 999 Kingsway","Kensington-Cedar Cottage","ICBC 999 Kingsway","Vancouver","Vancouver Open Data",49.254676,-123.085449,"unknown",,"unknown",,,,,0,0
+"06f07ea4-38be-497a-8ae5-2c565e754546","DFPB0078","Kerrisdale Centennial Park","Kerrisdale","Kerrisdale Centennial Park","Vancouver","Vancouver Open Data",49.2334361614254,-123.157185406277,"unknown",,"unknown",,,,,0,0
+"0738d055-49df-4b2c-8602-fae9ac5b04ca","DFPB0080","Killarney Park - E 45th Ave. @ Killarney St.","Killarney","Killarney Park - E 45th Ave. @ Killarney St.","Vancouver","Vancouver Open Data",49.2293001179424,-123.045327707791,"unknown",,"unknown",,,,,0,0
+"075e6c07-5873-468c-847f-311a9225ef64","545563","LAKEVIEW SCHOOL PARK","","","Vancouver","Vancouver Open Data",49.2315900989252,-122.94469239478,"unknown",,"unknown",,,,,0,0
+"08804580-a4d5-46c5-9f9b-c3542455c44c","546956","Cameron Rec Centre and Branch","","","Vancouver","Vancouver Open Data",49.2539894053471,-122.899252527386,"unknown",,"unknown",,,,,0,0
+"0921c092-f5e1-4ae3-b142-23b1b74cd786","DFPB0101","Melbourne Park","Renfrew-Collingwood","Melbourne Park","Vancouver","Vancouver Open Data",49.2365292742264,-123.029091584876,"unknown",,"unknown",,,,,0,0
+"0922ac21-ac17-4b5c-beca-79bf28508604","DFPB0115","Norquay Park","Renfrew-Collingwood","Norquay Park","Vancouver","Vancouver Open Data",49.2382783025449,-123.050812718246,"unknown",,"unknown",,,,,0,0
+"09b837e2-f5d0-493a-b3d1-5c9c1b421a56","DFPB0065","Hastings Park - Italian gardens","Hastings-Sunrise","Hastings Park - Italian gardens","Vancouver","Vancouver Open Data",49.2832502455867,-123.042943544748,"unknown",,"unknown",,,,,0,0
+"0a01b205-764e-46ee-bb53-805077d116dd","545606","WESBURN PARK","","","Vancouver","Vancouver Open Data",49.2417572010003,-123.011586572539,"unknown",,"unknown",,,,,0,0
+"0ab2606d-e90b-4df5-b6ea-9bcec9dffd13","DFPB0117","Oak Park - East of fieldhouse","Marpole","Oak Park - East of fieldhouse","Vancouver","Vancouver Open Data",49.2169868303953,-123.128140265414,"unknown",,"unknown",,,,,0,0
+"0adf2b38-a371-4537-a008-bf53fffcd09c","DFPB0073","Jericho Beach Park","West Point Grey","Jericho Beach Park","Vancouver","Vancouver Open Data",49.2720143540552,-123.191721526709,"unknown",,"unknown",,,,,0,0
+"0b6dc900-f05d-4f90-ab11-9c3fb22a5754","DFPB0094","Maple Grove Park - East of pool","Kerrisdale","Maple Grove Park - East of pool","Vancouver","Vancouver Open Data",49.2232849493449,-123.159687449487,"unknown",,"unknown",,,,,0,0
+"0b819019-575c-42f0-bd9a-4015086c761f","545474","BELL PARK","","","Vancouver","Vancouver Open Data",49.2520331050119,-122.904942740153,"unknown",,"unknown",,,,,0,0
+"0b972fdc-f653-479e-a00f-8d2a183ed1bc","547258","HARWOOD PARK","","","Vancouver","Vancouver Open Data",49.2525112189508,-122.986397983026,"unknown",,"unknown",,,,,0,0
+"0bedfd8d-adf9-493d-942d-48530f065e08","DFPB0057","Granville Loop Park","Fairview","Granville Loop Park","Vancouver","Vancouver Open Data",49.2672333741722,-123.137741194386,"unknown",,"unknown",,,,,0,0
+"0c124a40-395f-4808-b034-c16112c1b7f2","545583","RIVERWAY SPORTS COMPLEX","","","Vancouver","Vancouver Open Data",49.2071694732053,-123.002780514135,"unknown",,"unknown",,,,,0,0
+"0ca6ffca-e70b-4939-8e2d-7c533d4319bf","545496","ALTA VISTA RESERVOIR PARK","","","Vancouver","Vancouver Open Data",49.2110790075971,-122.988740194327,"unknown",,"unknown",,,,,0,0
+"0d53b46a-a832-473c-92bd-c49c3bd36dfb","545562","KISBEY PARK","","","Vancouver","Vancouver Open Data",49.227078377068,-122.979602934149,"unknown",,"unknown",,,,,0,0
+"0d624fcc-f051-4263-8561-20a65eb68213","DFPB0018","China Creek North Park","Mount Pleasant","China Creek North Park","Vancouver","Vancouver Open Data",49.2644778372994,-123.08311885258,"unknown",,"unknown",,,,,0,0
+"0f409263-3f1d-433a-a896-35f4114953d9","DFENG0034","Hastings & Kamloops","Hastings-Sunrise","Hastings & Kamloops","Vancouver","Vancouver Open Data",49.280998,-123.054448,"unknown",,"unknown",,,,,0,0
+"112726fe-db4d-4aee-b32a-3b71b389cfd8","545586","ROBERT BURNABY PARK","","","Vancouver","Vancouver Open Data",49.2303447290383,-122.934937018513,"unknown",,"unknown",,,,,0,0
+"1128a467-4ece-4987-9000-6d8be9193e95","DFPB0139","Slocan Park","Renfrew-Collingwood","Slocan Park","Vancouver","Vancouver Open Data",49.2443994311938,-123.048357685893,"unknown",,"unknown",,,,,0,0
+"120b026e-9788-43b6-b058-749cb4cdaa92","DFPB0127","Renfrew Community Park","Renfrew-Collingwood","Renfrew Community Park","Vancouver","Vancouver Open Data",49.2522155966186,-123.042070623823,"unknown",,"unknown",,,,,0,0
+"12700bd7-4cd9-43a5-8961-b57dd47e3783","545607","WESBURN PARK","","","Vancouver","Vancouver Open Data",49.2424240147958,-123.013341672405,"unknown",,"unknown",,,,,0,0
+"129ce3cc-a325-4d3c-a2c9-696fca93ba03","DFPB0165","Sunrise Park","Hastings-Sunrise","Sunrise Park","Vancouver","Vancouver Open Data",49.2669989081244,-123.035653542981,"unknown",,"unknown",,,,,0,0
+"1340d900-3528-4f11-8c4d-c7c0b9e899b8","547016","KENSINGTON PARK","","","Vancouver","Vancouver Open Data",49.276797152819,-122.97902186315,"unknown",,"unknown",,,,,0,0
+"153a75a5-15e3-436d-8ce8-22db1ee2984b","DFPB0121","Park Site On South East False Creek - Hinge","Mount Pleasant","Park Site On South East False Creek - Hinge","Vancouver","Vancouver Open Data",49.2711566664644,-123.110191007832,"unknown",,"unknown",,,,,0,0
+"156a09b2-a51a-46bd-aa5f-13946eae0e7f","DFPB0064","Hastings Community Park - SE of tennis courts","Hastings-Sunrise","Hastings Community Park - SE of tennis courts","Vancouver","Vancouver Open Data",49.2804751881411,-123.04060853749,"unknown",,"unknown",,,,,0,0
+"15a167c7-e486-4d1d-874b-883ca4c2a984","DFPB0062","Harbour Green Park - In front of washrooms","Downtown","Harbour Green Park - In front of washrooms","Vancouver","Vancouver Open Data",49.290107359493,-123.121679030624,"unknown",,"unknown",,,,7.5,1,1
+"172c4f4b-6520-42e3-aa62-f0b1a9b114fa","DFENG0027","Comox & Denman","West End","Comox & Denman","Vancouver","Vancouver Open Data",49.2887857,-123.13969,"unknown",,"unknown",,,,,0,0
+"178f1bd5-a025-4f11-a6a6-06df91ed9e46","545580","BARNET MARINE PARK","","","Vancouver","Vancouver Open Data",49.2908593137081,-122.925064641416,"unknown",,"unknown",,,,,0,0
+"18e5c55b-82dd-47c6-a641-545cf33344c9","545514","Bby Lake Rink","","","Vancouver","Vancouver Open Data",49.2515293748358,-122.96537959979,"unknown",,"unknown",,,,,0,0
+"192dfd1e-59ac-4b95-8bc9-5f39ebebfdfb","DFPB0192","Cedar Cottage Park","Kensington-Cedar Cottage","Cedar Cottage Park","Vancouver","Vancouver Open Data",49.260897510427,-123.076772461604,"unknown",,"unknown",,,,,0,0
+"1a07803e-3d8c-49e1-b70d-e251a8704940","DFENG0048","375 W 59th Avenue","Marpole","375 W 59th Avenue","Vancouver","Vancouver Open Data",49.217003,-123.11323,"unknown",,"unknown",,,,,0,0
+"1b453e44-829b-4718-bafa-d69d52fc6148","545576","RIVERWAY GOLF COURSE","","","Vancouver","Vancouver Open Data",49.2010024578016,-122.989191691651,"unknown",,"unknown",,,,,0,0
+"1b7c3528-c844-4905-8e27-8897e699ac24","DFPB0039","Emery Barnes Park - Dog off-leash area","Downtown","Emery Barnes Park - Dog off-leash area","Vancouver","Vancouver Open Data",49.2770970859809,-123.123781079527,"unknown",,"unknown",,,,,0,0
+"1be75504-3305-4623-b711-75348453357c","DFPB0002","Adanac Park","Hastings-Sunrise","Adanac Park","Vancouver","Vancouver Open Data",49.2759641005714,-123.024125444179,"unknown",,"unknown",,,,,0,0
+"1c04667a-6de0-4e27-bd72-0e0b8521c521","545511","CENTRAL PARK","","golf pro shop","Vancouver","Vancouver Open Data",49.2227588835359,-123.01853951729,"unknown",,"unknown",,,,,0,0
+"1cca1f05-f19d-4d6f-baa8-23943cd40b3c","545488","BURNABY LAKE PARK","","","Vancouver","Vancouver Open Data",49.2490275991371,-122.96583761028,"unknown",,"unknown",,,,,0,0
+"1cee5569-77db-4366-84ac-e6d32f0ceb32","DFPB0144","Stanley Park - South west of playground","Stanley Park","Stanley Park - South west of playground","Vancouver","Vancouver Open Data",49.310653,-123.148332,"unknown",,"unknown",,,,,0,0
+"1da65fe9-ce5c-4b56-97cd-8232773e356b","DFENG0505","Thornton Park Pumping Station","Strathcona","Thornton Park Pumping Station","Vancouver","Vancouver Open Data",49.2730368,-123.098886,"unknown",,"unknown",,,,,0,0
+"1e39a6ab-179f-4d9f-91e7-f7f2e13ae2e5","546961","DEER LAKE PARK","","Fieldhouse","Vancouver","Vancouver Open Data",49.2352194296699,-122.965218440358,"unknown",,"unknown",,,,,0,0
+"1e55ad0b-91a5-4c19-93b1-a61ab4d37615","DFPB0069","Hastings Park -Plateau Sport Parks / Empire Fields","Hastings-Sunrise","Hastings Park -Plateau Sport Parks / Empire Fields","Vancouver","Vancouver Open Data",49.2829982840181,-123.034485057262,"unknown",,"unknown",,,,2,1,1
+"1e78f14f-e81a-4f97-a771-e8154841e8f8","545536","DAVID GRAY PARK","","","Vancouver","Vancouver Open Data",49.2166364042596,-123.007489542696,"unknown",,"unknown",,,,,0,0
+"1e8599ce-dc21-42d0-9cec-e2aa15c68353","545518","CENTRAL PARK","","picnic","Vancouver","Vancouver Open Data",49.2309266727807,-123.019738137736,"unknown",,"unknown",,,,,0,0
+"1e89f1ca-879d-4b50-b27a-b657583c8abc","DFPB0118","Oak Park - East of spray park","Marpole","Oak Park - East of spray park","Vancouver","Vancouver Open Data",49.2166898240991,-123.12737226202,"unknown",,"unknown",,,,,0,0
+"1e94e489-cdf3-4810-8cc5-9a4e6a3eee94","DFPB0107","Morton Park","West End","Morton Park","Vancouver","Vancouver Open Data",49.2875352978827,-123.142249169992,"unknown",,"unknown",,,,,0,0
+"1fd097e7-4145-4b71-afee-441e6e7cf837","545587","ROBERT BURNABY PARK","","","Vancouver","Vancouver Open Data",49.2323229303486,-122.929881832848,"unknown",,"unknown",,,,,0,0
+"2145cab8-a99f-4489-876a-64d2fef6adab","DFENG0503","Granville St Pumping Station","Downtown","Granville St Pumping Station","Vancouver","Vancouver Open Data",49.2733345,-123.131579,"unknown",,"unknown",,,,,0,0
+"215389f3-9e48-4ed0-bc30-91a77174d7ce","545535","ERNIE WINCH PARK","","","Vancouver","Vancouver Open Data",49.214457086795,-122.945806758795,"unknown",,"unknown",,,,,0,0
+"21712df4-249a-4a59-8d37-f3416ca92c71","DFPB0160","Stanley Park - Lawn Bowling Club","Stanley Park","Stanley Park - Lawn Bowling Club","Vancouver","Vancouver Open Data",49.310653,-123.148332,"unknown",,"unknown",,,,,0,0
+"21a16319-9abb-4e98-a385-355367834436","DFPB0053","George Park","Sunset","George Park","Vancouver","Vancouver Open Data",49.2125217504589,-123.093587058272,"unknown",,"unknown",,,,,0,0
+"2200d355-e1a7-4400-8e1f-a87887bf9446","DFPB0123","Queen Elizabeth Park - Pitch and Putt Course","Riley Park","Queen Elizabeth Park - Pitch and Putt Course","Vancouver","Vancouver Open Data",49.2392723003766,-123.111527101067,"unknown",,"unknown",,,,9,1,1
+"2341209f-56c0-4875-b6dd-fffde4e34357","DFENG0702","2067 W 15th Ave","Kitsilano","2067 W 15th Ave","Vancouver","Vancouver Open Data",49.25823,-123.152452,"unknown",,"unknown",,,,,0,0
+"23624912-e7cc-4907-bf39-d7bd38981e33","545595","SQUINT LAKE PARK","","","Vancouver","Vancouver Open Data",49.2693003498812,-122.942249680861,"unknown",,"unknown",,,,,0,0
+"238fcd6f-c260-4f40-93ef-91a101f76089","DFPB0168","Sutcliffe Park","Fairview","Sutcliffe Park","Vancouver","Vancouver Open Data",49.2692269169011,-123.134016165618,"unknown",,"unknown",,,,,0,0
+"251dba3c-cc59-4f80-ad61-d1ef4b093c3c","DFENG0039","Davie & Bute (Jim Deva Plaza)","West End","Davie & Bute (Jim Deva Plaza)","Vancouver","Vancouver Open Data",49.281882,-123.133952,"unknown",,"unknown",,,,,0,0
+"254e1e46-ec0c-4729-8b4d-632fd1e93767","545577","RIVERWAY GOLF COURSE","","","Vancouver","Vancouver Open Data",49.2010296085642,-122.989232822239,"unknown",,"unknown",,,,,0,0
+"257a2f92-19f9-42ac-86a9-5741988a3e5a","546953","Bonsor","","","Vancouver","Vancouver Open Data",49.2241627818243,-122.996939046743,"unknown",,"unknown",,,,,0,0
+"258b9b36-d72c-4130-b6d9-beeb749a3831","DFPB0028","Coopers' Park","Downtown","Coopers' Park","Vancouver","Vancouver Open Data",49.2739146229717,-123.113042018546,"unknown",,"unknown",,,,,0,0
+"266285b1-fc68-4e20-a379-c01f7b67528e","545551","HILDA AVENUE PARK","","","Vancouver","Vancouver Open Data",49.2194287546591,-122.938524319369,"unknown",,"unknown",,,,,0,0
+"2663947b-1e8e-427a-a074-829d5ed722df","DFENG0603","Evelyne Saller Centre","Strathcona","Evelyne Saller Centre","Vancouver","Vancouver Open Data",49.284006,-123.097629,"unknown",,"unknown",,,,,0,0
+"26eb63a1-ddca-44c9-aa2a-abaeb6811987","545589","RON MCLEAN PARK","","","Vancouver","Vancouver Open Data",49.2129727577842,-122.965456228045,"unknown",,"unknown",,,,,0,0
+"273d1932-b499-48db-806c-ab8fa47a711b","DFENG0033","Denman & Nelson","West End","Denman & Nelson","Vancouver","Vancouver Open Data",49.28922483,-123.13854854,"unknown",,"unknown",,,,,0,0
+"276b0530-76a2-4c66-aef7-27bfaa959444","545491","BURNABY LAKE PARK","","","Vancouver","Vancouver Open Data",49.2528575626426,-122.970047402116,"unknown",,"unknown",,,,,0,0
+"27e3ec6f-2ac0-4fa4-a260-4bff690f5bba","545588","ROBERT BURNABY PARK","","","Vancouver","Vancouver Open Data",49.2322725837254,-122.929677306135,"unknown",,"unknown",,,,,0,0
+"282c8c19-b097-4efd-99c5-afc2364fec73","DFPB0082","Kitsilano Beach Park - washroom wall","Kitsilano","Kitsilano Beach Park - washroom wall","Vancouver","Vancouver Open Data",49.274482615713,-123.153804969829,"unknown",,"unknown",,,,,0,0
+"2840ca97-905d-4039-9219-b718d48a75d9","545538","FOREST GROVE PARK","","","Vancouver","Vancouver Open Data",49.2649570295093,-122.919730762258,"unknown",,"unknown",,,,,0,0
+"28beb903-c7ff-4ca9-a7be-c2aa64e7cb4c",,"Shingle Park - Wall St & N Renfrew","Hastings-Sunrise","Shingle Park - Wall St & N Renfrew","Vancouver",,49.291086,-123.044005,"unknown",,"unknown",,,,8,1,1
+"2988d6d2-46ca-4b0c-a3ca-58709e3f6d6e","DFPB0172","Trafalgar Park","Arbutus-Ridge","Trafalgar Park","Vancouver","Vancouver Open Data",49.2513785332313,-123.163822402519,"unknown",,"unknown",,,,,0,0
+"29bf3e05-e5d9-4678-92c2-83f98487cf36","545517","CENTRAL PARK","","picnic","Vancouver","Vancouver Open Data",49.2314929266514,-123.01978603585,"unknown",,"unknown",,,,,0,0
+"2a1407d7-4251-4b13-96d2-b8ace8a2a8a1","DFPB0071","Hillcrest Park - North of playground","Riley Park","Hillcrest Park - North of playground","Vancouver","Vancouver Open Data",49.244512,-123.10644,"unknown",,"unknown",,,,7.5,1,1
+"2c5bbf8b-5f4e-4069-8d0b-f8adba89f3f6","DFPB0148","Stanley Park - West side of Stanley Park Train","Stanley Park","Stanley Park - West side of Stanley Park Train","Vancouver","Vancouver Open Data",49.3016681977662,-123.134514082053,"unknown",,"unknown",,,,,0,0
+"2dd4be72-4aa1-4cdb-ac65-9ee9c748d5b9","546327","METROTOWN LIBRARY","","","Vancouver","Vancouver Open Data",49.2281686036803,-123.005577241701,"unknown",,"unknown",,,,,0,0
+"2ebd6f2d-20ed-4ac6-81eb-3fb580244a35","DFPB0076","Kaslo Park","Hastings-Sunrise","Kaslo Park","Vancouver","Vancouver Open Data",49.2640598425312,-123.045136611297,"unknown",,"unknown",,,,,0,0
+"2ed6d2b1-bbc4-4a91-a3d5-746355764282","DFENG0501","Grandview Hwy Pumping Station","Renfrew-Collingwood","Grandview Hwy Pumping Station","Vancouver","Vancouver Open Data",49.257924,-123.041381,"unknown",,"unknown",,,,,0,0
+"2eebcf6d-3850-4a33-bc5d-68c61d2c1317","DFENG0036","Pt.Grey & MacDonald","Kitsilano","Pt.Grey & MacDonald","Vancouver","Vancouver Open Data",49.271674,-123.167863,"unknown",,"unknown",,,,,0,0
+"2fdcbafe-8f48-4814-9b0b-5d8550eddd9a","DFPB0022","Clinton Park - North side of ball diamond","Hastings-Sunrise","Clinton Park - North side of ball diamond","Vancouver","Vancouver Open Data",49.271386994051,-123.051670632961,"unknown",,"unknown",,,,,0,0
+"30369f48-26b9-46e8-a08e-9500090984a1","DFPB0188","Riley Park","Riley Park","Riley Park","Vancouver","Vancouver Open Data",49.2426880999357,-123.104792280372,"unknown",,"unknown",,,,,0,0
+"306a1045-e4e5-4ac5-b7c2-7b69b768ffda","546959","City Hall","","","Vancouver","Vancouver Open Data",49.2433194408558,-122.972443070987,"unknown",,"unknown",,,,,0,0
+"31b3180c-77e6-4221-af4a-505af8a8aa21","DFPB0162","Stanley Park - Admin building","Stanley Park","Stanley Park - Admin building","Vancouver","Vancouver Open Data",49.310653,-123.148332,"unknown",,"unknown",,,,,0,0
+"32cb9d70-dd25-434b-845b-b0bd3e55329e","545486","BURNABY LAKE PARK","","","Vancouver","Vancouver Open Data",49.2495943139536,-122.961971765496,"unknown",,"unknown",,,,,0,0
+"32fe8569-a555-4b6f-970e-a6051f698564","DFPB0152","Stanley Park - Second Beach Pool","Stanley Park","Stanley Park - Second Beach Pool","Vancouver","Vancouver Open Data",49.295573663122,-123.151041204357,"unknown",,"unknown",,,,7,1,1
+"33067687-f09c-410d-9914-ec53e576f64b","DFPB0137","Seaforth Peace Park","Kitsilano","Seaforth Peace Park","Vancouver","Vancouver Open Data",49.2710959518645,-123.146190238216,"unknown",,"unknown",,,,,0,0
+"333d41eb-5b15-48e5-b172-770b4c2085c9","DFPB0032","David Lam Park - South west of basketball courts","Downtown","David Lam Park - South west of basketball courts","Vancouver","Vancouver Open Data",49.2717379729765,-123.125705105648,"unknown",,"unknown",,,,7,1,1
+"33ff9c2c-6aeb-42a9-9fdc-a80d80290c6a","DFPB0090","MacDonald Park","Sunset","MacDonald Park","Vancouver","Vancouver Open Data",49.2300751136141,-123.098496043455,"unknown",,"unknown",,,,,0,0
+"3437082b-742b-4b13-8fba-3d05f7a8c54b","545476","BONSOR PARK","","SKATEBOARD PARK","Vancouver","Vancouver Open Data",49.222717890149,-122.996379356725,"unknown",,"unknown",,,,,0,0
+"349fd4e0-ebe3-4ac7-aff6-55ec9af9336b","DFPB0161","Stanley Park - Dog Off-leash area","Stanley Park","Stanley Park - Dog Off-leash area","Vancouver","Vancouver Open Data",49.310653,-123.148332,"unknown",,"unknown",,,,,0,0
+"3749e488-98f1-43c7-8fda-f8557449c7d2","DFENG0806","Andy Livingston Park","Downtown","Andy Livingston Park","Vancouver","Vancouver Open Data",49.279211,-123.105654,"unknown",,"unknown",,,,,0,0
+"381983e4-d7dd-4a21-a467-442af0ed8fc3","642798","Unnamed Fountain","","","Vancouver","Vancouver Open Data",49.2248851042563,-122.992370064577,"unknown",,"unknown",,,,,0,0
+"38d1cbd4-7ec4-4a27-88e1-415c2b801ba9","DFPB0191","Shannon Mews Park","Kerrisdale","Shannon Mews Park","Vancouver","Vancouver Open Data",49.2197027395266,-123.141476658555,"unknown",,"unknown",,,,,0,0
+"3972e0c4-bd90-4f3d-8789-e4f91bf8b3b9","DFPB0190","Park Site On South East False Creek","Mount Pleasant","Park Site On South East False Creek","Vancouver","Vancouver Open Data",49.2723424059549,-123.109413620016,"unknown",,"unknown",,,,7,1,1
+"399557bf-9f29-4132-9360-a7817466d8b1","545609","WILLINGDON HEIGHTS PARK","","","Vancouver","Vancouver Open Data",49.2730614061612,-123.0122600391,"unknown",,"unknown",,,,,0,0
+"3a17ddd8-54e7-410e-9db8-50478ca8cac9","DFPB0091","Maclean Park","Strathcona","Maclean Park","Vancouver","Vancouver Open Data",49.278948337438,-123.089426854278,"unknown",,"unknown",,,,,0,0
+"3a44bf63-9402-4520-90e7-ca1ff0bca585","545541","FOREST GROVE ELEMENTARY","","","Vancouver","Vancouver Open Data",49.2654579040811,-122.922511089406,"unknown",,"unknown",,,,,0,0
+"3a92f66a-6996-48cc-b7ee-63724fa9d500","545477","Bonsor","","","Vancouver","Vancouver Open Data",49.2241627818243,-122.996939046743,"unknown",,"unknown",,,,,0,0
+"3ab07622-de06-4feb-ac44-36e778675147","DFPB0051","Garden Park","Grandview-Woodland","Garden Park","Vancouver","Vancouver Open Data",49.2684949304862,-123.058412683959,"unknown",,"unknown",,,,,0,0
+"3bb28bb6-70ae-4e8c-b1f1-fa0edbb45e60","DFPB0010","Balaclava Park","Dunbar-Southlands","Balaclava Park","Vancouver","Vancouver Open Data",49.2457194109974,-123.175327489872,"unknown",,"unknown",,,,,0,0
+"3be0027b-e475-463d-bdc3-9a6f4d7f8a6d","DFPB0043","English Bay Beach Park - concessions","West End","English Bay Beach Park - concessions","Vancouver","Vancouver Open Data",49.2790068201294,-123.137920164437,"unknown",,"unknown",,,,,0,0
+"3c5842b6-7ef6-42d4-8c8e-dae06ade34ea","545516","CENTRAL PARK","","variety park","Vancouver","Vancouver Open Data",49.2318561371562,-123.018660777335,"unknown",,"unknown",,,,,0,0
+"3cc32dd5-d2e5-42e0-8451-148f6d672b17","DFPB0110","Nanaimo Park","Victoria-Fraserview","Nanaimo Park","Vancouver","Vancouver Open Data",49.2283820943849,-123.056904783961,"unknown",,"unknown",,,,,0,0
+"3d1628f2-fa46-4fcd-ba46-b8ca7d28a64e","DFENG0011","1650 W 7th","Fairview","1650 W 7th","Vancouver","Vancouver Open Data",49.265329,-123.142081,"unknown",,"unknown",,,,,0,0
+"3da9d94f-d35e-4994-ad50-912c863e82e5","545544","GEORGE LEAF PARK","","","Vancouver","Vancouver Open Data",49.2282263863751,-122.916217809093,"unknown",,"unknown",,,,,0,0
+"3e203ab0-3dff-43f0-9877-973422d9a126","DFPB0151","Stanley Park - Second Beach","Stanley Park","Stanley Park - Second Beach","Vancouver","Vancouver Open Data",49.2949854457468,-123.150012563963,"unknown",,"unknown",,,,,0,0
+"3e9e9de9-ad1c-4968-a492-2b8153dba633","545594","SQUINT LAKE PARK","","","Vancouver","Vancouver Open Data",49.2680828343486,-122.94269148911,"unknown",,"unknown",,,,,0,0
+"3f8f0a2e-48f3-4ec5-bdd2-68414ccfc8f5","DFENG0028","Gilford & Comox","West End","Gilford & Comox","Vancouver","Vancouver Open Data",49.28977703,-123.14128655,"unknown",,"unknown",,,,,0,0
+"406820af-b312-481a-add4-c53bd2f37146","DFPB0169","Tea Swamp Park","Mount Pleasant","Tea Swamp Park","Vancouver","Vancouver Open Data",49.2574616841992,-123.098574970623,"unknown",,"unknown",,,,,0,0
+"42083c5f-4ad9-4f53-b927-83e8287bac7c","DFPB0106","Moberly Park - Arts & Cultural Centre","Sunset","Moberly Park - Arts & Cultural Centre","Vancouver","Vancouver Open Data",49.2154434140161,-123.087185010078,"unknown",,"unknown",,,,,0,0
+"425a4773-a91e-4c52-be37-b8ca7b266ee5","545526","CONFEDERATION PARK","","","Vancouver","Vancouver Open Data",49.2838779442216,-122.999339718419,"unknown",,"unknown",,,,,0,0
+"425d8bff-7630-4ea3-b9c0-4fd673cf646a","DFPB0179","W.C. Shelly Park","Grandview-Woodland","W.C. Shelly Park","Vancouver","Vancouver Open Data",49.2631538129796,-123.073092792845,"unknown",,"unknown",,,,,0,0
+"43267004-258a-46e3-9950-b52eb9e48c0e","545495","TAYLOR PARK","","","Vancouver","Vancouver Open Data",49.2064881663468,-122.963634546079,"unknown",,"unknown",,,,,0,0
+"43991fd7-82f7-43d4-aaec-aea7a8e1a6ee",,"Adanac & Garden","Grandview-Woodland",,"Vancouver",,49.2774089964963,-123.058054447174,"unknown",,"unknown",,,,9,1,1
+"43fe88fb-9871-4e70-a36a-120715e043e5","DFPB0149","Stanley Park - Putting Green","Stanley Park","Stanley Park - Putting Green","Vancouver","Vancouver Open Data",49.2931134136098,-123.146472181473,"unknown",,"unknown",,,,,0,0
+"44135cb7-c865-4eb1-863f-e56789797732","DFPB0142","Stanley Park - Lumbermen's Arch","Stanley Park","Stanley Park - Lumbermen's Arch","Vancouver","Vancouver Open Data",49.3031066290352,-123.130680054625,"unknown",,"unknown",,,,10,1,1
+"45178d0e-39e6-461c-8d78-e21e702f53d8","DFPB0081","Kingcrest Park","Kensington-Cedar Cottage","Kingcrest Park","Vancouver","Vancouver Open Data",49.247430484145,-123.074563844246,"unknown",,"unknown",,,,,0,0
+"451b63ba-6a3c-4a76-9ca5-1436dc6f0016",,"East Hastings & Commercial","Grandview-Woodland",,"Vancouver",,49.2813626011629,-123.070950508118,"unknown",,"unknown",,,,6.5,1,1
+"453af02b-c970-4ddd-9c75-996377080646","DFENG0708","London Drugs","Downtown","London Drugs","Vancouver","Vancouver Open Data",49.282333,-123.118113,"unknown",,"unknown",,,,,0,0
+"45741ae8-6ee2-4a4e-be12-d679e0982ed6","DFPB0003","Alexandra Park","West End","Alexandra Park","Vancouver","Vancouver Open Data",49.2856602587161,-123.142377175698,"unknown",,"unknown",,,,,0,0
+"45975e72-bb99-4c48-9479-3fb279e9de91","DFENG0013","37th & Ontario","Riley Park","37th & Ontario","Vancouver","Vancouver Open Data",49.237446,-123.105647,"unknown",,"unknown",,,,,0,0
+"45ea6b6d-dcd8-4ac8-b907-7812e58dc150","545557","KENSINGTON PARK","","clubhouse","Vancouver","Vancouver Open Data",49.2771212304523,-122.977940365271,"unknown",,"unknown",,,,,0,0
+"4638a938-c2b4-4923-ab55-9c796e0c675a","DFENG0811","Oppenheimer Park","Strathcona","Oppenheimer Park","Vancouver","Vancouver Open Data",49.282808,-123.093796,"unknown",,"unknown",,,,,0,0
+"46efc537-a54d-4fbe-9159-d750c9b8152c","DFPB0150","Stanley Park - West of Shore to Shore sculpture","Stanley Park","Stanley Park - West of Shore to Shore sculpture","Vancouver","Vancouver Open Data",49.2990579315421,-123.120675089193,"unknown",,"unknown",,,,,0,0
+"47353076-79c8-4ca7-b5c0-8043ef59405c","DFENG0025","Comox & Cardero","West End","Comox & Cardero","Vancouver","Vancouver Open Data",49.2867384,-123.136516,"unknown",,"unknown",,,,,0,0
+"47a2e957-c77c-451d-b714-55d4322cfe93","545592","SPRINGER PARK","","","Vancouver","Vancouver Open Data",49.2666455657972,-122.989509652816,"unknown",,"unknown",,,,,0,0
+"4815b3a7-6a89-4a08-8b12-17ad8462e60e","DFPB0185","Woodland Park","Grandview-Woodland","Woodland Park","Vancouver","Vancouver Open Data",49.2785481355657,-123.07340875242,"unknown",,"unknown",,,,,0,0
+"49631ffa-782c-467d-a9de-64f86ffbfb8c","DFPB0120","Pandora Park","Grandview-Woodland","Pandora Park","Vancouver","Vancouver Open Data",49.2824194435569,-123.057390722813,"unknown",,"unknown",,,,,0,0
+"498ab48c-1e6e-4036-929a-73b93eb71581","545522","CONFEDERATION PARK","","","Vancouver","Vancouver Open Data",49.2850665784805,-122.999468071107,"unknown",,"unknown",,,,,0,0
+"4b2bef46-64b7-4609-842e-6f1bbd8c6dfe","546999","Willingdon Heights Rec Centre","","","Vancouver","Vancouver Open Data",49.2711589907731,-123.013088968915,"unknown",,"unknown",,,,,0,0
+"4ba54223-e052-4395-9ecd-a256220078c2","DFPB0026","Connaught Park - North of playground","Kitsilano","Connaught Park - North of playground","Vancouver","Vancouver Open Data",49.2618733531172,-123.161415359599,"unknown",,"unknown",,,,,0,0
+"4c77b51e-a7f1-490b-9e32-96c8caa75d32",,"Templeton Track","Grandview-Woodland",,"Vancouver",,49.278535581645,-123.058236837387,"unknown",,"unknown",,,,9,1,1
+"4d9bf093-9144-49b2-bd69-ffa2d6b2716f","DFPB0075","Jonathan Rogers Park","Mount Pleasant","Jonathan Rogers Park","Vancouver","Vancouver Open Data",49.2642698232004,-123.107499009555,"unknown",,"unknown",,,,7.5,1,1
+"4e8ab709-d517-47d7-8a60-1c8c055fee6c","DFPB0143","Stanley Park - Tennis Courts","Stanley Park","Stanley Park - Tennis Courts","Vancouver","Vancouver Open Data",49.2923260179296,-123.145997674633,"unknown",,"unknown",,,,,0,0
+"4ea1284e-ad25-4ffa-8f73-e97951ced4d3","545483","BURNABY FRASER FORESHORE PARK","","","Vancouver","Vancouver Open Data",49.1935937522616,-123.000850692669,"unknown",,"unknown",,,,,0,0
+"4f619e0f-2111-4dda-b36c-b6880d359d04","DFPB0183","West Point Grey Park - North of wading pool","West Point Grey","West Point Grey Park - North of wading pool","Vancouver","Vancouver Open Data",49.2661268260244,-123.205247627948,"unknown",,"unknown",,,,,0,0
+"4fcc9473-da52-4ed9-9847-9b574c31f91b","DFPB0029","Coopers' Park - underneath bridge, near basket","Downtown","Coopers' Park - underneath bridge, near basket","Vancouver","Vancouver Open Data",49.2729040014691,-123.114634031325,"unknown",,"unknown",,,,,0,0
+"4fd96a1d-409b-4df1-83a7-15eea55e0520","DFENG0500","Charleson Park Pumping Station","Fairview","Charleson Park Pumping Station","Vancouver","Vancouver Open Data",49.2663411,-123.125914,"unknown",,"unknown",,,,,0,0
+"50640451-0126-4589-8b53-8ff95d908789","DFPB0041","English Bay Beach Park - Davie st entrance","West End","English Bay Beach Park - Davie st entrance","Vancouver","Vancouver Open Data",49.2875252972886,-123.142558172151,"unknown",,"unknown",,,,,0,0
+"50ba420f-afb8-4249-97d1-c944da60b22e","DFENG0046","733 W 14th Avenue","Fairview","733 W 14th Avenue","Vancouver","Vancouver Open Data",49.258738,-123.121414,"unknown",,"unknown",,,,,0,0
+"51047af1-c947-4bf3-b508-a28bae8d2f8c","DFENG0038","Nelson & Howe","Downtown","Nelson & Howe","Vancouver","Vancouver Open Data",49.279672,-123.123513,"unknown",,"unknown",,,,,0,0
+"51b3dbce-c003-49ab-ac51-03b5ba50d203","DFENG0016","Broadway & Victoria","Kensington-Cedar Cottage","Broadway & Victoria","Vancouver","Vancouver Open Data",49.262066,-123.065619,"unknown",,"unknown",,,,,0,0
+"51cb43f3-fd74-44dc-ba46-1de74b7619b2","545556","KENSINGTON PARK","","ball diamonds","Vancouver","Vancouver Open Data",49.2792796641502,-122.974934121754,"unknown",,"unknown",,,,,0,0
+"5225acdc-f0fe-4526-80ad-7df079a5a5a2","DFPB0112","New Brighton Park - West of tennis courts","Hastings-Sunrise","New Brighton Park - West of tennis courts","Vancouver","Vancouver Open Data",49.2896963840001,-123.03551547839,"unknown",,"unknown",,,,,0,0
+"5404dd0e-0298-43df-ac93-30e95f742ca1","DFPB0087","Langara Golf Course - East of tennis courts","Oakridge","Langara Golf Course - East of tennis courts","Vancouver","Vancouver Open Data",49.2195105907409,-123.106320120655,"unknown",,"unknown",,,,,0,0
+"54c2f7d3-7123-464f-ab61-976b5e647753","546957","Cameron Rec Centre and Branch","","","Vancouver","Vancouver Open Data",49.2539894053471,-122.899252527386,"unknown",,"unknown",,,,,0,0
+"562c9a88-da41-47a2-a974-30bd2a7b1d38","545530","CONFEDERATION PARK","","","Vancouver","Vancouver Open Data",49.2839223733247,-122.998069324064,"unknown",,"unknown",,,,,0,0
+"56ab45cf-b033-4e04-9c67-72494e703887","DFPB0131","Ross Park","Sunset","Ross Park","Vancouver","Vancouver Open Data",49.2170518489725,-123.082619977326,"unknown",,"unknown",,,,,0,0
+"56e97a8c-9879-49e3-b27f-4d3454cd7707","545470","BARNET MARINE PARK","","","Vancouver","Vancouver Open Data",49.2904431739965,-122.922371872428,"unknown",,"unknown",,,,,0,0
+"571b6efa-c89d-4c31-b6d6-e430249c950c","DFPB0122","Pioneer Place (Pigeon Park)","Downtown","Pioneer Place (Pigeon Park)","Vancouver","Vancouver Open Data",49.2817690908209,-123.104489943302,"unknown",,"unknown",,,,,0,0
+"572dd1c5-dbc1-4935-8c27-461eb09dd7de","DFPB0042","English Bay Beach Park - West of bath-house","West End","English Bay Beach Park - West of bath-house","Vancouver","Vancouver Open Data",49.2861332680349,-123.143020177554,"unknown",,"unknown",,,,,0,0
+"585e38af-73b7-4007-91f7-947e9b0806b1","DFPB0055","Grandview Park - West of Stage","Grandview-Woodland","Grandview Park - West of Stage","Vancouver","Vancouver Open Data",49.2736780414839,-123.070795280983,"unknown",,"unknown",,,,,0,0
+"585f9960-5af0-4002-af7a-5d143d8ff03d","545487","BURNABY LAKE PARK","","","Vancouver","Vancouver Open Data",49.2493290966495,-122.961960053303,"unknown",,"unknown",,,,,0,0
+"59c00556-be33-423a-9041-ac85e8fa9370","545608","WESTRIDGE PARK","","","Vancouver","Vancouver Open Data",49.282164700472,-122.957382976678,"unknown",,"unknown",,,,,0,0
+"59ebef6c-39cc-41e1-8be1-cc906f41827e","DFPB0108","Mosaic Creek Park","Grandview-Woodland","Mosaic Creek Park","Vancouver","Vancouver Open Data",49.2732980253963,-123.074201772359,"unknown",,"unknown",,,,,0,0
+"5a286288-c784-46a4-a150-04069ddd1f83","DFPB0145","Stanley Park - Ceperley Washrooms","Stanley Park","Stanley Park - Ceperley Washrooms","Vancouver","Vancouver Open Data",49.2937517326698,-123.148706775172,"unknown",,"unknown",,,,,0,0
+"5b1f4bf1-cd07-4689-84af-924954e62fbd","DFENG0018","37th & Prince Edward","Riley Park","37th & Prince Edward","Vancouver","Vancouver Open Data",49.2371952,-123.09728295,"unknown",,"unknown",,,,,0,0
+"5b4dbe09-d1f2-4417-b1bf-eb77b698a194","DFPB0098","McCleery Golf Course - clubhouse building","Kerrisdale","McCleery Golf Course - clubhouse building","Vancouver","Vancouver Open Data",49.2210600005032,-123.167848506166,"unknown",,"unknown",,,,,0,0
+"5b77ebc8-8fd7-4b0f-98ef-b1fb3db1fcd1","545584","RIVERWAY SPORTS COMPLEX","","","Vancouver","Vancouver Open Data",49.2061979823146,-123.004112541587,"unknown",,"unknown",,,,,0,0
+"5baea1b5-ff10-4016-bb1b-6652e06ad5ac","DFENG0802","Robson & Cardero","West End","Robson & Cardero","Vancouver","Vancouver Open Data",49.289447,-123.132493,"unknown",,"unknown",,,,,0,0
+"5bf1403d-1da8-47a4-8f72-dd6f3d7ada12","545493","BURNABY LAKE PARK","","","Vancouver","Vancouver Open Data",49.2528320574609,-122.971312268339,"unknown",,"unknown",,,,,0,0
+"5de1c4a1-d6a6-40c8-8735-21e1e2fcf219","DFPB0049","Fraserview Golf Course - 6th tee","Killarney","Fraserview Golf Course - 6th tee","Vancouver","Vancouver Open Data",49.2083152816453,-123.045679767129,"unknown",,"unknown",,,,,0,0
+"5e080c5e-3039-40df-86a7-6742fc035cc4","DFPB0031","Creekside Park","Downtown","Creekside Park","Vancouver","Vancouver Open Data",49.2743695634115,-123.102994076274,"unknown",,"unknown",,,,1,1,1
+"5e5902c0-5bfc-4b1f-a10a-9a73db0d0e89","DFPB0141","Stanley Park - Prospect Point Lookout","Stanley Park","Stanley Park - Prospect Point Lookout","Vancouver","Vancouver Open Data",49.313489270665,-123.142437701581,"unknown",,"unknown",,,,,0,0
+"5e93d689-f1c1-404e-918a-fb9bf9803352","DFPB0007","Arbutus Greenway Park","Kitsilano","Arbutus Greenway Park","Vancouver","Vancouver Open Data",49.262233763043,-123.155303319798,"unknown",,"unknown",,,,,0,0
+"5ff05101-7b72-4dbe-a15e-f2709ea8a30a","DFPB0159","Stanley Park - Brockton Cricket Pavilion","Stanley Park","Stanley Park - Brockton Cricket Pavilion","Vancouver","Vancouver Open Data",49.310653,-123.148332,"unknown",,"unknown",,,,,0,0
+"60084b45-c8e8-43c3-90bc-60fe9690e598","DFPB0011","Beaconsfield Park","Renfrew-Collingwood","Beaconsfield Park","Vancouver","Vancouver Open Data",49.2552966579098,-123.050055666149,"unknown",,"unknown",,,,,0,0
+"6089911f-2258-4177-adad-8a83ba384bae","DFPB0164","Strathcona Park - besides baseball diamond","Strathcona","Strathcona Park - besides baseball diamond","Vancouver","Vancouver Open Data",49.274933054532,-123.086673846551,"unknown",,"unknown",,,,,0,0
+"631bd23a-9552-4f8f-8b75-89451fb6b2a3","DFENG0609","384 Main","Strathcona","384 Main","Vancouver","Vancouver Open Data",49.281754,-123.097359,"unknown",,"unknown",,,,,0,0
+"64d97bd1-dd20-4a51-8808-e17766fa6f41","DFPB0089","Locarno Beach Park","West Point Grey","Locarno Beach Park","Vancouver","Vancouver Open Data",49.2750750121132,-123.20714961782,"unknown",,"unknown",,,,,0,0
+"659ba767-b323-4652-8763-e6afb38f8363","DFPB0068","Hastings Park -Plateau Sport Parks / Empire Fields","Hastings-Sunrise","Hastings Park -Plateau Sport Parks / Empire Fields","Vancouver","Vancouver Open Data",49.282563,-123.034264,"unknown",,"unknown",,,,,0,0
+"66ce8c36-3c07-4e11-a17d-dae9f869a50e","DFPB0014","Carnarvon Park","Arbutus-Ridge","Carnarvon Park","Vancouver","Vancouver Open Data",49.2570316479055,-123.172499443092,"unknown",,"unknown",,,,,0,0
+"674d983b-21f1-4f67-bbd7-24f07b41dee4","545507","BYRNE CREEK SECONDARY","","","Vancouver","Vancouver Open Data",49.2074694427921,-122.951488043487,"unknown",,"unknown",,,,,0,0
+"678ad7f8-5356-44a0-908f-425bae0234ce","DFPB0136","Rupert Park - East of fieldhouse","Hastings-Sunrise","Rupert Park - East of fieldhouse","Vancouver","Vancouver Open Data",49.270253978196,-123.030611501648,"unknown",,"unknown",,,,10,1,1
+"6828e23b-8449-40c7-a6aa-52d8c976ff96","545602","WARNER LOAT PARK","","","Vancouver","Vancouver Open Data",49.2461421890596,-122.933725460201,"unknown",,"unknown",,,,,0,0
+"69af711f-aa2b-4f54-a8ae-9b6db9109d73","545600","TAYLOR PARK","","","Vancouver","Vancouver Open Data",49.2066922234287,-122.961394212809,"unknown",,"unknown",,,,,0,0
+"69d133af-3da4-4986-959e-bad296831da5","DFPB0189","Seawall - Creekside","Mount Pleasant","Seawall - Creekside","Vancouver","Vancouver Open Data",49.2721828913686,-123.105738822059,"unknown",,"unknown",,,,7.5,1,1
+"6a293829-7b6f-46ee-966b-fd3dcf42cd21","DFPB0182","West Point Grey Park - lawn bowling court","West Point Grey","West Point Grey Park - lawn bowling court","Vancouver","Vancouver Open Data",49.266959448016,-123.205146832902,"unknown",,"unknown",,,,,0,0
+"6a46e951-9fce-4e50-9ba3-df99a26cbf9d","545513","CENTRAL PARK","","softball","Vancouver","Vancouver Open Data",49.2312279977789,-123.013278789041,"unknown",,"unknown",,,,,0,0
+"6b19cbb0-2251-4cda-8742-dd7a8799b9e3","DFENG0015","Broadway & Ontario","Mount Pleasant","Broadway & Ontario","Vancouver","Vancouver Open Data",49.262875,-123.105026,"unknown",,"unknown",,,,,0,0
+"6b1c9f81-4f5a-45af-b2b3-a802ad0ad96b","DFENG0031","Cambie & 10th","Mount Pleasant","Cambie & 10th","Vancouver","Vancouver Open Data",49.262294,-123.114544,"unknown",,"unknown",,,,,0,0
+"6b4e53aa-5d27-4eef-b66c-cfd6b3b415cb","DFPB0019","China Creek South Park","Mount Pleasant","China Creek South Park","Vancouver","Vancouver Open Data",49.2617497815562,-123.079045834674,"unknown",,"unknown",,,,,0,0
+"6c2e2b5a-3c5f-44ff-b14d-62e1770f652d","DFPB0167","Sunset Park","Sunset","Sunset Park","Vancouver","Vancouver Open Data",49.2229542674064,-123.096467236589,"unknown",,"unknown",,,,,0,0
+"6cad62bc-29a6-478a-b450-1caead38a707","DFENG0019","Granville & Robson","Downtown","Granville & Robson","Vancouver","Vancouver Open Data",49.281542,-123.119937,"unknown",,"unknown",,,,,0,0
+"6d7023f0-110a-45f4-bc71-987113911817","DFENG0023","Main & 11th","Mount Pleasant","Main & 11th","Vancouver","Vancouver Open Data",49.2610594,-123.100784,"unknown",,"unknown",,,,,0,0
+"6d7244db-3df8-4cdf-b52f-c4d898d2b093","DFPB0086","Langara Golf Course - cambie pathway","Oakridge","Langara Golf Course - cambie pathway","Vancouver","Vancouver Open Data",49.2231801633515,-123.116321174025,"unknown",,"unknown",,,,,0,0
+"6e3242b5-dcdf-4bdb-897f-2adb8b068ae1","DFENG0605","15 E Hastings","Downtown","15 E Hastings","Vancouver","Vancouver Open Data",49.281473,-123.104022,"unknown",,"unknown",,,,,0,0
+"6ebf11b2-b367-492e-ab8a-2e35b9377bad","DFPB0020","Clark Park","Kensington-Cedar Cottage","Clark Park","Vancouver","Vancouver Open Data",49.2568516814188,-123.073091809179,"unknown",,"unknown",,,,,0,0
+"6eff8e63-b31a-427a-b78c-43747fab0dc6","DFPB0079","Killarney Park - East of wading pool","Killarney","Killarney Park - East of wading pool","Vancouver","Vancouver Open Data",49.2271640745331,-123.041866690788,"unknown",,"unknown",,,,,0,0
+"70221bbf-4ee9-4baf-918e-72eebbaf5dc7","545550","HARWOOD PARK","","","Vancouver","Vancouver Open Data",49.2521247489198,-122.988266291625,"unknown",,"unknown",,,,,0,0
+"7165fe8c-756a-44a7-abbc-5d3bd623d400","DFPB0054","George Wainborn Park","Downtown","George Wainborn Park","Vancouver","Vancouver Open Data",49.2719079747461,-123.129778130479,"unknown",,"unknown",,,,,0,0
+"719d5fa1-6fbe-4d3b-bb32-008ba6c4f720","545605","WARNER LOAT PARK","","","Vancouver","Vancouver Open Data",49.2477921229854,-122.934963137129,"unknown",,"unknown",,,,,0,0
+"72477809-1555-4d1c-bd9f-8d1b6645b900","545490","BURNABY LAKE PARK","","","Vancouver","Vancouver Open Data",49.252752610279,-122.967927201949,"unknown",,"unknown",,,,,0,0
+"732b5f13-9f4d-4fa7-824c-074b3b1f344a","545596","STONEY CREEK PARK","","","Vancouver","Vancouver Open Data",49.2579723117353,-122.904509732006,"unknown",,"unknown",,,,,0,0
+"732b92db-e180-4e42-810f-35d7c021fb69","DFPB0012","Bobolink Park","Victoria-Fraserview","Bobolink Park","Vancouver","Vancouver Open Data",49.2156258295137,-123.056091813223,"unknown",,"unknown",,,,,0,0
+"75926ffe-d334-4b2d-b3bb-00c896132eba","DFPB0001","Aberdeen Park","Renfrew-Collingwood","Aberdeen Park","Vancouver","Vancouver Open Data",49.2350522447816,-123.027238576912,"unknown",,"unknown",,,,,0,0
+"767fde85-6f1f-4f79-af40-104de39f5ec5","DFPB0124","Queen Elizabeth Park - 37th and Ontario","Riley Park","Queen Elizabeth Park - 37th and Ontario","Vancouver","Vancouver Open Data",49.237525266031,-123.105606068223,"unknown",,"unknown",,,,7,1,1
+"76b51c76-8115-4522-b88c-82d1ce8ee69b","545567","MALVERN PARK","","","Vancouver","Vancouver Open Data",49.2284650632878,-122.950249711728,"unknown",,"unknown",,,,,0,0
+"773b8cdf-ac13-49f3-a335-2a6ddd1f7bf4","DFENG0054","E 30th Ave & Gladstone St","Kensington-Cedar Cottage","E 30th Ave & Gladstone St","Vancouver","Vancouver Open Data",49.242966,-123.0624878,"unknown",,"unknown",,,,,0,0
+"7741c67a-7207-489f-868b-773b305700e8","DFPB0132","Brewers Park","Kensington-Cedar Cottage","Brewers Park","Vancouver","Vancouver Open Data",49.2475554901502,-123.066210790651,"unknown",,"unknown",,,,,0,0
+"77d6642f-f398-4ee3-be8f-2eb7e5f9916b","545494","BURNABY LAKE PARK","","","Vancouver","Vancouver Open Data",49.2533764952767,-122.971172563119,"unknown",,"unknown",,,,,0,0
+"788b3003-397c-48dc-89f0-8771623cb5bd","DFENG0809","Main St & 14th Ave","Mount Pleasant","Main St & 14th Ave","Vancouver","Vancouver Open Data",49.258476,-123.100806,"unknown",,"unknown",,,,,0,0
+"78d03b4f-6931-413f-bdf2-ce978f6eebb4","DFPB0103","Memorial South Park - West of wading pool","Sunset","Memorial South Park - West of wading pool","Vancouver","Vancouver Open Data",49.2314459678927,-123.086907306401,"unknown",,"unknown",,,,,0,0
+"79fd5d8d-bf41-43b2-a3d6-e8ed10bf2e6f","545482","BURNABY FRASER FORESHORE PARK","","","Vancouver","Vancouver Open Data",49.1917693115085,-122.998908578452,"unknown",,"unknown",,,,,0,0
+"7a12a990-e7e0-420e-96d9-5a6103f423d3","DFPB0184","Winona Park","Marpole","Winona Park","Vancouver","Vancouver Open Data",49.2159438146885,-123.113044173093,"unknown",,"unknown",,,,,0,0
+"7cbf868f-4a59-4b41-a6c3-2671b9d058d1","DFPB0175","Vandusen Botanical Garden","Shaughnessy","Vandusen Botanical Garden","Vancouver","Vancouver Open Data",49.2395065984684,-123.129424214346,"unknown",,"unknown",,,,,0,0
+"7f10136d-b866-4306-b500-0b4cc2a0191f","DFPB0067","Hastings Park -Plateau Sport Parks / Empire Fields","Hastings-Sunrise","Hastings Park -Plateau Sport Parks / Empire Fields","Vancouver","Vancouver Open Data",49.2838144790617,-123.033375055881,"unknown",,"unknown",,,,6.5,1,1
+"7f3906ca-10d5-421c-8e18-e432fab17e69","DFENG0710","Wessex & Kingsway","Renfrew-Collingwood","Wessex & Kingsway","Vancouver","Vancouver Open Data",49.233332,-123.034049,"unknown",,"unknown",,,,,0,0
+"7f9fe066-d083-44c5-bcbc-82c70f6c87d3","545499","CENTENNIAL AVE - TCT","","","Vancouver","Vancouver Open Data",49.2801775655075,-122.938265300438,"unknown",,"unknown",,,,,0,0
+"807eb59d-1bca-41b1-845c-0a19988a63e1","DFENG0004","56th & Ontario","Oakridge","56th & Ontario","Vancouver","Vancouver Open Data",49.219505,-123.106415,"unknown",,"unknown",,,,,0,0
+"80931c2d-4aa8-45a1-817b-611cdd7f78a2","DFPB0085","Langara Golf Course - servive yard","Marpole","Langara Golf Course - servive yard","Vancouver","Vancouver Open Data",49.2182720495577,-123.111706400598,"unknown",,"unknown",,,,,0,0
+"809dbcac-b042-48fe-bb31-030c1fa9fef4","DFPB0135","Rupert Park","Hastings-Sunrise","Rupert Park","Vancouver","Vancouver Open Data",49.2712259979305,-123.033063514175,"unknown",,"unknown",,,,,0,0
+"80dbf1f2-a36a-4ed0-bfa9-85e5b40bad59","DFPB0178","Victory Square","Downtown","Victory Square","Vancouver","Vancouver Open Data",49.2819511927667,-123.110050978468,"unknown",,"unknown",,,,,0,0
+"811b5f40-9968-4fca-bca4-108182ac4455","545492","BURNABY LAKE PARK","","","Vancouver","Vancouver Open Data",49.2533923818345,-122.969941086787,"unknown",,"unknown",,,,,0,0
+"82444473-ffbb-4731-8ceb-bf83d4b5470c","DFPB0116","Oak Park - North west of field hockey","Marpole","Oak Park - North west of field hockey","Vancouver","Vancouver Open Data",49.2167118240571,-123.129107272878,"unknown",,"unknown",,,,,0,0
+"82f5a7dc-1bd7-4293-a337-d30bae3a51a7","DFPB0111","Nelson Park","West End","Nelson Park","Vancouver","Vancouver Open Data",49.2829442059099,-123.129966103546,"unknown",,"unknown",,,,,0,0
+"8323e3fd-1c44-4a24-901f-339e6d62e089","DFENG0051","10th & Willow","Fairview","10th & Willow","Vancouver","Vancouver Open Data",49.262387,-123.122156,"unknown",,"unknown",,,,,0,0
+"835b469c-8b9d-4bf4-aba1-d020c3e1d98e","DFPB0158","Stanley Park - Brockton Point Viewpoint","Stanley Park","Stanley Park - Brockton Point Viewpoint","Vancouver","Vancouver Open Data",49.310653,-123.148332,"unknown",,"unknown",,,,,0,0
+"835bac4e-9553-4052-87c3-bb2e254312f1","DFPB0017","Charleson Park","Fairview","Charleson Park","Vancouver","Vancouver Open Data",49.2681178968762,-123.125886116788,"unknown",,"unknown",,,,6,1,1
+"84bc0a3f-f336-44b4-8f9e-c385f82701e3","545542","GEORGE GREEN PARK","","","Vancouver","Vancouver Open Data",49.2823107861533,-122.978857816948,"unknown",,"unknown",,,,,0,0
+"850ef87d-810d-4911-a191-db847917476b","DFENG0044","Cambie & 29th Avenue","South Cambie","Cambie & 29th Avenue","Vancouver","Vancouver Open Data",49.245083,-123.116339,"unknown",,"unknown",,,,7,1,1
+"85137849-18bd-4755-8a2d-c93508c67f75","545571","MARY AVENUE PARK","","","Vancouver","Vancouver Open Data",49.2164132028209,-122.935502503609,"unknown",,"unknown",,,,,0,0
+"865296c1-e08a-4ae0-ae2a-3b36bac0903e","DFENG0601","Union Gospel Mission","Strathcona","Union Gospel Mission","Vancouver","Vancouver Open Data",49.281446,-123.091297,"unknown",,"unknown",,,,,0,0
+"86e427b3-65a8-4d33-b7c2-3d163afa10d9","545578","RIVERWAY GOLF COURSE","","","Vancouver","Vancouver Open Data",49.2022942652575,-123.009526217547,"unknown",,"unknown",,,,,0,0
+"872f0d84-a42d-443e-b5e3-bd8b272766b5","DFPB0146","Stanley Park - West of Restaurant","Stanley Park","Stanley Park - West of Restaurant","Vancouver","Vancouver Open Data",49.2923453973021,-123.146985187411,"unknown",,"unknown",,,,,0,0
+"89ea26c0-0da2-45d7-9699-c7c0d9613305","DFPB0171","Tisdall Park","Oakridge","Tisdall Park","Vancouver","Vancouver Open Data",49.2284760728964,-123.118251172904,"unknown",,"unknown",,,,,0,0
+"8bcad041-9deb-4b0d-8148-13674f83057e","DFENG0047","4963 Cambie St","South Cambie","4963 Cambie St","Vancouver","Vancouver Open Data",49.240567,-123.118074,"unknown",,"unknown",,,,7.5,1,1
+"8c175518-7ca9-4b6e-b8b1-cdd0df6345c0","545591","7TH & GRAHAM TOT LOT PARK","","","Vancouver","Vancouver Open Data",49.2220773675094,-122.935253063353,"unknown",,"unknown",,,,,0,0
+"8dd92cee-4888-4374-ba51-707e92c0b979","545505","BURNABY MOUNTAIN GOLF COURSE","","","Vancouver","Vancouver Open Data",49.2647976945119,-122.942378258199,"unknown",,"unknown",,,,,0,0
+"8e71d29e-777c-4a8f-8bc5-8bf9550274d0","545534","ERNIE WINCH PARK","","","Vancouver","Vancouver Open Data",49.2138892583699,-122.945140922134,"unknown",,"unknown",,,,,0,0
+"90330da7-7b0c-4239-9d72-c93210cab796","DFPB0170","Tecumseh Park","Victoria-Fraserview","Tecumseh Park","Vancouver","Vancouver Open Data",49.2297128163117,-123.070175864031,"unknown",,"unknown",,,,,0,0
+"90d67568-11e4-4625-bae1-3ebf44a5eb09","DFPB0140","Spanish Banks Beach Park","West Point Grey","Spanish Banks Beach Park","Vancouver","Vancouver Open Data",49.2775900597106,-123.222381707712,"unknown",,"unknown",,,,,0,0
+"90d718af-e4a1-4c53-92ed-2aa753cf8232","545524","CONFEDERATION PARK","","","Vancouver","Vancouver Open Data",49.2845763794251,-123.001540008678,"unknown",,"unknown",,,,,0,0
+"9114fcd3-32c1-4d96-acc9-776ec4896b46","DFPB0070","Hastings Park -Plateau Sport Parks / Empire Fields","Hastings-Sunrise","Hastings Park -Plateau Sport Parks / Empire Fields","Vancouver","Vancouver Open Data",49.282563,-123.034264,"unknown",,"unknown",,,,4,1,1
+"91ea35d1-fadc-4e37-93cf-5210bc3a0ff3","DFENG0026","Comox & Chilco","West End","Comox & Chilco","Vancouver","Vancouver Open Data",49.29067407,-123.14264686,"unknown",,"unknown",,,,,0,0
+"92184d2e-6b46-40aa-a226-cbf4adc96e92","DFPB0050","Fraserview Golf Course - driving range","Killarney","Fraserview Golf Course - driving range","Vancouver","Vancouver Open Data",49.2124968659967,-123.051379792143,"unknown",,"unknown",,,,,0,0
+"929d5c2e-2771-49c8-91d1-3af9abe18aa1","DFPB0048","Fraserview Golf Course - clubhouse building","Killarney","Fraserview Golf Course - clubhouse building","Vancouver","Vancouver Open Data",49.2140394978553,-123.051517788876,"unknown",,"unknown",,,,,0,0
+"9393379b-b6aa-41ae-9da8-7835fc6d5b08","545469","BARNET MARINE PARK","","","Vancouver","Vancouver Open Data",49.2899285368296,-122.921228021563,"unknown",,"unknown",,,,,0,0
+"946d4674-974f-4388-895c-ff082998c928","545467","AVONDALE PARK","","","Vancouver","Vancouver Open Data",49.2521190606727,-123.019412345962,"unknown",,"unknown",,,,,0,0
+"94a9c699-789b-4b89-a54e-7d790fc0837b","DFPB0138","Slocan Greenway","Renfrew-Collingwood","Slocan Greenway","Vancouver","Vancouver Open Data",49.2583599954325,-123.049735663052,"unknown",,"unknown",,,,8,1,1
+"94abb1b2-c89c-4ddc-ba80-d7451867364e","545509","CENTRAL PARK","","","Vancouver","Vancouver Open Data",49.2318708512627,-123.016013755965,"unknown",,"unknown",,,,,0,0
+"95b9283b-f360-447f-8d0a-8411b5ff7ba5","545552","JIM LORIMER PARK","","","Vancouver","Vancouver Open Data",49.2628092609308,-123.013791298179,"unknown",,"unknown",,,,,0,0
+"96c7e24b-34ad-4587-8e84-a5746a2823d6","DFPB0129","Riverfront Park - West of tennis courts","Killarney","Riverfront Park - West of tennis courts","Vancouver","Vancouver Open Data",49.2058436284454,-123.050965807441,"unknown",,"unknown",,,,,0,0
+"972ef14e-bf24-4695-ad95-9f9bbac2c9c2","545475","BONSOR PARK","","SPORTS FIELD","Vancouver","Vancouver Open Data",49.2236569356206,-122.995481886763,"unknown",,"unknown",,,,,0,0
+"976bfd8d-1e98-4904-b7c8-989972ca4ba4","DFPB0084","Kitsilano Beach Park - North of parking lot","Kitsilano","Kitsilano Beach Park - North of parking lot","Vancouver","Vancouver Open Data",49.2768450695967,-123.151728259004,"unknown",,"unknown",,,,,0,0
+"97990855-d67a-412d-bfe8-6b4b4c6988ee","DFPB0016","Chaldecott Park","Dunbar-Southlands","Chaldecott Park","Vancouver","Vancouver Open Data",49.249690487528,-123.191673583776,"unknown",,"unknown",,,,,0,0
+"98128ef3-0734-4a53-9c6c-1e66a354fa45",,"YVR Airport - Domestic Terminal (C51)","Kerrisdale",,"Vancouver",,49.1949229209738,-123.17985355854,"unknown",,"unknown",,,,7,1,1
+"982aa3f7-3a4e-4997-b82a-e5afb479973f","DFPB0093","Maple Grove Park - South of baseball diamond","Kerrisdale","Maple Grove Park - South of baseball diamond","Vancouver","Vancouver Open Data",49.2236119560475,-123.160816455754,"unknown",,"unknown",,,,,0,0
+"9856086a-d5f0-4dd0-96a8-c82037ad0048","DFPB0072","Hillcrest Park - East side","Riley Park","Hillcrest Park - East side","Vancouver","Vancouver Open Data",49.2457680372239,-123.106954055216,"unknown",,"unknown",,,,8,1,1
+"9895dbfb-7096-43e7-a31d-cbf3b343799a","DFPB0187","Vancouver Technical HS","Renfrew-Collingwood","Vancouver Technical HS","Vancouver","Vancouver Open Data",49.2606248627053,-123.050119466855,"unknown",,"unknown",,,,,0,0
+"993f3015-b99c-47e1-aee0-7b2553fc9453","DFPB0130","Robson Park","Mount Pleasant","Robson Park","Vancouver","Vancouver Open Data",49.2578976961212,-123.091896926457,"unknown",,"unknown",,,,,0,0
+"998e7df3-99ac-407b-9e57-507c991a1a5c","DFENG0808","West Blvd & W 45th","Kerrisdale","West Blvd & W 45th","Vancouver","Vancouver Open Data",49.230778,-123.155629,"unknown",,"unknown",,,,,0,0
+"9a150afe-7bc7-4022-8776-c662ce58828c","DFPB0105","Moberly Park - West of tennis courts","Sunset","Moberly Park - West of tennis courts","Vancouver","Vancouver Open Data",49.2149328037076,-123.084583995263,"unknown",,"unknown",,,,,0,0
+"9be236ec-18cf-4337-a487-ac10e597564b","545502","BURNABY MOUNTAIN GOLF COURSE","","","Vancouver","Vancouver Open Data",49.2625054404615,-122.947743583036,"unknown",,"unknown",,,,,0,0
+"9e3a7be5-a16c-414a-84b8-5616b714845f","DFENG0020","Hastings & Gore","Strathcona","Hastings & Gore","Vancouver","Vancouver Open Data",49.281386,-123.097231,"unknown",,"unknown",,,,,0,0
+"9eeb49bd-35ef-4275-84b7-5e8679d7592a","DFPB0040","Emery Barnes Park - South west of playground","Downtown","Emery Barnes Park - South west of playground","Vancouver","Vancouver Open Data",49.2766419756202,-123.124267082613,"unknown",,"unknown",,,,,0,0
+"9f280b4a-ee76-4f49-b33e-29506ade9fc0","DFENG0711","E Hastings & Heatley","Strathcona","E Hastings & Heatley","Vancouver","Vancouver Open Data",49.281264,-123.089387,"unknown",,"unknown",,,,,0,0
+"9f2f7a58-b40a-4719-ae0f-e407005864ef","DFENG0707","Powell & Jackson","Strathcona","Powell & Jackson","Vancouver","Vancouver Open Data",49.283174,-123.093446,"unknown",,"unknown",,,,,0,0
+"9f7d94ae-6cd3-474d-83ae-7343aec3f649","DFPB0060","Harbour Green Park - Viewpoint","Downtown","Harbour Green Park - Viewpoint","Vancouver","Vancouver Open Data",49.2913343844341,-123.123255037579,"unknown",,"unknown",,,,,0,0
+"9fecb3f2-7f15-45f4-8b78-ea6ae874b4fd","546992","SHADBOLT","","","Vancouver","Vancouver Open Data",49.2405206875878,-122.969513383152,"unknown",,"unknown",,,,,0,0
+"a08056ad-2f0a-40c7-a2fd-f538591f4d47","DFPB0052","Gaston Park","Renfrew-Collingwood","Gaston Park","Vancouver","Vancouver Open Data",49.2366032752625,-123.031395599542,"unknown",,"unknown",,,,,0,0
+"a154c935-59bf-4dd1-beec-17f0ddfaadbe","DFENG0050","10th & Kingsway","Mount Pleasant","10th & Kingsway","Vancouver","Vancouver Open Data",49.261984,-123.098912,"unknown",,"unknown",,,,,0,0
+"a2c4c3ab-5bd7-42bf-9cab-622c0fc711db","DFPB0096","McBride Park","Kitsilano","McBride Park","Vancouver","Vancouver Open Data",49.268028875205,-123.180119462495,"unknown",,"unknown",,,,,0,0
+"a2dd5850-f711-48b6-a597-3486c4461cc8","546950","Bill Copland","","dressing room hall","Vancouver","Vancouver Open Data",49.2523485825282,-122.965374305341,"unknown",,"unknown",,,,,0,0
+"a64d02e2-226d-42e0-a8da-13082d9c5b46","DFPB0045","Fraser River Park - South west","Kerrisdale","Fraser River Park - South west","Vancouver","Vancouver Open Data",49.2065246047152,-123.150793436983,"unknown",,"unknown",,,,,0,0
+"a688916e-d9d0-41e1-974f-f88ca75b0ee7","DFENG0037","Oak & 46th","Oakridge","Oak & 46th","Vancouver","Vancouver Open Data",49.229344,-123.127987,"unknown",,"unknown",,,,,0,0
+"a743e629-3f6c-4244-a0da-1f5e6e374bee","DFPB0114","New Brighton Park - South west of playground","Hastings-Sunrise","New Brighton Park - South west of playground","Vancouver","Vancouver Open Data",49.2895373789417,-123.038675499521,"unknown",,"unknown",,,,0,1,1
+"a80d8437-6e05-4348-a53b-4817f504da36","547035","CENTRAL PARK","","variety park","Vancouver","Vancouver Open Data",49.2316353264671,-123.018951787599,"unknown",,"unknown",,,,,0,0
+"a8c0c76a-03e2-4cd5-b2e4-c1a40ba1a6f6","DFENG0602","E Hastings & Columbia","Downtown","E Hastings & Columbia","Vancouver","Vancouver Open Data",49.281547,-123.102144,"unknown",,"unknown",,,,,0,0
+"a91bb345-292c-40eb-b4e3-df1a39f2c4a4","DFENG0030","Union & Hawks","Strathcona","Union & Hawks","Vancouver","Vancouver Open Data",49.2775724,-123.087389,"unknown",,"unknown",,,,,0,0
+"a9e4d918-32a9-46a2-b921-8145bfa11990","DFPB0083","Kitsilano Beach Park - South of playground","Kitsilano","Kitsilano Beach Park - South of playground","Vancouver","Vancouver Open Data",49.274787480311,-123.153186687643,"unknown",,"unknown",,,,,0,0
+"aa51bed2-2ec1-48a9-974c-4dd6b6eb855f","DFPB0163","Strathcona Park - North west of basketball court","Strathcona","Strathcona Park - North west of basketball court","Vancouver","Vancouver Open Data",49.2760156990395,-123.085562062923,"unknown",,"unknown",,,,,0,0
+"ab15f88f-328a-4716-96de-51fac69ecfb0","545561","KESWICK PARK","","","Vancouver","Vancouver Open Data",49.2478151032528,-122.899652621831,"unknown",,"unknown",,,,,0,0
+"ab7263f5-1390-40c7-a5ee-03488a9c0b4e","DFPB0119","Oppenheimer Park","Strathcona","Oppenheimer Park","Vancouver","Vancouver Open Data",49.2830072209497,-123.094041872513,"unknown",,"unknown",,,,,0,0
+"abeb2e73-1aea-4c90-b76c-18b316d323ab","545503","BURNABY MOUNTAIN GOLF COURSE","","","Vancouver","Vancouver Open Data",49.2614245579465,-122.940016373623,"unknown",,"unknown",,,,,0,0
+"abf64451-ad5f-48a0-bcb6-f87c9b366d08","642717","Unnamed Fountain","","","Vancouver","Vancouver Open Data",49.2727381451706,-123.002991638017,"unknown",,"unknown",,,,,0,0
+"ac123914-30b1-4d47-af34-4714b5746ba4","DFPB0021","Clinton Park - East side of wading pool","Hastings-Sunrise","Clinton Park - East side of wading pool","Vancouver","Vancouver Open Data",49.270804982488,-123.050121624181,"unknown",,"unknown",,,,,0,0
+"ac77174a-6ec9-4d9b-9956-220727f8ca79","545520","BURNABY LAKE PARK","","","Vancouver","Vancouver Open Data",49.2478290296827,-122.911808847079,"unknown",,"unknown",,,,,0,0
+"ac8df1c7-595e-4e6b-951b-e8f3c13ffdc0","545546","CAPITOL HILL - GROSVENOR CR","","","Vancouver","Vancouver Open Data",49.2878011351693,-122.985453341629,"unknown",,"unknown",,,,,0,0
+"acac6db9-0656-4ddf-8973-141622d4229a","548193","MCGILL LIBRARY","","PARKING LOT","Vancouver","Vancouver Open Data",49.282446086248,-123.000925686885,"unknown",,"unknown",,,,,0,0
+"ad232ab4-7e0e-4a8f-8e23-2c050b97b368","545525","CONFEDERATION PARK","","","Vancouver","Vancouver Open Data",49.2857988485163,-122.997338946569,"unknown",,"unknown",,,,,0,0
+"ad41c053-8593-44d8-8634-1d1385665c7b","545484","BURNABY FRASER FORESHORE PARK","","","Vancouver","Vancouver Open Data",49.1933222464079,-123.000413476568,"unknown",,"unknown",,,,,0,0
+"ae895910-f24d-4e53-a5e3-a2b407829a0f","DFENG0017","Elgin & 37th","Kensington-Cedar Cottage","Elgin & 37th","Vancouver","Vancouver Open Data",49.2365274,-123.084037,"unknown",,"unknown",,,,,0,0
+"afc1be11-b957-445b-940d-b66a24045c64","DFPB0009","Art Phillips Park (Discovery Square)","Downtown","Art Phillips Park (Discovery Square)","Vancouver","Vancouver Open Data",49.2860252739446,-123.120924036722,"unknown",,"unknown",,,,,0,0
+"b00d5146-d556-4be1-a0a8-5c7412e11392","DFENG0005","Cardero & Burnaby","West End","Cardero & Burnaby","Vancouver","Vancouver Open Data",49.28451988,-123.13955439,"unknown",,"unknown",,,,,0,0
+"b044d646-4aae-45d2-92f3-58e9be1ea35e","DFENG0606","The Gathering Place","Downtown","The Gathering Place","Vancouver","Vancouver Open Data",49.277664,-123.123678,"unknown",,"unknown",,,,,0,0
+"b0a55c8a-c906-4bb5-936c-1d39b06aabc4","DFPB0156","Stanley Park - Prospect Point Picnic Site","Stanley Park","Stanley Park - Prospect Point Picnic Site","Vancouver","Vancouver Open Data",49.3107247261559,-123.148188446165,"unknown",,"unknown",,,,,0,0
+"b11082e2-7120-4d94-927c-cdf97823549d","545471","BURNABY MOUNTAIN CONSERVATION AREA","","","Vancouver","Vancouver Open Data",49.2880667362092,-122.923684779809,"unknown",,"unknown",,,,,0,0
+"b18af709-2b4f-4f2e-a625-dfb92fe92609","DFPB0047","Fraserview Golf Course - West of kerr st.","Killarney","Fraserview Golf Course - West of kerr st.","Vancouver","Vancouver Open Data",49.2114009472477,-123.042267737527,"unknown",,"unknown",,,,,0,0
+"b1a9e632-2e49-4bd3-9ce6-abcaaad7e5c8","DFENG0705","Commercial & E Broadway","Grandview-Woodland","Commercial & E Broadway","Vancouver","Vancouver Open Data",49.262436,-123.069471,"unknown",,"unknown",,,,,0,0
+"b1c3ebe6-e2ee-42bf-b148-8553894515ca","545579","RIVERWAY GOLF COURSE","","","Vancouver","Vancouver Open Data",49.2037320085783,-123.005378267477,"unknown",,"unknown",,,,,0,0
+"b2084e0e-4c1a-4b04-9650-6c70c90bd958","DFPB0177","Victoria Park","Grandview-Woodland","Victoria Park","Vancouver","Vancouver Open Data",49.2717189621061,-123.066747013186,"unknown",,"unknown",,,,,0,0
+"b350d4d6-ec39-4007-9cbb-0bbbcd4b5472","546962","MCGILL LIBRARY","","","Vancouver","Vancouver Open Data",49.2827162649212,-123.000565295314,"unknown",,"unknown",,,,,0,0
+"b38eb275-7932-4e38-9b4a-dc3a57e65a43","547083","TOMMY DOUGLAS LIBRARY","","main floor","Vancouver","Vancouver Open Data",49.2187791168113,-122.952304083877,"unknown",,"unknown",,,,,0,0
+"b4f9490e-f394-4f15-9629-1524f42c5a48","DFPB0027","Connaught Park - East side of fieldhouse","Kitsilano","Connaught Park - East side of fieldhouse","Vancouver","Vancouver Open Data",49.2629747769993,-123.159321343593,"unknown",,"unknown",,,,,0,0
+"b74ab3dc-6d70-4b8f-880a-37c8e40b2758","545527","CONFEDERATION PARK","","","Vancouver","Vancouver Open Data",49.2844449977131,-122.998041207448,"unknown",,"unknown",,,,,0,0
+"b838051e-f865-4438-9545-e87cbc2146ab","546952","Bonsor","","","Vancouver","Vancouver Open Data",49.2241627818243,-122.996939046743,"unknown",,"unknown",,,,,0,0
+"b884d87b-9ba2-4bb8-b2f5-136d810e0855","DFPB0100","McCleery Golf Course - servive yard","Kerrisdale","McCleery Golf Course - servive yard","Vancouver","Vancouver Open Data",49.2207377483273,-123.170725388683,"unknown",,"unknown",,,,,0,0
+"b8c12876-2ab6-4fba-96b1-9f77dc2982eb","546954","Bonsor","","","Vancouver","Vancouver Open Data",49.2241627818243,-122.996939046743,"unknown",,"unknown",,,,,0,0
+"b91cb553-1266-472d-b291-4cef4475f326","DFPB0088","Langara Golf Course - clubhouse building","Oakridge","Langara Golf Course - clubhouse building","Vancouver","Vancouver Open Data",49.223890079311,-123.112528148335,"unknown",,"unknown",,,,,0,0
+"b987f22e-1078-41ca-bfc7-c701cc336d4c","545540","FOREST GROVE PARK","","","Vancouver","Vancouver Open Data",49.2649586293211,-122.919767693841,"unknown",,"unknown",,,,,0,0
+"b990b8dd-19d8-4c06-aa1c-83708ab89518","545504","BURNABY MOUNTAIN GOLF COURSE","","","Vancouver","Vancouver Open Data",49.2642017006523,-122.941931681772,"unknown",,"unknown",,,,,0,0
+"b9b5a5e7-3f44-4071-8484-d9ab6c0b3305","DFPB0109","Mount Pleasant Park","Mount Pleasant","Mount Pleasant Park","Vancouver","Vancouver Open Data",49.2569706712059,-123.106431021296,"unknown",,"unknown",,,,,0,0
+"b9d7567e-9a81-4abe-af89-c09c9c414396","DFPB0102","Memorial South Park - West of Softball Diamond","Sunset","Memorial South Park - West of Softball Diamond","Vancouver","Vancouver Open Data",49.2316280762324,-123.084757287928,"unknown",,"unknown",,,,,0,0
+"bab446d6-871b-4226-a1f8-6b2e8b6f104d","545597","SUMAS PARK","","","Vancouver","Vancouver Open Data",49.2655607887946,-122.968659234784,"unknown",,"unknown",,,,,0,0
+"bae37d06-acbf-4e30-b5bc-858e541963e2","DFENG0807","Nelson Park","West End","Nelson Park","Vancouver","Vancouver Open Data",49.281931,-123.129159,"unknown",,"unknown",,,,,0,0
+"bafa8a69-166a-41a5-8a6e-e4c95461a2d6","545519","CENTRAL PARK","","picnic","Vancouver","Vancouver Open Data",49.2311048971516,-123.019016633748,"unknown",,"unknown",,,,,0,0
+"bb86bc34-c13b-4d80-a83b-634b83fef228","DFENG0024","Burrard & Davie","West End","Burrard & Davie","Vancouver","Vancouver Open Data",49.2792475453812,-123.12923210062,"unknown",,"unknown",,,,,0,0
+"bba5a2b4-133a-4677-a3d9-c73f21a7706b","DFPB0036","Douglas Park (community centre)","South Cambie","Douglas Park (community centre)","Vancouver","Vancouver Open Data",49.2520415621315,-123.122487136797,"unknown",,"unknown",,,,8,1,1
+"bbd97d7c-8812-4562-8715-6e016e50a8fe","545593","SQUINT LAKE PARK","","","Vancouver","Vancouver Open Data",49.2678046296668,-122.942837948276,"unknown",,"unknown",,,,,0,0
+"bc17cd8f-2c34-4baf-aff9-063f16bac2ea","545604","WARNER LOAT PARK","","","Vancouver","Vancouver Open Data",49.2464807178481,-122.935156055295,"unknown",,"unknown",,,,,0,0
+"bd1e8f44-c2ee-4484-bc08-e73d6bc19023","DFPB0092","Major Matthews Park","Mount Pleasant","Major Matthews Park","Vancouver","Vancouver Open Data",49.2616810693327,-123.106994012831,"unknown",,"unknown",,,,,0,0
+"bd955ace-4ece-440f-bf45-1ab03a4cd0c8","545478","BROADVIEW PARK","","","Vancouver","Vancouver Open Data",49.2555033132919,-123.015909582202,"unknown",,"unknown",,,,,0,0
+"bdeeccaa-02d9-4c66-a464-1b8f8b2f776b","DFPB0030","CRAB Park at Portside","Downtown","CRAB Park at Portside","Vancouver","Vancouver Open Data",49.2847599549083,-123.10180591767,"unknown",,"unknown",,,,7.5,1,1
+"be5d4233-a6f3-4fe8-a066-e174564c8c4a","546947","Bill Copland","","upper lobby","Vancouver","Vancouver Open Data",49.2523485825282,-122.965374305341,"unknown",,"unknown",,,,,0,0
+"bf18da81-8c18-437a-83d6-1c13b998a0d3","545555","KENSINGTON PARK","","ball diamonds","Vancouver","Vancouver Open Data",49.2765582944615,-122.974864280937,"unknown",,"unknown",,,,,0,0
+"c084c713-c494-453a-860e-0d02eb5e93fc","546960","City Hall","","","Vancouver","Vancouver Open Data",49.2433194408558,-122.972443070987,"unknown",,"unknown",,,,,0,0
+"c148e838-e939-41b2-a089-53519f68d1aa","DFENG0045","2001 W 10th Avenue","Kitsilano","2001 W 10th Avenue","Vancouver","Vancouver Open Data",49.262911,-123.152238,"unknown",,"unknown",,,,,0,0
+"c3ac75c7-5fb4-4cda-a3d7-f9ce684b4b59","DFENG0706","Powell & Gore","Strathcona","Powell & Gore","Vancouver","Vancouver Open Data",49.283263,-123.097852,"unknown",,"unknown",,,,,0,0
+"c3ba6840-ebd4-4d5d-aec5-3f1508478b27","DFPB0186","Stanley Park - North east of Rose and Perennial Ga","Stanley Park","Stanley Park - North east of Rose and Perennial Ga","Vancouver","Vancouver Open Data",49.2991305466792,-123.134144556391,"unknown",,"unknown",,,,,0,0
+"c46a8e07-01e5-486d-b439-2759d5e97e69","545479","BRENTWOOD PARK","","","Vancouver","Vancouver Open Data",49.271449518169,-122.996174608688,"unknown",,"unknown",,,,,0,0
+"c4cb174b-ac45-46ca-a587-432c3348b088","DFENG0006","Gilford & Nelson","West End","Gilford & Nelson","Vancouver","Vancouver Open Data",49.29049866,-123.14022516,"unknown",,"unknown",,,,,0,0
+"c4dee8af-667e-4904-ad22-ecd50074170e","545533","DEER LAKE PARK","","Century Gardens","Vancouver","Vancouver Open Data",49.2406367999588,-122.971315344637,"unknown",,"unknown",,,,,0,0
+"c5c32fbf-e690-410e-b3f9-6275106d1808","545599","TAYLOR PARK","","","Vancouver","Vancouver Open Data",49.2057510405657,-122.959323962452,"unknown",,"unknown",,,,,0,0
+"c5e0e178-1c1f-47fe-8a1c-443e62fa4b7e","DFPB0061","Harbour Green Park - foot of Jervis Mews","Downtown","Harbour Green Park - foot of Jervis Mews","Vancouver","Vancouver Open Data",49.2906453698344,-123.123165039261,"unknown",,"unknown",,,,,0,0
+"c7a001fc-5217-42fa-bdf2-6faca1c89b24","DFPB0180","West End minipark","West End","West End minipark","Vancouver","Vancouver Open Data",49.2852962558752,-123.128030084017,"unknown",,"unknown",,,,,0,0
+"c8c537dc-8ab0-4d04-ac0b-ca9a60f2ede4","546946","Bill Copland","","lower lobby","Vancouver","Vancouver Open Data",49.2523485825282,-122.965374305341,"unknown",,"unknown",,,,,0,0
+"c8f95616-7f4c-45f9-a4a0-92527ab506e6","DFENG0801","Columbia & Powell","Downtown","Columbia & Powell","Vancouver","Vancouver Open Data",49.283301,-123.102033,"unknown",,"unknown",,,,,0,0
+"c9387333-81ef-4caf-a916-e5fad2a0de8e","545508","CENTRAL PARK","","baseball","Vancouver","Vancouver Open Data",49.2320825921699,-123.014821986279,"unknown",,"unknown",,,,,0,0
+"ca3fef02-215c-4223-846c-aa3d9c08f4b1","DFENG0049","11th & Prince Edward","Mount Pleasant","11th & Prince Edward","Vancouver","Vancouver Open Data",49.261036,-123.09634,"unknown",,"unknown",,,,,0,0
+"ca9443bd-09db-4b29-bd08-57bd02ae9de0","DFPB0174","Vandusen Botanical Garden - upper gardens","Shaughnessy","Vandusen Botanical Garden - upper gardens","Vancouver","Vancouver Open Data",49.238720681698,-123.129924219185,"unknown",,"unknown",,,,,0,0
+"cabbbb60-a430-47db-bd26-77e44c5a25c3","545572","MCGILL PARK","","","Vancouver","Vancouver Open Data",49.2889159063754,-123.010745523489,"unknown",,"unknown",,,,,0,0
+"cc746a75-6040-4e31-8109-f5974da05444","DFPB0153","Stanley Park - Third Beach Seawall","Stanley Park","Stanley Park - Third Beach Seawall","Vancouver","Vancouver Open Data",49.303262622732,-123.156320218251,"unknown",,"unknown",,,,8,1,1
+"ccc0d74a-fcfe-45fb-9cc2-af2041f46170","DFPB0113","New Brighton Park - South of pool","Hastings-Sunrise","New Brighton Park - South of pool","Vancouver","Vancouver Open Data",49.2893743767741,-123.036650486962,"unknown",,"unknown",,,,7.5,1,1
+"ce6b10c8-1f39-4ea6-8fb5-61e1132e5452","547017","DEER LAKE PARK","","Carousel","Vancouver","Vancouver Open Data",49.2407068995045,-122.967643522617,"unknown",,"unknown",,,,,0,0
+"cef55a2e-2cab-4d19-a9b2-0a42d7f0caf9","DFPB0157","Stanley Park - Stanley Park Pavilion","Stanley Park","Stanley Park - Stanley Park Pavilion","Vancouver","Vancouver Open Data",49.2996061952065,-123.133790019245,"unknown",,"unknown",,,,,0,0
+"cefebffe-74f8-4ad8-acae-4af19375e0e8","DFENG0010","Robson & Chilco","West End","Robson & Chilco","Vancouver","Vancouver Open Data",49.29345716,-123.13827002,"unknown",,"unknown",,,,,0,0
+"cf0af71c-73d0-47d4-8c61-69098fa36281","DFPB0133","Ross Park","Sunset","Ross Park","Vancouver","Vancouver Open Data",49.2169158463059,-123.08241897664,"unknown",,"unknown",,,,,0,0
+"cf8f7b03-bcbb-42be-95e2-d3f5345f3ccd","DFPB0038","Elm Park","Kerrisdale","Elm Park","Vancouver","Vancouver Open Data",49.2335891619661,-123.163386445859,"unknown",,"unknown",,,,,0,0
+"d0a36f84-3d00-40bb-a24b-24c1e60c623a","DFENG0032","Broadway & Stephens","Kitsilano","Broadway & Stephens","Vancouver","Vancouver Open Data",49.26423514,-123.1666474,"unknown",,"unknown",,,,,0,0
+"d21d2f2d-71d0-42a6-87eb-8d53e90dbed2","545523","CONFEDERATION PARK","","","Vancouver","Vancouver Open Data",49.2849358024368,-123.000922745498,"unknown",,"unknown",,,,,0,0
+"d23b9938-e966-4041-a037-6202aa0b88d0","DFPB0095","Marpole Park","Marpole","Marpole Park","Vancouver","Vancouver Open Data",49.2057285925046,-123.138943363011,"unknown",,"unknown",,,,,0,0
+"d2b0ce59-4aed-4c94-aea5-f625682ea816","545574","RENE MEMORIAL PARK","","","Vancouver","Vancouver Open Data",49.2207140477146,-122.96523234667,"unknown",,"unknown",,,,,0,0
+"d3bb76f4-7a82-4734-8277-6e455cc253d5","DFPB0074","John Hendry (Trout Lake) Park","Kensington-Cedar Cottage","John Hendry (Trout Lake) Park","Vancouver","Vancouver Open Data",49.2540346269577,-123.061970745685,"unknown",,"unknown",,,,8,1,1
+"d4b5e7c3-4e1a-4390-8c13-8850bd6014e4","545473","BEECHER PARK","","","Vancouver","Vancouver Open Data",49.2735256677138,-122.988067242304,"unknown",,"unknown",,,,,0,0
+"d51a01b1-0c75-421f-8ae1-23308849a0ef","545582","RIVERWAY SPORTS COMPLEX","","","Vancouver","Vancouver Open Data",49.2062626246708,-123.001203496382,"unknown",,"unknown",,,,,0,0
+"d5ee0056-9f93-4cc8-b4b4-25c131e93e49","DFPB0125","Queen Elizabeth Park - At Conservatory","Riley Park","Queen Elizabeth Park - At Conservatory","Vancouver","Vancouver Open Data",49.2423803644047,-123.1135281061,"unknown",,"unknown",,,,10,1,1
+"d6072c87-c2e4-41a5-a3aa-97d4c4e660b3","545501","BURNABY MOUNTAIN GOLF COURSE","","","Vancouver","Vancouver Open Data",49.2647930259891,-122.942392664218,"unknown",,"unknown",,,,,0,0
+"d6b9ea09-bc77-4547-9ef5-ab7c4904a7d7","DFPB0134","Rupert Park - South of golf entrance booth","Hastings-Sunrise","Rupert Park - South of golf entrance booth","Vancouver","Vancouver Open Data",49.2731770397506,-123.030620493013,"unknown",,"unknown",,,,,0,0
+"d75437ac-8c5a-4255-bcc5-42963c286e26","545537","FOREST GLEN PARK","","","Vancouver","Vancouver Open Data",49.2362987977421,-122.995525861351,"unknown",,"unknown",,,,,0,0
+"d82909b1-15b9-4f9b-a14b-b58b88c0d164","DFENG0703","Main & E Hastings","Downtown","Main & E Hastings","Vancouver","Vancouver Open Data",49.281431,-123.099907,"unknown",,"unknown",,,,,0,0
+"d84cb96e-a29e-4acb-aecf-5e682b90c33a","546951","Bonsor","","","Vancouver","Vancouver Open Data",49.2241627818243,-122.996939046743,"unknown",,"unknown",,,,,0,0
+"d85712c1-db44-49be-b90d-b1a9c392f3ed",,"Rainbow Park - Richards & Smithe","Downtown",,"Vancouver",,49.2790795948091,-123.119021058083,"unknown",,"unknown",,,,8,1,1
+"d9153936-d2df-4fcd-9d62-5f996ecabf6c","DFPB0128","Riverfront Park - East of washrooms","Killarney","Riverfront Park - East of washrooms","Vancouver","Vancouver Open Data",49.205859628777,-123.05180181299,"unknown",,"unknown",,,,,0,0
+"d93668ad-2168-4087-a8ee-6ddbf71c656a","546323","SHADBOLT","","","Vancouver","Vancouver Open Data",49.2405206875878,-122.969513383152,"unknown",,"unknown",,,,,0,0
+"da3ea33c-5bdb-4359-8645-c94a6668d226","545510","CENTRAL PARK","","golf","Vancouver","Vancouver Open Data",49.2228212944439,-123.013653135162,"unknown",,"unknown",,,,,0,0
+"da4ab5da-1b60-4c7d-a1c5-7d782fd42aac","545468","BARNET MARINE PARK","","","Vancouver","Vancouver Open Data",49.2901165958575,-122.924547860376,"unknown",,"unknown",,,,,0,0
+"db8266a6-c775-4987-9ed4-97623b58fc77","DFENG0002","39th & Nanaimo","Kensington-Cedar Cottage","39th & Nanaimo","Vancouver","Vancouver Open Data",49.234752,-123.058912,"unknown",,"unknown",,,,,0,0
+"dbd3320f-9865-4284-bc4c-616db9ad9986","DFPB0005","Andy Livingstone Park - North of basketball court","Downtown","Andy Livingstone Park - North of basketball court","Vancouver","Vancouver Open Data",49.278917130264,-123.106178961005,"unknown",,"unknown",,,,,0,0
+"dbecbf6f-4a4e-4bc8-b2c0-1b2a88eb635e","DFENG0042","W 63rd Avenue & Yukon Street","Marpole","W 63rd Avenue & Yukon Street","Vancouver","Vancouver Open Data",49.213173,-123.114629,"unknown",,"unknown",,,,,0,0
+"dc8b31e6-a47f-45af-8ca6-76dac6fda780","545532","DAVID GRAY PARK","","","Vancouver","Vancouver Open Data",49.2162095152897,-123.007463013533,"unknown",,"unknown",,,,,0,0
+"dcb3afe0-db6f-48f4-b3b2-37373bdbc55c","DFPB0059","Guelph Park","Mount Pleasant","Guelph Park","Vancouver","Vancouver Open Data",49.2643258292583,-123.095559932818,"unknown",,"unknown",,,,,0,0
+"dccc86a6-64d8-4420-af14-5f19881aac1c","DFPB0033","David Lam Park - South west of playgrounds","Downtown","David Lam Park - South west of playgrounds","Vancouver","Vancouver Open Data",49.2724999898775,-123.123274088319,"unknown",,"unknown",,,,,0,0
+"dcf782e1-957b-40f6-bd47-0abba93aabb5","545515","CENTRAL PARK","","","Vancouver","Vancouver Open Data",49.2281432438525,-123.020408416483,"unknown",,"unknown",,,,,0,0
+"de058b8b-7933-4e8b-b01f-119f9369ed5b","DFENG0022","Ashburn & Elliot","Victoria-Fraserview","Ashburn & Elliot","Vancouver","Vancouver Open Data",49.2187548,-123.055044,"unknown",,"unknown",,,,,0,0
+"dfa25db3-e34e-48bd-ab42-3a8a082ac50d","DFPB0126","Quilchena Park","Arbutus-Ridge","Quilchena Park","Vancouver","Vancouver Open Data",49.2447253998678,-123.148813324404,"unknown",,"unknown",,,,,0,0
+"e01888f3-bcf8-4ea4-ab8b-a347dc2bb0b4","DFENG0021","Commercial & 3rd","Grandview-Woodland","Commercial & 3rd","Vancouver","Vancouver Open Data",49.2678194,-123.06939067,"unknown",,"unknown",,,,,0,0
+"e049f634-f134-447d-801f-b790034e05d2","545573","MEADOWOOD PARK","","","Vancouver","Vancouver Open Data",49.2635506196881,-122.933085488184,"unknown",,"unknown",,,,,0,0
+"e133e912-4470-4751-887a-7440bb0c061b","DFPB0035","Douglas Park - Right side of wading pool","South Cambie","Douglas Park - Right side of wading pool","Vancouver","Vancouver Open Data",49.253194585914,-123.122302132452,"unknown",,"unknown",,,,,0,0
+"e21fd2a4-17dc-4419-90dc-d428e8e49016","DFENG0007","Nelson & Broughton","West End","Nelson & Broughton","Vancouver","Vancouver Open Data",49.28571023,-123.13333675,"unknown",,"unknown",,,,,0,0
+"e233dd79-63cf-41ba-bd3f-b94fb042f766","DFENG0035","Fraser & Broadway","Mount Pleasant","Fraser & Broadway","Vancouver","Vancouver Open Data",49.262628,-123.089225,"unknown",,"unknown",,,,,0,0
+"e2d6189f-ad3b-4067-8180-4259c1371573","545521","CHARLES RUMMEL PARK","","","Vancouver","Vancouver Open Data",49.2517842173355,-122.941266314048,"unknown",,"unknown",,,,,0,0
+"e32956b3-dcf4-47b1-972f-8f9b245de9ff","DFENG0052","8683 Kerr","Killarney","8683 Kerr","Vancouver","Vancouver Open Data",49.20577,-123.042394,"unknown",,"unknown",,,,,0,0
+"e3d19323-3ee7-41d8-bf49-4c913d187d0d","DFPB0034","Devonian Harbour Park","Stanley Park","Devonian Harbour Park","Vancouver","Vancouver Open Data",49.2950914591812,-123.135986109953,"unknown",,"unknown",,,,7,1,1
+"e59cc7b4-2d26-4a51-8cb3-c544ed6585d3","DFPB0173","Trillium Park","Strathcona","Trillium Park","Vancouver","Vancouver Open Data",49.2750663549827,-123.093106887793,"unknown",,"unknown",,,,,0,0
+"e5c9f244-950b-4052-980c-9e90e42f76c7","DFPB0154","Stanley Park - Legends Of The Moon Washroom","Stanley Park","Stanley Park - Legends Of The Moon Washroom","Vancouver","Vancouver Open Data",49.2996343643786,-123.121285092475,"unknown",,"unknown",,,,9,1,1
+"e62b5c6b-6fd4-44f2-b7e4-43051c8cd5e5","DFENG0502","Granville Island Pumping Station","Fairview","Granville Island Pumping Station","Vancouver","Vancouver Open Data",49.269566,-123.136177,"unknown",,"unknown",,,,,0,0
+"e65f91cb-95ad-4946-bc57-40e2214c9570","DFPB0058","Grays Park","Kensington-Cedar Cottage","Grays Park","Vancouver","Vancouver Open Data",49.2410823478605,-123.084978927757,"unknown",,"unknown",,,,,0,0
+"e7ac3816-f76a-445e-a1b0-73734d4807a5","545585","RIVERWAY SPORTS COMPLEX","","","Vancouver","Vancouver Open Data",49.2045740929809,-123.002759928621,"unknown",,"unknown",,,,,0,0
+"e7cfd520-d396-4501-81ca-dca4f25898cc","DFENG0001","28th & Main","Riley Park","28th & Main","Vancouver","Vancouver Open Data",49.245762,-123.10102,"unknown",,"unknown",,,,,0,0
+"e8466264-fe37-4051-b364-bcb543b0c89a","546978","SHADBOLT","","","Vancouver","Vancouver Open Data",49.2405206875878,-122.969513383152,"unknown",,"unknown",,,,,0,0
+"e852e5a9-8af0-4ccf-8b6e-5500a6589c74","DFPB0097","McCleery Golf Course - 5th tee","Kerrisdale","McCleery Golf Course - 5th tee","Vancouver","Vancouver Open Data",49.2204826872605,-123.170880526771,"unknown",,"unknown",,,,,0,0
+"e91d17d0-5b16-4e38-804a-3324426fe847","546964","KENSINGTON RINK","","rink","Vancouver","Vancouver Open Data",49.2759527538563,-122.974025942551,"unknown",,"unknown",,,,,0,0
+"ea0555b5-b61a-4ca7-9ccb-b84e4dc515e2",,"Vancouver Public Library - Central Library (8th Floor)","Downtown",,"Vancouver",,49.2796472641938,-123.115603923798,"unknown",,"unknown",,,,10,1,1
+"ec062ab9-b076-4a0d-8889-f3b14291e580","DFPB0176","Vanier Park (Burrard Civic Marina)","Kitsilano","Vanier Park (Burrard Civic Marina)","Vancouver","Vancouver Open Data",49.2752180402495,-123.139754185708,"unknown",,"unknown",,,,7.5,1,1
+"ec822884-32f5-41db-8b36-396b7b61b50c","DFPB0104","Memorial West Park","Dunbar-Southlands","Memorial West Park","Vancouver","Vancouver Open Data",49.2434633595353,-123.187281571723,"unknown",,"unknown",,,,,0,0
+"ec95100a-379e-4840-8ba7-06dfdc21ad3b","545528","CONFEDERATION PARK","","","Vancouver","Vancouver Open Data",49.283922117078,-122.997920473342,"unknown",,"unknown",,,,,0,0
+"ecbea285-bcb8-46fe-951e-b04a431c582b","DFENG0604","Dunlevy & E Cordova","Strathcona","Dunlevy & E Cordova","Vancouver","Vancouver Open Data",49.282337,-123.095427,"unknown",,"unknown",,,,,0,0
+"ecc0d629-fd02-40e5-a174-04e41bab56ed","545598","SUNCREST SCHOOL PARK","","","Vancouver","Vancouver Open Data",49.2152012766942,-123.020187617981,"unknown",,"unknown",,,,,0,0
+"edd067c8-3873-4722-b67e-4904009c009f","DFPB0181","West End minipark - JERVIS ST @ BURNABY ST","West End","West End minipark - JERVIS ST @ BURNABY ST","Vancouver","Vancouver Open Data",49.2820931859913,-123.136037143711,"unknown",,"unknown",,,,,0,0
+"ef409c70-2ce4-45d4-a5a6-54f34d07669d","DFPB0046","Fraser River Park - park entrance by Angus Dr","Kerrisdale","Fraser River Park - park entrance by Angus Dr","Vancouver","Vancouver Open Data",49.2072346202986,-123.149322424805,"unknown",,"unknown",,,,,0,0
+"ef416dbe-7aaa-4bf1-b1f4-baf08fbe40fd","DFENG0810","W 70th Ave & Hudson St","Marpole","W 70th Ave & Hudson St","Vancouver","Vancouver Open Data",49.208585,-123.134724,"unknown",,"unknown",,,,,0,0
+"f00ed3af-0651-492e-9288-d0c97e9e9bcc","DFPB0013","Burrard View Park","Hastings-Sunrise","Burrard View Park","Vancouver","Vancouver Open Data",49.2905213955634,-123.050467572494,"unknown",,"unknown",,,,5.5,1,1
+"f0105f07-3af1-4411-8930-3ce37a10d9d4","545472","BEECHER PARK","","","Vancouver","Vancouver Open Data",49.2735253183423,-122.988063773925,"unknown",,"unknown",,,,,0,0
+"f0d410a7-08c3-41c3-b001-9db93d557d0d","DFENG0608","201 Central","Strathcona","201 Central","Vancouver","Vancouver Open Data",49.271398,-123.099444,"unknown",,"unknown",,,,,0,0
+"f0e2825e-47ec-424f-a850-c52f77c4e92e","DFPB0066","Sunset Beach","West End","Sunset Beach","Vancouver","Vancouver Open Data",49.279002120163,-123.138005165289,"unknown",,"unknown",,,,7,1,1
+"f1420bdd-c746-4413-837b-585a183f8b50","545500","BURNABY MOUNTAIN GOLF COURSE","","","Vancouver","Vancouver Open Data",49.2667030634655,-122.944090315117,"unknown",,"unknown",,,,,0,0
+"f28e58d3-5b85-4232-b622-1ad4c6ca4f55","DFENG0043","Ormidale St & Vanness Avenue","Renfrew-Collingwood","Ormidale St & Vanness Avenue","Vancouver","Vancouver Open Data",49.234702,-123.024717,"unknown",,"unknown",,,,,0,0
+"f3379172-05e3-4fad-b795-f48cbb8d44a5","DFENG0041","River District Crossing & E Kent Ave North","Killarney","River District Crossing & E Kent Ave North","Vancouver","Vancouver Open Data",49.205331,-123.031131,"unknown",,"unknown",,,,,0,0
+"f3931be3-c01b-46dd-b399-2c2c8ddfb0c4","DFPB0024","Collingwood Park","Renfrew-Collingwood","Collingwood Park","Vancouver","Vancouver Open Data",49.2370512820887,-123.036364629155,"unknown",,"unknown",,,,,0,0
+"f3b3bb22-d172-44ca-8570-62e5c5b9ba28","DFPB0056","Grandview Park - South of playground","Grandview-Woodland","Grandview Park - South of playground","Vancouver","Vancouver Open Data",49.2738480665322,-123.069851940613,"unknown",,"unknown",,,,,0,0
+"f3cfd8ca-a79a-4bc4-a0e1-84dfb09963f9","545554","KENSINGTON PARK","","ball diamonds","Vancouver","Vancouver Open Data",49.2784452890649,-122.975410524655,"unknown",,"unknown",,,,,0,0
+"f45d1b70-47fb-42be-9a06-456c689ce6a7","DFPB0147","Stanley Park - Prospect Point Washrooms","Stanley Park","Stanley Park - Prospect Point Washrooms","Vancouver","Vancouver Open Data",49.3124945157282,-123.14271559277,"unknown",,"unknown",,,,,0,0
+"f53fd36c-14ed-4f7b-afb5-190636895aba","DFENG0003","4th & Arbutus","Kitsilano","4th & Arbutus","Vancouver","Vancouver Open Data",49.26822777,-123.152706,"unknown",,"unknown",,,,2,1,1
+"f577f45c-de48-4790-830f-1b5f350e8da1","545610","WILLINGDON HEIGHTS PARK","","","Vancouver","Vancouver Open Data",49.272009877157,-123.012874939527,"unknown",,"unknown",,,,,0,0
+"f5818d5e-dfbb-43d0-9965-78db5f4e9602","DFPB0077","Kensington Park","Kensington-Cedar Cottage","Kensington Park","Vancouver","Vancouver Open Data",49.2382432929673,-123.074274867687,"unknown",,"unknown",,,,7,1,1
+"f5f22f47-eb56-4064-b2bc-a8b7c79d6691","545545","HALIFAX PARK","","","Vancouver","Vancouver Open Data",49.2680354269086,-122.961437642385,"unknown",,"unknown",,,,,0,0
+"f638bd76-2448-4643-94a5-777430c82fda","DFPB0099","McCleery Golf Course - driving range","Kerrisdale","McCleery Golf Course - driving range","Vancouver","Vancouver Open Data",49.2206955915349,-123.169613518638,"unknown",,"unknown",,,,,0,0
+"f68b8f7e-24da-4e59-b88c-8759dc49e337","DFENG0805","Thornton Park","Strathcona","Thornton Park","Vancouver","Vancouver Open Data",49.273801,-123.098856,"unknown",,"unknown",,,,,0,0
+"f6c47053-afb4-435f-bc0d-b41bebdc73b8","DFENG0012","37th & Oak","South Cambie","37th & Oak","Vancouver","Vancouver Open Data",49.237587,-123.127384,"unknown",,"unknown",,,,,0,0
+"f7173ffb-18bd-47f3-bfbd-40b5f9ad88c5","546949","Bill Copland","","dressing room hall","Vancouver","Vancouver Open Data",49.2523485825282,-122.965374305341,"unknown",,"unknown",,,,,0,0
+"f7d7d839-d081-4fe6-bbb0-5dfd56f46a22","DFENG0029","Granville & 59th","Marpole","Granville & 59th","Vancouver","Vancouver Open Data",49.2173117,-123.139586,"unknown",,"unknown",,,,,0,0
+"f8ddf6b5-e386-45f0-aefc-2d083d5907ce","DFENG0040","Point Grey Road & Waterloo","Kitsilano","Point Grey Road & Waterloo","Vancouver","Vancouver Open Data",49.271936,-123.179475,"unknown",,"unknown",,,,,0,0
+"f8fc7add-c778-4722-a8a5-c93961f290f5","DFENG0008","Nicola & Beach","West End","Nicola & Beach","Vancouver","Vancouver Open Data",49.282385,-123.140508,"unknown",,"unknown",,,,,0,0
+"f96fb93c-87ff-4708-b5d8-cc4d48c01865","547036","Bill Copland","","lower lobby","Vancouver","Vancouver Open Data",49.2523485825282,-122.965374305341,"unknown",,"unknown",,,,,0,0
+"f992c789-3bb0-49e0-9d55-d70acae71351","DFENG0804","Commercial & E 10th","Kensington-Cedar Cottage","Commercial & E 10th","Vancouver","Vancouver Open Data",49.261443,-123.069583,"unknown",,"unknown",,,,,0,0
+"fadf02b6-7ab1-4e61-a25d-fd52ed900ee8","DFENG0014","7th & Yukon","Mount Pleasant","7th & Yukon","Vancouver","Vancouver Open Data",49.2646599,-123.112967,"unknown",,"unknown",,,,,0,0
+"fb524145-c790-4572-ab9a-c93f6175c272","DFPB0044","Falaise Park","Renfrew-Collingwood","Falaise Park","Vancouver","Vancouver Open Data",49.2549476583628,-123.029963539659,"unknown",,"unknown",,,,,0,0
+"fb8d42f3-04fc-4569-8d73-65ba5339f135","DFPB0006","Andy Livingstone Park - South of soccer fields","Downtown","Andy Livingstone Park - South of soccer fields","Vancouver","Vancouver Open Data",49.2780571133223,-123.103559946868,"unknown",,"unknown",,,,,0,0
+"fbcc7201-a9b7-440a-85b9-1b1049e38ee5","DFPB0008","Arbutus Village Park","Arbutus-Ridge","Arbutus Village Park","Vancouver","Vancouver Open Data",49.2487844807089,-123.157976371445,"unknown",,"unknown",,,,,0,0
+"fc18467d-3cb5-49d6-9017-5699beae5710","545512","CENTRAL PARK","","tennis crt","Vancouver","Vancouver Open Data",49.2255565162282,-123.013630812788,"unknown",,"unknown",,,,,0,0
+"fc66aee4-fe6a-4a4b-9958-40d5740f289b","DFPB0004","Almond Park","Kitsilano","Almond Park","Vancouver","Vancouver Open Data",49.261085727631,-123.18474450987,"unknown",,"unknown",,,,,0,0
+"fca74f73-2649-403a-b629-0e2ac126c2bf","DFENG0803","Granville & W 10th","Fairview","Granville & W 10th","Vancouver","Vancouver Open Data",49.262698,-123.138411,"unknown",,"unknown",,,,,0,0
+"fcbc6b16-9274-4163-b1f3-e292ac404356","545498","BURNABY MOUNTAIN CONSERVATION AREA","","","Vancouver","Vancouver Open Data",49.2828249387116,-122.934230270892,"unknown",,"unknown",,,,,0,0
+"fd9274ee-9f3a-4145-a259-cb4b0d513212","545529","CONFEDERATION PARK","","","Vancouver","Vancouver Open Data",49.2836482238998,-122.997915950048,"unknown",,"unknown",,,,,0,0
+"fdca203c-bed6-423b-9532-74cc03f82a97","545590","RON MCLEAN PARK","","","Vancouver","Vancouver Open Data",49.2124313610416,-122.966902187017,"unknown",,"unknown",,,,,0,0
+"fe4302c6-d7a6-4f7e-8e0e-052ebc468a60","DFPB0155","Stanley Park - Brockton Oval Fieldhouse","Stanley Park","Stanley Park - Brockton Oval Fieldhouse","Vancouver","Vancouver Open Data",49.2997559843144,-123.126138487861,"unknown",,"unknown",,,,,0,0
+"fe7a383c-e9ef-4967-b973-e2d4ea930cbd","DFENG0504","Kitsilano Pumping Station","Kitsilano","Kitsilano Pumping Station","Vancouver","Vancouver Open Data",49.2737142,-123.1527806,"unknown",,"unknown",,,,,0,0
+"fe901005-727a-48bd-bf4d-f1b44f2b3863","DFPB0025","Columbia Park","Oakridge","Columbia Park","Vancouver","Vancouver Open Data",49.231930146654,-123.112990130366,"unknown",,"unknown",,,,,0,0
+"ffd48918-ed53-4857-8ccf-231160cedbb0","545601","TAYLOR PARK","","","Vancouver","Vancouver Open Data",49.2070262916224,-122.961756881067,"unknown",,"unknown",,,,,0,0
+"ffed9894-2947-435a-8163-a48b288e1854","545603","WARNER LOAT PARK","","","Vancouver","Vancouver Open Data",49.2461435856396,-122.934351843533,"unknown",,"unknown",,,,,0,0

@@ -1,166 +1,68 @@
-# 🚰 YVR Water Fountains
+# YVR Water Fountains
 
-An interactive web application mapping 429+ public drinking fountains across Vancouver and Burnaby, featuring Instagram-integrated reviews, community ratings, and comprehensive moderation system.
+Two of us drink from public drinking fountains around Vancouver, review them on Instagram at [@yvrwaterfountains](https://www.instagram.com/yvrwaterfountains/), and put the reviews on a [map](https://yvr-water-fountains.netlify.app/map). Optimised for a phone screen and an empty water bottle.
 
-**🌐 [View Live Application →](https://yvr-water-fountains.netlify.app)**
+As of 2026-10-21 the database holds 436 fountains and 43 reviews. 42 fountains have a published review. The 43rd review came in through the public form and is still waiting for us.
 
-> 💡 **Full functionality** (including review submissions) available on Netlify deployment
-> 📱 **Read-only version** also available on [GitHub Pages](https://kcarbeck.github.io/yvr-water-fountains/map.html)
+## How a review works
 
-This readme now contains the key context for contributors, including testing steps and architecture notes.
+Each visit gets one overall rating out of 10. Reviews used to have five sub-ratings as well (water quality, flow, temperature, cleanliness, accessibility). None of them were ever filled in, so [we dropped them](supabase/migrations/20260302_drop_sub_ratings.sql).
 
-![Water Fountains Map](docs/images/map-preview.png)
+A second visit to the same fountain is meant to be a new review with its own visit date, not an edit of the first one, so we can see whether a fountain gets better or worse over time. The database allows this. No fountain has been reviewed twice yet.
 
-## ✨ Project Highlights
+The map currently shows each fountain's mean rating and number of reviews. We have decided to switch to showing the latest rating on the map, with the mean and every visit date in the fountain's info. That change is not built yet.
 
-- 🗺️ **Interactive Mapping**: Responsive web application built with Leaflet.js
-- 📊 **Data Engineering**: Custom ETL pipeline processing municipal open data
-- 🗃️ **Database Design**: Normalized PostgreSQL schema with PostGIS spatial capabilities
-- 📱 **Mobile Optimization**: Touch-friendly interface with bottom sheet navigation
-- 📸 **Instagram Integration**: Seamless connection with [@yvrwaterfountains](https://www.instagram.com/yvrwaterfountains/) reviews
-- 🛡️ **Moderation System**: Professional review management for public submissions
-- 🔧 **DevOps**: Automated deployment pipeline with GitHub Pages
+Ratings are stored between 0 and 10. One caption gives a fountain -10/10. The database records this as 0, and the caption keeps the original opinion.
 
-## 🛠️ Technical Implementation
+## The data, and what is wrong with it
 
-### Frontend Architecture
-- **Framework**: Vanilla JavaScript with Leaflet.js for mapping
-- **Design**: Mobile-first responsive CSS with modern UI patterns
-- **UX**: Conditional popups (desktop) vs bottom sheets (mobile)
-- **Script organization**: Map behavior now lives in [`docs/js/map.js`](docs/js/map.js) so the HTML remains simple and the logic is easy to review.
+Fountain locations come from two open data files kept in this repo: [City of Vancouver](data/raw/vancouver_fountains_raw.csv) (278 rows) and [City of Burnaby](data/raw/burnaby_fountains_raw.csv) (151 rows). We added 8 more that are in neither file, including one on the 8th floor of the Central Library and one at gate C51 of the YVR domestic terminal. Each city row keeps its original ID in `external_id`, so it can be traced back to the source file.
 
-### Backend & Data Pipeline
-- **Database**: Supabase (PostgreSQL + PostGIS) for spatial data
-- **ETL Process**: Python pipeline transforming UTM coordinates to WGS84
-- **Data Sources**: Vancouver and Burnaby municipal open data portals
-- **Instagram API**: Automated post ID extraction and metadata collection
-- **Review System**: Multi-criteria rating system with moderation workflows
-- **Validation**: Automated coordinate bounds checking and duplicate detection
+Things we found along the way:
 
-### Database schema & supabase setup
-- **core schema**: `supabase/migrations/20241015120000_core_schema.sql` defines `cities`, `sources`, `fountains`, `reviews`, the supporting `admins` table, and the SQL views (`fountain_ratings_view`, `fountain_latest_review_view`, `fountain_overview_view`). run this migration once through the supabase sql editor or `supabase db push` so every environment shares the same structure.
-- **row level security**: policies allow the public role to read fountains and approved reviews, create pending reviews, and require that admins exist in the `admins` table before they can moderate data. this keeps public submissions safe even when the anon key is embedded in the client.
-- **initial backfill (one time)**: after applying the schema the very first time, seed production data by running `SUPABASE_URL=... SUPABASE_SERVICE_ROLE_KEY=... node scripts/backfill_supabase.mjs`. the script reads `data/fountains_processed.geojson` and `data/ratings.csv`, creates missing cities and sources, and imports historical @yvrwaterfountains reviews as approved admin entries. once this succeeds you do **not** need to run it again unless you are rebuilding a brand-new supabase project from scratch.
-- **incremental updates**: to load new municipal data without rebuilding the database, run `node etl/import-fountains.js --csv <file> --city <name> ...`. the importer performs idempotent upserts so you can test the pipeline with real data and only new or changed fountains will be written. see [`etl/README.md`](etl/README.md) for the exact workflow.
-- **runtime config**: set `window.__ENV = { SUPABASE_URL: 'https://your-project.supabase.co', SUPABASE_ANON_KEY: 'public-anon-key' };` before loading `docs/config.js` (netlify can inject this with an inline script). when those values are present the map and forms use live data; otherwise they gracefully fall back to static geojson.
-- **admin workflow**: `docs/admin_review_form.html` and `docs/moderation_dashboard.html` now prompt for supabase email/password. only users listed in the `admins` table can approve, reject, or publish reviews. successful logins immediately update the map because the client reads from `fountain_overview_view`.
+- The City of Vancouver uses the ID `DFPB0066` for two different fountains: one at Sunset Beach and one on the field house at Empire Field, about 7.5 km apart. Our import requires unique IDs, so it kept Sunset Beach and silently dropped the other one. We noticed because we had reviewed the one it dropped.
+- Six Stanley Park fountains, including the ones at the Lawn Bowling Club, the Brockton Cricket Pavilion and the Brockton Point viewpoint, share a single coordinate near the north end of the park. Two Empire Fields fountains (`DFPB0068` and `DFPB0070`) also share one point. The Burnaby file has five stacks of its own.
+- All 151 Burnaby fountains are labelled city "Vancouver" and source "Vancouver Open Data" in our database. That one is our mistake, not the cities'. The airport fountain, which is in Richmond, is filed under Kerrisdale.
+- The 8 fountains we added have no source recorded yet, and nothing in the database marks which ones are indoors or not open to the public.
 
-### Key Technical Challenges Solved
-1. **Coordinate Transformation**: Converted UTM Zone 10N municipal data to web-standard WGS84
-2. **Data Normalization**: Unified disparate CSV formats into consistent schema
-3. **Instagram Integration**: Seamless workflow for [@yvrwaterfountains](https://www.instagram.com/yvrwaterfountains/) review management
-4. **Review Moderation**: Built comprehensive approval/rejection system for public submissions
-5. **Multi-Review Architecture**: Support for multiple reviews per fountain with rating aggregation
-6. **Spatial Optimization**: Implemented efficient rendering of 429+ map markers
-7. **Mobile Performance**: Custom bottom sheet UI with Instagram post previews
+Fixes for the duplicate ID, the city and source labels, and the indoor and not-public labels are written and tested on a copy of the database, but not applied (see In progress). The stacked fountains stay where the City put them until one of us walks over and drops a real pin.
 
-## 🧭 Editing the Map Code
+## How changes are made
 
-- The map logic now lives in [`docs/js/map.js`](docs/js/map.js), which keeps the HTML file light and makes maintenance easier.
-- The script uses plain JavaScript with lots of inline explanations, so you can scroll from top to bottom and follow what each helper does.
-- Functions that need to be callable from the HTML (for example the links inside popups) are attached to `window` so they stay available without extra setup.
-- Error handling is centralized, so if the GeoJSON file fails to load you will see one clear alert instead of partial failures.
+For the October 2026 changes we took a full backup of the live database, rebuilt it as a local copy, and checked that the copy matched production table by table. Each change was run on the copy first, along with its rollback, and we compared row counts and what the public map can see before and after. Schema changes are numbered files in [`supabase/migrations/`](supabase/migrations/). One-off corrections to the data are kept as separate scripts, each with a rollback (on the `oct-fixes` branch for now).
 
-### How to Test Changes Manually
+The security fix and the form pause reached the live database on 2026-10-21. Afterwards the public map view still returned 436 fountains, 42 of them rated, the same as before.
 
-1. Open `docs/map.html` in a browser (double-clicking the file works) and make sure the map pins load.
-2. Click a fountain marker on desktop to confirm the popup still shows ratings, Instagram previews, and review text.
-3. Shrink the browser window below 768px and click a pin to confirm the bottom sheet opens and can be dismissed.
-4. Use the "My Location" button to check geolocation permissions, and click the admin gear icon to confirm the new supabase login panel opens with links to the admin tools.
+## Who can see and change what
 
-### Admin testing quickstart
+Anyone can read fountains and published reviews. Only accounts listed in the `admins` table can add, edit or delete anything, and the admin pages sign in through Supabase Auth. This is enforced inside Postgres with row-level security, so the browser only ever holds the public key.
 
-1. Visit `docs/admin_review_form.html`, sign in with a supabase admin account, and ensure the loading spinner is replaced with the review form and the map highlights the selected fountain.
-2. Submit a test review with a unique instagram url. Because admin reviews are auto-approved you should see the new entry when you refresh `docs/map.html`.
-3. Open `docs/moderation_dashboard.html`, sign in with the same account, and approve or reject a pending review. The counters at the top should update immediately after each action.
-4. Use the "My Location" button to check geolocation permissions, and try the admin gear icon to make sure the password prompt still appears.
+The rules have not always worked. In the [original schema](supabase/migrations/20241015120000_core_schema.sql), the function that checks if a user is an admin reads the `admins` table, and the `admins` table's own rule calls that same function. Postgres followed this loop until it ran out of stack, so anonymous reads of reviews failed. The fix, applied on 2026-10-21, makes the function run with its owner's permissions, so reading `admins` no longer sets off the rule again.
 
-### Shared helpers sanity check
+The public review form is switched off at the database for now. The button on the map is still there.
 
-1. Load `docs/public_review_form.html` locally and submit a sample review (use fake data if needed). A green toast in the corner should confirm the pending submission in addition to the inline alert.
-2. While still on the public form, clear your selection to verify the helper utilities reset the hidden supabase id fields and re-center the map.
-3. Open `docs/moderation_dashboard.html` and approve or reject a review; watch for the toast notification that now confirms the action and double-check the counts update without a full reload.
+## How it is built
 
-## 📊 Project Impact & Results
+- The map is Leaflet and plain JavaScript in `docs/` (most of it in [`docs/js/map.js`](docs/js/map.js)). Netlify serves it, and GitHub Pages serves a second copy from the same folder.
+- The data lives in Supabase Postgres. The map reads one view, `fountain_overview_view`, using the public key. If that fails it falls back to a GeoJSON file bundled in `docs/data/`.
+- [`etl/import-fountains.js`](etl/import-fountains.js) loads a city CSV into the database, matching rows on `external_id` so re-running it updates fountains instead of duplicating them.
 
-### Data Successfully Processed
-- **429 Public Fountains** mapped across two municipalities
-- **Coordinate Accuracy**: All locations validated within Vancouver/Burnaby boundaries
-- **Data Integration**: Unified disparate municipal datasets into single schema
-- **Performance**: 95% file size reduction through optimization techniques
+## In progress
 
-### User Experience Achievements
-- **Cross-Platform Compatibility**: Responsive design works on desktop, tablet, and mobile
-- **Accessibility**: Touch-friendly controls and clear visual hierarchy
-- **Load Performance**: < 3 second initial load time with 429 map markers
-- **Progressive Enhancement**: Graceful degradation for older browsers
+This section is under construction, in the 1999 sense. None of it is on `main` yet.
 
-## 🔧 Development Methodology
+- On the `oct-fixes` branch: the security and form-pause migrations already applied above; a PostGIS migration adding `nearest_fountains()` (not applied); the data fixes for the problems listed earlier, including three reviews linked to the wrong fountain, the missing Empire Field fountain and the Burnaby labels (not applied); four SQL queries for coverage by neighbourhood, Park Board versus street fountains, review-link checks and possible duplicates; an R script that snapshots the database to CSV; and the tests and rollbacks for all of it.
+- The Instagram importer is decided but not written. It will use the official Instagram API. Each post is imported once, tracked by its Instagram media ID. A post goes on the map by itself only if its caption has exactly one fountain code and one clean rating. Anything else waits in a queue for us to confirm.
 
-### Problem-Solving Approach
-1. **Data Quality Issues**: Implemented validation pipeline catching coordinate anomalies
-2. **Performance Optimization**: Built file compression reducing payload by 95%
-3. **User Interface Design**: Created adaptive UI (popups vs bottom sheets) based on device capabilities
-4. **Deployment Automation**: Established CI/CD workflow with GitHub Pages
+## Running it locally
 
-### Technical Skills Demonstrated
-- **Spatial Data Processing**: UTM to WGS84 coordinate transformation
-- **Database Design**: Normalized schema with proper relationships and constraints
-- **API Development**: RESTful data endpoints with Supabase
-- **Frontend Development**: Modern JavaScript, CSS Grid/Flexbox, responsive design
-- **DevOps**: Version control, automated deployment, performance monitoring
+```bash
+cd docs
+python3 -m http.server 8000
+```
 
-## 🎯 Key Features
+Then open <http://localhost:8000/map.html>. It reads the live database with the public key. The admin pages need an admin account.
 
-### For End Users
-- **📍 Location Discovery**: Find nearest fountains with geolocation
-- **⭐ Multi-Criteria Ratings**: Detailed reviews covering water quality, flow, temperature, cleanliness, and accessibility
-- **📸 Instagram Integration**: View linked Instagram posts and reviews from [@yvrwaterfountains](https://www.instagram.com/yvrwaterfountains/)
-- **👥 Community Reviews**: Submit public reviews with professional moderation
-- **📱 Mobile Experience**: Touch-optimized interface with Instagram post previews
-- **🔍 Smart Filtering**: Search by neighborhood, maintainer, or features
+MIT licence, see [LICENSE](LICENSE).
 
-### For Developers
-- **🔄 ETL Pipeline**: Automated data processing and validation
-- **📸 Instagram Workflow**: Streamlined tools for systematically entering Instagram reviews
-- **🛡️ Moderation Dashboard**: Professional interface for managing public submissions
-- **📊 Analytics**: Track fountain usage patterns and community engagement
-- **🛠️ Admin Tools**: Command-line utilities for data management and review moderation
-- **📈 Monitoring**: Performance tracking and error handling
-
-## 💼 Professional Context
-
-This project demonstrates proficiency in:
-
-- **Full-Stack Development**: End-to-end application development from data pipeline to user interface
-- **Social Media Integration**: Seamless Instagram workflow integration with automated metadata extraction
-- **Content Moderation Systems**: Professional review management with approval/rejection workflows
-- **Multi-Criteria Rating Systems**: Complex rating aggregation and display across multiple dimensions
-- **Spatial Data Engineering**: Working with geographic datasets and coordinate systems
-- **API Integration**: Modern backend-as-a-service architecture with Supabase
-- **Performance Optimization**: Data compression, lazy loading, and mobile performance
-- **User Experience Design**: Responsive design principles and accessibility considerations
-
-### Impact Metrics
-- **429 fountains** successfully mapped and validated
-- **Instagram Integration** with [@yvrwaterfountains](https://www.instagram.com/yvrwaterfountains/) for systematic review collection
-- **Multi-dimensional Rating System** covering 6 criteria (overall, water quality, flow, temperature, cleanliness, accessibility)
-- **Professional Moderation Tools** for managing community-submitted reviews
-- **Mobile-first design** supporting all modern browsers with Instagram post previews
-- **Zero-downtime deployment** via GitHub Pages
-
----
-
-## 📄 Open Data Attribution
-
-- **Municipal Data**: City of Vancouver & City of Burnaby Open Data Portals
-- **Mapping**: OpenStreetMap contributors
-- **Infrastructure**: Supabase, GitHub Pages, Leaflet.js
-
-## 📋 License
-
-MIT License - see [LICENSE](LICENSE) for details.
-
----
-
-**🚀 Built by Katherine Carbeck** | [GitHub](https://github.com/kcarbeck) | [LinkedIn](https://linkedin.com/in/kcarbeck)
+Guestbook: the comments on Instagram.

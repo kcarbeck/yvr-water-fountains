@@ -81,3 +81,18 @@ data/output/
 
 # Database backups (contain reviewer details) - never commit
 backups/
+
+# Instagram data exports (personal account data and media) - never commit
+backlog/
+instagram-*.zip
+*.zip
+reels.json
+
+# Git bundles and local working copies
+*.bundle
+
+# Old local-only files from earlier tools
+README_PRIVATE.md
+runtime.txt
+.claude/
+.cursorignore

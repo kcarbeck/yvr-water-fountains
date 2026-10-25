@@ -104,7 +104,8 @@
     const activeClient = ensureClient(client);
     const { data, error } = await activeClient
       .from('reviews')
-      .select('id, fountain_id, reviewer_name, reviewer_email, rating, review_text, instagram_url, visit_date, created_at, author_type')
+      // reviewer_email is deliberately not requested: the database hides it from the website (2026-10 security fix)
+      .select('id, fountain_id, reviewer_name, rating, review_text, instagram_url, visit_date, created_at, author_type')
       .eq('status', status)
       .order('created_at', { ascending: true });
 

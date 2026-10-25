@@ -1,0 +1,105 @@
+{
+  "taken_at": "2026-10-20 (America/Vancouver), before any October fixes",
+  "project": {
+    "ref": "hnyktzfyquvmpthfwpvd",
+    "status": "ACTIVE_HEALTHY",
+    "postgres": "17.6"
+  },
+  "row_counts": {
+    "cities": 1,
+    "sources": 1,
+    "fountains": 436,
+    "admins": 1,
+    "reviews": {
+      "approved": 42,
+      "pending": 1,
+      "rejected": 0
+    }
+  },
+  "fountain_overview_view_as_anon": {
+    "n_rows": 436,
+    "n_rated": 42,
+    "sum_average_rating": "288.50",
+    "n_approved_reviews_shown": 42,
+    "n_distinct_latest_instagram_urls": 40,
+    "latest_instagram_url_set_md5": "e525d7d2e8060325c0fb5b9f0b00751a",
+    "query": "supabase/tests/view_equivalence.sql"
+  },
+  "table_checksums": {
+    "query": "supabase/tests/checksums.sql",
+    "cities": "9b62014f997fd694147c936ba19eacf9",
+    "fountains": "4339cfdc1c17339ff11f0ca5817ac3c8",
+    "reviews": "26faceb300622d112823ba6c45721a17",
+    "sources": "cde22e5809f56de79c6b0ba171d2514a"
+  },
+  "schema_fingerprint": {
+    "query": "supabase/tests/schema_fingerprint.sql",
+    "column grants": [
+      "a7558b5801f0ea85f0c1fe333d4d3a75",
+      688
+    ],
+    "functions": [
+      "8c4dc6f681c1bead7602c25eff42edd3",
+      2
+    ],
+    "indexes": [
+      "a44f43da9b949d2d729778007a75ab96",
+      15
+    ],
+    "policies": [
+      "9084b89f11cf8c8853cb065968a90688",
+      14
+    ],
+    "table grants": [
+      "ebe41b02c189e2b5aaaebaa0a22dae2d",
+      112
+    ],
+    "views": [
+      "800e08c40bcb94b9ef70e9765e66913b",
+      3
+    ]
+  },
+  "migrations_recorded_by_supabase": [],
+  "known_live_bug": "anon read of public.reviews fails: stack depth limit exceeded in is_admin() (confirmed 2026-10-20)",
+  "advisors": {
+    "security": {
+      "ERROR security_definer_view": [
+        "fountain_ratings_view",
+        "fountain_latest_review_view",
+        "fountain_overview_view"
+      ],
+      "WARN function_search_path_mutable": [
+        "is_admin",
+        "touch_updated_at"
+      ],
+      "WARN auth_leaked_password_protection": "disabled (dashboard setting)"
+    },
+    "performance": {
+      "INFO unindexed_foreign_keys": [
+        "reviews.approved_by"
+      ],
+      "WARN auth_rls_initplan": [
+        "admins.admins_read_own"
+      ],
+      "INFO unused_index": [
+        "idx_fountains_city",
+        "idx_fountains_source",
+        "idx_fountains_location",
+        "idx_reviews_status"
+      ],
+      "WARN multiple_permissive_policies": 30
+    }
+  },
+  "backup": {
+    "folder": "backups/2026-10-20/ (git-ignored)",
+    "files": [
+      "cities.json",
+      "sources.json",
+      "fountains.json",
+      "reviews.json",
+      "overview_view_anon.json"
+    ],
+    "verified": "a local database loaded from these files gives the same table checksums as live",
+    "not_included": "admins table (1 row; links to the Supabase login, cannot be restored from a file anyway). reviewer_email and approved_by are null in all 43 reviews."
+  }
+}

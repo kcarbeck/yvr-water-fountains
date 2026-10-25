@@ -20,8 +20,8 @@ Everything that changes the live Supabase database (project `hnyktzfyquvmpthfwpv
 
 | File | What it does | On the live database |
 |---|---|---|
-| `migrations/20241015120000_core_schema.sql` | Original tables, views and access rules | Yes, applied by hand in 2024; not yet in the migration history |
-| `migrations/20260302000000_drop_sub_ratings.sql` | Removes the five unused sub-rating columns | Yes, applied by hand in March 2026; not yet in the migration history |
+| `migrations/20241015120000_core_schema.sql` | Original tables, views and access rules | Yes, applied by hand in 2024; recorded in the history on 2026-10-25 |
+| `migrations/20260302000000_drop_sub_ratings.sql` | Removes the five unused sub-rating columns | Yes, applied by hand in March 2026; recorded in the history on 2026-10-25 |
 | `migrations/20261021173926_security_fixes.sql` | Fixes access rules; hides reviewer emails | Yes, 2026-10-21 |
 | `migrations/20261021174234_pause_public_review_form.sql` | Only admins can add reviews | Yes, 2026-10-21 |
 | `pending/postgis_nearest_fountains.sql` | PostGIS and the "nearest fountains" function | No |

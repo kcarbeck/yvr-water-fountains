@@ -21,8 +21,9 @@
 begin;
 
 -- ---------------------------------------------------------------------
--- 1. The 17 posts. Fill in `link` (the post's Instagram link) for every
---    row before running; step 2 refuses to run while any is missing.
+-- 1. The 17 posts. Links copied by Katherine on 2026-10-25 (tracking
+--    part after "?" removed); each link's built-in post time matches the
+--    export's post time to within 2 minutes.
 --    fountain = a City ID (DFPB/DFENG...) or the name of a new fountain
 --    added in step 3. media_id is Instagram's ID from the export, kept
 --    here only so each row can be traced back to the export.
@@ -38,65 +39,65 @@ create temporary table backlog (
 ) on commit drop;
 
 insert into backlog (row_no, posted_at, media_id, rating, fountain, link, caption) values
-  ( 1, '2026-03-31T05:49:31+00:00', '17972685626862367',    8, 'Costco Downtown (indoor)', null,
+  ( 1, '2026-03-31T05:49:31+00:00', '17972685626862367',    8, 'Costco Downtown (indoor)', 'https://www.instagram.com/reel/DWiaRIICYHV/',
        'Costco downtown! 8/10, solid 👌
 #yvrwaterfountains #costcosecrets'),
-  ( 2, '2026-05-31T19:40:42+00:00', '17970838935060761',   10, 'UBC AMS Student Nest (indoor)', null,
+  ( 2, '2026-05-31T19:40:42+00:00', '17970838935060761',   10, 'UBC AMS Student Nest (indoor)', 'https://www.instagram.com/reel/DZA9xbhvtJD/',
        'UBC stuedent nest building. 10/10
 #yvrwaterfountains #ubcstudentnest'),
-  ( 3, '2026-06-01T18:11:59+00:00', '17865582570652234',    8, 'Orpheum Theatre lobby (indoor)', null,
+  ( 3, '2026-06-01T18:11:59+00:00', '17865582570652234',    8, 'Orpheum Theatre lobby (indoor)', 'https://www.instagram.com/reel/DZDYepYPOEg/',
        'Orpheum lobby fancy waterfountain, 8/10
 It''s average when it comes to stream, temp, and taste, but look at how fancy it is!!!
 Prettiest waterfountain so far.
 #yvrwaterfountains #orpheumtheatre @vsorchestra'),
-  ( 4, '2026-06-08T22:10:30+00:00', '18102657869278506',  8.5, 'Vancouver Aquatic Centre (indoor)', null,
+  ( 4, '2026-06-08T22:10:30+00:00', '18102657869278506',  8.5, 'Vancouver Aquatic Centre (indoor)', 'https://www.instagram.com/reel/DZV1XGnv_nH/',
        'Vancouver Aquatic Centre
 This is a good one! A personal fav. 8.5/10. It''d have a higher rating if it wasn''t in a bathroom, which I know feels a bit icky. At least there''s separation from the stalls.
 
 #yvrwaterfountains #vancouveraquaticcentre #dohashtagsevenworkanymore'),
-  ( 5, '2026-06-29T23:36:52+00:00', '18089826710565932',    1, 'DFENG0034', null,
+  ( 5, '2026-06-29T23:36:52+00:00', '18089826710565932',    1, 'DFENG0034', 'https://www.instagram.com/reel/DaMD5T-PhoU/',
        'Hastings and Kamloops, 1/10. This has potential to be at least 7 if they can fix the water pressure! @vanparkboard 
 I give the little seating area 10/10. Very nice.
 @firehydrants.yvr there''s a pretty one here!
 
 #yvrwaterfountains #eastvillageyvr'),
-  ( 6, '2026-08-11T22:59:24+00:00', '18106305788172836',    7, 'DFPB0120', null,
+  ( 6, '2026-08-11T22:59:24+00:00', '18106305788172836',    7, 'DFPB0120', 'https://www.instagram.com/reel/Db6tzt2xQpv/',
        'Pandora Park 7/10
 
 #yvrwaterfountains #eastvancouver #pandorapark'),
-  ( 8, '2026-08-16T20:35:45+00:00', '18025283603886285',  7.5, 'DFPB0032', null,
+  ( 8, '2026-08-16T20:35:45+00:00', '18025283603886285',  7.5, 'DFPB0032', 'https://www.instagram.com/reel/DcHVWVOzjkY/',
        'David Lam park, near the courts. 7.5/10. It would have scored higher if it wasn''t clogged
 
 #yvrwaterfountains #davidlampark'),
-  (10, '2026-08-24T00:38:16+00:00', '18106070228138628',  9.5, 'DFPB0063', null,
+  (10, '2026-08-24T00:38:16+00:00', '18106070228138628',  9.5, 'DFPB0063', 'https://www.instagram.com/reel/DcZyo7ppQpl/',
        'Hastings Community Park, 9.5/10. The mosaic did a lot for this one! The stream was less than average, but the enjoyment level from the aesthetics bumped this up to 9.5'),
-  (11, '2026-08-25T20:44:42+00:00', '18119422645713358',  7.5, 'DFPB0187', null,
+  (11, '2026-08-25T20:44:42+00:00', '18119422645713358',  7.5, 'DFPB0187', 'https://www.instagram.com/reel/DcehfvfydIa/',
        'Van Tech 7.5/10, above average, location not super convenient, but great for students or folks who use the fields'),
-  (12, '2026-09-01T03:19:50+00:00', '17905871013492823',    6, 'DFPB0177', null,
+  (12, '2026-09-01T03:19:50+00:00', '17905871013492823',    6, 'DFPB0177', 'https://www.instagram.com/reel/DcurapUpRjS/',
        'Victoria Park - 6/10
 
 Very cool looking fountain but not very functional unfortunately!'),
-  (13, '2026-09-06T21:56:27+00:00', '18069189269721613',  7.5, 'VPL Hastings Branch (indoor)', null,
+  (13, '2026-09-06T21:56:27+00:00', '18069189269721613',  7.5, 'VPL Hastings Branch (indoor)', 'https://www.instagram.com/reel/Dc9jSJkhJ3N/',
        '@vancouverpubliclibrary Hastings branch waterfountain - 7.5/10
 
 Pretty good!'),
-  (14, '2026-09-10T21:21:23+00:00', '18206147542321560',    7, 'Rice Lake, Lower Seymour Conservation Reserve', null,
+  (14, '2026-09-10T21:21:23+00:00', '18206147542321560',    7, 'Rice Lake, Lower Seymour Conservation Reserve', 'https://www.instagram.com/reel/DdHydxTymCf/',
        'Watershed, Rice lake, North Van
 7/10'),
-  (15, '2026-09-11T19:56:37+00:00', '18015647420739914',    8, 'Grouse Grind trailhead', null,
+  (15, '2026-09-11T19:56:37+00:00', '18015647420739914',    8, 'Grouse Grind trailhead', 'https://www.instagram.com/reel/DdKNfQsvkIS/',
        'Grouse Grind Trail feat. Lauren
 8/10, pretty great!'),
-  (16, '2026-09-17T22:33:56+00:00', '18095761499556488',  7.5, 'Pandora Park - near the courts', null,
+  (16, '2026-09-17T22:33:56+00:00', '18095761499556488',  7.5, 'Pandora Park - near the courts', 'https://www.instagram.com/reel/DdZ8Rs-PoB-/',
        'Pandora Park waterfountain #2! 7.5/10. Nice!
 #yvrfoodblogger #eastvandogs #pandorapark'),
-  (17, '2026-10-04T17:26:24+00:00', '17933388570146856',    9, 'Jade Rock, False Creek seawall', null,
+  (17, '2026-10-04T17:26:24+00:00', '17933388570146856',    9, 'Jade Rock, False Creek seawall', 'https://www.instagram.com/reel/DeFKoXlvNWP/',
        'Secret Jade Rock Waterfountain, false creek
 9/10. Could have been perfect with a better stream and slightly crisper taste'),
-  (18, '2026-10-11T07:46:10+00:00', '17891138526616273',  2.5, 'Queen Elizabeth Theatre (backstage, not public)', null,
+  (18, '2026-10-11T07:46:10+00:00', '17891138526616273',  2.5, 'Queen Elizabeth Theatre (backstage, not public)', 'https://www.instagram.com/reel/DeWJw4bRMYd/',
        'Backstage Queen Elizabeth Theatre 
 2.5/10
 It''s something, but it''s not much. It''s there for survival purposes only I think'),
-  (19, '2026-10-25T20:11:46+00:00', '18197646952396395',  8.5, 'Lower Seymour demonstration forest gazebo', null,
+  (19, '2026-10-25T20:11:46+00:00', '18197646952396395',  8.5, 'Lower Seymour demonstration forest gazebo', 'https://www.instagram.com/reel/De7iJkqSOYv/',
        'Lower Seymour Conservation Reserve, demo forest road gazebo. 8.5/10!
 #yvrwaterfountains #northvan #demoforest')
 ;

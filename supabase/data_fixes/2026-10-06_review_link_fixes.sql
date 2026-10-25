@@ -180,10 +180,17 @@ where name = 'Empire Fields - Between two fields'
 
 
 -- B4. Correct Instagram links for the Hinge Park and False Creek CC
---     reviews: NOT set here. Katherine copies them from Instagram and they
---     are added in supabase/data_fixes/2026-10-25_backlog_import.sql.
---     Until then the map shows no Instagram link for them (A3 cleared the
---     wrong one).
+--     reviews (copied by Katherine on 2026-10-25; the post times built
+--     into the links are 30 May and 27 May 2025, matching the reviews).
+update public.reviews
+set instagram_url = 'https://www.instagram.com/reel/DKSshKNhiSo/'
+where id = '29174da1-b3b0-4bb8-b910-1d9287e04b8f'      -- "False creek seawall near hinge park"
+  and instagram_url is null;
+
+update public.reviews
+set instagram_url = 'https://www.instagram.com/reel/DKLCnxChNBu/'
+where id = '521b37c8-e683-41de-a1e8-e5101c21695c'      -- "False Creek Community Centre!"
+  and instagram_url is null;
 
 
 -- B5. "6-7/10 ... It's a 7 right now, last summer it was 6".

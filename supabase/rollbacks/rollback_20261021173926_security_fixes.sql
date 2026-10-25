@@ -1,5 +1,5 @@
 -- =====================================================================
--- ROLLBACK for supabase/migrations/20261006_security_fixes.sql
+-- ROLLBACK for supabase/migrations/20261021173926_security_fixes.sql
 -- ---------------------------------------------------------------------
 -- Puts the database back EXACTLY as it was on 2026-10-20 before the
 -- security fixes, including the recursion bug and the over-wide grants.

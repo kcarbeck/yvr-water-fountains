@@ -1,7 +1,7 @@
 -- =====================================================================
--- ROLLBACK for supabase/migrations/20261020_pause_public_review_form.sql
+-- ROLLBACK for supabase/migrations/20261021174234_pause_public_review_form.sql
 -- Switches the public review form back on at the database level
--- (state right after 20261006_security_fixes.sql).
+-- (state right after 20261021173926_security_fixes.sql).
 -- =====================================================================
 begin;
 

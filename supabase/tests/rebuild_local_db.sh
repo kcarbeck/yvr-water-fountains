@@ -17,7 +17,7 @@ $PSQL -c "drop database if exists $DB" -c "create database $DB"
 
 for f in supabase/tests/00_local_supabase_standins.sql \
          supabase/migrations/20241015120000_core_schema.sql \
-         supabase/migrations/20260302_drop_sub_ratings.sql \
+         supabase/migrations/20260302000000_drop_sub_ratings.sql \
          supabase/tests/01_match_live_before_october.sql; do
   echo "applying $f"
   PGOPTIONS="-c client_min_messages=warning" $PSQL -d "$DB" -f "$f"

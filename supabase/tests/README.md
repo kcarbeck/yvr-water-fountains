@@ -17,7 +17,7 @@ Files for checking database changes before they touch production.
 ```bash
 # a local Postgres 16+ with PostGIS on port 54329
 supabase/tests/rebuild_local_db.sh backups/2026-10-20 yvr_test
-psql -h /tmp -p 54329 -U postgres -d yvr_test -f supabase/migrations/20261006_security_fixes.sql
+psql -h /tmp -p 54329 -U postgres -d yvr_test -f supabase/migrations/20261021173926_security_fixes.sql
 psql -h /tmp -p 54329 -U postgres -d yvr_test -f supabase/tests/rls_matrix.sql
 psql -h /tmp -p 54329 -U postgres -d yvr_test -f supabase/tests/view_equivalence.sql
 ```

@@ -18,7 +18,7 @@ dbGetQuery(con, paste(readLines("queries/01_coverage_by_neighbourhood.sql"), col
 | `03_qc_review_links.sql` | Are reviews linked to the right fountain / post / rating? |
 | `04_possible_duplicate_fountains.sql` | Are any fountains recorded twice? |
 
-Spatial functions (from `supabase/migrations/20261006_postgis_nearest_fountains.sql`):
+Spatial functions (from `supabase/pending/postgis_nearest_fountains.sql`):
 
 ```sql
 select * from nearest_fountains(49.2734, -123.1038, 5);   -- 5 closest to Science World

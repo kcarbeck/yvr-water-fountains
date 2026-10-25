@@ -25,5 +25,10 @@ Everything that changes the live Supabase database (project `hnyktzfyquvmpthfwpv
 | `migrations/20261021173926_security_fixes.sql` | Fixes access rules; hides reviewer emails | Yes, 2026-10-21 |
 | `migrations/20261021174234_pause_public_review_form.sql` | Only admins can add reviews | Yes, 2026-10-21 |
 | `pending/postgis_nearest_fountains.sql` | PostGIS and the "nearest fountains" function | No |
-| `data_fixes/2026-10-06_review_link_fixes.sql` | Corrects reviews linked to the wrong fountain | No |
-| `data_fixes/2026-10-20_repair_garbled_emoji.sql` | Repairs garbled emoji in 4 captions | No |
+| `pending/add_is_indoor.sql` | Adds an "indoor" label to fountains | No (run 1st) |
+| `data_fixes/2026-10-06_review_link_fixes.sql` | Corrects reviews linked to the wrong fountain | No (run 2nd) |
+| `data_fixes/2026-10-20_repair_garbled_emoji.sql` | Repairs garbled emoji in 4 captions | No (run 3rd) |
+| `pending/unique_instagram_links.sql` | Stops the same Instagram post being added twice | No (run 4th) |
+| `data_fixes/2026-10-25_backlog_import.sql` | Adds the 17 backlog posts and 11 new fountains | No (run 5th, after the links are filled in) |
+
+Roll back in the reverse order. Each step was rehearsed on a copy of the live data on 2026-10-25: after the five rollbacks the data and the access rules were identical to the start.

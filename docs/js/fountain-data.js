@@ -128,6 +128,7 @@
       currently_operational: operationalLabel,
       operational_status: record.operational_status,
       season_note: record.season_note,
+      is_indoor: record.is_indoor === true,
       pet_friendly: formatPetFriendly(record.pet_friendly),
       pet_status: record.pet_friendly,
       avg_rating: averageRating,
@@ -156,7 +157,8 @@
       return seasonNote ? `seasonal (${seasonNote})` : 'seasonal';
     }
     if (status === 'closed') {
-      return 'closed';
+      // e.g. "closed (Closed permanently on 28 June 2026; building being demolished)"
+      return seasonNote ? `closed (${seasonNote})` : 'closed';
     }
     return seasonNote || 'unknown';
   }

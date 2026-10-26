@@ -8,7 +8,7 @@
 -- a story that is not a review.
 --
 -- Needs, in this order:
---   1. supabase/pending/add_is_indoor.sql
+--   1. supabase/migrations/20261026013441_add_is_indoor.sql
 --   2. supabase/data_fixes/2026-10-06_review_link_fixes.sql (adds the
 --      "@yvrwaterfountains field observation" source used below)
 -- Rollback: supabase/rollbacks/rollback_2026-10-25_backlog_import.sql

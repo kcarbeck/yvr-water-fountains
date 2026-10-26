@@ -7,7 +7,7 @@
 -- Section A = fixes from the audit (data/audits/2026-10-06_...).
 -- Section B = Katherine's decisions of 2026-10-20 (B1/B2 pins to confirm).
 -- Rollback:   supabase/rollbacks/rollback_2026-10-06_review_link_fixes.sql
--- Needs:      supabase/pending/add_is_indoor.sql applied first (is_indoor column).
+-- Needs:      supabase/migrations/20261026013441_add_is_indoor.sql applied first (is_indoor column).
 --
 -- Reviews are found by their Instagram link so you can check each one
 -- by pasting the link into a browser.

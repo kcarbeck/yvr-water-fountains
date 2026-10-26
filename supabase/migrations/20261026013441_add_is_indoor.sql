@@ -3,7 +3,7 @@
 -- =====================================================================
 -- Indoor fountains may be locked or closed outside building hours; the
 -- map says "Indoor" so visitors know. Everything else stays as it is.
--- Rollback: supabase/rollbacks/rollback_add_is_indoor.sql
+-- Rollback: supabase/rollbacks/rollback_20261026013441_add_is_indoor.sql
 -- =====================================================================
 
 -- 1. The new column. Existing fountains are outdoor (false) unless set.

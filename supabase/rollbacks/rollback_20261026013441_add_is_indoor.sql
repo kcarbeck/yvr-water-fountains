@@ -1,5 +1,5 @@
 -- =====================================================================
--- ROLLBACK for supabase/pending/add_is_indoor.sql
+-- ROLLBACK for supabase/migrations/20261026013441_add_is_indoor.sql
 -- Puts fountain_overview_view back exactly as it was, then drops the
 -- column. Roll back the 2026-10-25 backlog import and the 2026-10-06
 -- data fix first: both set is_indoor.

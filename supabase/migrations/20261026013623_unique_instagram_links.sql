@@ -6,7 +6,7 @@
 -- no link are not affected.
 -- Needs: supabase/data_fixes/2026-10-06_review_link_fixes.sql applied
 -- first (step A3 clears the one link that is currently used twice).
--- Rollback: supabase/rollbacks/rollback_unique_instagram_links.sql
+-- Rollback: supabase/rollbacks/rollback_20261026013623_unique_instagram_links.sql
 -- =====================================================================
 
 create unique index if not exists reviews_instagram_url_key

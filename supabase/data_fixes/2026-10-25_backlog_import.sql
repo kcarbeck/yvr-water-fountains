@@ -3,8 +3,7 @@
 -- =====================================================================
 -- Source: the official Instagram data export of 2026-10-25 (captions and
 -- post times copied exactly). Every fountain match and every pin was
--- confirmed by Katherine in the to-do doc and on the "Backlog pin check"
--- page. Two posts are skipped: the Montreal review (not in Vancouver) and
+-- confirmed by hand. Two posts are skipped: the Montreal review (not in Vancouver) and
 -- a story that is not a review.
 --
 -- Needs, in this order:
@@ -21,7 +20,7 @@
 begin;
 
 -- ---------------------------------------------------------------------
--- 1. The 17 posts. Links copied by Katherine on 2026-10-25 (tracking
+-- 1. The 17 posts. Links copied on 2026-10-25 (tracking
 --    part after "?" removed); each link's built-in post time matches the
 --    export's post time to within 2 minutes.
 --    fountain = a City ID (DFPB/DFENG...) or the name of a new fountain
@@ -29,7 +28,7 @@ begin;
 --    here only so each row can be traced back to the export.
 -- ---------------------------------------------------------------------
 create temporary table backlog (
-  row_no    int primary key,     -- row number in the to-do doc's backlog table
+  row_no    int primary key,     -- row number in the backlog list
   posted_at timestamptz not null,
   media_id  text not null,
   rating    numeric(4,1) not null check (rating between 0 and 10),

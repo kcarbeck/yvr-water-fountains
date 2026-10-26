@@ -3,8 +3,7 @@
 -- =====================================================================
 -- Adds:
 --   * the PostGIS extension
---   * fountains.geog  — a point built automatically from latitude/longitude
---                       (a "generated column": you never edit it by hand)
+--   * fountains.geog  — a generated point column from latitude/longitude
 --   * a spatial index so distance queries stay fast
 --   * nearest_fountains(lat, lon, how_many)   → closest fountains + metres
 --   * fountains_within(lat, lon, radius_m)    → every fountain in a radius
@@ -14,8 +13,7 @@
 -- and from SQL with
 --   select * from nearest_fountains(49.28, -123.12);
 --
--- "geography" (not "geometry") is used so distances come out in metres
--- on the real curved Earth, no projection maths needed.
+-- geography (not geometry) so distances are in metres without a projection.
 -- =====================================================================
 
 create extension if not exists postgis with schema extensions;

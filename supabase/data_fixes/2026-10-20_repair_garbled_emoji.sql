@@ -2,9 +2,8 @@
 -- 2026-10-20  Repair garbled emoji in 4 review captions
 -- ---------------------------------------------------------------------
 -- Four captions were imported with the wrong text encoding, so emoji show
--- on the map as junk like "ð¤¢" instead of the emoji you posted. The
--- bytes are all still there, just read the wrong way; converting them
--- back gives the original text exactly. Nothing else changes.
+-- on the map as mojibake ("ð¤¢"). The bytes are intact, only decoded
+-- as Latin-1; converting them back gives the original text exactly.
 --
 -- Rollback: supabase/rollbacks/rollback_2026-10-20_repair_garbled_emoji.sql
 -- =====================================================================

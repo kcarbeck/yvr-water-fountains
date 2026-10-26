@@ -1,7 +1,7 @@
--- Fountains that sit within 15 m of each other — either real double
--- fountains, or (more often) the source data giving several different
--- fountains the same placeholder coordinates. Needs PostGIS (geog column).
--- One row per cluster.
+-- Fountains within 15 m of each other: real double fountains, or (more
+-- often) different fountains given the same placeholder coordinates in
+-- the source data. One row per cluster.
+-- Requires supabase/pending/postgis_nearest_fountains.sql (not yet applied).
 with pairs as (
   select a.id as id_a, b.id as id_b
   from fountains a

@@ -1,8 +1,8 @@
 -- =====================================================================
 -- 2026-10-20  Pause the public review form
 -- ---------------------------------------------------------------------
--- Katherine's decision (2026-10-20): switch the public form off until the
--- Instagram pipeline is finished. Hiding the page is not enough, because
+-- Decided 2026-10-20: switch the public form off until the review
+-- pipeline is finished. Hiding the page is not enough, because
 -- anyone with the public key could still add rows through the API. So
 -- the database itself now only accepts new reviews from admins.
 --

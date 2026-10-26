@@ -1,7 +1,7 @@
 {
   "name": "yvr-water-fountains",
   "version": "1.0.0",
-  "description": "YVR Water Fountains - Secure form submission with Netlify Functions",
+  "description": "Map and reviews of public drinking fountains in Metro Vancouver",
   "scripts": {
     "build": "echo 'No build step required for static site'",
     "dev": "netlify dev"

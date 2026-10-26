@@ -10,12 +10,12 @@
 --   2. The three map views ran with the view owner's rights, skipping RLS.
 --      Fix: security_invoker = true, so they obey the same rules as the
 --      tables underneath (the public still only sees approved reviews).
---   3. Functions had no fixed search_path (a classic Postgres hardening).
+--   3. Functions had no fixed search_path.
 --   4. Each table had two overlapping SELECT policies. Merged into one
 --      policy per action so the rules are easier to read.
 --   5. Missing index on reviews.approved_by.
 --   6. Public (anon) role had write/truncate grants it never needs.
---   7. (added 2026-10-20 after local testing) reviewer_email and
+--   7. reviewer_email and
 --      approved_by are hidden from the public API roles, and the latest-
 --      review view names its columns instead of using `select *`.
 -- =====================================================================
@@ -53,7 +53,7 @@ $$;
 -- ---------------------------------------------------------------------
 -- 2. views obey RLS of whoever is querying
 -- ---------------------------------------------------------------------
--- (added 2026-10-20) The "latest review" view used `select *` on reviews,
+-- The "latest review" view used `select *` on reviews,
 -- which includes reviewer_email. Once the views run with the visitor's
 -- own rights, and the public can no longer read that column (step 7),
 -- `select *` would make the whole map fail. So name the columns instead.
@@ -173,7 +173,7 @@ revoke update, delete on public.reviews from anon;
 
 
 -- ---------------------------------------------------------------------
--- 7. (added 2026-10-20) private review columns
+-- 7. private review columns
 --    Before this migration nobody could read `reviews` directly (the
 --    recursion bug crashed every query). Once it is fixed, anyone could
 --    ask the API for approved reviews -- including reviewer_email.

@@ -7,6 +7,7 @@
 -- Section A = fixes from the audit (data/audits/2026-10-06_...).
 -- Section B = Katherine's decisions of 2026-10-20 (B1/B2 pins to confirm).
 -- Rollback:   supabase/rollbacks/rollback_2026-10-06_review_link_fixes.sql
+-- Needs:      supabase/migrations/20261026013441_add_is_indoor.sql applied first (is_indoor column).
 --
 -- Reviews are found by their Instagram link so you can check each one
 -- by pasting the link into a browser.
@@ -72,11 +73,11 @@ where id = '29174da1-b3b0-4bb8-b910-1d9287e04b8f';   -- "False creek seawall nea
 --      you couldn't find is on the south side of the building.)
 -- ---------------------------------------------------------------------
 insert into public.fountains
-  (name, neighbourhood, location_description, latitude, longitude, operational_status, season_note)
+  (name, neighbourhood, location_description, latitude, longitude, operational_status, is_indoor)
 select
   'False Creek Community Centre (indoor)', 'Fairview',
   'Inside the community centre, Granville Island — open during centre hours',
-  latitude, longitude, 'operational', 'indoor; centre opening hours'
+  latitude, longitude, 'operational', true
 from public.fountains
 where external_id = 'DFPB0168'
   and not exists (select 1 from public.fountains where name = 'False Creek Community Centre (indoor)');
@@ -129,15 +130,15 @@ where city_id is null;
 -- B1. "BTS waterfountain ... #theorpheumtheatre" (backstage, not public)
 --     was linked to the street fountain at 4th & Arbutus. Decision: its own
 --     fountain, shown on the map, clearly labelled as not public.
---     PIN: 601 Smithe St (Orpheum). Katherine to confirm before this runs.
+--     PIN: 601 Smithe St (Orpheum), confirmed 2026-10-20.
 insert into public.fountains
-  (name, neighbourhood, location_description, latitude, longitude, operational_status, season_note,
+  (name, neighbourhood, location_description, latitude, longitude, operational_status, is_indoor,
    city_id, source_id)
 select
   'Orpheum Theatre (backstage, not public)', 'Downtown',
   'NOT PUBLIC: backstage at the Orpheum, staff and performers only',
-  49.27985, -123.12045,                                    -- PIN (confirm)
-  'unknown', 'not open to the public',
+  49.27985, -123.12045,                                    -- pin confirmed 2026-10-20
+  'unknown', true,
   (select id from public.cities  where name = 'Vancouver'),
   (select id from public.sources where name = '@yvrwaterfountains field observation')
 where not exists (select 1 from public.fountains where name = 'Orpheum Theatre (backstage, not public)');
@@ -150,15 +151,15 @@ where instagram_url = 'https://www.instagram.com/p/DKDx_pOxWc0/';
 -- B2. "Kensington Park! ... inside the community centre" was linked to the
 --     OUTDOOR fountain (DFPB0077). Decision: a separate indoor fountain,
 --     pin on the community centre building (5175 Dumfries St).
---     PIN: Katherine to confirm before this runs.
+--     PIN: confirmed 2026-10-20.
 insert into public.fountains
-  (name, neighbourhood, location_description, latitude, longitude, operational_status, season_note,
+  (name, neighbourhood, location_description, latitude, longitude, operational_status, is_indoor,
    city_id, source_id)
 select
   'Kensington Community Centre (indoor)', 'Kensington-Cedar Cottage',
   'INDOOR: inside Kensington Community Centre, 5175 Dumfries St; open during centre hours',
-  49.23780, -123.07450,                                    -- PIN (confirm)
-  'operational', 'indoor; centre opening hours',
+  49.23780, -123.07450,                                    -- pin confirmed 2026-10-20
+  'operational', true,
   (select id from public.cities  where name = 'Vancouver'),
   (select id from public.sources where name = '@yvrwaterfountains field observation')
 where not exists (select 1 from public.fountains where name = 'Kensington Community Centre (indoor)');
@@ -179,10 +180,17 @@ where name = 'Empire Fields - Between two fields'
 
 
 -- B4. Correct Instagram links for the Hinge Park and False Creek CC
---     reviews: NOT set here. Once the official Instagram API is connected
---     (Part 2), the importer lists every post with its link, and these two
---     are matched by their exact caption text. Until then the map shows
---     no Instagram link for them (A3 cleared the wrong one).
+--     reviews (copied by Katherine on 2026-10-25; the post times built
+--     into the links are 30 May and 27 May 2025, matching the reviews).
+update public.reviews
+set instagram_url = 'https://www.instagram.com/reel/DKSshKNhiSo/'
+where id = '29174da1-b3b0-4bb8-b910-1d9287e04b8f'      -- "False creek seawall near hinge park"
+  and instagram_url is null;
+
+update public.reviews
+set instagram_url = 'https://www.instagram.com/reel/DKLCnxChNBu/'
+where id = '521b37c8-e683-41de-a1e8-e5101c21695c'      -- "False Creek Community Centre!"
+  and instagram_url is null;
 
 
 -- B5. "6-7/10 ... It's a 7 right now, last summer it was 6".

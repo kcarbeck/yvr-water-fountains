@@ -409,6 +409,9 @@
     }
 
     html += buildInfoRow('popup', 'Operational', formatOperational(fountain.currently_operational));
+    if (fountain.is_indoor) {
+      html += buildInfoRow('popup', 'Indoor', 'Yes, may be locked outside opening hours');
+    }
     html += buildInfoRow('popup', 'Pet Friendly', formatPetFriendly(fountain.pet_friendly));
     html += '</div>';
 
@@ -465,6 +468,9 @@
     // Details section
     html += '<div class="sheet-details">';
     html += buildInfoRow('bottom-sheet', 'Operational', formatOperational(fountain.currently_operational));
+    if (fountain.is_indoor) {
+      html += buildInfoRow('bottom-sheet', 'Indoor', 'Yes, may be locked outside opening hours');
+    }
     html += buildInfoRow('bottom-sheet', 'Pet Friendly', formatPetFriendly(fountain.pet_friendly));
 
     if (fountain.rating) {

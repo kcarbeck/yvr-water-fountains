@@ -22,8 +22,8 @@ join fountains f on f.id = r.fountain_id
 where substring(coalesce(r.instagram_caption, r.review_text) from '(-?\d+(?:\.\d+)?)\s*/\s*10')::numeric
       is distinct from r.rating;
 
--- (d) No word from the fountain's name (4+ letters) appears in the caption —
---     a cheap flag for "linked to the wrong fountain". Expect a few false alarms.
+-- (d) No word (4+ letters) from the fountain's name appears in the caption;
+--     flags possible wrong-fountain links. Expect some false positives.
 select f.name, left(coalesce(r.instagram_caption, r.review_text), 80) as caption_start
 from reviews r
 join fountains f on f.id = r.fountain_id

@@ -3,7 +3,7 @@
 --   DFPB...  = Vancouver Park Board      DFENG... = Engineering (streets)
 --   digits   = City of Burnaby open data (their asset number)
 --   no ID    = added by us (not in either city's open data)
--- With ~40 reviews this is descriptive only — far too few for a test.
+-- Descriptive only: too few reviews for a statistical test.
 select
   case
     when f.external_id like 'DFPB%'  then 'Park Board'

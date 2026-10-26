@@ -1,23 +1,21 @@
 -- =====================================================================
 -- 2026-10-06  Review ↔ fountain link fixes (from the Instagram audit)
 -- =====================================================================
--- How to run: Supabase dashboard → SQL editor → paste this file → Run.
--- Everything is inside one transaction: if any step fails, nothing changes.
+-- One transaction: if any step fails, nothing changes.
 --
 -- Section A = fixes from the audit (data/audits/2026-10-06_...).
--- Section B = Katherine's decisions of 2026-10-20 (B1/B2 pins to confirm).
+-- Section B = decisions of 2026-10-20.
 -- Rollback:   supabase/rollbacks/rollback_2026-10-06_review_link_fixes.sql
 -- Needs:      supabase/migrations/20261026013441_add_is_indoor.sql applied first (is_indoor column).
 --
--- Reviews are found by their Instagram link so you can check each one
--- by pasting the link into a browser.
+-- Reviews are matched by Instagram link so each one can be checked by hand.
 -- =====================================================================
 
 begin;
 
 -- ---------------------------------------------------------------------
 -- A1. "Empire fields, south side by the basketball courts and parking lot"
---     was linked to David Lam Park (Downtown!). City record DFPB0068 is
+--     was linked to David Lam Park (Downtown). City record DFPB0068 is
 --     "Hastings Park / Empire Fields — East of basketball courts".
 -- ---------------------------------------------------------------------
 update public.reviews
@@ -67,10 +65,7 @@ where id = '29174da1-b3b0-4bb8-b910-1d9287e04b8f';   -- "False creek seawall nea
 -- A4. "False Creek Community Centre!" (indoors) was linked to Douglas Park
 --     community centre, ~2 km away. The indoor fountain isn't in the City's
 --     data, so add it. Location copied from the City's fountain on the
---     south side of the same building (DFPB0168, Sutcliffe Park) —
---     nudge the pin if you want it exact.
---     (Fun fact for the comments: the City's data says the outdoor one
---      you couldn't find is on the south side of the building.)
+--     south side of the same building (DFPB0168, Sutcliffe Park).
 -- ---------------------------------------------------------------------
 insert into public.fountains
   (name, neighbourhood, location_description, latitude, longitude, operational_status, is_indoor)
@@ -124,7 +119,7 @@ where city_id is null;
 
 
 -- =====================================================================
--- B. Katherine's decisions (2026-10-20)
+-- B. Decisions (2026-10-20)
 -- =====================================================================
 
 -- B1. "BTS waterfountain ... #theorpheumtheatre" (backstage, not public)
@@ -180,7 +175,7 @@ where name = 'Empire Fields - Between two fields'
 
 
 -- B4. Correct Instagram links for the Hinge Park and False Creek CC
---     reviews (copied by Katherine on 2026-10-25; the post times built
+--     reviews (copied 2026-10-25; the post times built
 --     into the links are 30 May and 27 May 2025, matching the reviews).
 update public.reviews
 set instagram_url = 'https://www.instagram.com/reel/DKSshKNhiSo/'

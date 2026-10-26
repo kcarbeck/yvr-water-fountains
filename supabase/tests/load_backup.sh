@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # =====================================================================
-# Load a backup folder (made on 2026-10-20) into a LOCAL test database.
+# Load a backup folder into a LOCAL test database.
 # Never point this at Supabase.
 #
-# Usage:  supabase/tests/load_backup.sh backups/2026-10-20 yvr_test
+# Usage:  supabase/tests/load_backup.sh backups/2026-10-26 yvr_test
 # =====================================================================
 set -euo pipefail
 

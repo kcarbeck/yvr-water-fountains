@@ -15,16 +15,11 @@ const TIMEOUT_MS = 8000;
 const SENDER = 'YVR Water Fountains <onboarding@resend.dev>';
 
 exports.handler = async function () {
-  // Without this key there is no way to send an alert
-  if (!process.env.RESEND_API_KEY) {
-    console.error('keep-alive: RESEND_API_KEY is not set');
-    return { statusCode: 500, body: 'RESEND_API_KEY is not set' };
-  }
-
   const adminEmail = process.env.ADMIN_EMAIL || 'yvrwaterfountains@gmail.com';
   const siteUrl = process.env.URL || 'https://yvr-water-fountains.netlify.app';
-  const resend = new Resend(process.env.RESEND_API_KEY);
 
+  // The reads come first and never depend on email being set up:
+  // they are what keeps the project from pausing.
   let counts;
   try {
     // throws if SUPABASE_URL or the key is missing, which also triggers the alert
@@ -38,7 +33,7 @@ exports.handler = async function () {
     counts = { fountains, reviews, mapRows };
   } catch (error) {
     console.error('keep-alive: check failed:', error.message);
-    await sendEmail(resend, adminEmail, 'YVR Water Fountains: database check failed', [
+    await sendEmail(adminEmail, 'YVR Water Fountains: database check failed', [
       'The daily database check failed.',
       '',
       'Error: ' + error.message,
@@ -55,7 +50,7 @@ exports.handler = async function () {
 
   // Monday email: its absence means this function is not running
   if (new Date().getUTCDay() === 1) {
-    await sendEmail(resend, adminEmail, 'YVR Water Fountains: weekly check OK', [
+    await sendEmail(adminEmail, 'YVR Water Fountains: weekly check OK', [
       'The database answered today\'s check.',
       '',
       'Fountains: ' + counts.fountains,
@@ -82,11 +77,19 @@ async function countRows(supabase, table, approvedOnly) {
   return count;
 }
 
-async function sendEmail(resend, to, subject, text) {
-  const { error } = await resend.emails.send({ from: SENDER, to: [to], subject, text });
-  if (error) {
-    console.error('keep-alive: email not sent:', error.message);
-    throw new Error('email not sent: ' + error.message);
+// Send an email if Resend is set up. Failures are logged, never thrown,
+// so a mail problem cannot change the result of the database check.
+async function sendEmail(to, subject, text) {
+  if (!process.env.RESEND_API_KEY) {
+    console.error('keep-alive: RESEND_API_KEY is not set, email not sent:', subject);
+    return;
   }
-  console.log('keep-alive: email sent to', to);
+  try {
+    const resend = new Resend(process.env.RESEND_API_KEY);
+    const { error } = await resend.emails.send({ from: SENDER, to: [to], subject, text });
+    if (error) throw new Error(error.message);
+    console.log('keep-alive: email sent to', to);
+  } catch (error) {
+    console.error('keep-alive: email not sent:', error.message);
+  }
 }

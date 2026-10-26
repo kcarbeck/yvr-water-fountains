@@ -426,9 +426,9 @@
       html += '<a href="' + latestInstagramPost.url + '" target="_blank" class="ig-link">@yvrwaterfountains post \u2192</a>';
     }
 
-    // CTA for unreviewed
+    // Public reviews are paused until the new review form ships
     if (!fountain.rating) {
-      html += '<a href="public_review_form.html" class="cta-btn">Be the first to review!</a>';
+      html += '<a href="https://www.instagram.com/yvrwaterfountains/" target="_blank" class="cta-btn">Not reviewed yet. Public reviews open soon!</a>';
     }
 
     html += '</div>';
@@ -493,11 +493,8 @@
     if (latestInstagramPost) {
       html += '<a href="' + latestInstagramPost.url + '" target="_blank" class="sheet-action-btn primary">View on Instagram</a>';
     }
-    if (fountain.rating) {
-      html += '<a href="public_review_form.html" class="sheet-action-btn secondary">Submit Review</a>';
-    } else {
-      html += '<a href="public_review_form.html" class="sheet-action-btn primary" style="background:var(--color-primary);color:var(--color-dark);">Be the first to review!</a>';
-    }
+    // Public reviews are paused until the new review form ships
+    html += '<a href="https://www.instagram.com/yvrwaterfountains/" target="_blank" class="sheet-action-btn secondary">Public reviews open soon</a>';
     html += '</div>';
 
     return html;

@@ -34,6 +34,7 @@
   to = "/.netlify/functions/:splat"
   status = 200
 
-# Weekly reminder email — Mondays 10am Pacific (6pm UTC)
-[functions."weekly-reminder"]
-  schedule = "0 18 * * 1"
+# Daily database check (keeps the free Supabase project from pausing).
+# Cron times are UTC: 15:17 is about 8am Pacific.
+[functions."keep-alive"]
+  schedule = "17 15 * * *"

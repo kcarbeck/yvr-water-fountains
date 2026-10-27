@@ -14,12 +14,8 @@
     bottomSheetContent: null,
     overlay: null,
     bottomSheetClose: null,
-    locateButton: null,
-    adminButton: null
+    locateButton: null
   };
-
-  window.showFountainDetails = showFountainDetails;
-  window.showAllReviews = showAllReviews;
 
   window.addEventListener('DOMContentLoaded', init);
 
@@ -34,7 +30,6 @@
     registerResizeHandling();
     registerTouchShortcuts();
     registerLocateMe();
-    registerAdminAccess();
 
     try {
       const data = await FountainData.fetchGeoData();
@@ -55,7 +50,6 @@
     dom.overlay = document.getElementById('overlay');
     dom.bottomSheetClose = document.getElementById('bottom-sheet-close');
     dom.locateButton = document.getElementById('locate-me');
-    dom.adminButton = document.getElementById('admin-access');
 
     if (dom.bottomSheetClose) {
       dom.bottomSheetClose.addEventListener('click', hideBottomSheet);
@@ -176,31 +170,6 @@
   }
 
   /**
-   * wires the admin access icon to the password check flow.
-   */
-  function registerAdminAccess() {
-    if (!dom.adminButton) {
-      return;
-    }
-
-    dom.adminButton.addEventListener('click', async (event) => {
-      event.preventDefault();
-      const password = prompt('Enter admin password:');
-
-      if (!password) {
-        return;
-      }
-
-      const isValid = await verifyAdminPassword(password);
-      if (isValid) {
-        showAdminPanel();
-      } else if (password !== null) {
-        alert('Incorrect password');
-      }
-    });
-  }
-
-  /**
    * returns marker styling based on review status.
    * green = admin reviewed, orange = community reviewed, blue = unreviewed.
    */
@@ -302,85 +271,8 @@
   }
 
   /**
-   * shows the admin shortcut panel when credentials succeed.
-   */
-  function showAdminPanel() {
-    const panel = document.createElement('div');
-    panel.style.cssText = [
-      'position: fixed',
-      'top: 50%','left: 50%',
-      'transform: translate(-50%, -50%)',
-      'background: white',
-      'padding: 20px',
-      'border-radius: 10px',
-      'box-shadow: 0 4px 20px rgba(0,0,0,0.3)',
-      'z-index: 3000',
-      'text-align: center'
-    ].join(';');
-
-    panel.innerHTML = [
-      '<h3>🔧 Admin Panel</h3>',
-      '<div style="margin: 15px 0;">',
-      '<a href="admin_review_form.html" style="display: block; margin: 10px 0; padding: 10px; background: #007bff; color: white; text-decoration: none; border-radius: 5px;">📝 Admin Review Form</a>',
-      '<a href="moderation_dashboard.html" style="display: block; margin: 10px 0; padding: 10px; background: #007bff; color: white; text-decoration: none; border-radius: 5px;">🛡️ Moderation Dashboard</a>',
-      '</div>',
-      '<button style="background: #dc3545; color: white; border: none; padding: 8px 16px; border-radius: 5px; cursor: pointer;">Close</button>'
-    ].join('');
-
-    panel.querySelector('button').addEventListener('click', () => {
-      panel.remove();
-    });
-
-    document.body.appendChild(panel);
-  }
-
-  /**
-   * checks the supplied admin password by delegating to the serverless function.
-   */
-  async function verifyAdminPassword(password) {
-    const endpoint = config.API_ENDPOINT || '/.netlify/functions/submit-review';
-    try {
-      const response = await fetch(endpoint, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          reviewType: 'admin',
-          reviewData: {
-            adminPassword: password,
-            fountainId: 'password_check',
-            overallRating: 1,
-            waterQuality: 1,
-            flowPressure: 1,
-            temperature: 1,
-            drainage: 1,
-            accessibility: 1,
-            visitDate: '2024-01-01',
-            notes: 'password verification test'
-          }
-        })
-      });
-
-      if (response.status === 500) {
-        const result = await response.json();
-        if (result.message && result.message.includes('Fountain not found')) {
-          return true;
-        }
-        if (result.message && result.message.includes('Invalid admin password')) {
-          return false;
-        }
-      }
-
-      return response.ok;
-    } catch (error) {
-      console.error('password verification failed', error);
-      return false;
-    }
-  }
-
-  /**
    * renders the popup markup for desktop visitors.
+   * every database string goes through escapeHtml or safeUrl.
    */
   function buildPopupContent(fountain, latestInstagramPost, latestPhotoUrl, adminReview) {
     const isReviewed = (fountain.admin_review_count || 0) > 0;
@@ -391,16 +283,14 @@
 
     // Title with optional photo
     if (latestPhotoUrl) {
-      html += '<img src="' + latestPhotoUrl + '" alt="Photo" style="width:80px;height:80px;border-radius:10px;float:right;margin-left:10px;object-fit:cover;" onerror="this.style.display=\'none\'">';
+      html += '<img src="' + escapeHtml(latestPhotoUrl) + '" alt="Photo" style="width:80px;height:80px;border-radius:10px;float:right;margin-left:10px;object-fit:cover;" onerror="this.style.display=\'none\'">';
     }
-    html += '<div class="popup-title">';
-    html += '<a href="#" class="popup-title-link" onclick="showFountainDetails(\'' + (fountain.id || '') + '\')">' + (fountain.name || 'Unnamed Fountain') + '</a>';
-    html += '</div>';
+    html += '<div class="popup-title">' + escapeHtml(fountain.name || 'Unnamed Fountain') + '</div>';
 
     // Info section
     html += '<div class="info-section">';
-    html += buildInfoRow('popup', 'Location', fountain.location || fountain.address || '\u2014');
-    html += buildInfoRow('popup', 'Neighbourhood', fountain.neighborhood || '\u2014');
+    html += buildInfoRow('popup', 'Location', escapeHtml(fountain.location || fountain.address || '\u2014'));
+    html += buildInfoRow('popup', 'Neighbourhood', escapeHtml(fountain.neighborhood || '\u2014'));
 
     if (fountain.avg_rating) {
       const count = fountain.rating_count || 0;
@@ -408,22 +298,22 @@
       html += buildInfoRow('popup', 'Rating', '<span class="rating-badge">' + avg + '/10</span> (' + count + ' review' + (count !== 1 ? 's' : '') + ')');
     }
 
-    html += buildInfoRow('popup', 'Operational', formatOperational(fountain.currently_operational));
+    html += buildInfoRow('popup', 'Operational', escapeHtml(formatOperational(fountain.currently_operational)));
     if (fountain.is_indoor) {
       html += buildInfoRow('popup', 'Indoor', 'Yes, may be locked outside opening hours');
     }
-    html += buildInfoRow('popup', 'Pet Friendly', formatPetFriendly(fountain.pet_friendly));
+    html += buildInfoRow('popup', 'Pet Friendly', escapeHtml(formatPetFriendly(fountain.pet_friendly)));
     html += '</div>';
 
     // Caption
     if (fountain.caption) {
       const truncated = fountain.caption.length > 200 ? fountain.caption.slice(0, 200) + '...' : fountain.caption;
-      html += '<div class="caption-box">' + truncated + '</div>';
+      html += '<div class="caption-box">' + escapeHtml(truncated) + '</div>';
     }
 
     // Instagram link
-    if (latestInstagramPost) {
-      html += '<a href="' + latestInstagramPost.url + '" target="_blank" class="ig-link">@yvrwaterfountains post \u2192</a>';
+    if (latestInstagramPost && safeUrl(latestInstagramPost.url)) {
+      html += '<a href="' + escapeHtml(safeUrl(latestInstagramPost.url)) + '" target="_blank" rel="noopener" class="ig-link">@yvrwaterfountains post \u2192</a>';
     }
 
     // Public reviews are paused until the new review form ships
@@ -444,16 +334,14 @@
     // Header with optional photo
     if (latestPhotoUrl) {
       html += '<div class="sheet-header">';
-      html += '<img src="' + latestPhotoUrl + '" alt="Photo" class="sheet-photo" onerror="this.style.display=\'none\'">';
+      html += '<img src="' + escapeHtml(latestPhotoUrl) + '" alt="Photo" class="sheet-photo" onerror="this.style.display=\'none\'">';
       html += '<div class="sheet-header-text">';
     } else {
       html += '<div style="margin-bottom:1rem;">';
     }
 
-    html += '<div class="bottom-sheet-title">';
-    html += '<a href="#" class="popup-title-link" onclick="showFountainDetails(\'' + (fountain.id || '') + '\')">' + (fountain.name || 'Unnamed Fountain') + '</a>';
-    html += '</div>';
-    html += '<div class="sheet-subtitle">' + (fountain.neighborhood || '') + (fountain.location ? ' \u00B7 ' + fountain.location : '') + '</div>';
+    html += '<div class="bottom-sheet-title">' + escapeHtml(fountain.name || 'Unnamed Fountain') + '</div>';
+    html += '<div class="sheet-subtitle">' + escapeHtml((fountain.neighborhood || '') + (fountain.location ? ' \u00B7 ' + fountain.location : '')) + '</div>';
 
     if (fountain.avg_rating) {
       html += '<span class="rating-badge" style="margin-top:0.25rem;display:inline-block;">' + Number.parseFloat(fountain.avg_rating).toFixed(1) + '/10</span>';
@@ -467,56 +355,37 @@
 
     // Details section
     html += '<div class="sheet-details">';
-    html += buildInfoRow('bottom-sheet', 'Operational', formatOperational(fountain.currently_operational));
+    html += buildInfoRow('bottom-sheet', 'Operational', escapeHtml(formatOperational(fountain.currently_operational)));
     if (fountain.is_indoor) {
       html += buildInfoRow('bottom-sheet', 'Indoor', 'Yes, may be locked outside opening hours');
     }
-    html += buildInfoRow('bottom-sheet', 'Pet Friendly', formatPetFriendly(fountain.pet_friendly));
+    html += buildInfoRow('bottom-sheet', 'Pet Friendly', escapeHtml(formatPetFriendly(fountain.pet_friendly)));
 
     if (fountain.rating) {
-      const reviewer = fountain.latest_reviewer || 'Anonymous';
-      html += buildInfoRow('bottom-sheet', 'Reviewed by', reviewer);
+      const reviewer = adminReview ? '@yvrwaterfountains' : (fountain.latest_reviewer || 'Anonymous');
+      html += buildInfoRow('bottom-sheet', 'Reviewed by', escapeHtml(reviewer));
     }
 
     if (fountain.wheelchair_accessible && fountain.wheelchair_accessible !== 'unknown') {
-      html += buildInfoRow('bottom-sheet', 'Wheelchair', fountain.wheelchair_accessible);
+      html += buildInfoRow('bottom-sheet', 'Wheelchair', escapeHtml(fountain.wheelchair_accessible));
     }
     html += '</div>';
 
     // Caption
     if (fountain.caption) {
-      html += '<div class="sheet-caption">' + fountain.caption + '</div>';
+      html += '<div class="sheet-caption">' + escapeHtml(fountain.caption) + '</div>';
     }
 
     // Action buttons
     html += '<div class="sheet-actions">';
-    if (latestInstagramPost) {
-      html += '<a href="' + latestInstagramPost.url + '" target="_blank" class="sheet-action-btn primary">View on Instagram</a>';
+    if (latestInstagramPost && safeUrl(latestInstagramPost.url)) {
+      html += '<a href="' + escapeHtml(safeUrl(latestInstagramPost.url)) + '" target="_blank" rel="noopener" class="sheet-action-btn primary">View on Instagram</a>';
     }
     // Public reviews are paused until the new review form ships
     html += '<a href="https://www.instagram.com/yvrwaterfountains/" target="_blank" class="sheet-action-btn secondary">Public reviews open soon</a>';
     html += '</div>';
 
     return html;
-  }
-
-  /**
-   * constructs the shared instagram preview snippet.
-   */
-  function buildInstagramPreview(post, photoUrl) {
-    const pieces = [];
-    pieces.push('<div class="instagram-preview-container">');
-    pieces.push('<div class="instagram-preview-text">');
-    pieces.push(`<a href="${post.url}" target="_blank" class="popup-clickable">@yvrwaterfountains post</a>`);
-    if (post.date_posted) {
-      pieces.push(`<br><small>${formatDate(post.date_posted)}</small>`);
-    }
-    pieces.push('</div>');
-    if (photoUrl) {
-      pieces.push(`<img src="${photoUrl}" alt="Instagram photo" class="instagram-photo-preview" onclick="window.open('${post.url}', '_blank')">`);
-    }
-    pieces.push('</div>');
-    return pieces.join('');
   }
 
   /**
@@ -564,37 +433,6 @@
     dom.bottomSheet.classList.remove('active');
     dom.overlay.classList.remove('active');
     state.currentFountain = null;
-  }
-
-  /**
-   * prepares html blocks for additional instagram posts.
-   */
-  function generateInstagramPosts(posts) {
-    if (!posts || posts.length === 0) {
-      return '';
-    }
-
-    const cards = posts.slice(0, 3).map((post) => {
-      const caption = post.caption ? `<div class="instagram-post-caption">${post.caption}</div>` : '';
-      return [
-        '<div class="instagram-post">',
-        '<div class="instagram-post-header">',
-        `<span class="instagram-post-rating">⭐ ${post.rating}/10</span>`,
-        `<span class="instagram-post-date">${formatDate(post.date_posted)}</span>`,
-        '</div>',
-        caption,
-        `<a href="${post.url}" target="_blank" class="instagram-post-link">`,
-        '<i class="fab fa-instagram"></i> View on Instagram',
-        '</a>',
-        '</div>'
-      ].join('');
-    });
-
-    if (posts.length > 3) {
-      cards.push(`<div style="text-align: center; margin-top: 10px;"><small>+${posts.length - 3} more posts...</small></div>`);
-    }
-
-    return cards.join('');
   }
 
   /**
@@ -697,43 +535,28 @@
   }
 
   /**
-   * detects whether the latest review came from the admin account.
+   * a review is ours when the database says it was written by an admin.
    */
   function isAdminReview(fountain) {
-    const reviewer = fountain.latest_reviewer;
-    if (!reviewer) {
-      return false;
-    }
-    const normalized = reviewer.toLowerCase();
-    return normalized === 'yvr water fountains' || normalized === 'yvrwaterfountains';
+    return fountain.latest_review_author_type === 'admin';
   }
 
   /**
-   * formats iso date strings into a friendly format.
+   * escapes text before it goes into html.
    */
-  function formatDate(dateString) {
-    if (!dateString) {
-      return '';
-    }
-    const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', {
-      month: 'short',
-      day: 'numeric',
-      year: 'numeric'
-    });
+  function escapeHtml(value) {
+    return String(value === null || value === undefined ? '' : value)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
   }
 
   /**
-   * placeholder action for linking to a detailed fountain page.
+   * returns the url only if it is a plain http(s) link.
    */
-  function showFountainDetails(fountainId) {
-    console.log('show fountain details for:', fountainId);
-  }
-
-  /**
-   * placeholder action for opening the full reviews view.
-   */
-  function showAllReviews(fountainId) {
-    console.log('show all reviews for fountain:', fountainId);
+  function safeUrl(url) {
+    return typeof url === 'string' && /^https?:\/\//i.test(url) ? url : null;
   }
 })();

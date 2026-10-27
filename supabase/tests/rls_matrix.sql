@@ -22,7 +22,8 @@ select '00000000-0000-0000-0000-00000000a0a0'::uuid as admin_id,
        '00000000-0000-0000-0000-00000000b0b0'::uuid as user_id_nonadmin;
 
 -- What each visitor SHOULD be able to do. 'yes' = allowed, 'no' = blocked.
--- Public review form is switched off for now, so anon/user inserts = no.
+-- Direct inserts into reviews are admin-only; the public adds reviews
+-- and reports only through submit_public_review() and submit_report().
 -- Reviewer emails are hidden from the website's API for everyone,
 -- admins included (none are stored; revisit when the form returns).
 create temp table rls_expected (test text, who text, expected text);
@@ -39,10 +40,25 @@ insert into rls_expected values
   ('write cities',                   'anon', 'no'),  ('write cities',                   'user', 'no'),  ('write cities',                   'admin', 'yes'),
   ('write sources',                  'anon', 'no'),  ('write sources',                  'user', 'no'),  ('write sources',                  'admin', 'yes'),
   ('truncate reviews',               'anon', 'no'),  ('truncate reviews',               'user', 'no'),  ('truncate reviews',               'admin', 'no'),
-  ('read fountain_overview_view',    'anon', 'yes'), ('read fountain_overview_view',    'user', 'yes'), ('read fountain_overview_view',    'admin', 'yes');
+  ('read fountain_overview_view',    'anon', 'yes'), ('read fountain_overview_view',    'user', 'yes'), ('read fountain_overview_view',    'admin', 'yes'),
+  ('submit public review (form open)',      'anon', 'yes'), ('submit public review (form open)',      'user', 'yes'), ('submit public review (form open)',      'admin', 'yes'),
+  ('submit public review (form closed)',    'anon', 'no'),  ('submit public review (form closed)',    'user', 'no'),  ('submit public review (form closed)',    'admin', 'no'),
+  ('submit public review (honeypot filled)', 'anon', 'no'), ('submit public review (honeypot filled)', 'user', 'no'), ('submit public review (honeypot filled)', 'admin', 'no'),
+  ('read created_by column',         'anon', 'no'),  ('read created_by column',         'user', 'yes'), ('read created_by column',         'admin', 'yes'),
+  ('read settings',                  'anon', 'yes'), ('read settings',                  'user', 'yes'), ('read settings',                  'admin', 'yes'),
+  ('write settings',                 'anon', 'no'),  ('write settings',                 'user', 'no'),  ('write settings',                 'admin', 'yes'),
+  ('submit report',                  'anon', 'yes'), ('submit report',                  'user', 'yes'), ('submit report',                  'admin', 'yes'),
+  ('read reports',                   'anon', 'no'),  ('read reports',                   'user', 'no'),  ('read reports',                   'admin', 'yes'),
+  ('insert report directly',         'anon', 'no'),  ('insert report directly',         'user', 'no'),  ('insert report directly',         'admin', 'no'),
+  ('update reports',                 'anon', 'no'),  ('update reports',                 'user', 'no'),  ('update reports',                 'admin', 'yes'),
+  ('read public_average_rating',     'anon', 'yes'), ('read public_average_rating',     'user', 'yes'), ('read public_average_rating',     'admin', 'yes'),
+  ('pending review changes the map', 'anon', 'no'),  ('pending review changes the map', 'user', 'no'),  ('pending review changes the map', 'admin', 'no');
 
 create temp table rls_results (test text, who text, actual text, detail text);
 grant all on rls_settings, rls_expected, rls_results to anon, authenticated;
+
+-- one report so the read/update report tests have a row to touch
+insert into public.reports (kind, details) values ('other', 'rls test');
 
 
 -- ---------------------------------------------------------------------
@@ -79,7 +95,18 @@ declare
     ['write cities',                 format('with x as (update public.cities set name = name where id = %L returning 1) select count(*) from x', v_city)],
     ['write sources',                format('with x as (update public.sources set name = name where id = %L returning 1) select count(*) from x', v_source)],
     ['truncate reviews',             'truncate public.reviews'],
-    ['read fountain_overview_view',  'select count(*) from public.fountain_overview_view']
+    ['read fountain_overview_view',  'select count(*) from public.fountain_overview_view'],
+    ['submit public review (form open)',       format('select count(*) from (select public.submit_public_review(%L, 7.5, ''rls test'') as ok) x where ok', v_fountain)],
+    ['submit public review (form closed)',     format('select count(*) from (select public.submit_public_review(%L, 7.5, ''rls test'') as ok) x where ok', v_fountain)],
+    ['submit public review (honeypot filled)', format('select count(*) from (select public.submit_public_review(%L, 7.5, ''rls test'', null, null, ''spam'') as ok) x where ok', v_fountain)],
+    ['read created_by column',       'select count(created_by) + count(*) from public.reviews'],
+    ['read settings',                'select count(*) from public.settings'],
+    ['write settings',               'with x as (update public.settings set value = value where key = ''public_reviews_open'' returning 1) select count(*) from x'],
+    ['submit report',                format('select count(*) from (select public.submit_report(%L, ''not_working'', ''rls test'') as ok) x where ok', v_fountain)],
+    ['read reports',                 'select count(*) from public.reports'],
+    ['insert report directly',       format('with x as (insert into public.reports (fountain_id, kind) values (%L, ''other'') returning 1) select count(*) from x', v_fountain)],
+    ['update reports',               'with x as (update public.reports set status = status returning 1) select count(*) from x'],
+    ['read public_average_rating',   'select count(*) from (select public_average_rating from public.fountain_overview_view) x']
   ];
   i int;
 begin
@@ -88,6 +115,13 @@ begin
       v_test := tests[i][1];
       v_sql  := tests[i][2];
       begin
+        -- the review-form tests set the switch first (undone with the test)
+        if v_test like 'submit public review%' then
+          update public.settings
+          set value = case when v_test like '%(form closed)' then 'false' else 'true' end
+          where key = 'public_reviews_open';
+        end if;
+
         -- become the visitor (only for the duration of this sub-block)
         if v_who = 'anon' then
           perform set_config('request.jwt.claims', '{"role":"anon"}', true);
@@ -119,6 +153,56 @@ begin
       end;
       insert into rls_results values (v_test, v_who, v_actual, v_detail);
     end loop;
+  end loop;
+end $$;
+
+-- A pending review must not change the map view for anyone, admins
+-- included (they can read pending reviews). For each visitor: read the
+-- view, add pending reviews as the owner, read the view again, compare.
+-- "yes" = the view changed.
+do $$
+declare
+  v_who     text;
+  v_before  text;
+  v_after   text;
+  v_admin   uuid := (select admin_id from rls_settings);
+  v_user    uuid := (select user_id_nonadmin from rls_settings);
+  -- one fountain with approved reviews and one with none
+  v_rated   uuid := (select fountain_id from public.reviews where status = 'approved' order by fountain_id limit 1);
+  v_unrated uuid := (select f.id from public.fountains f
+                     where not exists (select 1 from public.reviews r where r.fountain_id = f.id)
+                     order by f.id limit 1);
+  v_actual  text;
+  v_detail  text;
+begin
+  foreach v_who in array array['anon', 'user', 'admin'] loop
+    begin
+      perform set_config('request.jwt.claims',
+        case when v_who = 'anon' then '{"role":"anon"}'
+             else json_build_object('sub', case when v_who = 'admin' then v_admin else v_user end,
+                                    'role', 'authenticated')::text end, true);
+      execute case when v_who = 'anon' then 'set local role anon' else 'set local role authenticated' end;
+      select md5(json_agg(o order by o.id)::text) into v_before from public.fountain_overview_view o;
+
+      reset role;
+      insert into public.reviews (fountain_id, author_type, status, rating, visit_date, reviewed_at, created_by)
+      values (v_rated,   'public', 'pending', 0, current_date, now(), null),
+             (v_rated,   'admin',  'pending', 0, current_date, now(), null),
+             (v_unrated, 'public', 'pending', 0, current_date, now(), null);
+
+      execute case when v_who = 'anon' then 'set local role anon' else 'set local role authenticated' end;
+      select md5(json_agg(o order by o.id)::text) into v_after from public.fountain_overview_view o;
+      raise exception 'rls_test_done:%', case when v_before = v_after then 0 else 1 end;
+    exception when others then
+      if sqlerrm like 'rls_test_done:%' then
+        v_actual := case when split_part(sqlerrm, ':', 2) = '1' then 'yes' else 'no' end;
+        v_detail := case when v_actual = 'yes' then 'view changed' else 'view unchanged' end;
+      else
+        v_actual := 'error';
+        v_detail := left(sqlerrm, 80);
+      end if;
+    end;
+    insert into rls_results values ('pending review changes the map', v_who, v_actual, v_detail);
   end loop;
 end $$;
 

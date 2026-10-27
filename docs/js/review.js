@@ -2,7 +2,7 @@
 
 // Review page. Admins sign in with an emailed code, then add reviews in three
 // steps (fountain, rating, details), approve public reviews and fix their own.
-// The public form is not built yet, so everyone else sees the closed notice.
+// Everyone else sees the closed notice.
 // Database text is only ever written with textContent, never innerHTML.
 (function () {
   // ---- Settings ----
@@ -11,6 +11,7 @@
   const SEARCH_LIMIT = 8;        // search results shown
   const RECENT_LIMIT = 10;       // reviews listed under "My recent"
   const RESEND_SECONDS = 60;     // wait before a new code can be requested
+  const EARLIEST_VISIT = '2020-01-01';   // visit dates before this are refused
   const TIME_ZONE = 'America/Vancouver';
 
   const state = {
@@ -21,6 +22,7 @@
     fountainById: new Map(),
     position: null,         // phone location, kept in memory only
     pickMap: null,
+    resendTimer: null,
     youMarker: null,
     draft: null             // the review being added or fixed
   };
@@ -59,6 +61,9 @@
         state.admin = await window.AppApi.fetchAdminProfile(user.id);
       } catch (error) {
         console.error('admin check failed', error);
+        signInMessage("Couldn't check your access. Try again in a minute.");
+        showOnly('view-sign-in');
+        return;
       }
     }
 
@@ -69,7 +74,7 @@
       return;
     }
 
-    const name = state.admin.display_name || user.email;
+    const name = adminName();
     $('admin-name').textContent = name;
     document.querySelectorAll('[data-admin-name]').forEach((node) => { node.textContent = name; });
     $('admin-bar').hidden = false;
@@ -89,8 +94,8 @@
       email,
       options: { shouldCreateUser: false }   // invite-only: no new accounts from this page
     });
-    $('send-code').disabled = false;
     if (error) {
+      $('send-code').disabled = false;
       console.error('send code failed', error);
       signInMessage(/signups not allowed|not found/i.test(error.message)
         ? 'That email is not invited. Ask Katherine to add you.'
@@ -106,14 +111,16 @@
   function startResendTimer() {
     const button = $('resend-code');
     let left = RESEND_SECONDS;
+    clearInterval(state.resendTimer);
     button.disabled = true;
     button.textContent = 'resend in ' + left + ' s';
-    const timer = setInterval(() => {
+    state.resendTimer = setInterval(() => {
       left -= 1;
       button.textContent = left > 0 ? 'resend in ' + left + ' s' : 'resend';
       if (left <= 0) {
-        clearInterval(timer);
+        clearInterval(state.resendTimer);
         button.disabled = false;
+        $('send-code').disabled = false;
       }
     }, 1000);
   }
@@ -121,8 +128,8 @@
   async function verifyCode() {
     const email = $('email').value.trim();
     const token = $('code').value.trim();
-    if (!/^\d{6}$/.test(token)) {
-      signInMessage('The code is 6 digits.');
+    if (!/^\d{6,10}$/.test(token)) {
+      signInMessage('Enter the code from the email (digits only).');
       return;
     }
     $('verify-code').disabled = true;
@@ -154,6 +161,8 @@
   function startNewReview(fountainId) {
     state.draft = { editingId: null, fountainId: null, rating: null, half: false, note: '', visitDate: todayInVancouver(), link: '' };
     selectTab('add');
+    $('search').value = '';
+    $('search-results').replaceChildren();
     if (fountainId && state.fountainById.has(fountainId)) {
       state.draft.fountainId = fountainId;
       showRate();
@@ -326,6 +335,7 @@
 
   function renderChips() {
     const chips = $('chips');
+    const focused = document.activeElement && chips.contains(document.activeElement) ? document.activeElement.textContent : null;
     chips.replaceChildren();
     for (let value = 0; value <= 10; value += 1) {
       const chip = el('button', 'chip', String(value));
@@ -355,6 +365,9 @@
     $('rating-badge').hidden = rating === null;
     $('rating-badge').textContent = rating === null ? '' : formatRating(rating) + ' / 10';
     $('rate-next').disabled = rating === null;
+    if (focused !== null) {
+      Array.from(chips.children).find((chip) => chip.textContent === focused).focus();
+    }
   }
 
   function currentRating() {
@@ -371,6 +384,7 @@
     $('note').value = state.draft.note;
     $('note-count').textContent = String(state.draft.note.length);
     $('visit-date').value = state.draft.visitDate;
+    $('visit-date').min = EARLIEST_VISIT;
     $('visit-date').max = todayInVancouver();
     $('post-link').value = state.draft.link;
     $('save-message').hidden = true;
@@ -379,12 +393,21 @@
   }
 
   async function save() {
+    $('save').disabled = true;   // one review per tap
+    try {
+      await saveDraft();
+    } finally {
+      $('save').disabled = false;
+    }
+  }
+
+  async function saveDraft() {
     const draft = state.draft;
     draft.note = $('note').value.trim();
     draft.visitDate = $('visit-date').value;
     draft.link = $('post-link').value.trim();
 
-    if (!draft.visitDate || draft.visitDate > todayInVancouver() || draft.visitDate < '2020-01-01') {
+    if (!draft.visitDate || draft.visitDate > todayInVancouver() || draft.visitDate < EARLIEST_VISIT) {
       saveMessage('Pick a visit date between 2020 and today.');
       return;
     }
@@ -402,15 +425,17 @@
       }
     }
 
+    // reviewed_at is set to the visit day, like the existing admin reviews,
+    // because the map's "latest rating" is ordered by it.
     const fields = {
       fountain_id: draft.fountainId,
       rating: currentRating(),
       review_text: draft.note || null,
       visit_date: draft.visitDate,
+      reviewed_at: draft.visitDate + 'T12:00:00Z',
       instagram_url: link
     };
 
-    $('save').disabled = true;
     let result;
     if (draft.editingId) {
       result = await state.client.from('reviews').update(fields).eq('id', draft.editingId);
@@ -419,11 +444,9 @@
         author_type: 'admin',
         status: 'approved',
         reviewer_name: state.admin.display_name,
-        approved_by: state.user.id,
-        reviewed_at: new Date().toISOString()
+        approved_by: state.user.id
       }));
     }
-    $('save').disabled = false;
 
     if (result.error) {
       console.error('save failed', result.error);
@@ -467,7 +490,7 @@
     $('done-rating').textContent = formatRating(currentRating()) + ' / 10';
     $('done-summary').textContent = [
       formatDate(state.draft.visitDate),
-      state.admin.display_name,
+      adminName(),
       state.draft.link ? 'post linked' : 'no post link yet'
     ].join(' · ');
     $('done-map-link').href = 'map.html#' + encodeURIComponent(fountain.external_id || fountain.id);
@@ -487,17 +510,18 @@
     }
     renderPending(pending);
     renderUnlinked(unlinked);
-    setWaitingCount(pending.length + unlinked.length);
+    setWaitingCount(pending.length);
     if (pending.length + unlinked.length === 0) {
       $('waiting-message').textContent = 'Nothing waiting. Nice.';
       $('waiting-message').hidden = false;
     }
   }
 
+  // The tab counts only what needs a decision; links to add are listed inside.
   async function refreshWaitingCount() {
-    const [pending, unlinked] = await Promise.all([fetchPending(), fetchUnlinked()]);
-    if (pending && unlinked) {
-      setWaitingCount(pending.length + unlinked.length);
+    const pending = await fetchPending();
+    if (pending) {
+      setWaitingCount(pending.length);
     }
   }
 
@@ -552,10 +576,13 @@
   }
 
   async function moderate(reviewId, status) {
-    const extra = { reviewed_at: new Date().toISOString(), approved_by: status === 'approved' ? state.user.id : null };
-    try {
-      await window.AppApi.updateReviewStatus(reviewId, status, extra);
-    } catch (error) {
+    // Only a review that is still pending changes, so two admins can't overrule each other.
+    const { error } = await state.client
+      .from('reviews')
+      .update({ status, reviewed_at: new Date().toISOString(), approved_by: status === 'approved' ? state.user.id : null })
+      .eq('id', reviewId)
+      .eq('status', 'pending');
+    if (error) {
       console.error('moderation failed', error);
       alert('Could not save that. Try again.');
       return;
@@ -699,6 +726,12 @@
     document.querySelectorAll('[data-action="sign-out"]').forEach((button) => button.addEventListener('click', signOut));
     document.querySelectorAll('[data-action="new-review"]').forEach((button) => button.addEventListener('click', () => startNewReview(null)));
     document.querySelectorAll('[data-goto="pick"]').forEach((button) => button.addEventListener('click', showPick));
+    document.querySelectorAll('[data-goto="rate"]').forEach((button) => button.addEventListener('click', () => {
+      state.draft.note = $('note').value;   // keep what was typed on the way back
+      state.draft.visitDate = $('visit-date').value;
+      state.draft.link = $('post-link').value;
+      showRate();
+    }));
     document.querySelectorAll('[data-tab]').forEach((button) => button.addEventListener('click', () => openTab(button.dataset.tab)));
     document.querySelectorAll('[data-tab-link]').forEach((button) => button.addEventListener('click', () => openTab(button.dataset.tabLink)));
   }
@@ -784,6 +817,10 @@
       other.latitude === fountain.latitude && other.longitude === fountain.longitude);
   }
 
+  function adminName() {
+    return state.admin.display_name || state.user.email;
+  }
+
   function fountainName(fountainId) {
     const fountain = state.fountainById.get(fountainId);
     return fountain ? fountain.name : 'Unknown fountain';
@@ -798,10 +835,10 @@
     return 'Latest ' + formatRating(fountain.latest_review_rating) + ' ' + who + when;
   }
 
-  // Accepts instagram.com/p/CODE or /reel/CODE with or without https, www or a
-  // query string, and returns the form stored in the database, else null.
+  // Accepts instagram.com/p/CODE or /reel/CODE (also with www, m., a username
+  // before /p/, or a query string) and returns the form stored in the database.
   function normalisePostLink(text) {
-    const match = text.match(/^(?:https?:\/\/)?(?:www\.)?instagram\.com\/(p|reels?)\/([A-Za-z0-9_-]+)/i);
+    const match = text.match(/^(?:https?:\/\/)?(?:www\.|m\.)?instagram\.com\/(?:[A-Za-z0-9_.]+\/)?(p|reels?)\/([A-Za-z0-9_-]+)/i);
     if (!match) {
       return null;
     }
@@ -823,6 +860,9 @@
   }
 
   function formatRating(value) {
+    if (value === null || value === undefined) {
+      return 'no rating';
+    }
     const number = Number(value);
     return Number.isInteger(number) ? String(number) : number.toFixed(1);
   }

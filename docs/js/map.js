@@ -554,9 +554,9 @@
   }
 
   /**
-   * returns the url only if it is a plain http(s) link.
+   * returns the url only if it is an https link to instagram.com.
    */
   function safeUrl(url) {
-    return typeof url === 'string' && /^https?:\/\//i.test(url) ? url : null;
+    return typeof url === 'string' && /^https:\/\/(www\.)?instagram\.com\//i.test(url) ? url : null;
   }
 })();

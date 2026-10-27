@@ -141,12 +141,12 @@ textarea { resize: vertical; }
         <button type="button" id="send-code" class="btn-small go">Email me a code</button>
       </div>
       <div id="code-block" hidden>
-        <label for="code">6-digit code from the email</label>
+        <label for="code">Code from the email</label>
         <div class="inline-form">
-          <input id="code" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6">
+          <input id="code" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="10">
           <button type="button" id="verify-code" class="btn-small go">Sign in</button>
         </div>
-        <p class="muted">No code? Check spam. Codes come from yvrwaterfountains@gmail.com.
+        <p class="muted">No code? Check spam.
           <button type="button" id="resend-code" class="text-link" disabled>resend</button></p>
       </div>
       <p id="sign-in-message" class="notice" hidden></p>
@@ -202,12 +202,13 @@ textarea { resize: vertical; }
       <div class="chosen">
         <span class="chosen-name" data-fountain-name></span>
         <span class="rating-badge" id="details-rating"></span>
+        <button type="button" class="text-link" data-goto="rate">change</button>
       </div>
       <h1>Anything to add?</h1>
       <label for="note">Notes <span class="muted">(optional, <span id="note-count">0</span> / 500)</span></label>
       <textarea id="note" rows="3" maxlength="500"></textarea>
       <label for="visit-date">Visit date</label>
-      <input id="visit-date" type="date" min="2020-01-01">
+      <input id="visit-date" type="date">
       <label for="post-link">Instagram post link <span class="muted">(blank if not posted yet)</span></label>
       <input id="post-link" type="url" placeholder="instagram.com/p/... or /reel/..." autocomplete="off">
       <p class="muted">Reviewer: <strong data-admin-name></strong> (from your login). Goes live on the map at once.</p>

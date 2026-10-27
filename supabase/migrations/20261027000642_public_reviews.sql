@@ -15,7 +15,7 @@
 --   5. new rating columns on the map views, from approved reviews only
 --   6. index for the hourly caps and the admin queue
 --
--- Rollback: supabase/rollbacks/rollback_public_reviews.sql
+-- Rollback: supabase/rollbacks/rollback_20261027000642_public_reviews.sql
 -- =====================================================================
 
 

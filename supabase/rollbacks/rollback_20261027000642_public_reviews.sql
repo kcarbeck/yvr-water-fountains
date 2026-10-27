@@ -1,5 +1,5 @@
 -- =====================================================================
--- ROLLBACK for supabase/pending/public_reviews.sql
+-- ROLLBACK for supabase/migrations/20261027000642_public_reviews.sql
 -- Puts the two views back exactly as they were, then removes the
 -- functions, tables, column and index the migration added.
 -- Reviews that came in through submit_public_review stay in reviews.

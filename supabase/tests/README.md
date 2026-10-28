@@ -6,7 +6,7 @@ Files for checking database changes before they touch production.
 |---|---|---|
 | `rls_matrix.sql` | Tries every action as a visitor, a logged-in user and an admin, and prints PASS/FAIL against the expected access rules | Yes. Every write is undone and the file ends in ROLLBACK. Set `admin_id` at the top to the real admin's user id first. |
 | `public_review_functions.sql` | Calls `submit_public_review()` and `submit_report()` as a visitor and checks each refusal gives the expected message | Yes. Ends in ROLLBACK. |
-| `visit_date_order.sql` | Adds two reviews to one fountain and checks the latest rating is the newest visit, not the newest approval, and that an open maintenance issue stays open until an admin clears it | Yes. Ends in ROLLBACK. |
+| `visit_date_order.sql` | Adds three reviews to one fountain and checks the latest rating is the newest visit, not the newest approval, and that an open maintenance issue stays open until an admin clears it | Yes. Ends in ROLLBACK. |
 | `view_equivalence.sql` | What the public map sees in `fountain_overview_view`: row count, rated rows, rating sum, set of Instagram links | Yes (read-only) |
 | `checksums.sql` | One fingerprint per table, to prove two databases hold identical data | Yes (read-only) |
 | `schema_fingerprint.sql` | Fingerprints of policies, grants, views, functions and indexes, to prove a rollback restored the old rules | Yes (read-only) |

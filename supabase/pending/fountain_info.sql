@@ -39,7 +39,8 @@
 alter table public.fountains
   add column anti_freeze       boolean,   -- expected to stay on through the winter
   add column issue_reported_at date,      -- null = no open issue
-  add column issue_note        text check (length(issue_note) <= 120),
+  add column issue_note        text,      -- short, written by an admin, e.g. "no water"
+  add constraint fountains_issue_note_length check (btrim(issue_note) <> '' and length(issue_note) <= 120),
   add constraint fountains_issue_note_needs_date check (issue_note is null or issue_reported_at is not null);
 
 alter table public.reviews

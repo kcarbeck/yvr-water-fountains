@@ -11,23 +11,25 @@ create temp table vd_results (test text, result text);
 
 do $$
 declare
-  -- a fountain with no reviews, so only the two below count
+  -- a fountain with no reviews, so only the three below count
   v_fountain uuid := (select f.id from public.fountains f
                       where not exists (select 1 from public.reviews r where r.fountain_id = f.id)
                       order by f.id limit 1);
   v record;
 begin
-  -- an older visit approved today, and a newer visit approved on the day
+  -- two public visits: the older one approved today, the newer one
+  -- approved on the day; then an admin visit newer than both
   insert into public.reviews (fountain_id, author_type, status, rating, review_text, visit_date, reviewed_at)
-  values (v_fountain, 'public', 'approved', 3, 'older visit, approved later', date '2025-06-01', now()),
-         (v_fountain, 'admin',  'approved', 9, 'newer visit',                 date '2026-01-05', timestamptz '2026-01-05 12:00+00');
+  values (v_fountain, 'public', 'approved', 3, 'older public visit, approved later', date '2025-06-01', now()),
+         (v_fountain, 'public', 'approved', 5, 'newer public visit',                 date '2025-09-01', timestamptz '2025-09-01 12:00+00'),
+         (v_fountain, 'admin',  'approved', 9, 'newest visit',                      date '2026-01-05', timestamptz '2026-01-05 12:00+00');
 
   select * into v from public.fountain_overview_view where id = v_fountain;
   insert into vd_results values
-    ('latest rating is the newest visit',   case when v.latest_review_rating = 9 then 'PASS' else 'FAIL (' || v.latest_review_rating || ')' end),
-    ('latest_visit_date is the newest visit', case when v.latest_visit_date = date '2026-01-05' then 'PASS' else 'FAIL (' || v.latest_visit_date || ')' end),
-    ('latest public rating ignores approval time', case when v.latest_public_rating = 3 then 'PASS' else 'FAIL' end),
-    ('average and count unchanged by order', case when v.average_rating = 6.00 and v.approved_review_count = 2 then 'PASS' else 'FAIL' end),
+    ('latest rating is the newest visit',   case when v.latest_review_rating = 9 then 'PASS' else 'FAIL (' || coalesce(v.latest_review_rating::text, 'null') || ')' end),
+    ('latest_visit_date is the newest visit', case when v.latest_visit_date = date '2026-01-05' then 'PASS' else 'FAIL (' || coalesce(v.latest_visit_date::text, 'null') || ')' end),
+    ('latest public rating is the newest public visit, not the latest approval', case when v.latest_public_rating = 5 then 'PASS' else 'FAIL (' || coalesce(v.latest_public_rating::text, 'null') || ')' end),
+    ('average and count unchanged by order', case when v.average_rating = 5.67 and v.approved_review_count = 3 then 'PASS' else 'FAIL' end),
     ('no issue when nothing is reported',   case when v.current_issue is null then 'PASS' else 'FAIL' end);
 
   insert into vd_results

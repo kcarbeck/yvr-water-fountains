@@ -30,7 +30,7 @@ Everything that changes the live Supabase database (project `hnyktzfyquvmpthfwpv
 | `data_fixes/2026-10-06_review_link_fixes.sql` | Corrects reviews linked to the wrong fountain; adds the two 2025 links | Yes, 2026-10-25 |
 | `data_fixes/2026-10-20_repair_garbled_emoji.sql` | Repairs garbled emoji in 4 captions | Yes, 2026-10-25 |
 | `data_fixes/2026-10-25_backlog_import.sql` | Adds the 17 backlog posts and 11 new fountains | Yes, 2026-10-25 |
-| `pending/fountain_info.sql` | Latest review by visit date; `anti_freeze` and `status_reported_at` on fountains; the three detail columns on reviews; `fountain_reviews_view` for the all-visits list; `submit_public_review` takes the details | No |
+| `pending/fountain_info.sql` | Latest review by visit date; `anti_freeze` and `status_reported_at` on fountains; detail columns on reviews; `fountain_reviews_view` for the all-visits list; `submit_public_review` takes the details | No |
 | `pending/postgis_nearest_fountains.sql` | PostGIS and the "nearest fountains" function | No |
 
 The five 2026-10-25 changes were applied in this order: add_is_indoor, review_link_fixes, repair_garbled_emoji, unique_instagram_links, backlog_import. Roll back in the reverse order.

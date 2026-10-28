@@ -103,14 +103,16 @@ begin
                   then 'ok' else 'wrong row' end
   from public.reviews where review_text = 'row check';
 
-  -- the three details land on the review row, and only there
+  -- the three details land on the review row, and the fountain's own
+  -- row is exactly as it was
+  create temp table fn_fountain_before as select * from public.fountains where id = v_other;
   perform set_config('request.jwt.claims', '{"role":"anon"}', true);
   set local role anon;
   perform public.submit_public_review(v_other, 6, 'details check', null, null, null, true, false, null);
   reset role;
   insert into fn_results
   select 31, case when r.has_bottle_filler is true and r.is_wheelchair_accessible is false and r.anti_freeze is null
-                   and f.has_bottle_filler is null and f.is_wheelchair_accessible is null and f.anti_freeze is null
+                   and row_to_json(f)::text = (select row_to_json(b)::text from fn_fountain_before b)
                   then 'ok' else 'wrong row' end
   from public.reviews r join public.fountains f on f.id = r.fountain_id
   where r.review_text = 'details check';

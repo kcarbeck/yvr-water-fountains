@@ -1,7 +1,8 @@
 -- =====================================================================
 -- ROLLBACK for supabase/pending/fountain_info.sql
--- Puts the two views back exactly as migration 20261027000642 left
--- them, removes the all-visits view, restores the old
+-- Puts the two views back exactly as the migrations left them
+-- (fountain_latest_review_view from 20261021173926, the overview from
+-- 20261027000642), removes the all-visits view, restores the old
 -- submit_public_review() and drops the new columns.
 -- Answers stored in the dropped review and fountain columns are lost:
 -- export them first if any exist.

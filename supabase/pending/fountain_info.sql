@@ -46,7 +46,7 @@ grant select (has_bottle_filler, is_wheelchair_accessible, anti_freeze) on publi
 -- 2 and 3. latest review by visit date; new overview columns
 -- ---------------------------------------------------------------------
 -- A review's date is its visit date. reviewed_at only says when an
--- admin approved it (Graham's March visit was approved in October).
+-- admin approved it (a March visit can be approved in October).
 -- Both views keep every existing column in place; new ones go last.
 create or replace view public.fountain_latest_review_view
 with (security_invoker = true) as

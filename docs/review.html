@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Review a fountain - YVR Water Fountains</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" type="image/png" href="images/logo.png">
+  <link rel="apple-touch-icon" href="images/logo.png">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="css/theme.css">
+  <style>
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--color-dark);
+  background: #fff;
+}
+[hidden] { display: none !important; }
+button { font: inherit; cursor: pointer; color: var(--color-dark); }
+button:disabled { cursor: default; opacity: 0.5; }
+
+.header {
+  background: var(--color-primary);
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.header-logo { width: 44px; height: 44px; border-radius: 10px; object-fit: cover; }
+.header-title { height: 46px; width: auto; max-width: calc(100% - 60px); object-fit: contain; }
+
+main { max-width: 480px; margin: 0 auto; padding: 16px 20px 32px; }
+h1 { margin: 0 0 12px; font-family: var(--font-heading); font-weight: 400; font-size: 26px; line-height: 1.15; }
+h2 { margin: 18px 0 8px; font-family: var(--font-subtitle); font-weight: 700; font-size: 15px; }
+p { line-height: 1.45; }
+.muted { color: #3d3d55; font-size: 13px; }
+.step-label { font-size: 12px; font-weight: 700; color: #3d3d55; text-align: center; margin-top: 8px; }
+
+.admin-bar { display: flex; justify-content: space-between; align-items: center; font-size: 13px; margin-bottom: 10px; }
+.tabs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; margin-bottom: 16px; }
+.tab { min-height: 44px; border-radius: 12px; border: 2px solid var(--color-tertiary); background: #fff; font-weight: 700; font-size: 14px; }
+.tab[aria-pressed="true"] { background: var(--color-primary); border-color: var(--color-dark); }
+
+.text-link {
+  background: none; border: none; padding: 8px 0;
+  font-family: 'Courier New', monospace; font-weight: 700; font-size: 14px;
+  text-transform: lowercase; text-decoration: none; color: var(--color-dark);
+  border-bottom: 2px dotted var(--color-secondary);
+}
+
+.btn-main {
+  display: block; width: 100%; box-sizing: border-box; text-align: center; text-decoration: none;
+  background: var(--color-primary); border: none; border-radius: 14px;
+  font-family: var(--font-heading); font-size: 20px; padding: 14px; min-height: 56px; margin-top: 16px;
+}
+.btn-outline {
+  display: block; width: 100%; box-sizing: border-box; text-align: center;
+  background: #fff; border: 3px solid var(--color-tertiary); border-radius: 14px;
+  font-family: var(--font-heading); font-size: 18px; padding: 10px; min-height: 50px; margin-top: 10px;
+}
+.btn-small { min-height: 44px; padding: 0 14px; border-radius: 12px; border: 2px solid var(--color-dark); background: #fff; font-weight: 700; }
+.btn-small.go { background: var(--color-primary); }
+
+label { display: block; font-family: var(--font-subtitle); font-weight: 700; font-size: 15px; margin: 14px 0 6px; }
+input[type="email"], input[type="text"], input[type="search"], input[type="url"], input[type="date"], textarea {
+  width: 100%; box-sizing: border-box; font-size: 16px; font-family: inherit;
+  padding: 12px; border: 2px solid var(--color-tertiary); border-radius: 12px;
+  background: var(--color-info-bg); color: var(--color-dark); min-height: 50px;
+}
+textarea { resize: vertical; }
+.inline-form { display: flex; gap: 8px; }
+.inline-form input { flex: 1; min-width: 0; }
+
+.notice { background: var(--color-light); border-radius: 14px; padding: 12px 14px; font-size: 14px; line-height: 1.45; margin: 12px 0; }
+.notice.error { background: #ffe8f3; }
+.card { background: #fff; border-radius: 14px; border-top: 4px solid var(--color-secondary); box-shadow: 0 4px 16px rgba(0,0,0,0.12); padding: 14px 16px; margin: 12px 0; }
+.card-title { font-family: var(--font-heading); font-size: 18px; }
+.card a.btn-main { color: var(--color-dark); }
+.rating-badge { white-space: nowrap; }
+
+#pick-map { height: 210px; border-radius: 14px; border: 2px solid var(--color-dark); }
+.pick-row {
+  display: flex; justify-content: space-between; align-items: center; gap: 10px;
+  width: 100%; text-align: left; box-sizing: border-box; margin-bottom: 8px;
+  background: var(--color-info-bg); border: 2px solid var(--color-tertiary); border-radius: 12px;
+  padding: 12px 14px; min-height: 52px;
+}
+.pick-row.here { background: #fff; border: none; border-top: 4px solid var(--color-primary); box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
+.pick-name { display: block; font-family: var(--font-heading); font-size: 18px; line-height: 1.2; }
+.pick-sub { display: block; font-size: 13px; color: #3d3d55; margin-top: 3px; }
+.distance { background: var(--color-primary); border-radius: 999px; padding: 4px 10px; font-weight: 700; font-size: 14px; white-space: nowrap; }
+.chosen { display: flex; justify-content: space-between; align-items: center; gap: 10px; background: var(--color-light); border-radius: 12px; padding: 8px 14px; margin-bottom: 12px; }
+.chosen-name { font-family: var(--font-heading); font-size: 16px; line-height: 1.2; }
+
+.rating-head { display: flex; justify-content: space-between; align-items: center; }
+.rating-badge-big { background: var(--color-primary); border-radius: 999px; padding: 6px 14px; font-family: var(--font-heading); font-size: 22px; }
+.chips { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; margin-top: 12px; }
+.chip { height: 52px; border-radius: 12px; border: 2px solid var(--color-tertiary); background: #fff; font-family: var(--font-heading); font-size: 22px; }
+.chip[aria-pressed="true"] { background: var(--color-primary); border-color: var(--color-dark); }
+.scale-hint { display: flex; justify-content: space-between; font-size: 12px; font-weight: 600; color: #3d3d55; margin-top: 8px; }
+
+.list-item { border-bottom: 2px solid var(--color-light); padding: 12px 0; }
+.row { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; }
+.list-item .actions { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+.quote { font-style: italic; margin: 6px 0 0; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <a href="map.html"><img src="images/logo.png" alt="Back to the map" class="header-logo"></a>
+    <img src="images/header.png" alt="YVR Water Fountains" class="header-title">
+  </header>
+
+  <main>
+    <p id="loading" class="muted">Loading fountains...</p>
+
+    <!-- Shown to everyone who is not a signed-in admin -->
+    <section id="view-closed" class="view" hidden>
+      <div class="card">
+        <div class="card-title">Reviews open soon</div>
+        <p>We're not taking public reviews right now. Follow
+          <a href="https://www.instagram.com/yvrwaterfountains/">@yvrwaterfountains</a> for the opening.</p>
+      </div>
+      <p id="no-access" class="notice" hidden><strong>This login has no admin access.</strong>
+        <button type="button" class="text-link" data-action="sign-out">sign out</button></p>
+      <p><a href="map.html" class="text-link">back to the map</a></p>
+      <p><button type="button" id="show-sign-in" class="text-link">admin sign-in</button></p>
+    </section>
+
+    <!-- Shown when the fountain list cannot be loaded -->
+    <section id="view-offline" class="view" hidden>
+      <p class="notice error">Can't reach the map right now, try again in a minute.</p>
+    </section>
+
+    <section id="view-sign-in" class="view" hidden>
+      <h1>Admin sign-in</h1>
+      <label for="email">Email</label>
+      <div class="inline-form">
+        <input id="email" type="email" autocomplete="email" required>
+        <button type="button" id="send-code" class="btn-small go">Email me a code</button>
+      </div>
+      <div id="code-block" hidden>
+        <label for="code">Code from the email</label>
+        <div class="inline-form">
+          <input id="code" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="10">
+          <button type="button" id="verify-code" class="btn-small go">Sign in</button>
+        </div>
+        <p class="muted">No code? Check spam.
+          <button type="button" id="resend-code" class="text-link" disabled>resend</button></p>
+      </div>
+      <p id="sign-in-message" class="notice" hidden></p>
+      <p class="muted">First time on your phone: open this page in Safari or Chrome (not inside Instagram) and use Add to Home Screen.</p>
+    </section>
+
+    <!-- Everything below is for signed-in admins -->
+    <div id="admin-bar" class="admin-bar" hidden>
+      <span>Signed in as <strong id="admin-name"></strong></span>
+      <button type="button" class="text-link" data-action="sign-out">sign out</button>
+    </div>
+    <nav id="tabs" class="tabs" hidden>
+      <button type="button" class="tab" data-tab="add" aria-pressed="true">Add review</button>
+      <button type="button" class="tab" data-tab="waiting" aria-pressed="false">Waiting</button>
+      <button type="button" class="tab" data-tab="recent" aria-pressed="false">My recent</button>
+    </nav>
+
+    <section id="view-pick" class="view" hidden>
+      <h1>Which fountain are you at?</h1>
+      <div id="pick-map" role="application" aria-label="Map of fountains. Tap a fountain to choose it."></div>
+      <p id="location-note" class="muted"></p>
+      <div id="nearby-list"></div>
+      <label for="search">Search all fountains</label>
+      <input id="search" type="search" placeholder="Park, street or building" autocomplete="off">
+      <div id="search-results"></div>
+      <p><button type="button" id="locate" class="text-link">find me again</button></p>
+      <p class="step-label">Step 1 of 3</p>
+    </section>
+
+    <section id="view-cluster" class="view" hidden>
+      <h1>Which fountain are you at?</h1>
+      <p id="cluster-intro"></p>
+      <div id="cluster-list"></div>
+      <p><button type="button" class="text-link" data-goto="pick">show other fountains</button></p>
+    </section>
+
+    <section id="view-rate" class="view" hidden>
+      <div class="chosen">
+        <span class="chosen-name" data-fountain-name></span>
+        <button type="button" class="text-link" data-goto="pick">change</button>
+      </div>
+      <div class="rating-head">
+        <h1>How was it?</h1>
+        <span id="rating-badge" class="rating-badge-big" hidden></span>
+      </div>
+      <div id="chips" class="chips" role="group" aria-label="Rating out of 10"></div>
+      <div class="scale-hint"><span>0 barely works</span><span>5 does the job</span><span>10 best in the city</span></div>
+      <button type="button" id="rate-next" class="btn-main" disabled>Next</button>
+      <p class="step-label">Step 2 of 3</p>
+    </section>
+
+    <section id="view-details" class="view" hidden>
+      <div class="chosen">
+        <span class="chosen-name" data-fountain-name></span>
+        <span class="rating-badge" id="details-rating"></span>
+        <button type="button" class="text-link" data-goto="rate">change</button>
+      </div>
+      <h1>Anything to add?</h1>
+      <label for="note">Notes <span class="muted">(optional, <span id="note-count">0</span> / 500)</span></label>
+      <textarea id="note" rows="3" maxlength="500"></textarea>
+      <label for="visit-date">Visit date</label>
+      <input id="visit-date" type="date">
+      <label for="post-link">Instagram post link <span class="muted">(blank if not posted yet)</span></label>
+      <input id="post-link" type="url" placeholder="instagram.com/p/... or /reel/..." autocomplete="off">
+      <p class="muted">Reviewer: <strong data-admin-name></strong> (from your login). Goes live on the map at once.</p>
+      <p id="save-message" class="notice error" hidden></p>
+      <button type="button" id="save" class="btn-main">Save and publish</button>
+      <p class="step-label">Step 3 of 3</p>
+    </section>
+
+    <section id="view-done" class="view" hidden>
+      <h1>Saved! It's on the map.</h1>
+      <div class="card">
+        <div class="row">
+          <span class="card-title" data-fountain-name></span>
+          <span class="rating-badge" id="done-rating"></span>
+        </div>
+        <p id="done-summary" class="muted"></p>
+        <a id="done-map-link" class="btn-main" href="map.html">See it on the live map</a>
+        <p><button type="button" class="text-link" data-tab-link="recent">fix or delete</button></p>
+      </div>
+      <button type="button" class="btn-outline" data-action="new-review">Review another fountain</button>
+    </section>
+
+    <section id="view-waiting" class="view" hidden>
+      <h2>Public reviews (<span id="pending-count">0</span>)</h2>
+      <div id="pending-list"></div>
+      <h2>Our reviews without a post link (<span id="unlinked-count">0</span>)</h2>
+      <div id="unlinked-list"></div>
+      <p id="waiting-message" class="notice" hidden></p>
+    </section>
+
+    <section id="view-recent" class="view" hidden>
+      <h2>My last 10 reviews</h2>
+      <div id="recent-list"></div>
+      <p id="recent-message" class="notice" hidden></p>
+    </section>
+  </main>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.43.1/dist/umd/supabase.min.js"></script>
+  <script src="config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/review.js"></script>
+</body>
+</html>

@@ -5,12 +5,13 @@
 -- the site changes until the map and review pages are updated.
 --
 --   1. three "what the reviewer saw" columns on reviews, and the same
---      anti_freeze column on fountains; status_reported_at on fountains
+--      anti_freeze column on fountains; an open maintenance issue on
+--      fountains (issue_reported_at, issue_note)
 --   2. the latest review is the one with the newest visit date, not the
 --      newest approval time (fountain_latest_review_view and the two
 --      latest-rating lookups in fountain_overview_view)
 --   3. new overview columns: latest_visit_date, anti_freeze,
---      status_reported_at, current_issue
+--      issue_reported_at, issue_note
 --   4. fountain_reviews_view: every approved review of a fountain, for
 --      the "all visits" list (never reviewer_email or created_by)
 --   5. submit_public_review() takes the three details
@@ -27,9 +28,19 @@
 -- what that reviewer saw: an admin's answers are also written to the
 -- fountain by the review page; a visitor's are applied by an admin when
 -- the review is approved.
+--
+-- An issue is something out of the ordinary that needs maintenance (no
+-- water, low pressure, leaking, dirty). It is not a seasonal shut-off
+-- (anti_freeze, operational_status and season_note cover that) and not
+-- a permanent closure (operational_status = 'closed'). An admin opens an
+-- issue by applying a report, with a short note written by the admin,
+-- and clears it by setting both columns back to null. Nothing clears it
+-- automatically.
 alter table public.fountains
-  add column anti_freeze        boolean,   -- expected to stay on through the winter
-  add column status_reported_at date;      -- when operational_status was last set from a report
+  add column anti_freeze       boolean,   -- expected to stay on through the winter
+  add column issue_reported_at date,      -- null = no open issue
+  add column issue_note        text check (length(issue_note) <= 120),
+  add constraint fountains_issue_note_needs_date check (issue_note is null or issue_reported_at is not null);
 
 alter table public.reviews
   add column has_bottle_filler        boolean,
@@ -115,16 +126,8 @@ select
   -- new from here
   latest.visit_date as latest_visit_date,
   f.anti_freeze,
-  f.status_reported_at,
-  -- a reported problem still stands unless someone has rated the
-  -- fountain on a later visit (a rating means it was working that day)
-  case
-    when f.operational_status in ('closed', 'seasonal')
-     and (f.status_reported_at is null
-          or ratings.last_rated_visit_date is null
-          or ratings.last_rated_visit_date <= f.status_reported_at)
-    then f.operational_status
-  end as current_issue
+  f.issue_reported_at,
+  f.issue_note
 from public.fountains f
 left join public.cities c on c.id = f.city_id
 left join public.sources s on s.id = f.source_id

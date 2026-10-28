@@ -192,8 +192,10 @@ alter table public.reviews
   drop column is_wheelchair_accessible,
   drop column anti_freeze;
 
+-- the check constraint on issue_note goes with its columns
 alter table public.fountains
   drop column anti_freeze,
-  drop column status_reported_at;
+  drop column issue_reported_at,
+  drop column issue_note;
 
 commit;

@@ -118,7 +118,7 @@ declare
     ['read fountain_reviews_view',    'select count(*) from public.fountain_reviews_view'],
     ['pending review in fountain_reviews_view', 'select count(*) from public.fountain_reviews_view where review_text = ''rls test pending'''],
     ['read review detail columns',    'select count(has_bottle_filler) + count(is_wheelchair_accessible) + count(anti_freeze) + count(*) from public.reviews'],
-    ['write fountain detail columns', format('with x as (update public.fountains set anti_freeze = anti_freeze, status_reported_at = status_reported_at where id = %L returning 1) select count(*) from x', v_fountain)],
+    ['write fountain detail columns', format('with x as (update public.fountains set anti_freeze = anti_freeze, issue_reported_at = issue_reported_at, issue_note = issue_note where id = %L returning 1) select count(*) from x', v_fountain)],
     ['submit public review with details', format('select count(*) from (select public.submit_public_review(%L, 7.5, ''rls test'', null, null, null, true, false, null) as ok) x where ok', v_fountain)]
   ];
   i int;

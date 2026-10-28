@@ -17,6 +17,18 @@ $PSQL -c "insert into public.admins (user_id, display_name) values ('00000000-00
 # and one ordinary logged-in user
 $PSQL -c "insert into auth.users (id, email) values ('00000000-0000-0000-0000-00000000b0b0', 'user@test.local') on conflict do nothing;"
 
+# the real admins too, when the backup has them: an approved review
+# points at the admin who approved it (reviews.approved_by)
+if [ -f "$BACKUP_DIR/admins.json" ]; then
+  $PSQL <<SQL
+\set json \`cat "$BACKUP_DIR/admins.json"\`
+insert into auth.users (id, email)
+  select user_id, user_id::text || '@test.local' from json_populate_recordset(null::public.admins, :'json')
+  on conflict do nothing;
+insert into public.admins select * from json_populate_recordset(null::public.admins, :'json') on conflict do nothing;
+SQL
+fi
+
 # tables in dependency order; json_populate_recordset matches JSON keys to column names
 for table in cities sources fountains reviews; do
   # psql reads the file into the variable "json", then inserts every row

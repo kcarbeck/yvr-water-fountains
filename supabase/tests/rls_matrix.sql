@@ -52,13 +52,21 @@ insert into rls_expected values
   ('insert report directly',         'anon', 'no'),  ('insert report directly',         'user', 'no'),  ('insert report directly',         'admin', 'no'),
   ('update reports',                 'anon', 'no'),  ('update reports',                 'user', 'no'),  ('update reports',                 'admin', 'yes'),
   ('read public_average_rating',     'anon', 'yes'), ('read public_average_rating',     'user', 'yes'), ('read public_average_rating',     'admin', 'yes'),
-  ('pending review changes the map', 'anon', 'no'),  ('pending review changes the map', 'user', 'no'),  ('pending review changes the map', 'admin', 'no');
+  ('pending review changes the map', 'anon', 'no'),  ('pending review changes the map', 'user', 'no'),  ('pending review changes the map', 'admin', 'no'),
+  ('read fountain_reviews_view',     'anon', 'yes'), ('read fountain_reviews_view',     'user', 'yes'), ('read fountain_reviews_view',     'admin', 'yes'),
+  ('pending review in fountain_reviews_view', 'anon', 'no'), ('pending review in fountain_reviews_view', 'user', 'no'), ('pending review in fountain_reviews_view', 'admin', 'no'),
+  ('read review detail columns',     'anon', 'yes'), ('read review detail columns',     'user', 'yes'), ('read review detail columns',     'admin', 'yes'),
+  ('write fountain detail columns',  'anon', 'no'),  ('write fountain detail columns',  'user', 'no'),  ('write fountain detail columns',  'admin', 'yes'),
+  ('submit public review with details', 'anon', 'yes'), ('submit public review with details', 'user', 'yes'), ('submit public review with details', 'admin', 'yes');
 
 create temp table rls_results (test text, who text, actual text, detail text);
 grant all on rls_settings, rls_expected, rls_results to anon, authenticated;
 
 -- one report so the read/update report tests have a row to touch
 insert into public.reports (kind, details) values ('other', 'rls test');
+-- and one pending review, which the all-visits view must never show
+insert into public.reviews (fountain_id, author_type, status, rating, review_text)
+select id, 'public', 'pending', 5, 'rls test pending' from public.fountains order by id limit 1;
 
 
 -- ---------------------------------------------------------------------
@@ -106,7 +114,12 @@ declare
     ['read reports',                 'select count(*) from public.reports'],
     ['insert report directly',       format('with x as (insert into public.reports (fountain_id, kind) values (%L, ''other'') returning 1) select count(*) from x', v_fountain)],
     ['update reports',               'with x as (update public.reports set status = status returning 1) select count(*) from x'],
-    ['read public_average_rating',   'select count(*) from (select public_average_rating from public.fountain_overview_view) x']
+    ['read public_average_rating',   'select count(*) from (select public_average_rating from public.fountain_overview_view) x'],
+    ['read fountain_reviews_view',    'select count(*) from public.fountain_reviews_view'],
+    ['pending review in fountain_reviews_view', 'select count(*) from public.fountain_reviews_view where review_text = ''rls test pending'''],
+    ['read review detail columns',    'select count(has_bottle_filler) + count(is_wheelchair_accessible) + count(anti_freeze) + count(*) from public.reviews'],
+    ['write fountain detail columns', format('with x as (update public.fountains set anti_freeze = anti_freeze, status_reported_at = status_reported_at where id = %L returning 1) select count(*) from x', v_fountain)],
+    ['submit public review with details', format('select count(*) from (select public.submit_public_review(%L, 7.5, ''rls test'', null, null, null, true, false, null) as ok) x where ok', v_fountain)]
   ];
   i int;
 begin
@@ -156,10 +169,10 @@ begin
   end loop;
 end $$;
 
--- A pending review must not change the map view for anyone, admins
--- included (they can read pending reviews). For each visitor: read the
--- view, add pending reviews as the owner, read the view again, compare.
--- "yes" = the view changed.
+-- A pending review must not change the map view or the all-visits view
+-- for anyone, admins included (they can read pending reviews). For each
+-- visitor: read both views, add pending reviews as the owner, read them
+-- again, compare. "yes" = a view changed.
 do $$
 declare
   v_who     text;
@@ -182,7 +195,9 @@ begin
              else json_build_object('sub', case when v_who = 'admin' then v_admin else v_user end,
                                     'role', 'authenticated')::text end, true);
       execute case when v_who = 'anon' then 'set local role anon' else 'set local role authenticated' end;
-      select md5(json_agg(o order by o.id)::text) into v_before from public.fountain_overview_view o;
+      select md5(json_agg(o order by o.id)::text)
+             || (select md5(coalesce(json_agg(v order by v.id)::text, '')) from public.fountain_reviews_view v)
+      into v_before from public.fountain_overview_view o;
 
       reset role;
       insert into public.reviews (fountain_id, author_type, status, rating, visit_date, reviewed_at, created_by)
@@ -191,7 +206,9 @@ begin
              (v_unrated, 'public', 'pending', 0, current_date, now(), null);
 
       execute case when v_who = 'anon' then 'set local role anon' else 'set local role authenticated' end;
-      select md5(json_agg(o order by o.id)::text) into v_after from public.fountain_overview_view o;
+      select md5(json_agg(o order by o.id)::text)
+             || (select md5(coalesce(json_agg(v order by v.id)::text, '')) from public.fountain_reviews_view v)
+      into v_after from public.fountain_overview_view o;
       raise exception 'rls_test_done:%', case when v_before = v_after then 0 else 1 end;
     exception when others then
       if sqlerrm like 'rls_test_done:%' then

@@ -221,13 +221,14 @@
         const props = feature.properties || {};
         const kind = markKind(props);
         const rating = formatRating(props.rating);
-        const size = rating ? 22 : 12;
 
+        // a 22 px box for every pin (easy to tap); the mark inside is 14 px,
+        // or 22 px with the rating when zoomed in (map.html styles)
         const icon = L.divIcon({
           className: 'fountain-pin',
           html: buildMark(kind, rating),
-          iconSize: [size, size],
-          iconAnchor: [size / 2, size / 2]
+          iconSize: [22, 22],
+          iconAnchor: [11, 11]
         });
 
         // the title is what screen readers announce for a pin
@@ -359,7 +360,9 @@
     if (formatRating(fountain.rating)) {
       const ratingRow = el('div', 'info-rating-row');
       const latest = el('div', 'info-latest');
-      latest.append(el('div', 'info-latest-number', formatRating(fountain.rating)));
+      const number = el('div', 'info-latest-number', formatRating(fountain.rating));
+      number.append(el('span', 'info-out-of', '/10'));
+      latest.append(number);
       if (fountain.latest_visit_date) {
         latest.append(el('div', 'info-latest-date', 'last visited ' + formatDate(fountain.latest_visit_date)));
       }
@@ -367,7 +370,7 @@
       const visits = fountain.rating_count || 0;
       if (fountain.avg_rating !== null && fountain.avg_rating !== undefined) {
         const average = el('div', 'info-average', 'Average ');
-        average.append(el('strong', '', formatAverage(fountain.avg_rating)),
+        average.append(el('strong', '', formatAverage(fountain.avg_rating) + '/10'),
           document.createTextNode(' from ' + visits + (visits === 1 ? ' visit' : ' visits')));
         side.append(average);
       }
@@ -475,7 +478,8 @@
         const meta = el('div', 'info-visit-meta', formatDate(review.visit_date) + ' \u00B7 ' + reviewerName(review));
         const rating = formatRating(review.rating);
         if (rating) {
-          meta.append(document.createTextNode(' \u00B7 '), el('strong', '', rating));
+          meta.append(document.createTextNode(' '),
+            el('span', review.author_type === 'admin' ? 'info-visit-rating ours' : 'info-visit-rating', rating + '/10'));
         }
         item.append(meta);
         if (review.review_text) {
@@ -497,23 +501,31 @@
   }
 
   /**
-   * Review this fountain, Report an issue, and suggest a correction.
+   * Review this fountain, then a "Something wrong?" box holding both ways to
+   * tell us about a problem: Report an issue (it needs fixing) and suggest a
+   * correction (our info about it is wrong).
    */
   function buildActions(fountain) {
-    const actions = el('div', 'info-actions');
     const review = el('a', 'info-btn primary', 'Review this fountain');
     review.href = fountain.supabase_id ? 'review.html?fountain=' + encodeURIComponent(fountain.supabase_id) : 'review.html';
+
+    const problem = el('div', 'info-problem');
+    problem.append(el('div', 'info-problem-title', 'Something wrong?'));
+
+    const reportRow = el('div', 'info-problem-row');
     const report = el('a', 'info-btn secondary', 'Report an issue');
     report.href = mailtoLink('Issue at', fountain);
-    actions.append(review, report);
+    reportRow.append(report, el('span', '', 'No water, low pressure, leaking or dirty'));
 
     const correction = el('div', 'info-correction');
     const correctionLink = el('a', '', 'suggest a correction');
     correctionLink.href = mailtoLink('Correction for', fountain);
-    correction.append(el('span', '', 'Off for winter, wrong spot, wrong details?'), correctionLink);
+    correction.append(el('span', '', 'Off for winter, wrong spot or wrong details?'), correctionLink);
+
+    problem.append(reportRow, correction);
 
     const wrap = el('div', 'info-actions-wrap');
-    wrap.append(actions, correction);
+    wrap.append(review, problem);
     return wrap;
   }
 
@@ -612,7 +624,7 @@
    * a mark: one span styled by theme.css, with an optional rating inside.
    */
   function buildMark(kind, text) {
-    const mark = el('span', 'mark mark-' + kind, text);
+    const mark = el('span', 'mark mark-' + kind + (text ? ' has-rating' : ''), text);
     mark.setAttribute('aria-hidden', 'true');
     return mark;
   }
@@ -631,7 +643,7 @@
     return node;
   }
 
-  // 8 -> '8', 7.5 -> '7½' (to the nearest half point); no rating -> ''
+  // 8 -> '8', 7.5 -> '7.5' (to the nearest half point); no rating -> ''
   function formatRating(value) {
     if (value === null || value === undefined || value === '') {
       return '';
@@ -640,8 +652,7 @@
     if (!Number.isFinite(number)) {
       return '';
     }
-    const whole = Math.floor(number);
-    return number > whole ? whole + '\u00BD' : String(whole);
+    return Number.isInteger(number) ? String(number) : number.toFixed(1);
   }
 
   // 7.25 -> '7.3', 8.0 -> '8'

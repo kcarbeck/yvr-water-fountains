@@ -11,6 +11,8 @@
   --color-dark: #1a1a2e;
   --color-light: #f5f0ff;
   --color-info-bg: #fafbff;
+  --color-blue: #0796cf;        /* the blue in the header title */
+  --color-blue-light: #e3f3fb;  /* light blue fill */
 
   --font-display: 'Bungee Shade', cursive;
   --font-heading: 'Fredoka One', cursive;

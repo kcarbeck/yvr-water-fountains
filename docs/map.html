@@ -519,8 +519,9 @@ body {
 }
 
 /* ── Pins and legend (marks themselves are in theme.css) ── */
-/* pins grow as you zoom in (the zoom bands are set in map.js);
-   from the rating zoom, rated pins are bigger and show the latest rating */
+/* pins grow as you zoom in (the zoom bands are set in map.js); every pin is
+   the same size at a given zoom, and from the rating zoom rated pins show
+   the latest rating */
 .fountain-pin {
   display: flex;
   align-items: center;
@@ -540,18 +541,13 @@ body {
   border-width: 1.5px;
 }
 
-.show-ratings .fountain-pin .mark.has-rating {
+.show-ratings .fountain-pin .mark {
   width: 20px;
   height: 20px;
   font-size: 8px;
 }
 
 .pins-close .fountain-pin .mark {
-  width: 15px;
-  height: 15px;
-}
-
-.pins-close .fountain-pin .mark.has-rating {
   width: 24px;
   height: 24px;
   font-size: 10px;
@@ -726,6 +722,6 @@ body.sheet-open {
   <script src="js/api.js"></script>
   <script src="js/ui.js"></script>
   <script src="js/fountain-data.js?v=4"></script>
-  <script src="js/map.js?v=11"></script>
+  <script src="js/map.js?v=12"></script>
 </body>
 </html>

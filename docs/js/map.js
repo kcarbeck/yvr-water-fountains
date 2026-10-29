@@ -690,7 +690,7 @@
    * a mark: one span styled by theme.css, with an optional rating inside.
    */
   function buildMark(kind, text) {
-    const mark = el('span', 'mark mark-' + kind + (text ? ' has-rating' : ''), text);
+    const mark = el('span', 'mark mark-' + kind, text);
     mark.setAttribute('aria-hidden', 'true');
     return mark;
   }

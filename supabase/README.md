@@ -27,6 +27,7 @@ Everything that changes the live Supabase database (project `hnyktzfyquvmpthfwpv
 | `migrations/20261026013441_add_is_indoor.sql` | Adds an "indoor" label to fountains | Yes, 2026-10-25 |
 | `migrations/20261026013623_unique_instagram_links.sql` | Stops the same Instagram post being added twice | Yes, 2026-10-25 |
 | `migrations/20261027000642_public_reviews.sql` | Settings switch, public review and report functions, reports table, `reviews.created_by`, admin/public rating columns on the map views | Yes, 2026-10-26 |
+| `migrations/20261029022728_fountain_info.sql` | Latest review by visit date; `anti_freeze` and an open maintenance issue (`issue_reported_at`, `issue_note`) on fountains; detail columns on reviews; `fountain_reviews_view` for the all-visits list; `submit_public_review` takes the details | Yes, 2026-10-28 |
 | `data_fixes/2026-10-06_review_link_fixes.sql` | Corrects reviews linked to the wrong fountain; adds the two 2025 links | Yes, 2026-10-25 |
 | `data_fixes/2026-10-20_repair_garbled_emoji.sql` | Repairs garbled emoji in 4 captions | Yes, 2026-10-25 |
 | `data_fixes/2026-10-25_backlog_import.sql` | Adds the 17 backlog posts and 11 new fountains | Yes, 2026-10-25 |

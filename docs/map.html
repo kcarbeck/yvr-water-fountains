@@ -600,8 +600,11 @@ body {
 
 /* sheet open on a phone: the page behind does not scroll */
 body.sheet-open {
+  position: fixed;   /* top is set from map.js to keep the page where it was */
+  left: 0;
+  right: 0;
+  width: 100%;
   overflow: hidden;
-  overscroll-behavior: none;
 }
 
 /* ── Footer ── */
@@ -655,7 +658,11 @@ body.sheet-open {
   .nav-link { font-size: 0.85rem; }
   #map { height: calc(100vh - 100px); }
   .leaflet-popup { display: none !important; }
-  .bottom-sheet { max-height: 85vh; max-height: 85dvh; }
+  .bottom-sheet {
+    max-height: 85vh;
+    max-height: 85dvh;   /* the visible screen, not counting Safari's toolbars */
+    padding-bottom: env(safe-area-inset-bottom);
+  }
   .bottom-sheet-content { padding: 0 15px 15px; }
   .footer { padding: 0.75rem 1rem; }
   .footer-links { gap: 1rem; }
@@ -722,6 +729,6 @@ body.sheet-open {
   <script src="js/api.js"></script>
   <script src="js/ui.js"></script>
   <script src="js/fountain-data.js?v=4"></script>
-  <script src="js/map.js?v=12"></script>
+  <script src="js/map.js?v=13"></script>
 </body>
 </html>

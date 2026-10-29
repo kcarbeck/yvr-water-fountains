@@ -28,7 +28,8 @@
     map: null,
     markerById: new Map(),
     fountains: [],
-    currentFountain: null
+    currentFountain: null,
+    pageScrollY: 0
   };
 
   const dom = {
@@ -142,26 +143,19 @@
       return;
     }
 
-    dom.bottomSheet.addEventListener('touchstart', (event) => {
-      dom.bottomSheet.startY = event.touches[0].pageY;
-    }, { passive: true });
-
-    dom.bottomSheet.addEventListener('touchmove', (event) => {
-      if (dom.bottomSheet.scrollTop === 0 && event.touches[0].pageY > dom.bottomSheet.startY) {
-        event.preventDefault();
-      }
-    }, { passive: false });
-
+    // Swipe down to close, but only when the swipe starts with the sheet
+    // scrolled to its top (otherwise the swipe is scrolling the reviews back up).
+    // The listeners are passive: they never block the sheet's own scrolling.
     let swipeStartY = 0;
+    let startedAtTop = false;
     dom.bottomSheet.addEventListener('touchstart', (event) => {
       swipeStartY = event.touches[0].clientY;
+      startedAtTop = dom.bottomSheet.scrollTop <= 0;
     }, { passive: true });
 
     dom.bottomSheet.addEventListener('touchend', (event) => {
-      const swipeEndY = event.changedTouches[0].clientY;
-      const diffY = swipeStartY - swipeEndY;
-
-      if (diffY < -100 && dom.bottomSheet.scrollTop < 20) {
+      const movedDown = event.changedTouches[0].clientY - swipeStartY;
+      if (startedAtTop && movedDown > 100) {
         hideBottomSheet();
       }
     }, { passive: true });
@@ -623,7 +617,19 @@
    * so a swipe on the sheet scrolls the sheet.
    */
   function setBackgroundLocked(locked) {
-    document.body.classList.toggle('sheet-open', locked);
+    // iPhone Safari ignores overflow: hidden on the page for touch scrolling,
+    // so the page is pinned in place (position: fixed) and put back on close
+    const body = document.body;
+    if (locked && !body.classList.contains('sheet-open')) {
+      state.pageScrollY = window.scrollY;
+      body.style.top = '-' + state.pageScrollY + 'px';
+      body.classList.add('sheet-open');
+    } else if (!locked && body.classList.contains('sheet-open')) {
+      body.classList.remove('sheet-open');
+      body.style.top = '';
+      window.scrollTo(0, state.pageScrollY || 0);
+    }
+
     const handlers = [state.map.dragging, state.map.touchZoom, state.map.doubleClickZoom, state.map.scrollWheelZoom];
     handlers.forEach((handler) => {
       if (handler) {

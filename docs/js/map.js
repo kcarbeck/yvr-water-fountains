@@ -7,6 +7,7 @@
   const CONTACT_EMAIL = 'yvrwaterfountains@gmail.com';   // "Report an issue" and "suggest a correction" open an email to this address
   const RATING_NUMBERS_FROM_ZOOM = 15;                    // pins show the latest rating from this zoom in
   const POPUP_MAX_HEIGHT = 440;                           // desktop popup scrolls beyond this many pixels
+  const LONG_REVIEW_CHARACTERS = 240;                     // longer reviews are cut short with "Read more"
 
   const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
@@ -390,21 +391,27 @@
       info.append(el('div', 'info-issue', issue));
     }
 
+    // Actions sit at the top so they are reachable without scrolling past the reviews
+    info.append(buildActions(fountain));
     info.append(buildDetails(fountain));
 
-    // Every approved review, newest visit first
+    // Reviews: every approved review, newest visit first
     if (fountain.rating_count) {
-      const visitList = el('div', 'info-visits');
-      visitList.append(el('div', 'info-visits-note', 'Loading visits\u2026'));
-      info.append(visitList);
-      loadVisits(fountain, visitList).then(() => {
+      const reviews = el('section', 'info-reviews');
+      const heading = el('div', 'info-reviews-head');
+      heading.append(el('h3', 'info-reviews-title', 'Reviews'),
+        el('span', 'info-reviews-count', fountain.rating_count + ' \u00B7 newest first'));
+      const list = el('div', 'info-review-list');
+      list.append(el('div', 'info-reviews-note', 'Loading reviews\u2026'));
+      reviews.append(heading, list);
+      info.append(reviews);
+      loadReviews(fountain, list).then(() => {
         if (onVisitsLoaded) {
           onVisitsLoaded();
         }
       });
     }
 
-    info.append(buildActions(fountain));
     return info;
   }
 
@@ -467,30 +474,55 @@
   }
 
   /**
-   * reads the approved reviews and fills the visits list.
+   * reads the approved reviews and fills the list, one card per review.
    */
-  async function loadVisits(fountain, container) {
+  async function loadReviews(fountain, list) {
     try {
       const reviews = await FountainData.fetchReviews(fountain.supabase_id);
-      container.replaceChildren(el('div', 'info-visits-title', reviews.length === 1 ? '1 visit' : reviews.length + ' visits'));
-      reviews.forEach((review) => {
-        const item = el('div', 'info-visit');
-        const meta = el('div', 'info-visit-meta', formatDate(review.visit_date) + ' \u00B7 ' + reviewerName(review));
-        const rating = formatRating(review.rating);
-        if (rating) {
-          meta.append(document.createTextNode(' '),
-            el('span', review.author_type === 'admin' ? 'info-visit-rating ours' : 'info-visit-rating', rating + '/10'));
-        }
-        item.append(meta);
-        if (review.review_text) {
-          item.append(el('div', 'info-visit-text', review.review_text));
-        }
-        container.append(item);
-      });
+      list.replaceChildren(...reviews.map(buildReviewCard));
     } catch (error) {
       console.warn('could not load reviews', error);
-      container.replaceChildren(el('div', 'info-visits-note', 'Could not load the visits right now.'));
+      list.replaceChildren(el('div', 'info-reviews-note', 'Could not load the reviews right now.'));
     }
+  }
+
+  /**
+   * one review: rating chip, who, and date on one line; the text beneath,
+   * cut to a few lines with "Read more" when it is long.
+   */
+  function buildReviewCard(review) {
+    const card = el('article', 'info-review');
+
+    const top = el('div', 'info-review-top');
+    const rating = formatRating(review.rating);
+    if (rating) {
+      top.append(el('span', review.author_type === 'admin' ? 'info-review-rating ours' : 'info-review-rating', rating + '/10'), ' ');
+    }
+    // the spaces keep the parts apart for screen readers; the layout ignores them
+    top.append(el('span', 'info-review-who', reviewerName(review)), ' ',
+      el('span', 'info-review-date', formatDate(review.visit_date)));
+    card.append(top);
+
+    if (review.review_text) {
+      const text = el('div', 'info-review-text', review.review_text);
+      card.append(text);
+      if (isLongReview(review.review_text)) {
+        text.classList.add('clamped');
+        const more = el('button', 'info-review-more', 'Read more');
+        more.type = 'button';
+        more.addEventListener('click', () => {
+          const clamped = text.classList.toggle('clamped');
+          more.textContent = clamped ? 'Read more' : 'Show less';
+        });
+        card.append(more);
+      }
+    }
+    return card;
+  }
+
+  // roughly more than the five lines a clamped review shows
+  function isLongReview(text) {
+    return text.length > LONG_REVIEW_CHARACTERS || text.split('\n').length > 5;
   }
 
   function reviewerName(review) {
@@ -501,32 +533,30 @@
   }
 
   /**
-   * Review this fountain, then a "Something wrong?" box holding both ways to
-   * tell us about a problem: Report an issue (it needs fixing) and suggest a
-   * correction (our info about it is wrong).
+   * Review this fountain across the full width, then two equal buttons for
+   * telling us about a problem, each with what it is for written beneath.
    */
   function buildActions(fountain) {
     const review = el('a', 'info-btn primary', 'Review this fountain');
     review.href = fountain.supabase_id ? 'review.html?fountain=' + encodeURIComponent(fountain.supabase_id) : 'review.html';
 
-    const problem = el('div', 'info-problem');
-    problem.append(el('div', 'info-problem-title', 'Something wrong?'));
+    const problems = el('div', 'info-problems');
+    problems.append(
+      buildProblemButton('Report an issue', 'Needs fixing: no water, low pressure, leaking or dirty', mailtoLink('Issue at', fountain)),
+      buildProblemButton('Suggest a correction', 'Our info is wrong: off for winter, wrong spot or details', mailtoLink('Correction for', fountain))
+    );
 
-    const reportRow = el('div', 'info-problem-row');
-    const report = el('a', 'info-btn secondary', 'Report an issue');
-    report.href = mailtoLink('Issue at', fountain);
-    reportRow.append(report, el('span', '', 'No water, low pressure, leaking or dirty'));
-
-    const correction = el('div', 'info-correction');
-    const correctionLink = el('a', '', 'suggest a correction');
-    correctionLink.href = mailtoLink('Correction for', fountain);
-    correction.append(el('span', '', 'Off for winter, wrong spot or wrong details?'), correctionLink);
-
-    problem.append(reportRow, correction);
-
-    const wrap = el('div', 'info-actions-wrap');
-    wrap.append(review, problem);
+    const wrap = el('div', 'info-actions');
+    wrap.append(review, problems);
     return wrap;
+  }
+
+  function buildProblemButton(label, meaning, href) {
+    const item = el('div', 'info-problem');
+    const button = el('a', 'info-btn secondary', label);
+    button.href = href;
+    item.append(button, el('div', 'info-problem-meaning', meaning));
+    return item;
   }
 
   function mailtoLink(subjectStart, fountain) {

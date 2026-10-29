@@ -348,74 +348,30 @@ body {
   color: #3d3d55;
 }
 
-.info-visits {
+/* Actions: Review this fountain, then two equal problem buttons */
+.info-actions {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  border-top: 2px dotted var(--color-secondary);
-  padding-top: 10px;
-  line-height: 1.4;
+  gap: 10px;
 }
 
-.info-visits-title {
-  font-family: var(--font-subtitle);
-  font-weight: 700;
-}
-
-.info-visit-meta,
-.info-visits-note {
-  color: #3d3d55;
-}
-
-.info-visit-rating {
-  display: inline-block;
-  padding: 0 7px;
-  border-radius: 999px;
-  font-weight: 700;
-  color: var(--color-dark);
-  background: #ffe1f0;   /* public: pink tint */
-}
-
-.info-visit-rating.ours {
-  background: var(--color-primary);
-}
-
-.info-visit-text {
-  white-space: pre-line;
-  overflow-wrap: anywhere;
-}
-
-.info-actions-wrap {
-  display: flex;
-  flex-direction: column;
+.info-problems {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 10px;
 }
 
 .info-problem {
-  background: var(--color-light);
-  border: 2px dashed var(--color-tertiary);
-  border-radius: 14px;
-  padding: 10px 12px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 4px;
 }
 
-.info-problem-title {
-  font-family: var(--font-subtitle);
-  font-weight: 700;
-}
-
-.info-problem-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 0.75rem;
+.info-problem-meaning {
+  font-size: 0.72rem;
+  line-height: 1.3;
   color: #3d3d55;
-}
-
-.info-problem-row .info-btn {
-  flex: none;
+  text-align: center;
 }
 
 .fountain-info .info-btn {
@@ -440,26 +396,112 @@ body {
 .info-btn.secondary {
   background: #fff;
   border: 3px solid var(--color-tertiary);
-  padding: 4px 14px;
+  font-size: 0.95rem;
 }
 
-.info-correction {
+/* Reviews: one card each, newest first */
+.info-reviews {
   display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 2px 8px;
+  flex-direction: column;
+  gap: 8px;
+  border-top: 2px dotted var(--color-secondary);
+  padding-top: 10px;
+}
+
+.info-reviews-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.info-reviews-title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: normal;
+}
+
+.info-reviews-count,
+.info-reviews-note {
   font-size: 0.75rem;
   color: #3d3d55;
 }
 
-.fountain-info .info-correction a {
-  font-family: 'Courier New', monospace;
+.info-review-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.info-review {
+  background: #fff;
+  border: 1.5px solid #e6d9ff;
+  border-radius: 12px;
+  padding: 10px 12px;
+  line-height: 1.4;
+}
+
+.info-review-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.info-review-rating {
+  flex: none;
+  padding: 1px 8px;
+  border-radius: 999px;
   font-weight: 700;
-  font-size: 0.85rem;
   color: var(--color-dark);
-  text-decoration: none;
-  border-bottom: 2px dotted var(--color-secondary);
+  background: #ffe1f0;   /* public: pink tint */
+}
+
+.info-review-rating.ours {
+  background: var(--color-primary);
+}
+
+.info-review-who {
+  flex: 1;
+  min-width: 0;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.info-review-date {
+  flex: none;
+  font-size: 0.75rem;
+  color: #3d3d55;
+}
+
+.info-review-text {
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+}
+
+.info-review-text.clamped {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+  line-clamp: 5;
+  overflow: hidden;
+}
+
+.info-review-more {
+  margin-top: 4px;
   padding: 6px 0;
+  background: none;
+  border: none;
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-dark);
+  text-decoration: underline;
+  text-decoration-color: var(--color-blue);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+  cursor: pointer;
 }
 
 /* ── Pins and legend (marks themselves are in theme.css) ── */
@@ -646,6 +688,6 @@ body {
   <script src="js/api.js"></script>
   <script src="js/ui.js"></script>
   <script src="js/fountain-data.js?v=3"></script>
-  <script src="js/map.js?v=9"></script>
+  <script src="js/map.js?v=10"></script>
 </body>
 </html>

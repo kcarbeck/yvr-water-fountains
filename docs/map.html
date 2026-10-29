@@ -126,6 +126,9 @@ body {
 
 /* ── Bottom sheet ── */
 .bottom-sheet {
+  overscroll-behavior: contain;   /* scrolling stops at the sheet's ends, never moves the page */
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
   position: fixed;
   bottom: 0;
   left: 0;
@@ -469,6 +472,17 @@ body {
   overflow-wrap: anywhere;
 }
 
+.fountain-info .info-review-post {
+  font-weight: 600;
+  font-size: 0.75rem;
+  color: var(--color-dark);
+  text-decoration: underline;
+  text-decoration-color: var(--color-blue);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 2px;
+  white-space: nowrap;
+}
+
 .info-review-date {
   flex: none;
   font-size: 0.75rem;
@@ -505,7 +519,8 @@ body {
 }
 
 /* ── Pins and legend (marks themselves are in theme.css) ── */
-/* every pin is the same 14 px mark; zoomed in, rated pins grow to 22 px to fit the rating */
+/* pins grow as you zoom in (the zoom bands are set in map.js);
+   from the rating zoom, rated pins are bigger and show the latest rating */
 .fountain-pin {
   display: flex;
   align-items: center;
@@ -513,16 +528,33 @@ body {
 }
 
 .fountain-pin .mark {
-  width: 14px;
-  height: 14px;
+  width: 12px;
+  height: 12px;
   margin: 0;
   font-size: 0;
 }
 
+.pins-far .fountain-pin .mark {
+  width: 9px;
+  height: 9px;
+  border-width: 1.5px;
+}
+
 .show-ratings .fountain-pin .mark.has-rating {
-  width: 22px;
-  height: 22px;
-  font-size: 9px;
+  width: 20px;
+  height: 20px;
+  font-size: 8px;
+}
+
+.pins-close .fountain-pin .mark {
+  width: 15px;
+  height: 15px;
+}
+
+.pins-close .fountain-pin .mark.has-rating {
+  width: 24px;
+  height: 24px;
+  font-size: 10px;
 }
 
 .map-legend .mark {
@@ -568,6 +600,12 @@ body {
 .overlay.active {
   opacity: 1;
   visibility: visible;
+}
+
+/* sheet open on a phone: the page behind does not scroll */
+body.sheet-open {
+  overflow: hidden;
+  overscroll-behavior: none;
 }
 
 /* ── Footer ── */
@@ -621,7 +659,7 @@ body {
   .nav-link { font-size: 0.85rem; }
   #map { height: calc(100vh - 100px); }
   .leaflet-popup { display: none !important; }
-  .bottom-sheet { max-height: 85vh; }
+  .bottom-sheet { max-height: 85vh; max-height: 85dvh; }
   .bottom-sheet-content { padding: 0 15px 15px; }
   .footer { padding: 0.75rem 1rem; }
   .footer-links { gap: 1rem; }
@@ -687,7 +725,7 @@ body {
   <script src="config.js"></script>
   <script src="js/api.js"></script>
   <script src="js/ui.js"></script>
-  <script src="js/fountain-data.js?v=3"></script>
-  <script src="js/map.js?v=10"></script>
+  <script src="js/fountain-data.js?v=4"></script>
+  <script src="js/map.js?v=11"></script>
 </body>
 </html>

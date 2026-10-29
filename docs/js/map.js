@@ -5,7 +5,11 @@
 
   // Settings
   const CONTACT_EMAIL = 'yvrwaterfountains@gmail.com';   // "Report an issue" and "suggest a correction" open an email to this address
-  const RATING_NUMBERS_FROM_ZOOM = 15;                    // pins show the latest rating from this zoom in
+  // Pin sizes follow the zoom (sizes are in map.html): small dots when zoomed out,
+  // the latest rating inside rated pins from RATING_NUMBERS_FROM_ZOOM, bigger pins from CLOSE_ZOOM
+  const FAR_ZOOM = 11;                                    // at this zoom and out: smallest dots
+  const RATING_NUMBERS_FROM_ZOOM = 13;                    // pins show the latest rating from this zoom in
+  const CLOSE_ZOOM = 15;                                  // from this zoom in: biggest pins
   const POPUP_MAX_HEIGHT = 440;                           // desktop popup scrolls beyond this many pixels
   const LONG_REVIEW_CHARACTERS = 240;                     // longer reviews are cut short with "Read more"
 
@@ -223,13 +227,13 @@
         const kind = markKind(props);
         const rating = formatRating(props.rating);
 
-        // a 22 px box for every pin (easy to tap); the mark inside is 14 px,
-        // or 22 px with the rating when zoomed in (map.html styles)
+        // a 26 px box for every pin (easy to tap); the mark inside it changes
+        // size with the zoom (map.html styles)
         const icon = L.divIcon({
           className: 'fountain-pin',
           html: buildMark(kind, rating),
-          iconSize: [22, 22],
-          iconAnchor: [11, 11]
+          iconSize: [26, 26],
+          iconAnchor: [13, 13]
         });
 
         // the title is what screen readers announce for a pin
@@ -289,11 +293,15 @@
   }
 
   /**
-   * hides the rating numbers on pins below RATING_NUMBERS_FROM_ZOOM.
+   * tells the stylesheet which zoom band the map is in, so pins grow as you zoom in.
    */
   function registerRatingNumbers() {
     const update = () => {
-      state.map.getContainer().classList.toggle('show-ratings', state.map.getZoom() >= RATING_NUMBERS_FROM_ZOOM);
+      const zoom = state.map.getZoom();
+      const container = state.map.getContainer();
+      container.classList.toggle('pins-far', zoom <= FAR_ZOOM);
+      container.classList.toggle('show-ratings', zoom >= RATING_NUMBERS_FROM_ZOOM);
+      container.classList.toggle('pins-close', zoom >= CLOSE_ZOOM);
     };
     state.map.on('zoomend', update);
     update();
@@ -499,8 +507,16 @@
       top.append(el('span', review.author_type === 'admin' ? 'info-review-rating ours' : 'info-review-rating', rating + '/10'), ' ');
     }
     // the spaces keep the parts apart for screen readers; the layout ignores them
-    top.append(el('span', 'info-review-who', reviewerName(review)), ' ',
-      el('span', 'info-review-date', formatDate(review.visit_date)));
+    const who = el('span', 'info-review-who', reviewerName(review));
+    const post = review.author_type === 'admin' ? safeUrl(review.instagram_url) : null;
+    if (post) {
+      const link = el('a', 'info-review-post', 'see post');
+      link.href = post;
+      link.target = '_blank';
+      link.rel = 'noopener';
+      who.append(' ', link);
+    }
+    top.append(who, ' ', el('span', 'info-review-date', formatDate(review.visit_date)));
     card.append(top);
 
     if (review.review_text) {
@@ -585,6 +601,7 @@
     dom.bottomSheet.scrollTop = 0;
     dom.bottomSheet.classList.add('active');
     dom.overlay.classList.add('active');
+    setBackgroundLocked(true);
   }
 
   /**
@@ -597,7 +614,26 @@
 
     dom.bottomSheet.classList.remove('active');
     dom.overlay.classList.remove('active');
+    setBackgroundLocked(false);
     state.currentFountain = null;
+  }
+
+  /**
+   * while the sheet is open, the page and the map behind it must not move,
+   * so a swipe on the sheet scrolls the sheet.
+   */
+  function setBackgroundLocked(locked) {
+    document.body.classList.toggle('sheet-open', locked);
+    const handlers = [state.map.dragging, state.map.touchZoom, state.map.doubleClickZoom, state.map.scrollWheelZoom];
+    handlers.forEach((handler) => {
+      if (handler) {
+        if (locked) {
+          handler.disable();
+        } else {
+          handler.enable();
+        }
+      }
+    });
   }
 
   // ---------------------------------------------------------------------

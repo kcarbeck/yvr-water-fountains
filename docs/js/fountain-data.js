@@ -241,7 +241,7 @@
 
     const { data, error } = await client
       .from('fountain_reviews_view')
-      .select('id, visit_date, author_type, reviewer_name, rating, review_text')
+      .select('id, visit_date, author_type, reviewer_name, rating, review_text, instagram_url')
       .eq('fountain_id', fountainId)
       .order('visit_date', { ascending: false })
       .order('created_at', { ascending: false });

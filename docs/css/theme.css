@@ -85,3 +85,36 @@
 .cta-btn:hover {
   opacity: 0.9;
 }
+
+/* ── Marks: who reviewed a fountain (same on map, legend, sheet and lists) ── */
+.mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 12px;
+  height: 12px;
+  flex: none;
+  box-sizing: border-box;
+  border-radius: 50%;
+  border: 2px solid var(--color-dark);
+  color: var(--color-dark);
+  font-family: var(--font-body);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.mark-ours { background: var(--color-primary); }
+.mark-public { background: var(--color-secondary); }
+.mark-both { background: var(--color-primary); box-shadow: 0 0 0 2px var(--color-secondary); margin: 0 2px; }
+.mark-none { background: var(--color-tertiary); }
+.mark-issue { background: #d9d9e3; }
+
+.mark-issue::after {
+  content: '';
+  position: absolute;
+  width: 85%;
+  height: 2px;
+  background: var(--color-dark);
+  transform: rotate(-45deg);
+}

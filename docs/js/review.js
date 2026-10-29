@@ -831,7 +831,7 @@
       return 'Not reviewed yet';
     }
     const who = fountain.latest_review_author_type === 'admin' ? 'by us' : 'public';
-    const when = fountain.latest_reviewed_at ? ', ' + formatTimestamp(fountain.latest_reviewed_at) : '';
+    const when = fountain.latest_visit_date ? ', ' + formatDate(fountain.latest_visit_date) : '';
     return 'Latest ' + formatRating(fountain.latest_review_rating) + ' ' + who + when;
   }
 
@@ -871,15 +871,15 @@
     return new Date().toLocaleDateString('en-CA', { timeZone: TIME_ZONE });   // YYYY-MM-DD
   }
 
-  // '2026-10-14' -> '14 Oct 2026' without time zone shifts
+  // '2026-10-14' -> '14 Oct 2026', read straight from the date (no time zone shifts;
+  // fixed month names because some browsers write September as 'Sept')
   function formatDate(isoDate) {
     if (!isoDate) {
       return 'no date';
     }
     const [year, month, day] = isoDate.split('-').map(Number);
-    return new Date(Date.UTC(year, month - 1, day)).toLocaleDateString('en-GB', {
-      day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC'
-    });
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    return day + ' ' + months[month - 1] + ' ' + year;
   }
 
   function formatTimestamp(timestamp) {

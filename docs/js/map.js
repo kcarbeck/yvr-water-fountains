@@ -2,6 +2,22 @@
 
 (function () {
   const config = window.APP_CONFIG || {};
+
+  // Settings
+  const CONTACT_EMAIL = 'yvrwaterfountains@gmail.com';   // Report an issue and suggest a correction go here until the reports PR
+  const RATING_NUMBERS_FROM_ZOOM = 15;                    // pins show the latest rating from this zoom in
+
+  const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+  // Words beside a mark in the fountain info
+  const KIND_LABELS = {
+    ours: 'By us',
+    both: 'Us + public',
+    public: 'Public',
+    none: 'Not reviewed',
+    issue: 'Issue reported'
+  };
+
   const state = {
     map: null,
     markerById: new Map(),
@@ -35,6 +51,8 @@
       const data = await FountainData.fetchGeoData();
       state.fountains = data.features || [];
       placeFountainsOnMap(data);
+      addLegend();
+      registerRatingNumbers();
       focusFromHash();
     } catch (error) {
       handleLoadError(error);
@@ -170,66 +188,113 @@
   }
 
   /**
-   * returns marker styling based on review status.
-   * green = admin reviewed, orange = community reviewed, blue = unreviewed.
+   * which mark a fountain gets (the marks note on the design canvas):
+   * issue = open issue, ours = only our reviews, both = ours and public,
+   * public = only public reviews, none = not reviewed yet.
    */
-  function markerStyle(props) {
-    const adminCount = props.admin_review_count || 0;
-    const totalCount = props.rating_count || 0;
-    let color;
-
-    if (adminCount > 0) {
-      color = '#c8ff00';
-    } else if (totalCount > 0) {
-      color = '#ff69b4';
-    } else {
-      color = '#c5a3ff';
+  function markKind(fountain) {
+    if (fountain.issue_reported_at) {
+      return 'issue';
     }
-
-    return {
-      radius: isMobile() ? 6 : 5,
-      color: '#1a1a2e',
-      fillColor: color,
-      fillOpacity: 0.85,
-      weight: 1.5
-    };
+    const ours = (fountain.admin_review_count || 0) > 0;
+    const publicReviews = (fountain.public_review_count || 0) > 0;
+    if (ours && publicReviews) {
+      return 'both';
+    }
+    if (ours) {
+      return 'ours';
+    }
+    if (publicReviews || (fountain.rating_count || 0) > 0) {
+      return 'public';
+    }
+    return 'none';
   }
 
   /**
-   * draws markers using the geojson payload.
+   * draws one mark per fountain; rated fountains carry their latest rating.
    */
   function placeFountainsOnMap(geojson) {
     L.geoJSON(geojson, {
       pointToLayer: (feature, latlng) => {
         const props = feature.properties || {};
-        const style = markerStyle(props);
-        return L.circleMarker(latlng, style);
+        const kind = markKind(props);
+        const rated = props.rating !== null && props.rating !== undefined;
+        const size = rated || kind === 'issue' ? 22 : 12;
+
+        const icon = L.divIcon({
+          className: 'fountain-pin',
+          html: buildMark(kind, rated ? formatRating(props.rating) : ''),
+          iconSize: [size, size],
+          iconAnchor: [size / 2, size / 2]
+        });
+
+        return L.marker(latlng, {
+          icon,
+          title: props.name || 'Fountain',
+          zIndexOffset: kind === 'none' ? 0 : 500
+        });
       },
       onEachFeature: (feature, layer) => attachFountainBehavior(feature, layer)
     }).addTo(state.map);
   }
 
   /**
-   * adds click and popup behavior for each fountain marker.
+   * opens the fountain info: a bottom sheet on phones, a popup on wider screens.
    */
   function attachFountainBehavior(feature, layer) {
     const properties = feature.properties || {};
-    const latestInstagramPost = pickLatestInstagramPost(properties);
-    const latestPhotoUrl = latestInstagramPost ? getInstagramPhotoUrl(latestInstagramPost.url) : null;
-    const adminReview = isAdminReview(properties);
 
     if (isMobile()) {
-      layer.on('click', () => {
-        showBottomSheet(properties, latestInstagramPost, latestPhotoUrl, adminReview);
-      });
+      layer.on('click', () => showBottomSheet(properties));
     } else {
-      const popupContent = buildPopupContent(properties, latestInstagramPost, latestPhotoUrl, adminReview);
-      layer.bindPopup(popupContent);
+      // build the info once per opening; popup.update() then only resizes it
+      layer.bindPopup('', { maxWidth: 340, minWidth: 280 });
+      layer.on('popupopen', (event) => {
+        const popup = event.popup;
+        popup.setContent(buildFountainInfo(properties, () => popup.update()));
+      });
     }
 
     if (properties.id) {
       state.markerById.set(properties.id, layer);
     }
+  }
+
+  /**
+   * legend with the same marks as the pins.
+   */
+  function addLegend() {
+    const legend = L.control({ position: 'topright' });
+    legend.onAdd = () => {
+      const box = el('div', 'map-legend');
+      const rows = [
+        ['ours', 'Reviewed by us'],
+        ['public', 'Public reviews only'],
+        ['both', 'Both'],
+        ['none', 'Not reviewed yet'],
+        ['issue', 'Issue reported']
+      ];
+      rows.forEach(([kind, label]) => {
+        const row = el('div', 'map-legend-row');
+        row.append(buildMark(kind, ''), document.createTextNode(label));
+        box.append(row);
+      });
+      box.append(el('div', 'map-legend-note', 'Number = latest rating'));
+      L.DomEvent.disableClickPropagation(box);
+      return box;
+    };
+    legend.addTo(state.map);
+  }
+
+  /**
+   * hides the rating numbers on pins below RATING_NUMBERS_FROM_ZOOM.
+   */
+  function registerRatingNumbers() {
+    const update = () => {
+      state.map.getContainer().classList.toggle('show-ratings', state.map.getZoom() >= RATING_NUMBERS_FROM_ZOOM);
+    };
+    state.map.on('zoomend', update);
+    update();
   }
 
   /**
@@ -251,11 +316,7 @@
     if (isMobile()) {
       const fountain = state.fountains.find((feature) => (feature.properties || {}).id === hash);
       if (fountain) {
-        const properties = fountain.properties || {};
-        const latestInstagramPost = pickLatestInstagramPost(properties);
-        const latestPhotoUrl = latestInstagramPost ? getInstagramPhotoUrl(latestInstagramPost.url) : null;
-        const adminReview = isAdminReview(properties);
-        showBottomSheet(properties, latestInstagramPost, latestPhotoUrl, adminReview);
+        showBottomSheet(fountain.properties || {});
       }
     } else {
       marker.openPopup();
@@ -271,153 +332,208 @@
   }
 
   /**
-   * renders the popup markup for desktop visitors.
-   * every database string goes through escapeHtml or safeUrl.
+   * builds the fountain info shown in both the phone sheet and the desktop popup.
+   * every database string goes in with textContent (via el) or through safeUrl.
+   * onVisitsLoaded runs after the all-visits list arrives (the popup resizes).
    */
-  function buildPopupContent(fountain, latestInstagramPost, latestPhotoUrl, adminReview) {
-    const isReviewed = (fountain.admin_review_count || 0) > 0;
-    const isCommunity = !isReviewed && (fountain.rating_count || 0) > 0;
-    const typeClass = isReviewed ? ' reviewed' : isCommunity ? ' community-reviewed' : '';
+  function buildFountainInfo(fountain, onVisitsLoaded) {
+    const kind = markKind(fountain);
+    const info = el('div', 'fountain-info ' + kind);
 
-    let html = '<div class="popup-content' + typeClass + '">';
-
-    // Title with optional photo
-    if (latestPhotoUrl) {
-      html += '<img src="' + escapeHtml(latestPhotoUrl) + '" alt="Photo" style="width:80px;height:80px;border-radius:10px;float:right;margin-left:10px;object-fit:cover;" onerror="this.style.display=\'none\'">';
+    // Name, where it is, and who reviewed it
+    const head = el('div', 'info-head');
+    const titles = el('div', 'info-titles');
+    titles.append(el('div', 'info-title', fountain.name || 'Unnamed fountain'));
+    const location = sameText(fountain.location, fountain.name) ? null : fountain.location;
+    const where = [fountain.neighborhood, location].filter(Boolean).join(' \u00B7 ');
+    if (where) {
+      titles.append(el('div', 'info-subtitle', where));
     }
-    html += '<div class="popup-title">' + escapeHtml(fountain.name || 'Unnamed Fountain') + '</div>';
+    const badge = el('div', 'info-badge');
+    badge.append(buildMark(kind, ''), document.createTextNode(KIND_LABELS[kind]));
+    head.append(titles, badge);
+    info.append(head);
 
-    // Info section
-    html += '<div class="info-section">';
-    html += buildInfoRow('popup', 'Location', escapeHtml(fountain.location || fountain.address || '\u2014'));
-    html += buildInfoRow('popup', 'Neighbourhood', escapeHtml(fountain.neighborhood || '\u2014'));
-
-    if (fountain.avg_rating) {
-      const count = fountain.rating_count || 0;
-      const avg = Number.parseFloat(fountain.avg_rating).toFixed(1);
-      html += buildInfoRow('popup', 'Rating', '<span class="rating-badge">' + avg + '/10</span> (' + count + ' review' + (count !== 1 ? 's' : '') + ')');
-    }
-
-    html += buildInfoRow('popup', 'Operational', escapeHtml(formatOperational(fountain.currently_operational)));
-    if (fountain.is_indoor) {
-      html += buildInfoRow('popup', 'Indoor', 'Yes, may be locked outside opening hours');
-    }
-    html += buildInfoRow('popup', 'Pet Friendly', escapeHtml(formatPetFriendly(fountain.pet_friendly)));
-    html += '</div>';
-
-    // Caption
-    if (fountain.caption) {
-      const truncated = fountain.caption.length > 200 ? fountain.caption.slice(0, 200) + '...' : fountain.caption;
-      html += '<div class="caption-box">' + escapeHtml(truncated) + '</div>';
-    }
-
-    // Instagram link
-    if (latestInstagramPost && safeUrl(latestInstagramPost.url)) {
-      html += '<a href="' + escapeHtml(safeUrl(latestInstagramPost.url)) + '" target="_blank" rel="noopener" class="ig-link">@yvrwaterfountains post \u2192</a>';
-    }
-
-    // Public reviews are paused until the new review form ships
-    if (!fountain.rating) {
-      html += '<a href="https://www.instagram.com/yvrwaterfountains/" target="_blank" class="cta-btn">Not reviewed yet. Public reviews open soon!</a>';
-    }
-
-    html += '</div>';
-    return html;
-  }
-
-  /**
-   * renders the bottom sheet markup for mobile visitors.
-   */
-  function buildBottomSheetContent(fountain, latestInstagramPost, latestPhotoUrl, adminReview) {
-    let html = '';
-
-    // Header with optional photo
-    if (latestPhotoUrl) {
-      html += '<div class="sheet-header">';
-      html += '<img src="' + escapeHtml(latestPhotoUrl) + '" alt="Photo" class="sheet-photo" onerror="this.style.display=\'none\'">';
-      html += '<div class="sheet-header-text">';
+    // Latest rating, average, photo and post link
+    if (fountain.rating !== null && fountain.rating !== undefined) {
+      const ratingRow = el('div', 'info-rating-row');
+      const latest = el('div', 'info-latest');
+      latest.append(el('div', 'info-latest-number', formatRating(fountain.rating)));
+      if (fountain.latest_visit_date) {
+        latest.append(el('div', 'info-latest-date', 'last visited ' + formatDate(fountain.latest_visit_date)));
+      }
+      const side = el('div', 'info-rating-side');
+      const visits = fountain.rating_count || 0;
+      if (fountain.avg_rating !== null && fountain.avg_rating !== undefined) {
+        const average = el('div', 'info-average', 'Average ');
+        average.append(el('strong', '', formatAverage(fountain.avg_rating)),
+          document.createTextNode(' from ' + visits + (visits === 1 ? ' visit' : ' visits')));
+        side.append(average);
+      }
+      const post = buildPostLink(fountain);
+      if (post) {
+        side.append(post);
+      }
+      ratingRow.append(latest, side);
+      info.append(ratingRow);
     } else {
-      html += '<div style="margin-bottom:1rem;">';
+      info.append(el('div', 'info-unrated', 'Not reviewed yet'));
     }
 
-    html += '<div class="bottom-sheet-title">' + escapeHtml(fountain.name || 'Unnamed Fountain') + '</div>';
-    html += '<div class="sheet-subtitle">' + escapeHtml((fountain.neighborhood || '') + (fountain.location ? ' \u00B7 ' + fountain.location : '')) + '</div>';
-
-    if (fountain.avg_rating) {
-      html += '<span class="rating-badge" style="margin-top:0.25rem;display:inline-block;">' + Number.parseFloat(fountain.avg_rating).toFixed(1) + '/10</span>';
+    // Open issue (maintenance only; seasonal and closed are details)
+    if (fountain.issue_reported_at) {
+      const issue = 'Issue reported ' + formatDate(fountain.issue_reported_at) + (fountain.issue_note ? ': ' + fountain.issue_note : '');
+      info.append(el('div', 'info-issue', issue));
     }
 
-    if (latestPhotoUrl) {
-      html += '</div></div>';
+    info.append(buildDetails(fountain));
+
+    // Every approved review, newest visit first
+    const visitList = el('div', 'info-visits');
+    visitList.append(el('div', 'info-visits-note', fountain.rating_count ? 'Loading visits\u2026' : 'No reviews yet. Be the first.'));
+    info.append(visitList);
+    if (fountain.rating_count) {
+      loadVisits(fountain, visitList).then(() => {
+        if (onVisitsLoaded) {
+          onVisitsLoaded();
+        }
+      });
+    }
+
+    info.append(buildActions(fountain));
+    return info;
+  }
+
+  /**
+   * photo from the latest post (when the link allows one) and the post link.
+   */
+  function buildPostLink(fountain) {
+    const link = safeUrl(fountain.latest_review_author_type === 'admin' ? latestPostUrl(fountain) : null);
+    if (!link) {
+      return null;
+    }
+    const row = el('div', 'info-post');
+    const photoUrl = storedPhotoUrl(fountain);
+    if (photoUrl) {
+      const photo = document.createElement('img');
+      photo.className = 'info-photo';
+      photo.src = photoUrl;
+      photo.alt = 'Photo from the @yvrwaterfountains post';
+      photo.addEventListener('error', () => photo.remove());
+      row.append(photo);
+    }
+    const anchor = el('a', 'info-post-link', '@yvrwaterfountains post');
+    anchor.href = link;
+    anchor.target = '_blank';
+    anchor.rel = 'noopener';
+    row.append(anchor);
+    return row;
+  }
+
+  /**
+   * details, each Yes / No / Unknown, plus Closed or the season note when set.
+   */
+  function buildDetails(fountain) {
+    const details = el('div', 'info-details');
+    const addDetail = (label, value, wide) => {
+      const item = el('div', wide ? 'info-detail wide' : 'info-detail');
+      item.append(el('span', 'info-detail-label', label + ' '), el('strong', '', value));
+      details.append(item);
+    };
+
+    addDetail('Anti-freeze', yesNoUnknown(fountain.anti_freeze));
+    addDetail('Bottle filler', yesNoUnknown(fountain.bottle_filler));
+    addDetail('Accessible', yesNoUnknown(fountain.wheelchair_accessible));
+    addDetail('Pet friendly', yesNoUnknown(fountain.pet_friendly));
+    if (fountain.indoor === 'Yes') {
+      addDetail('Indoor', 'Yes, may be locked outside opening hours', true);
     } else {
-      html += '</div>';
+      addDetail('Indoor', yesNoUnknown(fountain.indoor));
     }
 
-    // Details section
-    html += '<div class="sheet-details">';
-    html += buildInfoRow('bottom-sheet', 'Operational', escapeHtml(formatOperational(fountain.currently_operational)));
-    if (fountain.is_indoor) {
-      html += buildInfoRow('bottom-sheet', 'Indoor', 'Yes, may be locked outside opening hours');
+    if (fountain.operational_status === 'closed') {
+      addDetail('Status', fountain.season_note ? 'Closed (' + fountain.season_note + ')' : 'Closed', true);
+    } else if (fountain.operational_status === 'seasonal') {
+      addDetail('Season', fountain.season_note || 'Seasonal', true);
     }
-    html += buildInfoRow('bottom-sheet', 'Pet Friendly', escapeHtml(formatPetFriendly(fountain.pet_friendly)));
-
-    if (fountain.rating) {
-      const reviewer = adminReview ? '@yvrwaterfountains' : (fountain.latest_reviewer || 'Anonymous');
-      html += buildInfoRow('bottom-sheet', 'Reviewed by', escapeHtml(reviewer));
-    }
-
-    if (fountain.wheelchair_accessible && fountain.wheelchair_accessible !== 'unknown') {
-      html += buildInfoRow('bottom-sheet', 'Wheelchair', escapeHtml(fountain.wheelchair_accessible));
-    }
-    html += '</div>';
-
-    // Caption
-    if (fountain.caption) {
-      html += '<div class="sheet-caption">' + escapeHtml(fountain.caption) + '</div>';
-    }
-
-    // Action buttons
-    html += '<div class="sheet-actions">';
-    if (latestInstagramPost && safeUrl(latestInstagramPost.url)) {
-      html += '<a href="' + escapeHtml(safeUrl(latestInstagramPost.url)) + '" target="_blank" rel="noopener" class="sheet-action-btn primary">View on Instagram</a>';
-    }
-    // Public reviews are paused until the new review form ships
-    html += '<a href="https://www.instagram.com/yvrwaterfountains/" target="_blank" class="sheet-action-btn secondary">Public reviews open soon</a>';
-    html += '</div>';
-
-    return html;
+    return details;
   }
 
   /**
-   * builds a labeled detail row for popups and sheets.
+   * reads the approved reviews and fills the visits list.
    */
-  function buildInfoRow(context, label, value) {
-    const baseClass = context === 'popup' ? 'popup' : 'bottom-sheet';
-    return '<div class="' + baseClass + '-info"><span class="' + baseClass + '-label">' + label + '</span><span class="' + baseClass + '-value">' + value + '</span></div>';
+  async function loadVisits(fountain, container) {
+    try {
+      const reviews = await FountainData.fetchReviews(fountain.supabase_id);
+      container.replaceChildren(el('div', 'info-visits-title', reviews.length === 1 ? '1 visit' : reviews.length + ' visits'));
+      reviews.forEach((review) => {
+        const item = el('div', 'info-visit');
+        const meta = el('div', 'info-visit-meta', formatDate(review.visit_date) + ' \u00B7 ' + reviewerName(review) + ' \u00B7 ');
+        meta.append(el('strong', '', formatRating(review.rating)));
+        item.append(meta);
+        if (review.review_text) {
+          item.append(el('div', 'info-visit-text', review.review_text));
+        }
+        container.append(item);
+      });
+    } catch (error) {
+      console.warn('could not load reviews', error);
+      container.replaceChildren(el('div', 'info-visits-note', 'Could not load the visits right now.'));
+    }
+  }
+
+  function reviewerName(review) {
+    if (review.author_type === 'admin') {
+      return '@yvrwaterfountains';
+    }
+    return review.reviewer_name || 'Anonymous';
   }
 
   /**
-   * shows the bottom sheet with detailed fountain information.
+   * Review this fountain, Report an issue, and suggest a correction.
    */
-  function showBottomSheet(fountain, latestInstagramPost, latestPhotoUrl, adminReview) {
+  function buildActions(fountain) {
+    const actions = el('div', 'info-actions');
+    const review = el('a', 'info-btn primary', 'Review this fountain');
+    review.href = fountain.supabase_id ? 'review.html?fountain=' + encodeURIComponent(fountain.supabase_id) : 'review.html';
+    const report = el('a', 'info-btn secondary', 'Report an issue');
+    report.href = mailtoLink('Issue at', fountain);
+    actions.append(review, report);
+
+    const correction = el('div', 'info-correction');
+    const correctionLink = el('a', '', 'suggest a correction');
+    correctionLink.href = mailtoLink('Correction for', fountain);
+    correction.append(el('span', '', 'Off for winter, wrong spot, wrong details?'), correctionLink);
+
+    const wrap = el('div', 'info-actions-wrap');
+    wrap.append(actions, correction);
+    return wrap;
+  }
+
+  function mailtoLink(subjectStart, fountain) {
+    const name = fountain.name || 'a fountain';
+    const body = 'Fountain: ' + name + '\nID: ' + (fountain.id || '') + '\n\nWhat we should know:\n';
+    return 'mailto:' + CONTACT_EMAIL + '?subject=' + encodeURIComponent(subjectStart + ' ' + name) + '&body=' + encodeURIComponent(body);
+  }
+
+  /**
+   * shows the bottom sheet with the fountain info.
+   */
+  function showBottomSheet(fountain) {
     if (!dom.bottomSheet || !dom.bottomSheetContent || !dom.overlay) {
       return;
     }
 
     state.currentFountain = fountain;
 
-    // Set color bar based on review type
+    // Colour bar follows the mark
     const colorBar = document.getElementById('sheet-color-bar');
     if (colorBar) {
-      colorBar.className = 'sheet-color-bar';
-      if ((fountain.admin_review_count || 0) > 0) {
-        colorBar.classList.add('reviewed');
-      } else if ((fountain.rating_count || 0) > 0) {
-        colorBar.classList.add('community-reviewed');
-      }
+      colorBar.className = 'sheet-color-bar ' + markKind(fountain);
     }
 
-    dom.bottomSheetContent.innerHTML = buildBottomSheetContent(fountain, latestInstagramPost, latestPhotoUrl, adminReview);
+    dom.bottomSheetContent.replaceChildren(buildFountainInfo(fountain));
+    dom.bottomSheet.scrollTop = 0;
     dom.bottomSheet.classList.add('active');
     dom.overlay.classList.add('active');
   }
@@ -463,94 +579,78 @@
   }
 
   /**
-   * picks the latest instagram post from the fountain payload.
+   * the post link of the latest review, if it has one.
    */
-  function pickLatestInstagramPost(fountain) {
-    if (!fountain.instagram_posts || fountain.instagram_posts.length === 0) {
-      return null;
-    }
-    return fountain.instagram_posts[0];
+  function latestPostUrl(fountain) {
+    const posts = fountain.instagram_posts || [];
+    return posts.length > 0 ? posts[0].url : null;
   }
 
   /**
-   * normalizes pet friendly values for display.
+   * the post's photo, only when a copy is kept in the project's Supabase Storage
+   * (Instagram's own image links expire within days).
    */
-  function formatPetFriendly(value) {
-    if (value === true) {
-      return 'Yes';
-    }
-    if (value === false) {
-      return 'No';
-    }
-    if (!value) {
-      return 'unknown';
-    }
-    if (typeof value === 'string') {
-      const lower = value.toLowerCase();
-      if (lower.includes('yes') || lower.includes('y')) {
-        return 'Yes';
-      }
-      if (lower.includes('no') || lower.includes('n')) {
-        return 'No';
-      }
-      if (lower === 'na' || lower === 'unknown') {
-        return 'unknown';
-      }
-    }
-    return 'unknown';
+  function storedPhotoUrl(fountain) {
+    const posts = fountain.instagram_posts || [];
+    const url = posts.length > 0 ? posts[0].photo_url : null;
+    const storage = (config.SUPABASE_URL || '') + '/storage/v1/object/public/';
+    return typeof url === 'string' && config.SUPABASE_URL && url.startsWith(storage) ? url : null;
   }
 
   /**
-   * normalizes operational values for display.
+   * a mark: one span styled by theme.css, with an optional rating inside.
    */
-  function formatOperational(value) {
-    if (value === true) {
-      return 'Yes';
-    }
-    if (value === false) {
-      return 'No';
-    }
-    if (!value) {
-      return 'unknown';
-    }
-    if (typeof value === 'string' && (value.toLowerCase() === 'na' || value.toLowerCase() === 'unknown')) {
-      return 'unknown';
-    }
-    return value;
+  function buildMark(kind, text) {
+    const mark = el('span', 'mark mark-' + kind, text);
+    mark.setAttribute('aria-hidden', 'true');
+    return mark;
   }
 
   /**
-   * derives instagram media urls from post links.
+   * creates an element with a class and optional text (text is never parsed as html).
    */
-  function getInstagramPhotoUrl(instagramUrl) {
-    if (!instagramUrl) {
-      return null;
+  function el(tag, className, text) {
+    const node = document.createElement(tag);
+    if (className) {
+      node.className = className;
     }
-    const match = instagramUrl.match(/\/p\/([^\/]+)\//);
-    if (match) {
-      const postId = match[1];
-      return `https://instagram.com/p/${postId}/media/?size=m`;
+    if (text !== undefined && text !== null) {
+      node.textContent = String(text);
     }
-    return null;
+    return node;
   }
 
-  /**
-   * a review is ours when the database says it was written by an admin.
-   */
-  function isAdminReview(fountain) {
-    return fountain.latest_review_author_type === 'admin';
+  // 8 -> '8', 7.5 -> '7½'
+  function formatRating(value) {
+    const number = Number(value);
+    if (!Number.isFinite(number)) {
+      return '';
+    }
+    const whole = Math.floor(number);
+    return number - whole >= 0.5 ? whole + '\u00BD' : String(whole);
   }
 
-  /**
-   * escapes text before it goes into html.
-   */
-  function escapeHtml(value) {
-    return String(value === null || value === undefined ? '' : value)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#39;');
+  // 7.25 -> '7.3', 8.0 -> '8'
+  function formatAverage(value) {
+    const rounded = Number(value).toFixed(1);
+    return rounded.endsWith('.0') ? rounded.slice(0, -2) : rounded;
+  }
+
+  // '2026-10-14' -> '14 Oct 2026', read straight from the date (no time zone shifts)
+  function formatDate(isoDate) {
+    if (!isoDate) {
+      return 'no date';
+    }
+    const [year, month, day] = String(isoDate).slice(0, 10).split('-').map(Number);
+    return day + ' ' + MONTHS[month - 1] + ' ' + year;
+  }
+
+  function sameText(a, b) {
+    return Boolean(a && b) && String(a).trim().toLowerCase() === String(b).trim().toLowerCase();
+  }
+
+  function yesNoUnknown(value) {
+    return value === 'Yes' || value === 'No' ? value : 'Unknown';
   }
 
   /**

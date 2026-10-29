@@ -129,12 +129,15 @@
       operational_status: record.operational_status,
       season_note: record.season_note,
       is_indoor: record.is_indoor === true,
+      indoor: formatAvailability(record.is_indoor),
       pet_friendly: formatPetFriendly(record.pet_friendly),
       pet_status: record.pet_friendly,
       avg_rating: averageRating,
       rating_count: record.approved_review_count || 0,
       admin_review_count: record.admin_review_count || 0,
+      public_review_count: record.public_review_count || 0,
       rating: latestRating,
+      latest_visit_date: record.latest_visit_date,
       latest_reviewer: deriveReviewer(record),
       latest_review_author_type: record.latest_review_author_type,
       latest_review_text: record.latest_review_text,
@@ -145,6 +148,9 @@
       instagram_posts: instagramPosts,
       wheelchair_accessible: formatAvailability(record.is_wheelchair_accessible),
       bottle_filler: formatAvailability(record.has_bottle_filler),
+      anti_freeze: formatAvailability(record.anti_freeze),
+      issue_reported_at: record.issue_reported_at,
+      issue_note: record.issue_note,
       last_verified_at: record.last_verified_at
     };
   }
@@ -224,6 +230,29 @@
     ];
   }
 
+  /**
+   * approved reviews of one fountain, newest visit first, for the all-visits list.
+   * fountainId is the database uuid (properties.supabase_id).
+   */
+  async function fetchReviews(fountainId) {
+    const client = typeof api.getClient === 'function' ? api.getClient() : null;
+    if (!client || !fountainId) {
+      throw new Error('reviews need the database');
+    }
+
+    const { data, error } = await client
+      .from('fountain_reviews_view')
+      .select('id, visit_date, author_type, reviewer_name, rating, review_text')
+      .eq('fountain_id', fountainId)
+      .order('visit_date', { ascending: false })
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      throw error;
+    }
+    return data || [];
+  }
+
   function clone(source) {
     if (!source) {
       return source;
@@ -236,6 +265,7 @@
 
   window.FountainData = {
     fetchGeoData,
+    fetchReviews,
     getPlainList
   };
 })();

@@ -16,7 +16,7 @@
     public: { legend: 'Public reviews only', badge: 'Public' },
     both: { legend: 'Both', badge: 'Us + public' },
     none: { legend: 'Not reviewed yet', badge: 'Not reviewed yet' },
-    issue: { legend: 'Issue reported', badge: 'Issue reported' }
+    issue: { legend: 'Issue reported or closed', badge: 'Issue reported' }
   };
 
   const state = {
@@ -189,12 +189,13 @@
   }
 
   /**
-   * which mark a fountain gets: issue = an open issue (whoever reviewed it),
+   * which mark a fountain gets: issue = an open issue or closed for good
+   * (whoever reviewed it),
    * ours = only our reviews, both = ours and public, public = only public
    * reviews, none = no approved review yet.
    */
   function markKind(fountain) {
-    if (fountain.issue_reported_at) {
+    if (fountain.issue_reported_at || fountain.operational_status === 'closed') {
       return 'issue';
     }
     const ours = (fountain.admin_review_count || 0) > 0;
@@ -349,7 +350,8 @@
       titles.append(el('div', 'info-subtitle', where));
     }
     const badge = el('div', 'info-badge');
-    badge.append(buildMark(kind, ''), document.createTextNode(KINDS[kind].badge));
+    const closedOnly = fountain.operational_status === 'closed' && !fountain.issue_reported_at;
+    badge.append(buildMark(kind, ''), document.createTextNode(closedOnly ? 'Closed' : KINDS[kind].badge));
     head.append(titles, badge);
     info.append(head);
 

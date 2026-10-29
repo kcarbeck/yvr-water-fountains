@@ -431,9 +431,13 @@ body {
   margin: 0;
 }
 
-/* below the rating zoom, pins hide their number */
+/* below the rating zoom, rated pins shrink and hide their number */
 .leaflet-container:not(.show-ratings) .fountain-pin .mark {
   font-size: 0;
+}
+
+.leaflet-container:not(.show-ratings) .fountain-pin .mark:not(.mark-none) {
+  transform: scale(0.7);
 }
 
 .map-legend {

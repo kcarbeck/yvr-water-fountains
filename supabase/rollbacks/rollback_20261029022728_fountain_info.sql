@@ -1,5 +1,5 @@
 -- =====================================================================
--- ROLLBACK for supabase/pending/fountain_info.sql
+-- ROLLBACK for supabase/migrations/20261029022728_fountain_info.sql
 -- Puts the two views back exactly as the migrations left them
 -- (fountain_latest_review_view from 20261021173926, the overview from
 -- 20261027000642), removes the all-visits view, restores the old

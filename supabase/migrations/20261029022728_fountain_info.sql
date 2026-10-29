@@ -16,7 +16,7 @@
 --      the "all visits" list (never reviewer_email or created_by)
 --   5. submit_public_review() takes the three details
 --
--- Rollback: supabase/rollbacks/rollback_fountain_info.sql
+-- Rollback: supabase/rollbacks/rollback_20261029022728_fountain_info.sql
 -- =====================================================================
 
 

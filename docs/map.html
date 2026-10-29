@@ -150,16 +150,16 @@ body {
   background: var(--color-tertiary);
 }
 
-.sheet-color-bar.ours,
-.sheet-color-bar.both {
+.sheet-color-bar.kind-ours,
+.sheet-color-bar.kind-both {
   background: var(--color-primary);
 }
 
-.sheet-color-bar.public {
+.sheet-color-bar.kind-public {
   background: var(--color-secondary);
 }
 
-.sheet-color-bar.issue {
+.sheet-color-bar.kind-issue {
   background: #d9d9e3;
 }
 
@@ -204,16 +204,16 @@ body {
   border-top: 4px solid var(--color-tertiary);
 }
 
-.leaflet-popup-content .fountain-info.ours,
-.leaflet-popup-content .fountain-info.both {
+.leaflet-popup-content .fountain-info.kind-ours,
+.leaflet-popup-content .fountain-info.kind-both {
   border-top-color: var(--color-primary);
 }
 
-.leaflet-popup-content .fountain-info.public {
+.leaflet-popup-content .fountain-info.kind-public {
   border-top-color: var(--color-secondary);
 }
 
-.leaflet-popup-content .fountain-info.issue {
+.leaflet-popup-content .fountain-info.kind-issue {
   border-top-color: #d9d9e3;
 }
 
@@ -349,11 +349,6 @@ body {
   line-height: 1.4;
 }
 
-.leaflet-popup-content .info-visits {
-  max-height: 220px;
-  overflow-y: auto;
-}
-
 .info-visits-title {
   font-family: var(--font-subtitle);
   font-weight: 700;
@@ -436,10 +431,9 @@ body {
   margin: 0;
 }
 
-/* below the rating zoom, rated pins shrink and hide their number */
-.leaflet-container:not(.show-ratings) .fountain-pin .mark:not(.mark-none) {
+/* below the rating zoom, pins hide their number */
+.leaflet-container:not(.show-ratings) .fountain-pin .mark {
   font-size: 0;
-  transform: scale(0.7);
 }
 
 .map-legend {

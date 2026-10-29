@@ -4,18 +4,19 @@
   const config = window.APP_CONFIG || {};
 
   // Settings
-  const CONTACT_EMAIL = 'yvrwaterfountains@gmail.com';   // Report an issue and suggest a correction go here until the reports PR
+  const CONTACT_EMAIL = 'yvrwaterfountains@gmail.com';   // "Report an issue" and "suggest a correction" open an email to this address
   const RATING_NUMBERS_FROM_ZOOM = 15;                    // pins show the latest rating from this zoom in
+  const POPUP_MAX_HEIGHT = 440;                           // desktop popup scrolls beyond this many pixels
 
   const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-  // Words beside a mark in the fountain info
-  const KIND_LABELS = {
-    ours: 'By us',
-    both: 'Us + public',
-    public: 'Public',
-    none: 'Not reviewed',
-    issue: 'Issue reported'
+  // The five marks: words in the legend, and the short badge in the fountain info
+  const KINDS = {
+    ours: { legend: 'Reviewed by us', badge: 'By us' },
+    public: { legend: 'Public reviews only', badge: 'Public' },
+    both: { legend: 'Both', badge: 'Us + public' },
+    none: { legend: 'Not reviewed yet', badge: 'Not reviewed yet' },
+    issue: { legend: 'Issue reported', badge: 'Issue reported' }
   };
 
   const state = {
@@ -188,9 +189,9 @@
   }
 
   /**
-   * which mark a fountain gets (the marks note on the design canvas):
-   * issue = open issue, ours = only our reviews, both = ours and public,
-   * public = only public reviews, none = not reviewed yet.
+   * which mark a fountain gets: issue = an open issue (whoever reviewed it),
+   * ours = only our reviews, both = ours and public, public = only public
+   * reviews, none = no approved review yet.
    */
   function markKind(fountain) {
     if (fountain.issue_reported_at) {
@@ -218,19 +219,23 @@
       pointToLayer: (feature, latlng) => {
         const props = feature.properties || {};
         const kind = markKind(props);
-        const rated = props.rating !== null && props.rating !== undefined;
-        const size = rated || kind === 'issue' ? 22 : 12;
+        const rating = formatRating(props.rating);
+        const size = rating ? 22 : 12;
 
         const icon = L.divIcon({
           className: 'fountain-pin',
-          html: buildMark(kind, rated ? formatRating(props.rating) : ''),
+          html: buildMark(kind, rating),
           iconSize: [size, size],
           iconAnchor: [size / 2, size / 2]
         });
 
+        // the title is what screen readers announce for a pin
+        const title = (props.name || 'Fountain') + ', ' + KINDS[kind].legend.toLowerCase() +
+          (rating ? ', latest rating ' + rating + ' out of 10' : '');
+
         return L.marker(latlng, {
           icon,
-          title: props.name || 'Fountain',
+          title,
           zIndexOffset: kind === 'none' ? 0 : 500
         });
       },
@@ -247,8 +252,9 @@
     if (isMobile()) {
       layer.on('click', () => showBottomSheet(properties));
     } else {
-      // build the info once per opening; popup.update() then only resizes it
-      layer.bindPopup('', { maxWidth: 340, minWidth: 280 });
+      // the info is built once each time the popup opens; popup.update()
+      // re-measures it after the visits arrive
+      layer.bindPopup('', { maxWidth: 340, minWidth: 280, maxHeight: POPUP_MAX_HEIGHT });
       layer.on('popupopen', (event) => {
         const popup = event.popup;
         popup.setContent(buildFountainInfo(properties, () => popup.update()));
@@ -267,19 +273,12 @@
     const legend = L.control({ position: 'topright' });
     legend.onAdd = () => {
       const box = el('div', 'map-legend');
-      const rows = [
-        ['ours', 'Reviewed by us'],
-        ['public', 'Public reviews only'],
-        ['both', 'Both'],
-        ['none', 'Not reviewed yet'],
-        ['issue', 'Issue reported']
-      ];
-      rows.forEach(([kind, label]) => {
+      Object.keys(KINDS).forEach((kind) => {
         const row = el('div', 'map-legend-row');
-        row.append(buildMark(kind, ''), document.createTextNode(label));
+        row.append(buildMark(kind, ''), document.createTextNode(KINDS[kind].legend));
         box.append(row);
       });
-      box.append(el('div', 'map-legend-note', 'Number = latest rating'));
+      box.append(el('div', 'map-legend-note', 'Zoom in to see each latest rating'));
       L.DomEvent.disableClickPropagation(box);
       return box;
     };
@@ -338,7 +337,7 @@
    */
   function buildFountainInfo(fountain, onVisitsLoaded) {
     const kind = markKind(fountain);
-    const info = el('div', 'fountain-info ' + kind);
+    const info = el('div', 'fountain-info kind-' + kind);
 
     // Name, where it is, and who reviewed it
     const head = el('div', 'info-head');
@@ -350,12 +349,12 @@
       titles.append(el('div', 'info-subtitle', where));
     }
     const badge = el('div', 'info-badge');
-    badge.append(buildMark(kind, ''), document.createTextNode(KIND_LABELS[kind]));
+    badge.append(buildMark(kind, ''), document.createTextNode(KINDS[kind].badge));
     head.append(titles, badge);
     info.append(head);
 
     // Latest rating, average, photo and post link
-    if (fountain.rating !== null && fountain.rating !== undefined) {
+    if (formatRating(fountain.rating)) {
       const ratingRow = el('div', 'info-rating-row');
       const latest = el('div', 'info-latest');
       latest.append(el('div', 'info-latest-number', formatRating(fountain.rating)));
@@ -376,8 +375,8 @@
       }
       ratingRow.append(latest, side);
       info.append(ratingRow);
-    } else {
-      info.append(el('div', 'info-unrated', 'Not reviewed yet'));
+    } else if (fountain.rating_count) {
+      info.append(el('div', 'info-unrated', 'No rating on the latest visit'));
     }
 
     // Open issue (maintenance only; seasonal and closed are details)
@@ -389,10 +388,10 @@
     info.append(buildDetails(fountain));
 
     // Every approved review, newest visit first
-    const visitList = el('div', 'info-visits');
-    visitList.append(el('div', 'info-visits-note', fountain.rating_count ? 'Loading visits\u2026' : 'No reviews yet. Be the first.'));
-    info.append(visitList);
     if (fountain.rating_count) {
+      const visitList = el('div', 'info-visits');
+      visitList.append(el('div', 'info-visits-note', 'Loading visits\u2026'));
+      info.append(visitList);
       loadVisits(fountain, visitList).then(() => {
         if (onVisitsLoaded) {
           onVisitsLoaded();
@@ -431,7 +430,7 @@
   }
 
   /**
-   * details, each Yes / No / Unknown, plus Closed or the season note when set.
+   * details, each Yes / No / Unknown, plus Closed or the season when set.
    */
   function buildDetails(fountain) {
     const details = el('div', 'info-details');
@@ -452,7 +451,10 @@
     }
 
     if (fountain.operational_status === 'closed') {
-      addDetail('Status', fountain.season_note ? 'Closed (' + fountain.season_note + ')' : 'Closed', true);
+      addDetail('Status', 'Closed', true);
+      if (fountain.season_note) {
+        addDetail('Note', fountain.season_note, true);
+      }
     } else if (fountain.operational_status === 'seasonal') {
       addDetail('Season', fountain.season_note || 'Seasonal', true);
     }
@@ -468,8 +470,11 @@
       container.replaceChildren(el('div', 'info-visits-title', reviews.length === 1 ? '1 visit' : reviews.length + ' visits'));
       reviews.forEach((review) => {
         const item = el('div', 'info-visit');
-        const meta = el('div', 'info-visit-meta', formatDate(review.visit_date) + ' \u00B7 ' + reviewerName(review) + ' \u00B7 ');
-        meta.append(el('strong', '', formatRating(review.rating)));
+        const meta = el('div', 'info-visit-meta', formatDate(review.visit_date) + ' \u00B7 ' + reviewerName(review));
+        const rating = formatRating(review.rating);
+        if (rating) {
+          meta.append(document.createTextNode(' \u00B7 '), el('strong', '', rating));
+        }
         item.append(meta);
         if (review.review_text) {
           item.append(el('div', 'info-visit-text', review.review_text));
@@ -512,7 +517,7 @@
 
   function mailtoLink(subjectStart, fountain) {
     const name = fountain.name || 'a fountain';
-    const body = 'Fountain: ' + name + '\nID: ' + (fountain.id || '') + '\n\nWhat we should know:\n';
+    const body = 'Fountain: ' + name + '\r\nID: ' + (fountain.id || '') + '\r\n\r\nWhat we should know:\r\n';
     return 'mailto:' + CONTACT_EMAIL + '?subject=' + encodeURIComponent(subjectStart + ' ' + name) + '&body=' + encodeURIComponent(body);
   }
 
@@ -529,7 +534,7 @@
     // Colour bar follows the mark
     const colorBar = document.getElementById('sheet-color-bar');
     if (colorBar) {
-      colorBar.className = 'sheet-color-bar ' + markKind(fountain);
+      colorBar.className = 'sheet-color-bar kind-' + markKind(fountain);
     }
 
     dom.bottomSheetContent.replaceChildren(buildFountainInfo(fountain));
@@ -550,6 +555,10 @@
     dom.overlay.classList.remove('active');
     state.currentFountain = null;
   }
+
+  // ---------------------------------------------------------------------
+  // Helpers (don't normally edit)
+  // ---------------------------------------------------------------------
 
   /**
    * returns true for mobile viewport widths.
@@ -620,14 +629,17 @@
     return node;
   }
 
-  // 8 -> '8', 7.5 -> '7½'
+  // 8 -> '8', 7.5 -> '7½' (to the nearest half point); no rating -> ''
   function formatRating(value) {
-    const number = Number(value);
+    if (value === null || value === undefined || value === '') {
+      return '';
+    }
+    const number = Math.round(Number(value) * 2) / 2;
     if (!Number.isFinite(number)) {
       return '';
     }
     const whole = Math.floor(number);
-    return number - whole >= 0.5 ? whole + '\u00BD' : String(whole);
+    return number > whole ? whole + '\u00BD' : String(whole);
   }
 
   // 7.25 -> '7.3', 8.0 -> '8'

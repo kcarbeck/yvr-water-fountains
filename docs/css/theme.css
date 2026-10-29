@@ -29,63 +29,6 @@
   font-weight: 700;
 }
 
-/* ── Info section (lavender bg + left border) ── */
-.info-section {
-  background: var(--color-info-bg);
-  border-radius: 10px;
-  padding: 10px 12px;
-  margin-bottom: 10px;
-  border-left: 3px solid var(--color-accent);
-}
-
-/* ── Caption box ── */
-.caption-box {
-  font-size: 0.8rem;
-  color: #555;
-  font-style: italic;
-  line-height: 1.4;
-  padding: 8px 10px;
-  background: var(--color-light);
-  border-radius: 8px;
-  max-height: 80px;
-  overflow-y: auto;
-  margin-top: 0.5rem;
-}
-
-/* ── Instagram link ── */
-.ig-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  color: var(--color-secondary);
-  text-decoration: none;
-  font-size: 0.85rem;
-  font-weight: 600;
-  margin-top: 0.5rem;
-}
-
-.ig-link:hover {
-  text-decoration: underline;
-}
-
-/* ── CTA button ── */
-.cta-btn {
-  display: block;
-  text-align: center;
-  margin-top: 0.75rem;
-  padding: 0.5rem;
-  background: var(--color-primary);
-  border-radius: 8px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--color-dark);
-  text-decoration: none;
-}
-
-.cta-btn:hover {
-  opacity: 0.9;
-}
-
 /* ── Marks: who reviewed a fountain (same on map, legend, sheet and lists) ── */
 .mark {
   display: inline-flex;

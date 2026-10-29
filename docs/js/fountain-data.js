@@ -128,7 +128,6 @@
       currently_operational: operationalLabel,
       operational_status: record.operational_status,
       season_note: record.season_note,
-      is_indoor: record.is_indoor === true,
       indoor: formatAvailability(record.is_indoor),
       pet_friendly: formatPetFriendly(record.pet_friendly),
       pet_status: record.pet_friendly,

@@ -5,11 +5,10 @@
 
   // Settings
   const CONTACT_EMAIL = 'yvrwaterfountains@gmail.com';   // "Report an issue" and "suggest a correction" open an email to this address
-  // Pin sizes follow the zoom (sizes are in map.html): small dots when zoomed out,
-  // the latest rating inside rated pins from RATING_NUMBERS_FROM_ZOOM, bigger pins from CLOSE_ZOOM
+  // Pins stay a fixed size on screen, like most web maps: small dots zoomed out,
+  // then from RATING_NUMBERS_FROM_ZOOM just big enough to hold the rating (sizes in map.html)
   const FAR_ZOOM = 11;                                    // at this zoom and out: smallest dots
   const RATING_NUMBERS_FROM_ZOOM = 13;                    // pins show the latest rating from this zoom in
-  const CLOSE_ZOOM = 15;                                  // from this zoom in: biggest pins
   const POPUP_MAX_HEIGHT = 440;                           // desktop popup scrolls beyond this many pixels
   const LONG_REVIEW_CHARACTERS = 240;                     // longer reviews are cut short with "Read more"
 
@@ -221,8 +220,7 @@
         const kind = markKind(props);
         const rating = formatRating(props.rating);
 
-        // a 26 px box for every pin (easy to tap); the mark inside it changes
-        // size with the zoom (map.html styles)
+        // a 26 px tap area for every pin, larger than the dot you see inside it
         const icon = L.divIcon({
           className: 'fountain-pin',
           html: buildMark(kind, rating),
@@ -295,7 +293,6 @@
       const container = state.map.getContainer();
       container.classList.toggle('pins-far', zoom <= FAR_ZOOM);
       container.classList.toggle('show-ratings', zoom >= RATING_NUMBERS_FROM_ZOOM);
-      container.classList.toggle('pins-close', zoom >= CLOSE_ZOOM);
     };
     state.map.on('zoomend', update);
     update();

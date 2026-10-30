@@ -5,10 +5,12 @@
 
   // Settings
   const CONTACT_EMAIL = 'yvrwaterfountains@gmail.com';   // "Report an issue" and "suggest a correction" open an email to this address
-  // Pins stay a fixed size on screen, like most web maps: small dots zoomed out,
-  // then from RATING_NUMBERS_FROM_ZOOM just big enough to hold the rating (sizes in map.html)
+  // Pins stay a fixed size on screen, like most web maps, in four small steps
+  // (sizes in map.html): 8 px dots, 11 px, 14 px with the rating, 16 px
   const FAR_ZOOM = 11;                                    // at this zoom and out: smallest dots
   const RATING_NUMBERS_FROM_ZOOM = 13;                    // pins show the latest rating from this zoom in
+  const CLOSE_ZOOM = 15;                                  // from this zoom in: pins one step bigger
+  const STACK_METRES = 20;                                // fountains this close are fanned out until zoomed in enough to separate
   const POPUP_MAX_HEIGHT = 440;                           // desktop popup scrolls beyond this many pixels
   const LONG_REVIEW_CHARACTERS = 240;                     // longer reviews are cut short with "Read more"
 
@@ -26,6 +28,7 @@
   const state = {
     map: null,
     markerById: new Map(),
+    stacks: [],
     fountains: [],
     currentFountain: null,
     pageScrollY: 0
@@ -58,7 +61,8 @@
       state.fountains = data.features || [];
       placeFountainsOnMap(data);
       addLegend();
-      registerRatingNumbers();
+      state.stacks = findStacks([...state.markerById.values()]);
+      registerZoomStyles();
       focusFromHash();
     } catch (error) {
       handleLoadError(error);
@@ -285,17 +289,81 @@
   }
 
   /**
-   * tells the stylesheet which zoom band the map is in, so pins grow as you zoom in.
+   * after each zoom: tells the stylesheet which zoom band the map is in (pin
+   * sizes), then fans out stacked fountains to suit the new pin size.
    */
-  function registerRatingNumbers() {
+  function registerZoomStyles() {
     const update = () => {
       const zoom = state.map.getZoom();
       const container = state.map.getContainer();
       container.classList.toggle('pins-far', zoom <= FAR_ZOOM);
       container.classList.toggle('show-ratings', zoom >= RATING_NUMBERS_FROM_ZOOM);
+      container.classList.toggle('pins-close', zoom >= CLOSE_ZOOM);
+      spreadStacks();
     };
     state.map.on('zoomend', update);
     update();
+  }
+
+  /**
+   * groups markers that sit within STACK_METRES of each other (27 fountains
+   * share exact coordinates in the city data, up to 6 at one spot).
+   * Each marker keeps its true position (home); each stack its centre.
+   */
+  function findStacks(markers) {
+    const stacks = [];
+    markers.forEach((marker) => {
+      marker.home = marker.getLatLng();
+      const stack = stacks.find((s) => s.markers.some((m) => m.home.distanceTo(marker.home) < STACK_METRES));
+      if (stack) {
+        stack.markers.push(marker);
+      } else {
+        stacks.push({ markers: [marker] });
+      }
+    });
+
+    const stacked = stacks.filter((s) => s.markers.length > 1);
+    stacked.forEach((s) => {
+      const lat = s.markers.reduce((sum, m) => sum + m.home.lat, 0) / s.markers.length;
+      const lng = s.markers.reduce((sum, m) => sum + m.home.lng, 0) / s.markers.length;
+      s.centre = L.latLng(lat, lng);
+    });
+    return stacked;
+  }
+
+  /**
+   * while a stack's pins would overlap on screen, places them on a small ring
+   * around its centre, a little more than one pin apart, so each can be seen
+   * and tapped. Once zoomed in far enough for them to sit apart, each pin goes
+   * back to its true position (pins with identical coordinates never do).
+   */
+  function spreadStacks() {
+    const pin = document.querySelector('.fountain-pin .mark');
+    const pinSize = pin ? pin.offsetWidth : 12;
+    const zoom = state.map.getZoom();
+
+    state.stacks.forEach((stack) => {
+      if (pinsSitApart(stack.markers, pinSize, zoom)) {
+        stack.markers.forEach((marker) => marker.setLatLng(marker.home));
+        return;
+      }
+      const count = stack.markers.length;
+      // ring radius so that neighbouring pins are about 1.15 pins apart
+      const radius = Math.max(pinSize * 0.6, (pinSize * 0.575) / Math.sin(Math.PI / count));
+      const centre = state.map.project(stack.centre, zoom);
+      stack.markers.forEach((marker, i) => {
+        const angle = -Math.PI / 2 + (2 * Math.PI * i) / count;
+        const point = centre.add([radius * Math.cos(angle), radius * Math.sin(angle)]);
+        marker.setLatLng(state.map.unproject(point, zoom));
+      });
+    });
+  }
+
+  // true when, at this zoom, every pair of the stack's true positions is at
+  // least two pins apart on screen
+  function pinsSitApart(markers, pinSize, zoom) {
+    const points = markers.map((m) => state.map.project(m.home, zoom));
+    return points.every((a, i) => points.every((b, j) => i === j || a.distanceTo(b) >= pinSize * 2));
   }
 
   /**

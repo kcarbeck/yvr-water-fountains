@@ -11,6 +11,8 @@
   --color-dark: #1a1a2e;
   --color-light: #f5f0ff;
   --color-info-bg: #fafbff;
+  --color-blue: #0796cf;        /* the blue in the header title */
+  --color-blue-light: #e3f3fb;  /* light blue fill */
 
   --font-display: 'Bungee Shade', cursive;
   --font-heading: 'Fredoka One', cursive;
@@ -29,59 +31,35 @@
   font-weight: 700;
 }
 
-/* ── Info section (lavender bg + left border) ── */
-.info-section {
-  background: var(--color-info-bg);
-  border-radius: 10px;
-  padding: 10px 12px;
-  margin-bottom: 10px;
-  border-left: 3px solid var(--color-accent);
-}
-
-/* ── Caption box ── */
-.caption-box {
-  font-size: 0.8rem;
-  color: #555;
-  font-style: italic;
-  line-height: 1.4;
-  padding: 8px 10px;
-  background: var(--color-light);
-  border-radius: 8px;
-  max-height: 80px;
-  overflow-y: auto;
-  margin-top: 0.5rem;
-}
-
-/* ── Instagram link ── */
-.ig-link {
+/* ── Marks: who reviewed a fountain (same on map, legend, sheet and lists) ── */
+.mark {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  color: var(--color-secondary);
-  text-decoration: none;
-  font-size: 0.85rem;
-  font-weight: 600;
-  margin-top: 0.5rem;
-}
-
-.ig-link:hover {
-  text-decoration: underline;
-}
-
-/* ── CTA button ── */
-.cta-btn {
-  display: block;
-  text-align: center;
-  margin-top: 0.75rem;
-  padding: 0.5rem;
-  background: var(--color-primary);
-  border-radius: 8px;
-  font-size: 0.8rem;
-  font-weight: 600;
+  justify-content: center;
+  position: relative;
+  width: 12px;
+  height: 12px;
+  flex: none;
+  box-sizing: border-box;
+  border-radius: 50%;
+  border: 2px solid var(--color-dark);
   color: var(--color-dark);
-  text-decoration: none;
+  font-family: var(--font-body);
+  font-weight: 700;
+  line-height: 1;
 }
 
-.cta-btn:hover {
-  opacity: 0.9;
+.mark-ours { background: var(--color-primary); }
+.mark-public { background: var(--color-secondary); }
+.mark-both { background: var(--color-primary); box-shadow: 0 0 0 2px var(--color-secondary); margin: 0 2px; }
+.mark-none { background: var(--color-tertiary); }
+.mark-issue { background: #d9d9e3; }
+
+.mark-issue::after {
+  content: '';
+  position: absolute;
+  width: 85%;
+  height: 2px;
+  background: var(--color-dark);
+  transform: rotate(-45deg);
 }

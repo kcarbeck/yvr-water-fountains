@@ -2,11 +2,36 @@
 
 (function () {
   const config = window.APP_CONFIG || {};
+
+  // Settings
+  const CONTACT_EMAIL = 'yvrwaterfountains@gmail.com';   // "Report an issue" and "suggest a correction" open an email to this address
+  // Pins stay a fixed size on screen, like most web maps, in four small steps
+  // (sizes in map.html): 8 px dots, 11 px, 14 px with the rating, 16 px
+  const FAR_ZOOM = 11;                                    // at this zoom and out: smallest dots
+  const RATING_NUMBERS_FROM_ZOOM = 13;                    // pins show the latest rating from this zoom in
+  const CLOSE_ZOOM = 15;                                  // from this zoom in: pins one step bigger
+  const STACK_METRES = 20;                                // fountains this close are fanned out until zoomed in enough to separate
+  const POPUP_MAX_HEIGHT = 440;                           // desktop popup scrolls beyond this many pixels
+  const LONG_REVIEW_CHARACTERS = 240;                     // longer reviews are cut short with "Read more"
+
+  const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+  // The five marks: words in the legend, and the short badge in the fountain info
+  const KINDS = {
+    ours: { legend: 'Reviewed by us', badge: 'By us' },
+    public: { legend: 'Public reviews only', badge: 'Public' },
+    both: { legend: 'Both', badge: 'Us + public' },
+    none: { legend: 'Not reviewed yet', badge: 'Not reviewed yet' },
+    issue: { legend: 'Issue reported or closed', badge: 'Issue reported' }
+  };
+
   const state = {
     map: null,
     markerById: new Map(),
+    stacks: [],
     fountains: [],
-    currentFountain: null
+    currentFountain: null,
+    pageScrollY: 0
   };
 
   const dom = {
@@ -35,6 +60,9 @@
       const data = await FountainData.fetchGeoData();
       state.fountains = data.features || [];
       placeFountainsOnMap(data);
+      addLegend();
+      state.stacks = findStacks([...state.markerById.values()]);
+      registerZoomStyles();
       focusFromHash();
     } catch (error) {
       handleLoadError(error);
@@ -118,26 +146,19 @@
       return;
     }
 
-    dom.bottomSheet.addEventListener('touchstart', (event) => {
-      dom.bottomSheet.startY = event.touches[0].pageY;
-    }, { passive: true });
-
-    dom.bottomSheet.addEventListener('touchmove', (event) => {
-      if (dom.bottomSheet.scrollTop === 0 && event.touches[0].pageY > dom.bottomSheet.startY) {
-        event.preventDefault();
-      }
-    }, { passive: false });
-
+    // Swipe down to close, but only when the swipe starts with the sheet
+    // scrolled to its top (otherwise the swipe is scrolling the reviews back up).
+    // The listeners are passive: they never block the sheet's own scrolling.
     let swipeStartY = 0;
+    let startedAtTop = false;
     dom.bottomSheet.addEventListener('touchstart', (event) => {
       swipeStartY = event.touches[0].clientY;
+      startedAtTop = dom.bottomSheet.scrollTop <= 0;
     }, { passive: true });
 
     dom.bottomSheet.addEventListener('touchend', (event) => {
-      const swipeEndY = event.changedTouches[0].clientY;
-      const diffY = swipeStartY - swipeEndY;
-
-      if (diffY < -100 && dom.bottomSheet.scrollTop < 20) {
+      const movedDown = event.changedTouches[0].clientY - swipeStartY;
+      if (startedAtTop && movedDown > 100) {
         hideBottomSheet();
       }
     }, { passive: true });
@@ -170,66 +191,179 @@
   }
 
   /**
-   * returns marker styling based on review status.
-   * green = admin reviewed, orange = community reviewed, blue = unreviewed.
+   * which mark a fountain gets: issue = an open issue or closed for good
+   * (whoever reviewed it),
+   * ours = only our reviews, both = ours and public, public = only public
+   * reviews, none = no approved review yet.
    */
-  function markerStyle(props) {
-    const adminCount = props.admin_review_count || 0;
-    const totalCount = props.rating_count || 0;
-    let color;
-
-    if (adminCount > 0) {
-      color = '#c8ff00';
-    } else if (totalCount > 0) {
-      color = '#ff69b4';
-    } else {
-      color = '#c5a3ff';
+  function markKind(fountain) {
+    if (fountain.issue_reported_at || fountain.operational_status === 'closed') {
+      return 'issue';
     }
-
-    return {
-      radius: isMobile() ? 6 : 5,
-      color: '#1a1a2e',
-      fillColor: color,
-      fillOpacity: 0.85,
-      weight: 1.5
-    };
+    const ours = (fountain.admin_review_count || 0) > 0;
+    const publicReviews = (fountain.public_review_count || 0) > 0;
+    if (ours && publicReviews) {
+      return 'both';
+    }
+    if (ours) {
+      return 'ours';
+    }
+    if (publicReviews || (fountain.rating_count || 0) > 0) {
+      return 'public';
+    }
+    return 'none';
   }
 
   /**
-   * draws markers using the geojson payload.
+   * draws one mark per fountain; rated fountains carry their latest rating.
    */
   function placeFountainsOnMap(geojson) {
     L.geoJSON(geojson, {
       pointToLayer: (feature, latlng) => {
         const props = feature.properties || {};
-        const style = markerStyle(props);
-        return L.circleMarker(latlng, style);
+        const kind = markKind(props);
+        const rating = formatRating(props.rating);
+
+        // a 26 px tap area for every pin, larger than the dot you see inside it
+        const icon = L.divIcon({
+          className: 'fountain-pin',
+          html: buildMark(kind, rating),
+          iconSize: [26, 26],
+          iconAnchor: [13, 13]
+        });
+
+        // the title is what screen readers announce for a pin
+        const title = (props.name || 'Fountain') + ', ' + KINDS[kind].legend.toLowerCase() +
+          (rating ? ', latest rating ' + rating + ' out of 10' : '');
+
+        return L.marker(latlng, {
+          icon,
+          title,
+          zIndexOffset: kind === 'none' ? 0 : 500
+        });
       },
       onEachFeature: (feature, layer) => attachFountainBehavior(feature, layer)
     }).addTo(state.map);
   }
 
   /**
-   * adds click and popup behavior for each fountain marker.
+   * opens the fountain info: a bottom sheet on phones, a popup on wider screens.
    */
   function attachFountainBehavior(feature, layer) {
     const properties = feature.properties || {};
-    const latestInstagramPost = pickLatestInstagramPost(properties);
-    const latestPhotoUrl = latestInstagramPost ? getInstagramPhotoUrl(latestInstagramPost.url) : null;
-    const adminReview = isAdminReview(properties);
 
     if (isMobile()) {
-      layer.on('click', () => {
-        showBottomSheet(properties, latestInstagramPost, latestPhotoUrl, adminReview);
-      });
+      layer.on('click', () => showBottomSheet(properties));
     } else {
-      const popupContent = buildPopupContent(properties, latestInstagramPost, latestPhotoUrl, adminReview);
-      layer.bindPopup(popupContent);
+      // the info is built once each time the popup opens; popup.update()
+      // re-measures it after the visits arrive
+      layer.bindPopup('', { maxWidth: 340, minWidth: 280, maxHeight: POPUP_MAX_HEIGHT });
+      layer.on('popupopen', (event) => {
+        const popup = event.popup;
+        popup.setContent(buildFountainInfo(properties, () => popup.update()));
+      });
     }
 
     if (properties.id) {
       state.markerById.set(properties.id, layer);
     }
+  }
+
+  /**
+   * legend with the same marks as the pins.
+   */
+  function addLegend() {
+    const legend = L.control({ position: 'topright' });
+    legend.onAdd = () => {
+      const box = el('div', 'map-legend');
+      Object.keys(KINDS).forEach((kind) => {
+        const row = el('div', 'map-legend-row');
+        row.append(buildMark(kind, ''), document.createTextNode(KINDS[kind].legend));
+        box.append(row);
+      });
+      box.append(el('div', 'map-legend-note', 'Zoom in to see each latest rating'));
+      L.DomEvent.disableClickPropagation(box);
+      return box;
+    };
+    legend.addTo(state.map);
+  }
+
+  /**
+   * after each zoom: tells the stylesheet which zoom band the map is in (pin
+   * sizes), then fans out stacked fountains to suit the new pin size.
+   */
+  function registerZoomStyles() {
+    const update = () => {
+      const zoom = state.map.getZoom();
+      const container = state.map.getContainer();
+      container.classList.toggle('pins-far', zoom <= FAR_ZOOM);
+      container.classList.toggle('show-ratings', zoom >= RATING_NUMBERS_FROM_ZOOM);
+      container.classList.toggle('pins-close', zoom >= CLOSE_ZOOM);
+      spreadStacks();
+    };
+    state.map.on('zoomend', update);
+    update();
+  }
+
+  /**
+   * groups markers that sit within STACK_METRES of each other (27 fountains
+   * share exact coordinates in the city data, up to 6 at one spot).
+   * Each marker keeps its true position (home); each stack its centre.
+   */
+  function findStacks(markers) {
+    const stacks = [];
+    markers.forEach((marker) => {
+      marker.home = marker.getLatLng();
+      const stack = stacks.find((s) => s.markers.some((m) => m.home.distanceTo(marker.home) < STACK_METRES));
+      if (stack) {
+        stack.markers.push(marker);
+      } else {
+        stacks.push({ markers: [marker] });
+      }
+    });
+
+    const stacked = stacks.filter((s) => s.markers.length > 1);
+    stacked.forEach((s) => {
+      const lat = s.markers.reduce((sum, m) => sum + m.home.lat, 0) / s.markers.length;
+      const lng = s.markers.reduce((sum, m) => sum + m.home.lng, 0) / s.markers.length;
+      s.centre = L.latLng(lat, lng);
+    });
+    return stacked;
+  }
+
+  /**
+   * while a stack's pins would overlap on screen, places them on a small ring
+   * around its centre, a little more than one pin apart, so each can be seen
+   * and tapped. Once zoomed in far enough for them to sit apart, each pin goes
+   * back to its true position (pins with identical coordinates never do).
+   */
+  function spreadStacks() {
+    const pin = document.querySelector('.fountain-pin .mark');
+    const pinSize = pin ? pin.offsetWidth : 12;
+    const zoom = state.map.getZoom();
+
+    state.stacks.forEach((stack) => {
+      if (pinsSitApart(stack.markers, pinSize, zoom)) {
+        stack.markers.forEach((marker) => marker.setLatLng(marker.home));
+        return;
+      }
+      const count = stack.markers.length;
+      // ring radius so that neighbouring pins are about 1.15 pins apart
+      const radius = Math.max(pinSize * 0.6, (pinSize * 0.575) / Math.sin(Math.PI / count));
+      const centre = state.map.project(stack.centre, zoom);
+      stack.markers.forEach((marker, i) => {
+        const angle = -Math.PI / 2 + (2 * Math.PI * i) / count;
+        const point = centre.add([radius * Math.cos(angle), radius * Math.sin(angle)]);
+        marker.setLatLng(state.map.unproject(point, zoom));
+      });
+    });
+  }
+
+  // true when, at this zoom, every pair of the stack's true positions is at
+  // least two pins apart on screen
+  function pinsSitApart(markers, pinSize, zoom) {
+    const points = markers.map((m) => state.map.project(m.home, zoom));
+    return points.every((a, i) => points.every((b, j) => i === j || a.distanceTo(b) >= pinSize * 2));
   }
 
   /**
@@ -251,11 +385,7 @@
     if (isMobile()) {
       const fountain = state.fountains.find((feature) => (feature.properties || {}).id === hash);
       if (fountain) {
-        const properties = fountain.properties || {};
-        const latestInstagramPost = pickLatestInstagramPost(properties);
-        const latestPhotoUrl = latestInstagramPost ? getInstagramPhotoUrl(latestInstagramPost.url) : null;
-        const adminReview = isAdminReview(properties);
-        showBottomSheet(properties, latestInstagramPost, latestPhotoUrl, adminReview);
+        showBottomSheet(fountain.properties || {});
       }
     } else {
       marker.openPopup();
@@ -271,155 +401,266 @@
   }
 
   /**
-   * renders the popup markup for desktop visitors.
-   * every database string goes through escapeHtml or safeUrl.
+   * builds the fountain info shown in both the phone sheet and the desktop popup.
+   * every database string goes in with textContent (via el) or through safeUrl.
+   * onVisitsLoaded runs after the all-visits list arrives (the popup resizes).
    */
-  function buildPopupContent(fountain, latestInstagramPost, latestPhotoUrl, adminReview) {
-    const isReviewed = (fountain.admin_review_count || 0) > 0;
-    const isCommunity = !isReviewed && (fountain.rating_count || 0) > 0;
-    const typeClass = isReviewed ? ' reviewed' : isCommunity ? ' community-reviewed' : '';
+  function buildFountainInfo(fountain, onVisitsLoaded) {
+    const kind = markKind(fountain);
+    const info = el('div', 'fountain-info kind-' + kind);
 
-    let html = '<div class="popup-content' + typeClass + '">';
-
-    // Title with optional photo
-    if (latestPhotoUrl) {
-      html += '<img src="' + escapeHtml(latestPhotoUrl) + '" alt="Photo" style="width:80px;height:80px;border-radius:10px;float:right;margin-left:10px;object-fit:cover;" onerror="this.style.display=\'none\'">';
+    // Name, where it is, and who reviewed it
+    const head = el('div', 'info-head');
+    const titles = el('div', 'info-titles');
+    titles.append(el('div', 'info-title', fountain.name || 'Unnamed fountain'));
+    const location = sameText(fountain.location, fountain.name) ? null : fountain.location;
+    const where = [fountain.neighborhood, location].filter(Boolean).join(' \u00B7 ');
+    if (where) {
+      titles.append(el('div', 'info-subtitle', where));
     }
-    html += '<div class="popup-title">' + escapeHtml(fountain.name || 'Unnamed Fountain') + '</div>';
+    const badge = el('div', 'info-badge');
+    const closedOnly = fountain.operational_status === 'closed' && !fountain.issue_reported_at;
+    badge.append(buildMark(kind, ''), document.createTextNode(closedOnly ? 'Closed' : KINDS[kind].badge));
+    head.append(titles, badge);
+    info.append(head);
 
-    // Info section
-    html += '<div class="info-section">';
-    html += buildInfoRow('popup', 'Location', escapeHtml(fountain.location || fountain.address || '\u2014'));
-    html += buildInfoRow('popup', 'Neighbourhood', escapeHtml(fountain.neighborhood || '\u2014'));
-
-    if (fountain.avg_rating) {
-      const count = fountain.rating_count || 0;
-      const avg = Number.parseFloat(fountain.avg_rating).toFixed(1);
-      html += buildInfoRow('popup', 'Rating', '<span class="rating-badge">' + avg + '/10</span> (' + count + ' review' + (count !== 1 ? 's' : '') + ')');
+    // Latest rating, average, photo and post link
+    if (formatRating(fountain.rating)) {
+      const ratingRow = el('div', 'info-rating-row');
+      const latest = el('div', 'info-latest');
+      const number = el('div', 'info-latest-number', formatRating(fountain.rating));
+      number.append(el('span', 'info-out-of', '/10'));
+      latest.append(number);
+      if (fountain.latest_visit_date) {
+        latest.append(el('div', 'info-latest-date', 'last visited ' + formatDate(fountain.latest_visit_date)));
+      }
+      const side = el('div', 'info-rating-side');
+      const visits = fountain.rating_count || 0;
+      if (fountain.avg_rating !== null && fountain.avg_rating !== undefined) {
+        const average = el('div', 'info-average', 'Average ');
+        average.append(el('strong', '', formatAverage(fountain.avg_rating) + '/10'),
+          document.createTextNode(' from ' + visits + (visits === 1 ? ' visit' : ' visits')));
+        side.append(average);
+      }
+      const post = buildPostLink(fountain);
+      if (post) {
+        side.append(post);
+      }
+      ratingRow.append(latest, side);
+      info.append(ratingRow);
+    } else if (fountain.rating_count) {
+      info.append(el('div', 'info-unrated', 'No rating on the latest visit'));
     }
 
-    html += buildInfoRow('popup', 'Operational', escapeHtml(formatOperational(fountain.currently_operational)));
-    if (fountain.is_indoor) {
-      html += buildInfoRow('popup', 'Indoor', 'Yes, may be locked outside opening hours');
-    }
-    html += buildInfoRow('popup', 'Pet Friendly', escapeHtml(formatPetFriendly(fountain.pet_friendly)));
-    html += '</div>';
-
-    // Caption
-    if (fountain.caption) {
-      const truncated = fountain.caption.length > 200 ? fountain.caption.slice(0, 200) + '...' : fountain.caption;
-      html += '<div class="caption-box">' + escapeHtml(truncated) + '</div>';
+    // Open issue (maintenance only; seasonal and closed are details)
+    if (fountain.issue_reported_at) {
+      const issue = 'Issue reported ' + formatDate(fountain.issue_reported_at) + (fountain.issue_note ? ': ' + fountain.issue_note : '');
+      info.append(el('div', 'info-issue', issue));
     }
 
-    // Instagram link
-    if (latestInstagramPost && safeUrl(latestInstagramPost.url)) {
-      html += '<a href="' + escapeHtml(safeUrl(latestInstagramPost.url)) + '" target="_blank" rel="noopener" class="ig-link">@yvrwaterfountains post \u2192</a>';
+    // Actions sit at the top so they are reachable without scrolling past the reviews
+    info.append(buildActions(fountain));
+    info.append(buildDetails(fountain));
+
+    // Reviews: every approved review, newest visit first
+    if (fountain.rating_count) {
+      const reviews = el('section', 'info-reviews');
+      const heading = el('div', 'info-reviews-head');
+      heading.append(el('h3', 'info-reviews-title', 'Reviews'),
+        el('span', 'info-reviews-count', fountain.rating_count + ' \u00B7 newest first'));
+      const list = el('div', 'info-review-list');
+      list.append(el('div', 'info-reviews-note', 'Loading reviews\u2026'));
+      reviews.append(heading, list);
+      info.append(reviews);
+      loadReviews(fountain, list).then(() => {
+        if (onVisitsLoaded) {
+          onVisitsLoaded();
+        }
+      });
     }
 
-    // Public reviews are paused until the new review form ships
-    if (!fountain.rating) {
-      html += '<a href="https://www.instagram.com/yvrwaterfountains/" target="_blank" class="cta-btn">Not reviewed yet. Public reviews open soon!</a>';
-    }
-
-    html += '</div>';
-    return html;
+    return info;
   }
 
   /**
-   * renders the bottom sheet markup for mobile visitors.
+   * photo from the latest post (when the link allows one) and the post link.
    */
-  function buildBottomSheetContent(fountain, latestInstagramPost, latestPhotoUrl, adminReview) {
-    let html = '';
+  function buildPostLink(fountain) {
+    const link = safeUrl(fountain.latest_review_author_type === 'admin' ? latestPostUrl(fountain) : null);
+    if (!link) {
+      return null;
+    }
+    const row = el('div', 'info-post');
+    const photoUrl = storedPhotoUrl(fountain);
+    if (photoUrl) {
+      const photo = document.createElement('img');
+      photo.className = 'info-photo';
+      photo.src = photoUrl;
+      photo.alt = 'Photo from the @yvrwaterfountains post';
+      photo.addEventListener('error', () => photo.remove());
+      row.append(photo);
+    }
+    const anchor = el('a', 'info-post-link', '@yvrwaterfountains post');
+    anchor.href = link;
+    anchor.target = '_blank';
+    anchor.rel = 'noopener';
+    row.append(anchor);
+    return row;
+  }
 
-    // Header with optional photo
-    if (latestPhotoUrl) {
-      html += '<div class="sheet-header">';
-      html += '<img src="' + escapeHtml(latestPhotoUrl) + '" alt="Photo" class="sheet-photo" onerror="this.style.display=\'none\'">';
-      html += '<div class="sheet-header-text">';
+  /**
+   * details, each Yes / No / Unknown, plus Closed or the season when set.
+   */
+  function buildDetails(fountain) {
+    const details = el('div', 'info-details');
+    const addDetail = (label, value, wide) => {
+      const item = el('div', wide ? 'info-detail wide' : 'info-detail');
+      item.append(el('span', 'info-detail-label', label + ' '), el('strong', '', value));
+      details.append(item);
+    };
+
+    addDetail('Anti-freeze', yesNoUnknown(fountain.anti_freeze));
+    addDetail('Bottle filler', yesNoUnknown(fountain.bottle_filler));
+    addDetail('Accessible', yesNoUnknown(fountain.wheelchair_accessible));
+    addDetail('Pet friendly', yesNoUnknown(fountain.pet_friendly));
+    if (fountain.indoor === 'Yes') {
+      addDetail('Indoor', 'Yes, may be locked outside opening hours', true);
     } else {
-      html += '<div style="margin-bottom:1rem;">';
+      addDetail('Indoor', yesNoUnknown(fountain.indoor));
     }
 
-    html += '<div class="bottom-sheet-title">' + escapeHtml(fountain.name || 'Unnamed Fountain') + '</div>';
-    html += '<div class="sheet-subtitle">' + escapeHtml((fountain.neighborhood || '') + (fountain.location ? ' \u00B7 ' + fountain.location : '')) + '</div>';
-
-    if (fountain.avg_rating) {
-      html += '<span class="rating-badge" style="margin-top:0.25rem;display:inline-block;">' + Number.parseFloat(fountain.avg_rating).toFixed(1) + '/10</span>';
+    if (fountain.operational_status === 'closed') {
+      addDetail('Status', 'Closed', true);
+      if (fountain.season_note) {
+        addDetail('Note', fountain.season_note, true);
+      }
+    } else if (fountain.operational_status === 'seasonal') {
+      addDetail('Season', fountain.season_note || 'Seasonal', true);
     }
-
-    if (latestPhotoUrl) {
-      html += '</div></div>';
-    } else {
-      html += '</div>';
-    }
-
-    // Details section
-    html += '<div class="sheet-details">';
-    html += buildInfoRow('bottom-sheet', 'Operational', escapeHtml(formatOperational(fountain.currently_operational)));
-    if (fountain.is_indoor) {
-      html += buildInfoRow('bottom-sheet', 'Indoor', 'Yes, may be locked outside opening hours');
-    }
-    html += buildInfoRow('bottom-sheet', 'Pet Friendly', escapeHtml(formatPetFriendly(fountain.pet_friendly)));
-
-    if (fountain.rating) {
-      const reviewer = adminReview ? '@yvrwaterfountains' : (fountain.latest_reviewer || 'Anonymous');
-      html += buildInfoRow('bottom-sheet', 'Reviewed by', escapeHtml(reviewer));
-    }
-
-    if (fountain.wheelchair_accessible && fountain.wheelchair_accessible !== 'unknown') {
-      html += buildInfoRow('bottom-sheet', 'Wheelchair', escapeHtml(fountain.wheelchair_accessible));
-    }
-    html += '</div>';
-
-    // Caption
-    if (fountain.caption) {
-      html += '<div class="sheet-caption">' + escapeHtml(fountain.caption) + '</div>';
-    }
-
-    // Action buttons
-    html += '<div class="sheet-actions">';
-    if (latestInstagramPost && safeUrl(latestInstagramPost.url)) {
-      html += '<a href="' + escapeHtml(safeUrl(latestInstagramPost.url)) + '" target="_blank" rel="noopener" class="sheet-action-btn primary">View on Instagram</a>';
-    }
-    // Public reviews are paused until the new review form ships
-    html += '<a href="https://www.instagram.com/yvrwaterfountains/" target="_blank" class="sheet-action-btn secondary">Public reviews open soon</a>';
-    html += '</div>';
-
-    return html;
+    return details;
   }
 
   /**
-   * builds a labeled detail row for popups and sheets.
+   * reads the approved reviews and fills the list, one card per review.
    */
-  function buildInfoRow(context, label, value) {
-    const baseClass = context === 'popup' ? 'popup' : 'bottom-sheet';
-    return '<div class="' + baseClass + '-info"><span class="' + baseClass + '-label">' + label + '</span><span class="' + baseClass + '-value">' + value + '</span></div>';
+  async function loadReviews(fountain, list) {
+    try {
+      const reviews = await FountainData.fetchReviews(fountain.supabase_id);
+      list.replaceChildren(...reviews.map(buildReviewCard));
+    } catch (error) {
+      console.warn('could not load reviews', error);
+      list.replaceChildren(el('div', 'info-reviews-note', 'Could not load the reviews right now.'));
+    }
   }
 
   /**
-   * shows the bottom sheet with detailed fountain information.
+   * one review: rating chip, who, and date on one line; the text beneath,
+   * cut to a few lines with "Read more" when it is long.
    */
-  function showBottomSheet(fountain, latestInstagramPost, latestPhotoUrl, adminReview) {
+  function buildReviewCard(review) {
+    const card = el('article', 'info-review');
+
+    const top = el('div', 'info-review-top');
+    const rating = formatRating(review.rating);
+    if (rating) {
+      top.append(el('span', review.author_type === 'admin' ? 'info-review-rating ours' : 'info-review-rating', rating + '/10'), ' ');
+    }
+    // the spaces keep the parts apart for screen readers; the layout ignores them
+    const who = el('span', 'info-review-who', reviewerName(review));
+    const post = review.author_type === 'admin' ? safeUrl(review.instagram_url) : null;
+    if (post) {
+      const link = el('a', 'info-review-post', 'see post');
+      link.href = post;
+      link.target = '_blank';
+      link.rel = 'noopener';
+      who.append(' ', link);
+    }
+    top.append(who, ' ', el('span', 'info-review-date', formatDate(review.visit_date)));
+    card.append(top);
+
+    if (review.review_text) {
+      const text = el('div', 'info-review-text', review.review_text);
+      card.append(text);
+      if (isLongReview(review.review_text)) {
+        text.classList.add('clamped');
+        const more = el('button', 'info-review-more', 'Read more');
+        more.type = 'button';
+        more.addEventListener('click', () => {
+          const clamped = text.classList.toggle('clamped');
+          more.textContent = clamped ? 'Read more' : 'Show less';
+        });
+        card.append(more);
+      }
+    }
+    return card;
+  }
+
+  // roughly more than the five lines a clamped review shows
+  function isLongReview(text) {
+    return text.length > LONG_REVIEW_CHARACTERS || text.split('\n').length > 5;
+  }
+
+  function reviewerName(review) {
+    if (review.author_type === 'admin') {
+      return '@yvrwaterfountains';
+    }
+    return review.reviewer_name || 'Anonymous';
+  }
+
+  /**
+   * Review this fountain across the full width, then two equal buttons for
+   * telling us about a problem, each with what it is for written beneath.
+   */
+  function buildActions(fountain) {
+    const review = el('a', 'info-btn primary', 'Review this fountain');
+    review.href = fountain.supabase_id ? 'review.html?fountain=' + encodeURIComponent(fountain.supabase_id) : 'review.html';
+
+    const problems = el('div', 'info-problems');
+    problems.append(
+      buildProblemButton('Report an issue', 'Needs fixing: no water, low pressure, leaking or dirty', mailtoLink('Issue at', fountain)),
+      buildProblemButton('Suggest a correction', 'Our info is wrong: off for winter, wrong spot or details', mailtoLink('Correction for', fountain))
+    );
+
+    const wrap = el('div', 'info-actions');
+    wrap.append(review, problems);
+    return wrap;
+  }
+
+  function buildProblemButton(label, meaning, href) {
+    const item = el('div', 'info-problem');
+    const button = el('a', 'info-btn secondary', label);
+    button.href = href;
+    item.append(button, el('div', 'info-problem-meaning', meaning));
+    return item;
+  }
+
+  function mailtoLink(subjectStart, fountain) {
+    const name = fountain.name || 'a fountain';
+    const body = 'Fountain: ' + name + '\r\nID: ' + (fountain.id || '') + '\r\n\r\nWhat we should know:\r\n';
+    return 'mailto:' + CONTACT_EMAIL + '?subject=' + encodeURIComponent(subjectStart + ' ' + name) + '&body=' + encodeURIComponent(body);
+  }
+
+  /**
+   * shows the bottom sheet with the fountain info.
+   */
+  function showBottomSheet(fountain) {
     if (!dom.bottomSheet || !dom.bottomSheetContent || !dom.overlay) {
       return;
     }
 
     state.currentFountain = fountain;
 
-    // Set color bar based on review type
+    // Colour bar follows the mark
     const colorBar = document.getElementById('sheet-color-bar');
     if (colorBar) {
-      colorBar.className = 'sheet-color-bar';
-      if ((fountain.admin_review_count || 0) > 0) {
-        colorBar.classList.add('reviewed');
-      } else if ((fountain.rating_count || 0) > 0) {
-        colorBar.classList.add('community-reviewed');
-      }
+      colorBar.className = 'sheet-color-bar kind-' + markKind(fountain);
     }
 
-    dom.bottomSheetContent.innerHTML = buildBottomSheetContent(fountain, latestInstagramPost, latestPhotoUrl, adminReview);
+    dom.bottomSheetContent.replaceChildren(buildFountainInfo(fountain));
+    dom.bottomSheet.scrollTop = 0;
     dom.bottomSheet.classList.add('active');
     dom.overlay.classList.add('active');
+    setBackgroundLocked(true);
   }
 
   /**
@@ -432,8 +673,43 @@
 
     dom.bottomSheet.classList.remove('active');
     dom.overlay.classList.remove('active');
+    setBackgroundLocked(false);
     state.currentFountain = null;
   }
+
+  /**
+   * while the sheet is open, the page and the map behind it must not move,
+   * so a swipe on the sheet scrolls the sheet.
+   */
+  function setBackgroundLocked(locked) {
+    // iPhone Safari ignores overflow: hidden on the page for touch scrolling,
+    // so the page is pinned in place (position: fixed) and put back on close
+    const body = document.body;
+    if (locked && !body.classList.contains('sheet-open')) {
+      state.pageScrollY = window.scrollY;
+      body.style.top = '-' + state.pageScrollY + 'px';
+      body.classList.add('sheet-open');
+    } else if (!locked && body.classList.contains('sheet-open')) {
+      body.classList.remove('sheet-open');
+      body.style.top = '';
+      window.scrollTo(0, state.pageScrollY || 0);
+    }
+
+    const handlers = [state.map.dragging, state.map.touchZoom, state.map.doubleClickZoom, state.map.scrollWheelZoom];
+    handlers.forEach((handler) => {
+      if (handler) {
+        if (locked) {
+          handler.disable();
+        } else {
+          handler.enable();
+        }
+      }
+    });
+  }
+
+  // ---------------------------------------------------------------------
+  // Helpers (don't normally edit)
+  // ---------------------------------------------------------------------
 
   /**
    * returns true for mobile viewport widths.
@@ -463,94 +739,80 @@
   }
 
   /**
-   * picks the latest instagram post from the fountain payload.
+   * the post link of the latest review, if it has one.
    */
-  function pickLatestInstagramPost(fountain) {
-    if (!fountain.instagram_posts || fountain.instagram_posts.length === 0) {
-      return null;
-    }
-    return fountain.instagram_posts[0];
+  function latestPostUrl(fountain) {
+    const posts = fountain.instagram_posts || [];
+    return posts.length > 0 ? posts[0].url : null;
   }
 
   /**
-   * normalizes pet friendly values for display.
+   * the post's photo, only when a copy is kept in the project's Supabase Storage
+   * (Instagram's own image links expire within days).
    */
-  function formatPetFriendly(value) {
-    if (value === true) {
-      return 'Yes';
-    }
-    if (value === false) {
-      return 'No';
-    }
-    if (!value) {
-      return 'unknown';
-    }
-    if (typeof value === 'string') {
-      const lower = value.toLowerCase();
-      if (lower.includes('yes') || lower.includes('y')) {
-        return 'Yes';
-      }
-      if (lower.includes('no') || lower.includes('n')) {
-        return 'No';
-      }
-      if (lower === 'na' || lower === 'unknown') {
-        return 'unknown';
-      }
-    }
-    return 'unknown';
+  function storedPhotoUrl(fountain) {
+    const posts = fountain.instagram_posts || [];
+    const url = posts.length > 0 ? posts[0].photo_url : null;
+    const storage = (config.SUPABASE_URL || '') + '/storage/v1/object/public/';
+    return typeof url === 'string' && config.SUPABASE_URL && url.startsWith(storage) ? url : null;
   }
 
   /**
-   * normalizes operational values for display.
+   * a mark: one span styled by theme.css, with an optional rating inside.
    */
-  function formatOperational(value) {
-    if (value === true) {
-      return 'Yes';
-    }
-    if (value === false) {
-      return 'No';
-    }
-    if (!value) {
-      return 'unknown';
-    }
-    if (typeof value === 'string' && (value.toLowerCase() === 'na' || value.toLowerCase() === 'unknown')) {
-      return 'unknown';
-    }
-    return value;
+  function buildMark(kind, text) {
+    const mark = el('span', 'mark mark-' + kind, text);
+    mark.setAttribute('aria-hidden', 'true');
+    return mark;
   }
 
   /**
-   * derives instagram media urls from post links.
+   * creates an element with a class and optional text (text is never parsed as html).
    */
-  function getInstagramPhotoUrl(instagramUrl) {
-    if (!instagramUrl) {
-      return null;
+  function el(tag, className, text) {
+    const node = document.createElement(tag);
+    if (className) {
+      node.className = className;
     }
-    const match = instagramUrl.match(/\/p\/([^\/]+)\//);
-    if (match) {
-      const postId = match[1];
-      return `https://instagram.com/p/${postId}/media/?size=m`;
+    if (text !== undefined && text !== null) {
+      node.textContent = String(text);
     }
-    return null;
+    return node;
   }
 
-  /**
-   * a review is ours when the database says it was written by an admin.
-   */
-  function isAdminReview(fountain) {
-    return fountain.latest_review_author_type === 'admin';
+  // 8 -> '8', 7.5 -> '7.5' (to the nearest half point); no rating -> ''
+  function formatRating(value) {
+    if (value === null || value === undefined || value === '') {
+      return '';
+    }
+    const number = Math.round(Number(value) * 2) / 2;
+    if (!Number.isFinite(number)) {
+      return '';
+    }
+    return Number.isInteger(number) ? String(number) : number.toFixed(1);
   }
 
-  /**
-   * escapes text before it goes into html.
-   */
-  function escapeHtml(value) {
-    return String(value === null || value === undefined ? '' : value)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#39;');
+  // 7.25 -> '7.3', 8.0 -> '8'
+  function formatAverage(value) {
+    const rounded = Number(value).toFixed(1);
+    return rounded.endsWith('.0') ? rounded.slice(0, -2) : rounded;
+  }
+
+  // '2026-10-14' -> '14 Oct 2026', read straight from the date (no time zone shifts)
+  function formatDate(isoDate) {
+    if (!isoDate) {
+      return 'no date';
+    }
+    const [year, month, day] = String(isoDate).slice(0, 10).split('-').map(Number);
+    return day + ' ' + MONTHS[month - 1] + ' ' + year;
+  }
+
+  function sameText(a, b) {
+    return Boolean(a && b) && String(a).trim().toLowerCase() === String(b).trim().toLowerCase();
+  }
+
+  function yesNoUnknown(value) {
+    return value === 'Yes' || value === 'No' ? value : 'Unknown';
   }
 
   /**

@@ -14,6 +14,26 @@
   const EARLIEST_VISIT = '2020-01-01';   // visit dates before this are refused
   const TIME_ZONE = 'America/Vancouver';
 
+  // The Yes / No / Not sure questions on step 3. Each column has the same name
+  // on reviews and on fountains; null means Not sure (Unknown on the map).
+  // A review records only what was seen on that visit, so every question starts
+  // at Not sure. Only Yes and No answers are ever written to the fountain.
+  // onReview: false = a fixed fact about the fountain, stored on the fountain only.
+  // anti_freeze is shown as "Year-round": Yes = on all year, No = seasonal.
+  const DETAILS = [
+    { column: 'has_bottle_filler', label: 'Bottle filler', hint: '', onReview: true },
+    { column: 'is_wheelchair_accessible', label: 'Accessible', hint: 'step-free, reachable', onReview: true },
+    { column: 'anti_freeze', label: 'Year-round', hint: 'on in winter', onReview: true },
+    { column: 'pet_friendly', label: 'Pet friendly', hint: '', onReview: false },
+    { column: 'is_indoor', label: 'Indoor', hint: '', onReview: false }
+  ];
+  const REVIEW_DETAILS = DETAILS.filter((detail) => detail.onReview);
+  const ANSWERS = [
+    { value: true, label: 'Yes' },
+    { value: false, label: 'No' },
+    { value: null, label: 'Not sure' }
+  ];
+
   const state = {
     client: null,
     user: null,
@@ -159,7 +179,13 @@
   // ---- Step 1: which fountain ----
 
   function startNewReview(fountainId) {
-    state.draft = { editingId: null, fountainId: null, rating: null, half: false, note: '', visitDate: todayInVancouver(), link: '' };
+    state.draft = {
+      editingId: null, fountainId: null, rating: null, half: false, note: '',
+      visitDate: todayInVancouver(), link: '',
+      details: pickDetails(null),        // all Not sure until tapped
+      startDetails: pickDetails(null),   // to tell which answers were changed
+      startFountainId: null
+    };
     selectTab('add');
     $('search').value = '';
     $('search-results').replaceChildren();
@@ -386,10 +412,47 @@
     $('visit-date').value = state.draft.visitDate;
     $('visit-date').min = EARLIEST_VISIT;
     $('visit-date').max = todayInVancouver();
+    showTodayHint();
+    renderDetailRows();
     $('post-link').value = state.draft.link;
     $('save-message').hidden = true;
     $('save').textContent = state.draft.editingId ? 'Save changes' : 'Save and publish';
     showOnly('view-details');
+  }
+
+  // One row per question: name, what the map says now, then Yes / No / Not sure.
+  function renderDetailRows() {
+    const rows = $('detail-rows');
+    rows.replaceChildren();
+    const onMap = pickDetails(state.fountainById.get(state.draft.fountainId));
+    DETAILS.forEach((detail) => {
+      const row = el('div', 'detail-row');
+      row.setAttribute('role', 'group');
+      row.setAttribute('aria-label', detail.label);
+      const name = el('span', 'detail-name', detail.label);
+      if (detail.hint) {
+        name.append(el('span', 'detail-hint', detail.hint));
+      }
+      name.append(el('span', 'detail-hint', 'map: ' + answerLabel(onMap[detail.column], 'Unknown')));
+      row.append(name);
+      ANSWERS.forEach((answer) => {
+        const button = el('button', 'answer', answer.label);
+        button.type = 'button';
+        button.setAttribute('aria-pressed', String(state.draft.details[detail.column] === answer.value));
+        button.addEventListener('click', () => {
+          state.draft.details[detail.column] = answer.value;
+          row.querySelectorAll('.answer').forEach((other) => {
+            other.setAttribute('aria-pressed', String(other === button));
+          });
+        });
+        row.append(button);
+      });
+      rows.append(row);
+    });
+  }
+
+  function showTodayHint() {
+    $('visit-today').hidden = $('visit-date').value !== todayInVancouver();
   }
 
   async function save() {
@@ -425,27 +488,30 @@
       }
     }
 
-    // reviewed_at is set to the visit day, like the existing admin reviews,
-    // because the map's "latest rating" is ordered by it.
-    const fields = {
+    // The map orders visits by visit_date. reviewed_at is only the approval
+    // time, so it is set once when the review is added and never changed.
+    const fields = Object.assign({
       fountain_id: draft.fountainId,
       rating: currentRating(),
       review_text: draft.note || null,
       visit_date: draft.visitDate,
-      reviewed_at: draft.visitDate + 'T12:00:00Z',
       instagram_url: link
-    };
+    }, reviewAnswers(draft.details));
 
     let result;
     if (draft.editingId) {
-      result = await state.client.from('reviews').update(fields).eq('id', draft.editingId);
+      result = await state.client.from('reviews').update(fields).eq('id', draft.editingId).select('id');
+      if (!result.error && (!result.data || result.data.length !== 1)) {
+        result.error = { message: 'no row updated' };   // blocked by the access rules, or deleted
+      }
     } else {
       result = await state.client.from('reviews').insert(Object.assign(fields, {
         author_type: 'admin',
         status: 'approved',
         reviewer_name: state.admin.display_name,
-        approved_by: state.user.id
-      }));
+        approved_by: state.user.id,
+        reviewed_at: new Date().toISOString()
+      })).select('id').single();
     }
 
     if (result.error) {
@@ -457,8 +523,47 @@
     }
 
     draft.link = link || '';
+    if (!draft.editingId) {
+      draft.editingId = result.data.id;   // a retry below updates this review, never adds a second
+    }
+    if (!(await saveFountainDetails(draft))) {
+      saveMessage('The review is saved, but the fountain details did not update. Tap Save changes to try again.');
+      $('save').textContent = 'Save changes';
+      return;
+    }
     showDone();
     loadFountains().catch((error) => console.error('could not refresh fountains', error));
+  }
+
+  // Writes to the fountain the Yes and No answers tapped on this screen, which
+  // is also how a wrong value is corrected. Not sure is never written, so it
+  // cannot erase a known value. Fixing an old review writes only the answers
+  // changed during the fix (all of them if the review moved to another
+  // fountain), so an old visit cannot undo a newer correction.
+  // Returns false if the update did not go through.
+  async function saveFountainDetails(draft) {
+    const fountainId = draft.fountainId;
+    const movedFountain = fountainId !== draft.startFountainId;
+    const changes = {};
+    DETAILS.forEach((detail) => {
+      const answer = draft.details[detail.column];
+      if (answer !== null && (movedFountain || answer !== draft.startDetails[detail.column])) {
+        changes[detail.column] = toFountainValue(detail.column, answer);
+      }
+    });
+    if (Object.keys(changes).length === 0) {
+      return true;
+    }
+    const { data, error } = await state.client.from('fountains').update(changes).eq('id', fountainId).select('id');
+    if (error || !data || data.length !== 1) {
+      console.error('fountain details update failed', error || 'no row updated');
+      return false;
+    }
+    const fountain = state.fountainById.get(fountainId);
+    if (fountain) {
+      Object.assign(fountain, changes);   // the "map:" hints show the new values before the refresh
+    }
+    return true;
   }
 
   function saveMessage(text) {
@@ -645,7 +750,8 @@
     $('recent-message').hidden = true;
     const { data, error } = await state.client
       .from('reviews')
-      .select('id, fountain_id, rating, review_text, visit_date, instagram_url, created_at')
+      .select('id, fountain_id, rating, review_text, visit_date, instagram_url, created_at, ' +
+        REVIEW_DETAILS.map((detail) => detail.column).join(', '))
       .eq('created_by', state.user.id)
       .order('created_at', { ascending: false })
       .limit(RECENT_LIMIT);
@@ -663,7 +769,8 @@
     data.forEach((review) => {
       const item = el('div', 'list-item');
       item.append(titleRow(fountainName(review.fountain_id), formatRating(review.rating) + ' / 10'));
-      item.append(el('div', 'muted', formatDate(review.visit_date) + (review.instagram_url ? ' · post linked' : ' · no post link')));
+      item.append(el('div', 'muted', 'Visited ' + formatDate(review.visit_date) + (review.instagram_url ? ' · post linked' : ' · no post link')));
+      item.append(el('div', 'muted', detailsLine(review)));
       if (review.review_text) {
         item.append(el('p', 'quote', review.review_text));
       }
@@ -690,7 +797,10 @@
       half: rating % 1 !== 0,
       note: review.review_text || '',
       visitDate: review.visit_date || todayInVancouver(),
-      link: review.instagram_url || ''
+      link: review.instagram_url || '',
+      details: pickDetails(review),         // what this visit recorded
+      startDetails: pickDetails(review),
+      startFountainId: review.fountain_id
     };
     selectTab('add');
     showRate();
@@ -722,6 +832,10 @@
     $('rate-next').addEventListener('click', showDetails);
     $('save').addEventListener('click', save);
     $('note').addEventListener('input', () => { $('note-count').textContent = String($('note').value.length); });
+    $('visit-date').addEventListener('input', () => {
+      showTodayHint();
+      $('save-message').hidden = true;
+    });
 
     document.querySelectorAll('[data-action="sign-out"]').forEach((button) => button.addEventListener('click', signOut));
     document.querySelectorAll('[data-action="new-review"]').forEach((button) => button.addEventListener('click', () => startNewReview(null)));
@@ -826,6 +940,44 @@
     return fountain ? fountain.name : 'Unknown fountain';
   }
 
+  // { has_bottle_filler: true, ... } from a fountain or review row; missing = null.
+  // pet_friendly is stored as text ('yes', 'no', 'unknown') on fountains.
+  function pickDetails(row) {
+    const details = {};
+    DETAILS.forEach((detail) => {
+      let value = row ? row[detail.column] : null;
+      if (value === 'yes') value = true;
+      if (value === 'no') value = false;
+      details[detail.column] = value === true || value === false ? value : null;
+    });
+    return details;
+  }
+
+  // The answers that are stored on the review itself.
+  function reviewAnswers(details) {
+    const answers = {};
+    REVIEW_DETAILS.forEach((detail) => { answers[detail.column] = details[detail.column]; });
+    return answers;
+  }
+
+  function toFountainValue(column, answer) {
+    if (column === 'pet_friendly') {
+      return answer ? 'yes' : 'no';
+    }
+    return answer;
+  }
+
+  // 'Bottle filler Yes · Accessible Not sure · Year-round No'
+  function detailsLine(row) {
+    const details = pickDetails(row);
+    return REVIEW_DETAILS.map((detail) => detail.label + ' ' + answerLabel(details[detail.column], 'Not sure')).join(' · ');
+  }
+
+  // true -> 'Yes', false -> 'No', null -> the word given for unknown
+  function answerLabel(value, unknownWord) {
+    return value === true ? 'Yes' : value === false ? 'No' : unknownWord;
+  }
+
   function latestLine(fountain) {
     if (fountain.latest_review_rating === null || fountain.latest_review_rating === undefined) {
       return 'Not reviewed yet';
@@ -882,9 +1034,8 @@
     return day + ' ' + months[month - 1] + ' ' + year;
   }
 
+  // A timestamp shown as its Vancouver day, e.g. '9 Sep 2026'.
   function formatTimestamp(timestamp) {
-    return new Date(timestamp).toLocaleDateString('en-GB', {
-      day: 'numeric', month: 'short', year: 'numeric', timeZone: TIME_ZONE
-    });
+    return formatDate(new Date(timestamp).toLocaleDateString('en-CA', { timeZone: TIME_ZONE }));
   }
 })();

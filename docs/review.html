@@ -104,6 +104,12 @@ textarea { resize: vertical; }
 .row { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; }
 .list-item .actions { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
 .quote { font-style: italic; margin: 6px 0 0; font-size: 14px; }
+
+.detail-row { display: grid; grid-template-columns: 1.3fr repeat(3, minmax(0, 1fr)); gap: 6px; align-items: center; margin-bottom: 8px; }
+.detail-name { font-size: 14px; font-weight: 600; line-height: 1.2; }
+.detail-hint { display: block; font-size: 12px; font-weight: 500; color: #3d3d55; }
+.answer { min-height: 44px; border-radius: 10px; border: 2px solid var(--color-tertiary); background: #fff; font-size: 14px; font-weight: 600; padding: 0 4px; }
+.answer[aria-pressed="true"] { background: var(--color-primary); border-color: var(--color-dark); }
   </style>
 </head>
 <body>
@@ -207,11 +213,14 @@ textarea { resize: vertical; }
       <h1>Anything to add?</h1>
       <label for="note">Notes <span class="muted">(optional, <span id="note-count">0</span> / 500)</span></label>
       <textarea id="note" rows="3" maxlength="500"></textarea>
-      <label for="visit-date">Visit date</label>
+      <label for="visit-date">Visit date <span id="visit-today" class="muted">(today)</span></label>
       <input id="visit-date" type="date">
+      <h2>What did you see? <span class="muted">(optional)</span></h2>
+      <div id="detail-rows"></div>
+      <p class="muted">Record what you saw on this visit. Yes or No also updates the fountain; Not sure leaves it as it is. Pet friendly and Indoor are kept on the fountain only.</p>
       <label for="post-link">Instagram post link <span class="muted">(blank if not posted yet)</span></label>
       <input id="post-link" type="url" placeholder="instagram.com/p/... or /reel/..." autocomplete="off">
-      <p class="muted">Reviewer: <strong data-admin-name></strong> (from your login). Goes live on the map at once.</p>
+      <p class="muted">Reviewer: <strong data-admin-name></strong> (from your login). Goes live on the map at once. Change the visit date for an older post.</p>
       <p id="save-message" class="notice error" hidden></p>
       <button type="button" id="save" class="btn-main">Save and publish</button>
       <p class="step-label">Step 3 of 3</p>
@@ -250,6 +259,6 @@ textarea { resize: vertical; }
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.43.1/dist/umd/supabase.min.js"></script>
   <script src="config.js"></script>
   <script src="js/api.js"></script>
-  <script src="js/review.js?v=2"></script>
+  <script src="js/review.js?v=4"></script>
 </body>
 </html>

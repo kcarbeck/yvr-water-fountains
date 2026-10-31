@@ -509,7 +509,8 @@
   }
 
   /**
-   * details, each Yes / No / Unknown, plus Closed or the season when set.
+   * details, each Yes / No / Unknown; the season (year-round or seasonal,
+   * with its note); and Closed when set.
    */
   function buildDetails(fountain) {
     const details = el('div', 'info-details');
@@ -519,7 +520,6 @@
       details.append(item);
     };
 
-    addDetail('Anti-freeze', yesNoUnknown(fountain.anti_freeze));
     addDetail('Bottle filler', yesNoUnknown(fountain.bottle_filler));
     addDetail('Accessible', yesNoUnknown(fountain.wheelchair_accessible));
     addDetail('Pet friendly', yesNoUnknown(fountain.pet_friendly));
@@ -534,8 +534,8 @@
       if (fountain.season_note) {
         addDetail('Note', fountain.season_note, true);
       }
-    } else if (fountain.operational_status === 'seasonal') {
-      addDetail('Season', fountain.season_note || 'Seasonal', true);
+    } else {
+      addDetail('Season', seasonText(fountain), true);
     }
     return details;
   }
@@ -809,6 +809,18 @@
 
   function sameText(a, b) {
     return Boolean(a && b) && String(a).trim().toLowerCase() === String(b).trim().toLowerCase();
+  }
+
+  // anti_freeze Yes = on all year, No = off in winter. The season note
+  // (e.g. "about May to October") is added for seasonal fountains.
+  function seasonText(fountain) {
+    if (fountain.anti_freeze === 'Yes') {
+      return 'Year-round';
+    }
+    if (fountain.anti_freeze === 'No' || fountain.operational_status === 'seasonal') {
+      return fountain.season_note ? 'Seasonal (' + fountain.season_note + ')' : 'Seasonal';
+    }
+    return 'Unknown';
   }
 
   function yesNoUnknown(value) {

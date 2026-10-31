@@ -14,15 +14,20 @@
   const EARLIEST_VISIT = '2020-01-01';   // visit dates before this are refused
   const TIME_ZONE = 'America/Vancouver';
 
-  // The three Yes / No / Not sure questions on step 3. Each column has the same
-  // name on reviews and on fountains; null means Not sure (Unknown on the map).
-  // A review records only what was seen on that visit, so a new review starts
+  // The Yes / No / Not sure questions on step 3. Each column has the same name
+  // on reviews and on fountains; null means Not sure (Unknown on the map).
+  // A review records only what was seen on that visit, so every question starts
   // at Not sure. Only Yes and No answers are ever written to the fountain.
+  // onReview: false = a fixed fact about the fountain, stored on the fountain only.
+  // anti_freeze is shown as "Year-round": Yes = on all year, No = seasonal.
   const DETAILS = [
-    { column: 'has_bottle_filler', label: 'Bottle filler', hint: '' },
-    { column: 'is_wheelchair_accessible', label: 'Accessible', hint: 'step-free, reachable' },
-    { column: 'anti_freeze', label: 'Anti-freeze', hint: 'stays on in winter' }
+    { column: 'has_bottle_filler', label: 'Bottle filler', hint: '', onReview: true },
+    { column: 'is_wheelchair_accessible', label: 'Accessible', hint: 'step-free, reachable', onReview: true },
+    { column: 'anti_freeze', label: 'Year-round', hint: 'on in winter', onReview: true },
+    { column: 'pet_friendly', label: 'Pet friendly', hint: '', onReview: false },
+    { column: 'is_indoor', label: 'Indoor', hint: '', onReview: false }
   ];
+  const REVIEW_DETAILS = DETAILS.filter((detail) => detail.onReview);
   const ANSWERS = [
     { value: true, label: 'Yes' },
     { value: false, label: 'No' },
@@ -491,7 +496,7 @@
       review_text: draft.note || null,
       visit_date: draft.visitDate,
       instagram_url: link
-    }, draft.details);
+    }, reviewAnswers(draft.details));
 
     let result;
     if (draft.editingId) {
@@ -543,7 +548,7 @@
     DETAILS.forEach((detail) => {
       const answer = draft.details[detail.column];
       if (answer !== null && (movedFountain || answer !== draft.startDetails[detail.column])) {
-        changes[detail.column] = answer;
+        changes[detail.column] = toFountainValue(detail.column, answer);
       }
     });
     if (Object.keys(changes).length === 0) {
@@ -746,7 +751,7 @@
     const { data, error } = await state.client
       .from('reviews')
       .select('id, fountain_id, rating, review_text, visit_date, instagram_url, created_at, ' +
-        DETAILS.map((detail) => detail.column).join(', '))
+        REVIEW_DETAILS.map((detail) => detail.column).join(', '))
       .eq('created_by', state.user.id)
       .order('created_at', { ascending: false })
       .limit(RECENT_LIMIT);
@@ -936,19 +941,36 @@
   }
 
   // { has_bottle_filler: true, ... } from a fountain or review row; missing = null.
+  // pet_friendly is stored as text ('yes', 'no', 'unknown') on fountains.
   function pickDetails(row) {
     const details = {};
     DETAILS.forEach((detail) => {
-      const value = row ? row[detail.column] : null;
+      let value = row ? row[detail.column] : null;
+      if (value === 'yes') value = true;
+      if (value === 'no') value = false;
       details[detail.column] = value === true || value === false ? value : null;
     });
     return details;
   }
 
-  // 'Bottle filler Yes · Accessible Not sure · Anti-freeze No'
+  // The answers that are stored on the review itself.
+  function reviewAnswers(details) {
+    const answers = {};
+    REVIEW_DETAILS.forEach((detail) => { answers[detail.column] = details[detail.column]; });
+    return answers;
+  }
+
+  function toFountainValue(column, answer) {
+    if (column === 'pet_friendly') {
+      return answer ? 'yes' : 'no';
+    }
+    return answer;
+  }
+
+  // 'Bottle filler Yes · Accessible Not sure · Year-round No'
   function detailsLine(row) {
     const details = pickDetails(row);
-    return DETAILS.map((detail) => detail.label + ' ' + answerLabel(details[detail.column], 'Not sure')).join(' · ');
+    return REVIEW_DETAILS.map((detail) => detail.label + ' ' + answerLabel(details[detail.column], 'Not sure')).join(' · ');
   }
 
   // true -> 'Yes', false -> 'No', null -> the word given for unknown

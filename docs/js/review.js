@@ -1,8 +1,10 @@
 'use strict';
 
-// Review page. Admins sign in with an emailed code, then add reviews in three
-// steps (fountain, rating, details), approve public reviews and fix their own.
-// Everyone else sees the closed notice.
+// Review page. The same three steps (fountain, rating, details) for everyone.
+// Admins sign in with an emailed code; their reviews go live at once, and they
+// approve public reviews and fix their own. Visitors' reviews go through
+// submit_public_review() and wait for approval. While the settings row
+// public_reviews_open is off, visitors see the closed notice instead.
 // Database text is only ever written with textContent, never innerHTML.
 (function () {
   // ---- Settings ----
@@ -12,7 +14,26 @@
   const RECENT_LIMIT = 10;       // reviews listed under "My recent"
   const RESEND_SECONDS = 60;     // wait before a new code can be requested
   const EARLIEST_VISIT = '2020-01-01';   // visit dates before this are refused
+  const MAX_NAME_LENGTH = 40;    // same limits as submit_public_review()
+  const MAX_NOTE_LENGTH = 500;
   const TIME_ZONE = 'America/Vancouver';
+
+  // What a visitor is told when submit_public_review() refuses a review.
+  // The keys are the function's error messages.
+  const PUBLIC_ERRORS = {
+    reviews_closed: "We're not taking public reviews right now, so this one wasn't sent.",
+    rejected: "Couldn't send that. Try again in a minute.",
+    fountain_not_found: "We couldn't find that fountain. Start again and pick it from the list.",
+    bad_rating: 'Pick a rating from 0 to 10.',
+    text_too_long: 'Notes can be up to ' + MAX_NOTE_LENGTH + ' characters.',
+    link_in_text: 'Please take the web link out of your notes.',
+    name_too_long: 'Names can be up to ' + MAX_NAME_LENGTH + ' characters.',
+    bad_characters: 'Please leave out < and > in your notes and name.',
+    bad_visit_date: 'Pick a visit date between 2020 and today.',
+    too_many_for_fountain: 'This fountain has had a lot of reviews in the last hour. Try again later.',
+    too_many_overall: "We've had a lot of reviews in the last hour. Try again later."
+  };
+  const SEND_FAILED = "Couldn't send. Your review is still here; check your connection and try again.";
 
   // The Yes / No / Not sure questions on step 3. Each column has the same name
   // on reviews and on fountains; null means Not sure (Unknown on the map).
@@ -38,6 +59,8 @@
     client: null,
     user: null,
     admin: null,            // row from public.admins
+    publicOpen: false,      // settings.public_reviews_open
+    mode: null,             // 'admin' or 'visitor'
     fountains: [],          // rows from fountain_overview_view
     fountainById: new Map(),
     position: null,         // phone location, kept in memory only
@@ -66,6 +89,7 @@
       showOnly('view-offline');
       return;
     }
+    state.publicOpen = await loadPublicOpen();
 
     const { data } = await state.client.auth.getSession();
     await afterSignIn(data && data.session ? data.session.user : null);
@@ -88,12 +112,22 @@
     }
 
     if (!state.admin) {
+      // The map footer's Admin link opens review.html#sign-in.
       $('no-access').hidden = !user;
-      $('show-sign-in').hidden = Boolean(user);
-      showOnly('view-closed');
+      $('no-access-visitor').hidden = !state.publicOpen;
+      if (!user && window.location.hash === '#sign-in') {
+        showOnly('view-sign-in');
+      } else if (state.publicOpen) {
+        setMode('visitor');
+        startNewReview(new URLSearchParams(window.location.search).get('fountain'));
+      } else {
+        showOnly('view-closed');
+      }
       return;
     }
 
+    $('no-access').hidden = true;
+    setMode('admin');
     const name = adminName();
     $('admin-name').textContent = name;
     document.querySelectorAll('[data-admin-name]').forEach((node) => { node.textContent = name; });
@@ -181,7 +215,7 @@
   function startNewReview(fountainId) {
     state.draft = {
       editingId: null, fountainId: null, rating: null, half: false, note: '',
-      visitDate: todayInVancouver(), link: '',
+      visitDate: todayInVancouver(), link: '', name: '',
       details: pickDetails(null),        // all Not sure until tapped
       startDetails: pickDetails(null),   // to tell which answers were changed
       startFountainId: null
@@ -415,17 +449,24 @@
     showTodayHint();
     renderDetailRows();
     $('post-link').value = state.draft.link;
+    $('reviewer-name').value = state.draft.name;
     $('save-message').hidden = true;
-    $('save').textContent = state.draft.editingId ? 'Save changes' : 'Save and publish';
+    if (state.mode === 'visitor') {
+      $('save').textContent = 'Send review';
+    } else {
+      $('save').textContent = state.draft.editingId ? 'Save changes' : 'Save and publish';
+    }
     showOnly('view-details');
   }
 
-  // One row per question: name, what the map says now, then Yes / No / Not sure.
+  // One row per question, then Yes / No / Not sure. Admins also see what the
+  // map says now; visitors get only the three questions stored on a review.
   function renderDetailRows() {
     const rows = $('detail-rows');
     rows.replaceChildren();
+    const isAdmin = state.mode === 'admin';
     const onMap = pickDetails(state.fountainById.get(state.draft.fountainId));
-    DETAILS.forEach((detail) => {
+    (isAdmin ? DETAILS : REVIEW_DETAILS).forEach((detail) => {
       const row = el('div', 'detail-row');
       row.setAttribute('role', 'group');
       row.setAttribute('aria-label', detail.label);
@@ -433,7 +474,9 @@
       if (detail.hint) {
         name.append(el('span', 'detail-hint', detail.hint));
       }
-      name.append(el('span', 'detail-hint', 'map: ' + answerLabel(onMap[detail.column], 'Unknown')));
+      if (isAdmin) {
+        name.append(el('span', 'detail-hint', 'map: ' + answerLabel(onMap[detail.column], 'Unknown')));
+      }
       row.append(name);
       ANSWERS.forEach((answer) => {
         const button = el('button', 'answer', answer.label);
@@ -458,10 +501,67 @@
   async function save() {
     $('save').disabled = true;   // one review per tap
     try {
-      await saveDraft();
+      if (state.mode === 'visitor') {
+        await sendPublicReview();
+      } else {
+        await saveDraft();
+      }
     } finally {
       $('save').disabled = false;
     }
+  }
+
+  // A visitor's review. The database function checks everything again and
+  // stores it as pending; it goes on the map only after an admin approves it.
+  async function sendPublicReview() {
+    const draft = state.draft;
+    draft.note = $('note').value.trim();
+    draft.visitDate = $('visit-date').value;
+    draft.name = $('reviewer-name').value.trim();
+
+    // The same checks as the function, so most mistakes get a message before sending.
+    let problem = null;
+    if (!draft.visitDate || draft.visitDate > todayInVancouver() || draft.visitDate < EARLIEST_VISIT) {
+      problem = 'bad_visit_date';
+    } else if (draft.note.length > MAX_NOTE_LENGTH) {
+      problem = 'text_too_long';
+    } else if (draft.name.length > MAX_NAME_LENGTH) {
+      problem = 'name_too_long';
+    } else if (/http|www\./i.test(draft.note)) {
+      problem = 'link_in_text';
+    } else if (/[<>]/.test(draft.note + draft.name)) {
+      problem = 'bad_characters';
+    }
+    if (problem) {
+      saveMessage(PUBLIC_ERRORS[problem]);
+      return;
+    }
+
+    const { error } = await state.client.rpc('submit_public_review', {
+      p_fountain_id: draft.fountainId,
+      p_rating: currentRating(),
+      p_review_text: draft.note || null,
+      p_reviewer_name: draft.name || null,
+      p_visit_date: draft.visitDate,
+      p_website: $('website').value,   // the hidden honeypot field
+      p_has_bottle_filler: draft.details.has_bottle_filler,
+      p_is_wheelchair_accessible: draft.details.is_wheelchair_accessible,
+      p_anti_freeze: draft.details.anti_freeze
+    });
+    if (error) {
+      console.error('send failed', error);
+      saveMessage(PUBLIC_ERRORS[error.message] || SEND_FAILED);
+      return;
+    }
+    showSent();
+  }
+
+  function showSent() {
+    const fountain = state.fountainById.get(state.draft.fountainId);
+    showFountainName();
+    $('sent-rating').textContent = formatRating(currentRating()) + ' / 10';
+    $('sent-map-link').href = 'map.html#' + encodeURIComponent(fountain.external_id || fountain.id);
+    showOnly('view-sent');
   }
 
   async function saveDraft() {
@@ -672,6 +772,10 @@
       if (review.review_text) {
         item.append(el('p', 'quote', review.review_text));
       }
+      // The visitor's answers stay on the review; approving does not change the fountain.
+      if (REVIEW_DETAILS.some((detail) => review[detail.column] === true || review[detail.column] === false)) {
+        item.append(el('div', 'muted', 'They saw: ' + detailsLine(review)));
+      }
       const actions = el('div', 'actions');
       actions.append(actionButton('Approve', 'go', () => moderate(review.id, 'approved')));
       actions.append(actionButton('Reject', '', () => moderate(review.id, 'rejected')));
@@ -798,6 +902,7 @@
       note: review.review_text || '',
       visitDate: review.visit_date || todayInVancouver(),
       link: review.instagram_url || '',
+      name: '',
       details: pickDetails(review),         // what this visit recorded
       startDetails: pickDetails(review),
       startFountainId: review.fountain_id
@@ -823,7 +928,6 @@
   // ---- Page wiring ----
 
   function wireEvents() {
-    $('show-sign-in').addEventListener('click', () => showOnly('view-sign-in'));
     $('send-code').addEventListener('click', sendCode);
     $('resend-code').addEventListener('click', sendCode);
     $('verify-code').addEventListener('click', verifyCode);
@@ -844,6 +948,7 @@
       state.draft.note = $('note').value;   // keep what was typed on the way back
       state.draft.visitDate = $('visit-date').value;
       state.draft.link = $('post-link').value;
+      state.draft.name = $('reviewer-name').value;
       showRate();
     }));
     document.querySelectorAll('[data-tab]').forEach((button) => button.addEventListener('click', () => openTab(button.dataset.tab)));
@@ -883,6 +988,27 @@
     const rows = await window.AppApi.fetchFountainOverview();
     state.fountains = rows.filter((row) => typeof row.latitude === 'number' && typeof row.longitude === 'number');
     state.fountainById = new Map(state.fountains.map((row) => [row.id, row]));
+  }
+
+  // The switch Katherine flips in the settings table. If it can't be read,
+  // the form stays closed.
+  async function loadPublicOpen() {
+    const { data, error } = await state.client
+      .from('settings')
+      .select('value')
+      .eq('key', 'public_reviews_open')
+      .maybeSingle();
+    if (error) {
+      console.error('could not read public_reviews_open', error);
+      return false;
+    }
+    return Boolean(data && data.value === 'true');
+  }
+
+  // Shows the parts of step 3 meant for admins or for visitors (data-for="...").
+  function setMode(mode) {
+    state.mode = mode;
+    document.querySelectorAll('[data-for]').forEach((node) => { node.hidden = node.dataset.for !== mode; });
   }
 
   // ======================================================================

@@ -1,11 +1,15 @@
 -- Fountains within 15 m of each other: real double fountains, or (more
 -- often) different fountains given the same placeholder coordinates in
 -- the source data. One row per cluster.
--- Requires supabase/pending/postgis_nearest_fountains.sql (not yet applied).
-with pairs as (
+-- Needs the PostGIS extension (supabase/pending/postgis_nearest_fountains.sql).
+with points as (
+  select id, extensions.st_setsrid(extensions.st_makepoint(longitude, latitude), 4326)::extensions.geography as geog
+  from fountains
+),
+pairs as (
   select a.id as id_a, b.id as id_b
-  from fountains a
-  join fountains b on a.id < b.id and st_dwithin(a.geog, b.geog, 15)
+  from points a
+  join points b on a.id < b.id and extensions.st_dwithin(a.geog, b.geog, 15)
 )
 select
   round(f.latitude::numeric, 5)  as lat,

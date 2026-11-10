@@ -1,17 +1,11 @@
 -- =====================================================================
 -- ROLLBACK for supabase/pending/postgis_nearest_fountains.sql
--- Removes the two distance functions, the geog column (and its index),
--- and the PostGIS extension. No fountain data is lost: geog was only ever
--- calculated from latitude/longitude, which stay untouched.
+-- Removes nearest_fountains() and the PostGIS extension. No data is
+-- touched: the function only reads latitude and longitude.
 -- =====================================================================
 begin;
 
 drop function if exists public.nearest_fountains(double precision, double precision, integer);
-drop function if exists public.fountains_within(double precision, double precision, double precision);
-
-drop index if exists public.idx_fountains_geog;
-alter table public.fountains drop column if exists geog;
-
 drop extension if exists postgis;
 
 commit;

@@ -1,5 +1,5 @@
 -- =====================================================================
--- ROLLBACK for supabase/pending/postgis_nearest_fountains.sql
+-- ROLLBACK for supabase/migrations/20261110194915_postgis_nearest_fountains.sql
 -- Removes nearest_fountains() and the PostGIS extension. No data is
 -- touched: the function only reads latitude and longitude.
 -- =====================================================================

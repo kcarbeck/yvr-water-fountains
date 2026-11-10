@@ -1,7 +1,7 @@
 -- Fountains within 15 m of each other: real double fountains, or (more
 -- often) different fountains given the same placeholder coordinates in
 -- the source data. One row per cluster.
--- Needs the PostGIS extension (supabase/pending/postgis_nearest_fountains.sql).
+-- Uses PostGIS (supabase/migrations/20261110194915_postgis_nearest_fountains.sql).
 with points as (
   select id, extensions.st_setsrid(extensions.st_makepoint(longitude, latitude), 4326)::extensions.geography as geog
   from fountains

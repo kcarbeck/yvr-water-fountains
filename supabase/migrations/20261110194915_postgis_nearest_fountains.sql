@@ -13,7 +13,7 @@
 -- without choosing a projection. With about 450 fountains no spatial index
 -- is needed.
 --
--- Rollback: supabase/rollbacks/rollback_postgis_nearest_fountains.sql
+-- Rollback: supabase/rollbacks/rollback_20261110194915_postgis_nearest_fountains.sql
 -- =====================================================================
 
 create extension if not exists postgis with schema extensions;

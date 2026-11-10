@@ -28,11 +28,11 @@ Everything that changes the live Supabase database (project `hnyktzfyquvmpthfwpv
 | `migrations/20261026013623_unique_instagram_links.sql` | Stops the same Instagram post being added twice | Yes, 2026-10-25 |
 | `migrations/20261027000642_public_reviews.sql` | Settings switch, public review and report functions, reports table, `reviews.created_by`, admin/public rating columns on the map views | Yes, 2026-10-26 |
 | `migrations/20261029022728_fountain_info.sql` | Latest review by visit date; `anti_freeze` and an open maintenance issue (`issue_reported_at`, `issue_note`) on fountains; detail columns on reviews; `fountain_reviews_view` for the all-visits list; `submit_public_review` takes the details | Yes, 2026-10-28 |
+| `migrations/20261110194915_postgis_nearest_fountains.sql` | PostGIS and `nearest_fountains()`: the closest fountains to a point, in metres | Yes, 2026-11-10 |
 | `data_fixes/2026-10-06_review_link_fixes.sql` | Corrects reviews linked to the wrong fountain; adds the two 2025 links | Yes, 2026-10-25 |
 | `data_fixes/2026-10-20_repair_garbled_emoji.sql` | Repairs garbled emoji in 4 captions | Yes, 2026-10-25 |
 | `data_fixes/2026-10-25_backlog_import.sql` | Adds the 17 backlog posts and 11 new fountains | Yes, 2026-10-25 |
 | `data_fixes/2026-11-10_city_season_pet.sql` | Copies the City of Vancouver's season and pet-friendly values onto its 243 fountains that have them | Yes, 2026-11-10 |
-| `pending/postgis_nearest_fountains.sql` | PostGIS and the "nearest fountains" function | No |
 
 The five 2026-10-25 changes were applied in this order: add_is_indoor, review_link_fixes, repair_garbled_emoji, unique_instagram_links, backlog_import. Roll back in the reverse order.
 Each step was rehearsed on a copy of the live data on 2026-10-25: after the five rollbacks the data and the access rules were identical to the start.

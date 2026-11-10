@@ -18,9 +18,8 @@ dbGetQuery(con, paste(readLines("queries/01_coverage_by_neighbourhood.sql"), col
 | `03_qc_review_links.sql` | Are reviews linked to the right fountain / post / rating? |
 | `04_possible_duplicate_fountains.sql` | Are any fountains recorded twice? (needs PostGIS, see below) |
 
-Query 04 and the functions below need `supabase/pending/postgis_nearest_fountains.sql`, which is not yet applied:
+Query 04 and the function below use PostGIS (`supabase/migrations/20261110194915_postgis_nearest_fountains.sql`):
 
 ```sql
 select * from nearest_fountains(49.2734, -123.1038, 5);   -- 5 closest to Science World
-select * from fountains_within(49.2797, -123.1157, 300);  -- within 300 m of the Central Library
 ```

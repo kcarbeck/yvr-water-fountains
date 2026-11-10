@@ -31,7 +31,7 @@ Everything that changes the live Supabase database (project `hnyktzfyquvmpthfwpv
 | `data_fixes/2026-10-06_review_link_fixes.sql` | Corrects reviews linked to the wrong fountain; adds the two 2025 links | Yes, 2026-10-25 |
 | `data_fixes/2026-10-20_repair_garbled_emoji.sql` | Repairs garbled emoji in 4 captions | Yes, 2026-10-25 |
 | `data_fixes/2026-10-25_backlog_import.sql` | Adds the 17 backlog posts and 11 new fountains | Yes, 2026-10-25 |
-| `data_fixes/2026-11-10_city_season_pet.sql` | Copies the City of Vancouver's season and pet-friendly values onto its 243 fountains that have them | No |
+| `data_fixes/2026-11-10_city_season_pet.sql` | Copies the City of Vancouver's season and pet-friendly values onto its 243 fountains that have them | Yes, 2026-11-10 |
 | `pending/postgis_nearest_fountains.sql` | PostGIS and the "nearest fountains" function | No |
 
 The five 2026-10-25 changes were applied in this order: add_is_indoor, review_link_fixes, repair_garbled_emoji, unique_instagram_links, backlog_import. Roll back in the reverse order.

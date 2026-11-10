@@ -17,6 +17,7 @@ body {
   background: #fff;
 }
 [hidden] { display: none !important; }
+a { color: var(--color-dark); }
 button { font: inherit; cursor: pointer; color: var(--color-dark); }
 button:disabled { cursor: default; opacity: 0.5; }
 
@@ -76,7 +77,7 @@ textarea { resize: vertical; }
 .notice.error { background: #ffe8f3; }
 .card { background: #fff; border-radius: 14px; border-top: 4px solid var(--color-secondary); box-shadow: 0 4px 16px rgba(0,0,0,0.12); padding: 14px 16px; margin: 12px 0; }
 .card-title { font-family: var(--font-heading); font-size: 18px; }
-.card a.btn-main { color: var(--color-dark); }
+.card a.btn-main, .card a.btn-outline { color: var(--color-dark); text-decoration: none; }
 .rating-badge { white-space: nowrap; }
 
 #pick-map { height: 210px; border-radius: 14px; border: 2px solid var(--color-dark); }
@@ -110,6 +111,18 @@ textarea { resize: vertical; }
 .detail-hint { display: block; font-size: 12px; font-weight: 500; color: #3d3d55; }
 .answer { min-height: 44px; border-radius: 10px; border: 2px solid var(--color-tertiary); background: #fff; font-size: 14px; font-weight: 600; padding: 0 4px; }
 .answer[aria-pressed="true"] { background: var(--color-primary); border-color: var(--color-dark); }
+
+/* Visitor reviews are pink, like their marks on the map */
+.rating-badge.public { background: var(--color-secondary); }
+.sent-head { display: flex; align-items: center; gap: 12px; margin-bottom: 4px; }
+.sent-head h1 { margin: 0; }
+.sent-tick {
+  width: 64px; height: 64px; flex: none; box-sizing: border-box; border-radius: 32px;
+  background: var(--color-secondary); border: 3px solid var(--color-dark);
+  display: flex; align-items: center; justify-content: center;
+}
+/* Hidden from people, but a form-filling bot fills it in */
+.honeypot { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
   </style>
 </head>
 <body>
@@ -121,17 +134,19 @@ textarea { resize: vertical; }
   <main>
     <p id="loading" class="muted">Loading fountains...</p>
 
-    <!-- Shown to everyone who is not a signed-in admin -->
+    <!-- Signed in, but not in the admins table -->
+    <p id="no-access" class="notice" hidden><strong>This login has no admin access.</strong>
+      <span id="no-access-visitor">You can still review as a visitor.</span>
+      <button type="button" class="text-link" data-action="sign-out">sign out</button></p>
+
+    <!-- Shown to visitors while public reviews are switched off -->
     <section id="view-closed" class="view" hidden>
       <div class="card">
         <div class="card-title">Reviews open soon</div>
         <p>We're not taking public reviews right now. Follow
           <a href="https://www.instagram.com/yvrwaterfountains/">@yvrwaterfountains</a> for the opening.</p>
       </div>
-      <p id="no-access" class="notice" hidden><strong>This login has no admin access.</strong>
-        <button type="button" class="text-link" data-action="sign-out">sign out</button></p>
       <p><a href="map.html" class="text-link">back to the map</a></p>
-      <p><button type="button" id="show-sign-in" class="text-link">admin sign-in</button></p>
     </section>
 
     <!-- Shown when the fountain list cannot be loaded -->
@@ -213,17 +228,51 @@ textarea { resize: vertical; }
       <h1>Anything to add?</h1>
       <label for="note">Notes <span class="muted">(optional, <span id="note-count">0</span> / 500)</span></label>
       <textarea id="note" rows="3" maxlength="500"></textarea>
+      <p class="muted" data-for="visitor">No web links, please. They get refused.</p>
       <label for="visit-date">Visit date <span id="visit-today" class="muted">(today)</span></label>
       <input id="visit-date" type="date">
+      <div data-for="visitor">
+        <label for="reviewer-name">Your name <span class="muted">(optional)</span></label>
+        <input id="reviewer-name" type="text" maxlength="40" placeholder="Anonymous" autocomplete="nickname">
+        <p class="muted">Shown on the map as typed; leave blank for Anonymous. No email needed, and nothing else about you is saved with the review.</p>
+      </div>
       <h2>What did you see? <span class="muted">(optional)</span></h2>
       <div id="detail-rows"></div>
-      <p class="muted">Record what you saw on this visit. Yes or No also updates the fountain; Not sure leaves it as it is. Pet friendly and Indoor are kept on the fountain only.</p>
-      <label for="post-link">Instagram post link <span class="muted">(blank if not posted yet)</span></label>
-      <input id="post-link" type="url" placeholder="instagram.com/p/... or /reel/..." autocomplete="off">
-      <p class="muted">Reviewer: <strong data-admin-name></strong> (from your login). Goes live on the map at once. Change the visit date for an older post.</p>
+      <p class="muted" data-for="admin">Record what you saw on this visit. Yes or No also updates the fountain; Not sure leaves it as it is. Pet friendly and Indoor are kept on the fountain only.</p>
+      <p class="muted" data-for="visitor">We keep your answers with your review and check them before changing the fountain's details.</p>
+      <div data-for="admin">
+        <label for="post-link">Instagram post link <span class="muted">(blank if not posted yet)</span></label>
+        <input id="post-link" type="url" placeholder="instagram.com/p/... or /reel/..." autocomplete="off">
+        <p class="muted">Reviewer: <strong data-admin-name></strong> (from your login). Goes live on the map at once. Change the visit date for an older post.</p>
+      </div>
+      <div class="honeypot" aria-hidden="true">
+        <label for="website">Leave this empty</label>
+        <input id="website" type="text" tabindex="-1" autocomplete="off">
+      </div>
       <p id="save-message" class="notice error" hidden></p>
       <button type="button" id="save" class="btn-main">Save and publish</button>
-      <p class="step-label">Step 3 of 3</p>
+      <p class="step-label" data-for="admin">Step 3 of 3</p>
+      <p class="step-label" data-for="visitor">Step 3 of 3 · public reviews are checked before they appear</p>
+    </section>
+
+    <section id="view-sent" class="view" hidden>
+      <div class="sent-head">
+        <div class="sent-tick" aria-hidden="true">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1a1a2e" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"></path></svg>
+        </div>
+        <h1>Thanks! It's in the queue.</h1>
+      </div>
+      <div class="card">
+        <div class="row">
+          <span class="card-title" data-fountain-name></span>
+          <span class="rating-badge public" id="sent-rating"></span>
+        </div>
+        <p>We read every review, usually within a few days, and then it appears on the map.
+          To change it, message <a href="https://www.instagram.com/yvrwaterfountains/">@yvrwaterfountains</a> on Instagram.
+          Back here another day? A new review of the same fountain is welcome.</p>
+        <a id="sent-map-link" class="btn-outline" href="map.html">Back to map</a>
+      </div>
+      <button type="button" class="btn-main" data-action="new-review">Review another fountain</button>
     </section>
 
     <section id="view-done" class="view" hidden>
@@ -258,7 +307,7 @@ textarea { resize: vertical; }
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.43.1/dist/umd/supabase.min.js"></script>
   <script src="config.js"></script>
-  <script src="js/api.js"></script>
-  <script src="js/review.js?v=4"></script>
+  <script src="js/api.js?v=2"></script>
+  <script src="js/review.js?v=5"></script>
 </body>
 </html>

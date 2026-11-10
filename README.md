@@ -10,9 +10,9 @@ Each visit gets one overall rating out of 10 and fun commentary. Subsequent visi
 
 Fountain locations come from two open data files kept in this repo: [City of Vancouver](data/raw/vancouver_fountains_raw.csv) (278 rows) and [City of Burnaby](data/raw/burnaby_fountains_raw.csv) (151 rows). We’ve also tracked down fountains that aren’t in any official database, so you’ll find water here that you won’t find anywhere else!
 
-## Coming soon...
+## Public reviews
 
-Public reviews! The review form is currently switched off, though the (non-functional) button still appears. 
+Anyone can review a fountain: tap it on the map and choose Review this fountain. We read every public review before it appears on the map.
 
 
 

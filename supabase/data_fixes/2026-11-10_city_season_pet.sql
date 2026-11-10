@@ -14,7 +14,9 @@
 --   blank                                      -> left as Unknown
 --
 -- Only fields that are still unknown are filled: anything we have seen
--- ourselves (a review's answer, the Empire Fields note) is kept.
+-- ourselves (a review's answer) is kept. One exception: the Empire Fields
+-- field house already had the city's wording "spring to fall" as its
+-- note; it is changed to match the others.
 -- Burnaby's file has no such columns, so Burnaby fountains are untouched.
 --
 -- Rollback: supabase/rollbacks/rollback_2026-11-10_city_season_pet.sql
@@ -302,13 +304,15 @@ end $$;
 -- Seasonal: status, note and "off in winter", each only where unknown.
 update public.fountains f
 set operational_status = case when f.operational_status = 'unknown' then 'seasonal' else f.operational_status end,
-    season_note        = coalesce(f.season_note, 'about May to October'),
+    season_note        = case when f.season_note is null or f.season_note = 'spring to fall'
+                              then 'about May to October' else f.season_note end,
     anti_freeze        = coalesce(f.anti_freeze, false)
 from city_values v
 where v.external_id = f.external_id
   and lower(v.in_operation) in ('spring to fall', 'may-october')
   and f.operational_status in ('unknown', 'seasonal')   -- never on a closed fountain
-  and (f.operational_status = 'unknown' or f.season_note is null or f.anti_freeze is null);
+  and (f.operational_status = 'unknown' or f.season_note is null
+       or f.season_note = 'spring to fall' or f.anti_freeze is null);
 
 -- Year-round: anti-freeze on, only where unknown.
 update public.fountains f
